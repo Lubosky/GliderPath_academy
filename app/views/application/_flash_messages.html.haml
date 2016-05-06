@@ -1,0 +1,13 @@
+- if flash.present?
+  - flash.each do |name, msg|
+    - if msg.respond_to?("each")
+      - msg.each do |item|
+        :coffeescript
+          $.notify { message: "#{item}" },
+          type: "#{alert_for(name)}"
+          offset: {x: 20, y:60}
+    - else
+      :coffeescript
+        $.notify { message: "#{msg}" },
+          type: "#{alert_for(name)}"
+          offset: {x: 20, y:60}
