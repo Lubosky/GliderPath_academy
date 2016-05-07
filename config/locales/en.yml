@@ -1,3 +1,15 @@
 en:
   titles:
     application: 'GliderPath Academy'
+    courses:
+      index: 'Courses'
+  flash:
+    courses:
+      create:
+        success: 'Course has been successfuly created.'
+        alert: 'Ooops! We are having trouble creating this course. Please check your form.'
+      update:
+        success: 'Course has been successfuly updated.'
+        alert: 'Sorry! We are having trouble updating this course.'
+      destroy:
+        info: 'Course was successfully deleted.'
