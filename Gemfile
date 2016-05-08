@@ -34,6 +34,7 @@ group :test do
   gem 'capybara'
   gem 'email_spec'
   gem 'poltergeist'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'shoulda'
   gem 'simplecov'

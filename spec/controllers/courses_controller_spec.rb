@@ -1,5 +1,92 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe CoursesController, type: :controller do
 
+  describe 'GET #index' do
+    before do
+      get :index
+    end
+    it {
+      is_expected.to respond_with :ok
+      is_expected.to render_with_layout :application
+      is_expected.to render_template :index
+    }
+  end
+
+  describe 'GET #show' do
+
+    before do
+      @course = create(:course)
+      get :show, params: { id: @course }
+    end
+
+    it {
+      expect(assigns(:course)).to eq(@course)
+      is_expected.to render_template :show
+    }
+  end
+
+  describe 'GET #create' do
+
+    context 'when new course is invalid' do
+      it 'renders the page with error' do
+        post :create, params: { course: { name: '', description: '' } }
+        expect(response).to render_template(:new)
+        expect(flash[:alert]).to match(/^Ooops! We are having trouble creating this course. Please check your form./)
+
+      end
+    end
+
+    context 'when new course is valid' do
+      it 'creates the course and redirects to courses index page' do
+        expect {
+          post :create, params: { course: FactoryGirl.attributes_for(:course) }
+        }.to change(Course, :count).by(1)
+        expect(response).to redirect_to Course.last
+        expect(flash[:success]).to match(/^Course has been successfuly created./)
+
+      end
+    end
+  end
+
+  describe 'GET #update' do
+
+    before :each do
+      @course = create(:course)
+    end
+
+    context 'when updated course is invalid' do
+      it 'renders the page with error' do
+        put :update, params: { id: @course, course: { name: '', description: '' } }
+        @course.reload
+        expect(response).to render_template(:edit)
+        expect(flash[:alert]).to match(/^Sorry! We are having trouble updating this course./)
+
+      end
+    end
+
+    context 'when updated course is valid' do
+      it 'updates the course' do
+        put :update, params: { id: @course, course: { name: 'Updated Course #1', description: 'Updated course description #1' } }
+        @course.reload
+        expect(@course.name).to eq('Updated Course #1')
+        expect(flash[:success]).to match(/^Course has been successfuly updated./)
+      end
+    end
+  end
+
+  describe 'GET #destroy' do
+
+    before do
+      @course = create(:course)
+    end
+
+    it 'deletes the course and redirects to courses index page' do
+      expect {
+        delete :destroy, params: { id: @course }
+      }.to change(Course,:count).by(-1)
+      expect(response).to redirect_to root_path
+
+    end
+  end
 end
