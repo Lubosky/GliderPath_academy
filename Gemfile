@@ -5,6 +5,7 @@ gem 'rails', '~> 5.0.0.rc1'
 gem 'pg', '~> 0.15'
 gem 'jbuilder', '~> 2.0'
 gem 'simple_form'
+gem 'cocoon'
 gem 'title'
 
 gem 'coffee-rails', '~> 4.1.0'
