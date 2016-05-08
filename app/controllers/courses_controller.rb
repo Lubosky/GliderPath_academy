@@ -49,6 +49,6 @@ class CoursesController < ApplicationController
     end
 
     def course_params
-      params.require(:course).permit(:name, :description, sections_attributes: [:id, :title, :objective, :_destroy])
+      params.require(:course).permit(:name, :description, sections_attributes: [ :id, :title, :objective, :_destroy, lessons_attributes: [ :id, :title, :notes, :_destroy ] ])
     end
 end

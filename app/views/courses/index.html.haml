@@ -1,2 +1,7 @@
--@courses.each do |course|
-  = render 'course', course: course
+%ul
+  - @courses.each do |course|
+    %li
+      = link_to course.name, course_path(course)
+      = course.sections.count
+      \/
+      = course.lessons.count

@@ -2,3 +2,9 @@
   = f.input :title
   = f.input :objective, input_html: { rows: 4 }
   = link_to_remove_association 'Remove module', f
+
+  #lesson
+    = f.simple_fields_for :lessons do |fff|
+      = render 'lessons/form', f: fff
+    #lesson_add
+      = link_to_add_association 'Add Lesson', f, :lessons, partial: 'lessons/form'
