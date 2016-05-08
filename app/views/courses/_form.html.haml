@@ -1,4 +1,9 @@
 = simple_form_for @course do |f|
   = f.input :name
   = f.input :description
+  #modules
+    = f.simple_fields_for :sections do |ff|
+      = render 'sections/form', f: ff
+    #module_add
+      = link_to_add_association 'Add module', f, :sections, partial: 'sections/form'
   = f.button :submit
