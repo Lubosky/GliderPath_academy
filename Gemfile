@@ -8,6 +8,8 @@ gem 'simple_form'
 gem 'cocoon'
 gem 'title'
 
+gem 'devise'
+
 gem 'coffee-rails', '~> 4.1.0'
 gem 'haml-rails'
 gem 'jquery-rails'

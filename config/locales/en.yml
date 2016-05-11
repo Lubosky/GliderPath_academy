@@ -13,3 +13,12 @@ en:
         alert: 'Sorry! We are having trouble updating this course.'
       destroy:
         info: 'Course was successfully deleted.'
+  users:
+    email: 'Email'
+    password: 'Password'
+    first_name: 'First Name'
+    last_name: 'Last Name'
+
+  sign_up: 'Sign Up'
+  sign_in: 'Sign In'
+  sign_out: 'Sign Out'
