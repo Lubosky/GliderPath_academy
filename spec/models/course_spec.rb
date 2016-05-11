@@ -7,6 +7,7 @@ describe Course, type: :model do
       is_expected.to validate_presence_of(:description)
 
       is_expected.to have_many :sections
+      is_expected.to have_many :lessons
     end
   end
 end

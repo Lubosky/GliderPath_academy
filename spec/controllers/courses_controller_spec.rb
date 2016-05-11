@@ -26,6 +26,18 @@ RSpec.describe CoursesController, type: :controller do
     }
   end
 
+  describe 'GET #new' do
+
+    before do
+      get :new
+    end
+
+    it {
+      expect(assigns(:course)).to be_a_new(Course)
+      is_expected.to render_template :new
+    }
+  end
+
   describe 'GET #create' do
 
     context 'when new course is invalid' do
