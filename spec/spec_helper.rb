@@ -48,17 +48,18 @@ RSpec.configure do |config|
   config.order = 'random'
 
   Capybara.javascript_driver = :poltergeist
-  Capybara.default_host = 'http://#{DEFAULT_HOST}'
+  Capybara.default_host = "http://#{DEFAULT_HOST}"
   Capybara.server_port = DEFAULT_PORT
 
   config.before :suite do
-    Capybara.app_host = 'http://#{DEFAULT_HOST}:#{DEFAULT_PORT}'
+    Capybara.app_host = "http://#{DEFAULT_HOST}:#{DEFAULT_PORT}"
   end
 
   def get_file(filename)
     @get_file ||= File.open Rails.root.join('spec', 'support', 'images', filename)
   end
 
+  config.include AbstractController::Translation
   config.include FactoryGirl::Syntax::Methods
 
 end
