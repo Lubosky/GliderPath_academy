@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   devise  :confirmable,
           :database_authenticatable,
           :lockable,
@@ -10,5 +11,11 @@ class User < ApplicationRecord
           # :timeoutable, :omniauthable
 
   validates_presence_of :first_name, :last_name
+
+  after_create :assign_default_role
+
+  def assign_default_role
+    add_role(:student)
+  end
 
 end

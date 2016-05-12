@@ -4,6 +4,8 @@ en:
     courses:
       index: 'Courses'
   flash:
+    application:
+      not_authorized: 'You are not authorized to perform this action.'
     courses:
       create:
         success: 'Course has been successfuly created.'
