@@ -2,10 +2,14 @@ require 'spec_helper'
 
 RSpec.describe LessonsController, type: :controller do
 
+  let(:user) { FactoryGirl.create(:user) }
+
   describe 'GET #show' do
 
     before do
-      @course = create(:course)
+      user.confirm
+      login user
+      @course = create(:course, user: user)
       @section = create(:section, course: @course)
       @lesson = create(:lesson, section: @section)
       get :show, params: { course_id: @course, id: @lesson }

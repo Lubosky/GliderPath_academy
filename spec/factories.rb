@@ -11,6 +11,14 @@ FactoryGirl.define do
     password '1234abcd'
     password_confirmation '1234abcd'
     confirmed_at 2.hours.ago
+
+    trait :instructor do
+      after(:create) {|user| user.add_role(:instructor)}
+    end
+    trait :admin do
+      after(:create) {|user| user.add_role(:admin)}
+    end
+
   end
 
   factory :course do

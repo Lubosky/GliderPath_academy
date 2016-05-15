@@ -2,6 +2,13 @@ require 'spec_helper'
 
 RSpec.describe CoursesController, type: :controller do
 
+  let(:user) { FactoryGirl.create(:user, :instructor, :admin) }
+
+  before :each do
+    user.confirm
+    login user
+  end
+
   describe 'GET #index' do
     before do
       get :index
@@ -16,7 +23,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #show' do
 
     before do
-      @course = create(:course)
+      @course = create(:course, user: user)
       get :show, params: { id: @course }
     end
 
@@ -64,7 +71,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #update' do
 
     before :each do
-      @course = create(:course)
+      @course = create(:course, user: user)
     end
 
     context 'when updated course is invalid' do
@@ -90,7 +97,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #destroy' do
 
     before do
-      @course = create(:course)
+      @course = create(:course, user: user)
     end
 
     it 'deletes the course and redirects to courses index page' do
