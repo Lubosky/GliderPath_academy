@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all.order('created_at DESC')
+    authorize @courses
   end
 
   def show
@@ -12,10 +13,12 @@ class CoursesController < ApplicationController
 
   def new
     @course = current_user.courses.build
+    authorize @course
   end
 
   def create
     @course = current_user.courses.build(course_params)
+    authorize @course
     if @course.save
       redirect_to @course
       flash[:success] = t('flash.courses.create.success')
@@ -48,6 +51,7 @@ class CoursesController < ApplicationController
 
     def find_course
       @course = Course.find(params[:id])
+      authorize @course
     end
 
     def course_params
