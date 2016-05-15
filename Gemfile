@@ -26,6 +26,7 @@ end
 group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'rspec-rails', '~> 3.5.0.beta3'
   gem 'rspec-its'
 end
