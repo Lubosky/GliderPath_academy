@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
+  has_many :courses
+
   after_create :assign_default_role
 
   def assign_default_role

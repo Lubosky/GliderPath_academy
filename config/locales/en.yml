@@ -13,6 +13,7 @@ en:
       update:
         success: 'Course has been successfuly updated.'
         alert: 'Sorry! We are having trouble updating this course.'
+        not_authorized: 'You are not authorized to edit this course.'
       destroy:
         info: 'Course was successfully deleted.'
   users:

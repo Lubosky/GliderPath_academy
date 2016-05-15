@@ -1,19 +1,21 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_course, only: [:show, :edit, :update, :destroy]
+  before_action :owned_course, only: [:edit, :update]
 
   def index
-    @courses = Course.order('created_at DESC')
+    @courses = Course.all.order('created_at DESC')
   end
 
   def show
   end
 
   def new
-    @course = Course.new
+    @course = current_user.courses.build
   end
 
   def create
-    @course = Course.new(course_params)
+    @course = current_user.courses.build(course_params)
     if @course.save
       redirect_to @course
       flash[:success] = t('flash.courses.create.success')
@@ -51,4 +53,12 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:name, :description, sections_attributes: [ :id, :title, :objective, :_destroy, lessons_attributes: [ :id, :title, :notes, :_destroy ] ])
     end
+
+    def owned_course
+      unless current_user == @course.user
+        flash[:alert] = t('flash.courses.update.not_authorized')
+        redirect_to :back
+      end
+    end
+
 end
