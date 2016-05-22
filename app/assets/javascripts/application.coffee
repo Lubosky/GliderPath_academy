@@ -3,4 +3,5 @@
 #= require turbolinks
 #= require cocoon
 #= require bootstrap-notify
+#= require refile
 #= require_tree .

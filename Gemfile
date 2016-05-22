@@ -19,6 +19,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
+gem 'refile', require: 'refile/rails', github: 'refile/refile'
+gem 'refile-mini_magick'
+
+gem 'sinatra', github: 'sinatra/sinatra'
+
 group :doc do
   gem 'sdoc', require: false
 end
