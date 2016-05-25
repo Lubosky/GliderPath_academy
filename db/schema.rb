@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515125815) do
+ActiveRecord::Schema.define(version: 20160524044236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20160515125815) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_courses_on_user_id", using: :btree
+  end
+
+  create_table "lesson_uploads", force: :cascade do |t|
+    t.integer  "lesson_id"
+    t.integer  "upload_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_lesson_uploads_on_lesson_id", using: :btree
+    t.index ["upload_id"], name: "index_lesson_uploads_on_upload_id", using: :btree
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -51,6 +60,17 @@ ActiveRecord::Schema.define(version: 20160515125815) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_sections_on_course_id", using: :btree
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.string   "file_id",           null: false
+    t.string   "file_filename",     null: false
+    t.integer  "file_size",         null: false
+    t.string   "file_content_type", null: false
+    t.integer  "user_id",           null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["user_id"], name: "index_uploads_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
