@@ -3,7 +3,14 @@ Rails.application.routes.draw do
 
   root 'courses#index'
 
+  concern :downloadable do
+    get 'download', on: :member
+  end
+
   resources :courses do
     resources :lessons, only: [:show]
   end
+
+  resources :uploads, only: [:download], concerns: :downloadable
+
 end

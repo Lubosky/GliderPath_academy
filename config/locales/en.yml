@@ -6,6 +6,8 @@ en:
   flash:
     application:
       not_authorized: 'You are not authorized to perform this action.'
+    attachments:
+      error: 'There was an error downloading requested file.'
     courses:
       create:
         success: 'Course has been successfuly created.'
