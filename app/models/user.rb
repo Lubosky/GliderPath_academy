@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
 
-  has_many :courses
+  has_many :courses, inverse_of: :user
+  has_many :uploads, inverse_of: :user
 
   after_create :assign_default_role
 
