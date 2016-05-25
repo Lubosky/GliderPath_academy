@@ -20,4 +20,14 @@ class User < ApplicationRecord
     add_role(:student)
   end
 
+  private
+
+    def self.current
+      RequestStore.store[:current_user]
+    end
+
+    def self.current=(user)
+      RequestStore.store[:current_user] = user
+    end
+
 end

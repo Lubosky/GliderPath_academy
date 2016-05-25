@@ -2,6 +2,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  if defined? Devise
+    before_action do
+      RequestStore[:current_user] = current_user
+    end
+  end
+
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

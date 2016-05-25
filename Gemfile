@@ -10,6 +10,7 @@ gem 'title'
 
 gem 'devise'
 gem 'pundit'
+gem 'request_store'
 gem 'rolify'
 
 gem 'coffee-rails', '~> 4.1.0'
