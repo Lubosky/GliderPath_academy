@@ -1,3 +1,5 @@
+require 'refile/file_double'
+
 FactoryGirl.define do
 
   sequence :email do |n|
@@ -34,5 +36,9 @@ FactoryGirl.define do
   factory :lesson do
     title 'Lesson #1'
     notes 'Lesson description #1'
+  end
+
+  factory :upload do
+    file Refile::FileDouble.new('yoda', Rails.root.to_s + 'spec/support/images/yoda.jpg', content_type: 'image/jpg')
   end
 end

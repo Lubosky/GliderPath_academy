@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Section, type: :model do
   describe 'validations' do
-    it 'associates with' do
+    it 'validates and associates with' do
       is_expected.to validate_presence_of(:title)
 
       is_expected.to belong_to :course
