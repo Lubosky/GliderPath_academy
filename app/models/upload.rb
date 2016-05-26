@@ -6,7 +6,11 @@ class Upload < ApplicationRecord
 
   before_validation :set_user_id
 
-  attachment :file
+  attachment :file, extension: [ 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'pdf', 'zip', 'jpg', 'jpeg', 'png', 'gif' ]
+
+  validates_presence_of :file
+  validates :file_size, numericality: { less_than_or_equal_to: 5.megabytes }
+  validates :user_id, presence: true
 
   def basename
     File.basename(file_filename, extension)
