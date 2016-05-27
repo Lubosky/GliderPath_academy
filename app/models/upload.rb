@@ -1,7 +1,7 @@
 class Upload < ApplicationRecord
   belongs_to :user, inverse_of: :uploads
 
-  has_many :lesson_uploads, dependent: :destroy, inverse_of: :uploads
+  has_many :lesson_uploads, dependent: :destroy, inverse_of: :upload
   has_many :lessons, through: :lesson_uploads, inverse_of: :uploads
 
   before_validation :set_user_id
