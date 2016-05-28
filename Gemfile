@@ -19,6 +19,8 @@ gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+gem 'bourbon', '~> 5.0.0.beta.5'
+gem 'neat', '~> 1.7'
 
 gem 'refile', require: 'refile/rails', github: 'refile/refile'
 gem 'refile-mini_magick'
