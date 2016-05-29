@@ -1,0 +1,48 @@
+.regular
+  font-family: $proxima_regular
+  font-weight: normal
+
+b,
+strong,
+.sbold
+  font-family: $proxima_semibold
+  font-weight: normal
+
+.bold
+  font-family: $proxima_bold
+  font-weight: normal
+
+.uppercase
+  text-transform: uppercase !important
+
+@each $align in center left right
+  .content-#{$align}
+    text-align: $align !important
+
+.centered
+  float: none !important
+  margin: 0 auto !important
+
+.wide
+  width: 100% !important
+
+.hidden
+  display: none !important
+
+.hide-on-mobile
+  +mq($max, $mobile-screen)
+    display: none !important
+
+.hide-on-desktop
+  +mq($min, $desktop-screen)
+    display: none !important
+
+.text-muted
+  color: $text-muted
+
+.text-small
+  +font-size($font-size-small)
+
+.disabled
+  cursor: default
+  pointer-events: none

@@ -1,0 +1,23 @@
+@import 'neat-helpers'
+
+// GRID SETTINGS
+$grid-width:            1030px
+$grid-columns:          12
+$sidebar-columns:       4
+
+$default-breakpoint:    768px
+$desktop-min:           960px
+$tablet-min:            680px
+
+$tablet-max:            $desktop-min - 1
+$mobile-max:            $tablet-min - 1
+
+$mobile-screen:         $default-breakpoint - 1
+$desktop-screen:        $default-breakpoint
+
+$mobile:                new-breakpoint(max-width 598px 12)
+$tablet:                new-breakpoint(max-width 768px 12)
+$desktop:               new-breakpoint(max-width 1030px 12)
+
+$min:                   min-width
+$max:                   max-width
