@@ -3,6 +3,7 @@
 #= require turbolinks
 #= require cocoon
 #= require bootstrap-notify
+#= require dropdown
 #= require refile
 #= require_tree .
 

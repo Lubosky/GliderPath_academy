@@ -1,0 +1,103 @@
+.dropdown
+  +border-radius($border-radius)
+  background: $white
+  border: 2px solid $default
+  display: none
+  min-width: 200px
+  max-width: 360px
+  position: absolute
+  top: 40px
+  z-index: 99
+  &:before
+    +border-radius(3px 0 0 0)
+    +box-shadow(-2px -2px 0 $default)
+    +rotate(45deg)
+    +size(12px)
+    background: $white
+    content: ''
+    position: absolute
+    top: -6px
+
+  &.left
+    left: 0
+    &:before
+      left: 20px
+
+  &.right
+    right: -20px
+    &:before
+      right: 20px
+
+  &.is-open
+    display: block
+
+  .dropdown-header,
+  .dropdown-footer
+    +font-size($font-size-base)
+    background: $white
+    display: block
+    line-height: $line-height-base
+    margin: 0
+    position: relative
+
+  .dropdown-header
+    border-bottom: 2px solid $default
+    a
+      &:hover
+        background-color: $white
+
+      h4
+        +font-size(14px)
+        margin: 0
+      span
+        @extend .regular
+        +font-size(12px)
+        color: $text-muted
+        display: block
+
+  .dropdown-footer
+    border-top: 2px solid $default
+    a
+      +transition(background-color 200ms ease)
+      &:hover
+        background-color: $default
+
+  a
+    @extend .sbold
+    +font-size(14px)
+    +opacity(.9)
+    +pad(15px 20px)
+    color: $text-color
+    display: block
+    text-decoration: none
+
+    &:hover
+      +opacity(1)
+      color: $text-color
+
+  > ul
+    +pad(0)
+    list-style: none
+    max-height: 290px
+    overflow: auto
+
+    > li
+      +transition(background-color 200ms ease, border-color 200ms ease)
+      background-color: lighten($default, 3%)
+      border: 0 solid $default
+      border-width: 0 0 1px
+      margin: 0
+
+      &:last-child
+        border-bottom: none
+
+      &:not(.no-hover):hover
+        background: $white
+        border-color: $default
+
+      > a
+        +clearfix
+        +transition(color 200ms ease-in-out)
+        +pad(15px 20px)
+        position: relative
+        display: block
