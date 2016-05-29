@@ -1,5 +1,35 @@
-- if user_signed_in?
-  = link_to t('sign_out'), destroy_user_session_path, method: :delete
-- else
-  = link_to t('sign_in'), new_user_session_path
-  = link_to t('sign_up'), new_user_registration_path
+%nav
+  %section
+    #mobile-menu-toggler
+      %a#menu-toggle{ href: 'javascript:void(0)', data: { toggle: 'mobile-menu' } }
+        %span.toggler
+    = render 'logo'
+    %ul.menu-list
+      %li.menu-item.hide-on-desktop
+        = link_to t('home'), root_path
+      %li.menu-item
+        = link_to t('courses'), courses_path
+      - if user_signed_in?
+        %li.menu-item.bordered.hide-on-desktop
+          = link_to t('sign_out'), destroy_user_session_path, method: :delete
+        %li.menu-item.menu-profile
+          = link_to edit_user_registration_path, data: { toggle: 'dropdown' } do
+            %figure.avatar
+              = image_tag '', class: 'avatar-circle', alt: "#{ current_user.first_name } #{ current_user.last_name }", width: '45px', height: '45px'
+              %figcaption #{ current_user.first_name } #{ current_user.last_name }
+          .dropdown.right
+            .dropdown-header
+              = link_to edit_user_registration_path do
+                %h4 #{ current_user.first_name } #{ current_user.last_name }
+                %span
+                  = t('users.account.show')
+            %ul
+              %li
+                = link_to t('users.account.edit'), edit_user_registration_path
+            .dropdown-footer
+              = link_to t('sign_out'), destroy_user_session_path, method: :delete
+      - else
+        %li.menu-item
+          = link_to t('sign_in'), new_user_session_path
+        %li.menu-item.sticky
+          = link_to t('sign_up'), new_user_registration_path, class: 'button-sticky'

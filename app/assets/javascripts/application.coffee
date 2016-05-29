@@ -5,3 +5,15 @@
 #= require bootstrap-notify
 #= require refile
 #= require_tree .
+
+$(document).on 'turbolinks:load', ->
+  $html = $('html')
+  $('#menu-toggle').data('toggle', 'mobile-menu').click ->
+    $html.toggleClass 'menu-expanded'
+
+  $('nav .menu-item > a').click ->
+    if $html.hasClass 'menu-expanded'
+      $html.removeClass 'menu-expanded'
+
+  $('a.disabled').click (e) ->
+    e.preventDefault()

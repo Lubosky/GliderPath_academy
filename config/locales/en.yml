@@ -19,6 +19,9 @@ en:
       destroy:
         info: 'Course was successfully deleted.'
   users:
+    account:
+      edit: 'Manage Account'
+      show: 'View Profile'
     email: 'Email'
     password: 'Password'
     first_name: 'First Name'
