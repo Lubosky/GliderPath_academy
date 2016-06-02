@@ -1,0 +1,32 @@
+[data-icon]
+  +size(0)
+  display: inline-block
+  fill: currentColor
+  overflow: hidden
+  position: relative
+  vertical-align: middle
+
+  &[data-icon-size=xsm]
+    +size(.5em)
+
+  &[data-icon-size=sm]
+    +size(.8em)
+
+  &[data-icon-size=m]
+    +size(1em)
+
+  &[data-icon-size=lg]
+    +size(1.2em)
+
+  &[data-icon-size=xl]
+    +size(1.8em)
+
+  &[data-icon-size=xxl]
+    +size(2.4em)
+
+  .icon--cnt
+    +size(100%)
+    +transform(translateX(0))
+    background: inherit
+    fill: inherit
+    position: absolute
