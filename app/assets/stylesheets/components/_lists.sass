@@ -133,13 +133,34 @@ ul.step-list
         position: absolute
         top: 0
         left: 0
-        [class^='icon-']
-          +border-radius(50%)
-          +size(30px)
-          border: 2px solid darken($default, 9%)
-          margin: -15px auto
-          position: relative
+        span.icon
+          +size(20px)
+          color: $white
+          display: block
+          margin: -10px auto
+          overflow: visible
           top: 50%
+          &:before
+            +border-radius(50%)
+            +size(30px)
+            background-color: map-deep-get($component-colors, green, base)
+            content: ''
+            display: inline-block
+            margin: -15px
+            position: absolute
+            left: 50%
+            top: 50%
+        div.icon
+          &:before
+            +border-radius(50%)
+            +size(30px)
+            border: 2px solid darken($default, 9%)
+            content: ''
+            display: inline-block
+            margin: -15px
+            position: absolute
+            left: 50%
+            top: 50%
       &:hover
         background: $white
         h5
@@ -162,5 +183,15 @@ ul.step-list
         +pad(10px 30px)
         color: $text-muted
         display: block
-        [class^='icon-']
+        .icon
+          +transition(transform 300ms)
           margin: -2px 5px 0 0
+      &:hover,
+      &:focus
+        .icon
+          color: $text-color
+  &.is-closed
+    li
+      &.step-list-footer
+        a > .icon
+          +transform(rotate(180deg))

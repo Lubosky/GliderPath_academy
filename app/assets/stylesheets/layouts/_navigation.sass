@@ -86,16 +86,31 @@ nav
               overflow: hidden
               position: relative
               left: 5px
-              top: -5px
+              top: 0
               text-overflow: ellipsis
               white-space: nowrap
 
               +mq($max, $mobile-screen)
                 display: inline-block
 
+            .icon
+              color: $default
+              position: relative
+              bottom: 15px
+              left: 10px
+
+              +mq($max, $mobile-screen)
+                display: none
 
           &:hover, &:active
             background: transparent !important
+
+            .avatar
+              img
+                border-color: darken($light-shade, 5%)
+
+            .icon
+              color: darken($light-shade, 5%)
 
         +mq($max, $mobile-screen)
           position: absolute
