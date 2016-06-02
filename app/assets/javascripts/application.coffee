@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require cocoon
-#= require bootstrap-notify
+#= require growl
 #= require accordion
 #= require dropdown
 #= require refile
