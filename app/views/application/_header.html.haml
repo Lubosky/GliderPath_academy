@@ -17,6 +17,7 @@
             %figure.avatar
               = image_tag '', class: 'avatar-circle', alt: "#{ current_user.first_name } #{ current_user.last_name }", width: '45px', height: '45px'
               %figcaption #{ current_user.first_name } #{ current_user.last_name }
+              = icon_tag 'chevron-down', size: :m
           .dropdown.right
             .dropdown-header
               = link_to edit_user_registration_path do
