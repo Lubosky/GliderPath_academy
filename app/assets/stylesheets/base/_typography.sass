@@ -1,0 +1,59 @@
+// BODY
+body
+  +font-size($font-size-base)
+  font-family: $proxima_regular
+  color: $text-color
+
+// HEADINGS
+h1, h2, h3, h4, h5, h6
+  display: block
+  font-family: $proxima_semibold
+  line-height: $line-height-base
+
+
+h1
+  +font-size($font-size-h1)
+h2
+  +font-size($font-size-h2)
+h3
+  +font-size($font-size-h3)
+h4
+  +font-size($font-size-h4)
+h5
+  +font-size($font-size-h5)
+h6
+  +font-size($font-size-h6)
+
+// PARAGRAPHS
+p
+  line-height: $line-height-computed
+
+// SEPARATORS
+hr
+  border: solid $border-color
+  border-width: 2px 0 0
+  clear: both
+  height: 0
+  margin: 45px 0
+
+// LISTS
+ul,
+ol
+  +font-size($font-size-base)
+  line-height: $line-height-base
+  &.no-bullets
+    +pad(0)
+    list-style-type: none
+  > li
+    > [class^='icon-']
+      padding-right: 5px
+
+// ANCHORS
+a
+  color: $brand
+  text-decoration: none
+  &:focus,
+  &:hover,
+  &:active
+    color: darken($brand, 15%)
+    text-decoration: none

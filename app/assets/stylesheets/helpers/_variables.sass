@@ -18,7 +18,7 @@ $text-muted:            #7b8b8e
 
 // BORDERS
 $border-radius:         5px
-$border-color:          $default
+$border-color:          darken($light-shade, 5%)
 
 // TYPOGRAPHY
 $sans-serif:            sans-serif
@@ -32,5 +32,13 @@ $font-size-large:       22px
 $font-size-medium:      18px
 $font-size-small:       14px
 
+$font-size-h1: 36px !default
+$font-size-h2: 28px !default
+$font-size-h3: $font-size-large !default
+$font-size-h4: $font-size-medium !default
+$font-size-h5: $font-size-base !default
+$font-size-h6: $font-size-small !default
+
 $line-height-base:      1.6
+$line-height-small:     1.25
 $line-height-computed:  floor(($font-size-base * $line-height-base))

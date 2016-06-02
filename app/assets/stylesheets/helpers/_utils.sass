@@ -19,6 +19,10 @@ strong,
   .content-#{$align}
     text-align: $align !important
 
+@each $position in left right
+  .pull-#{$position}
+    float: $position !important
+
 .centered
   float: none !important
   margin: 0 auto !important

@@ -1,0 +1,40 @@
+$component-colors: (
+  default:    (base: #F0F2F7, font: #384047),
+  red:        (base: #EF4E4E, font: #FFFFFF),
+  pink:       (base: #FC7279, font: #FFFFFF),
+  purple:     (base: #A177FF, font: #FFFFFF),
+  indigo:     (base: #3F51B5, font: #FFFFFF),
+  blue:       (base: #5B9BD1, font: #FFFFFF),
+  brand:      (base: #44BBFF, font: #FFFFFF),
+  turquoise:  (base: #3BE8B0, font: #FFFFFF),
+  teal:       (base: #009688, font: #FFFFFF),
+  green:      (base: #2ECC71, font: #FFFFFF),
+  lime:       (base: #CDDC39, font: #FFFFFF),
+  yellow:     (base: #FFEB3B, font: #FFFFFF),
+  amber:      (base: #FFC019, font: #FFFFFF),
+  orange:     (base: #FF9800, font: #FFFFFF),
+  grey:       (base: #7B8B8E, font: #FFFFFF),
+  white:      (base: #FFFFFF, font: #384047)
+);
+
+$gradient-colors: (
+  'purple-blue':    (from: #A177FF, to: #44BBFF, font: #FFFFFF),
+  'red-orange':     (from: #EF4E4E, to: #FF9800, font: #FFFFFF),
+  'purple-pink':    (from: #A177FF, to: #FC7279, font: #FFFFFF),
+  'turquoise-blue': (from: #3BE8B0, to: #44BBFF, font: #FFFFFF)
+);
+
+$card-colors: (
+  1:  (base: #A177FF, font: #FFFFFF),
+  2:  (base: #CDDC39, font: #FFFFFF),
+  3:  (base: #EF4E4E, font: #FFFFFF),
+  4:  (base: #3BE8B0, font: #FFFFFF),
+  5:  (base: #FC7279, font: #FFFFFF),
+  6:  (base: #3F51B5, font: #FFFFFF),
+  7:  (base: #FFC019, font: #FFFFFF),
+  8:  (base: #5B9BD1, font: #FFFFFF),
+  9:  (base: #009688, font: #FFFFFF),
+  10: (base: #2ECC71, font: #FFFFFF),
+  11: (base: #44BBFF, font: #FFFFFF),
+  12: (base: #FF9800, font: #FFFFFF)
+);

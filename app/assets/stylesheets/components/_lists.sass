@@ -1,0 +1,166 @@
+ul.card-list
+  +pad(0)
+  list-style: none
+  overflow: hidden
+  margin-top: 45px
+  max-width: none
+  width: 100%
+
+
+  &.three-columns
+    .card-list-item
+      +span-columns(4 of 12)
+      +omega(3n)
+
+      +mq(null, $tablet-min, $tablet-max)
+        +omega-reset(3n)
+        +span-columns(6 of 12)
+        +omega(2n)
+
+      +mq($max, $mobile-max)
+        +omega-reset(2n)
+        +span-columns(12)
+
+  &.two-columns
+    .card-list-item
+      +span-columns(6 of 12)
+      +omega(2n)
+
+      +mq($max, $mobile-max)
+        +omega-reset(2n)
+        +span-columns(12)
+
+  &.one-column
+    .card-list-item
+      +span-columns(12)
+      +omega
+      padding-bottom: 60px
+
+      &:last-child
+        padding-bottom: 0
+
+  .card-list
+    &-item
+      +border-radius($border-radius)
+      margin-bottom: 30px
+
+      &.stacked
+        +box-shadow(inset -2px -2px 0 rgba($black, .09), inset 2px 2px 0 rgba($black, .09))
+        box-sizing: border-box
+        display: block
+        position: relative
+
+        &:after,
+        &:before
+          +border-radius(0 0 $border-radius $border-radius)
+          +box-shadow(inset 0 -2px 0 rgba($black, .09))
+          +transition(height 100ms ease-in-out)
+          content: ''
+          height: 3px
+          display: block
+          position: absolute
+          top: 100%
+          right: 5px
+          left: 5px
+
+        &:before
+          height: 6px
+          left: 10px
+          right: 10px
+
+        &:hover
+          &:after
+            height: 5px
+          &:before
+            height: 10px
+
+      .card-box
+        +pad(150px 0 0)
+        display: block
+        min-height: 270px
+        position: relative
+
+        &-title
+          +border-radius($border-radius $border-radius 0 0)
+          +pad(25px 45px)
+          background: rgba($black,0.09)
+          display: block
+          min-height: 150px
+          position: absolute
+          top: 0
+          left: 0
+          right: 0
+          h3
+            +font-size(26px)
+            line-height: $line-height-small
+            margin: 0
+            +text-shadow(0 2px 1px rgba($black,.25))
+
+        &-meta
+          +pad(15px 45px)
+          text-align: left
+
+ul.step-list
+  +border-radius($border-radius)
+  +pad(0)
+  background-color: lighten($default, 3%)
+  border: 2px solid $border-color
+  margin: 45px 0
+  li:not(.step-list-footer)
+    list-style-type: none
+    > a
+      +clearfix
+      +pad(20px 30px 20px 110px)
+      +transition(background-color 200ms ease)
+      border-bottom: 1px solid $border-color
+      display: block
+      overflow: hidden
+      position: relative
+      h5
+        color: darken($text-muted, 9%)
+        display: block
+        margin: 0
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+      p
+        +font-size($font-size-base)
+        color: $text-muted
+        margin: 5px 0
+      .icon-holder
+        +size(110px, 100%)
+        float: left
+        position: absolute
+        top: 0
+        left: 0
+        [class^='icon-']
+          +border-radius(50%)
+          +size(30px)
+          border: 2px solid darken($default, 9%)
+          margin: -15px auto
+          position: relative
+          top: 50%
+      &:hover
+        background: $white
+        h5
+          color: $text-color
+  li
+    &.step-list-header,
+    &.step-list-footer
+      background-color: $default
+      display: block
+    &.step-list-header
+      +border-radius($border-radius $border-radius 0 0)
+      +pad(10px 30px)
+      border-bottom: 1px solid $border-color
+    &.step-list-footer
+      +border-radius(0 0 $border-radius $border-radius)
+      +box-shadow(0 2px 0 rgba($black, .09))
+      border: none
+      margin-bottom: 0
+      a
+        +pad(10px 30px)
+        color: $text-muted
+        display: block
+        [class^='icon-']
+          margin: -2px 5px 0 0

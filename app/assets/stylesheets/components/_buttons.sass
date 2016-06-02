@@ -1,0 +1,17 @@
+.button
+  @extend .sbold
+  +border-radius($border-radius)
+  +font-size($font-size-base)
+  +pad(14px 36px)
+  +transition(background 250ms ease, border-color 250ms ease, color 250ms ease)
+  cursor: pointer
+  display: inline-block
+  height: 54px
+  line-height: $line-height-base
+  text-decoration: none
+  text-transform: uppercase
+
+  &-small
+    +font-size($font-size-small)
+    +pad(5px 20px)
+    height: 36px

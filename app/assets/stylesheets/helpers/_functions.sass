@@ -1,0 +1,59 @@
+@import 'base/maps'
+
+@each $name, $colors in $component-colors
+  .button-#{$name}:not(.outline)
+    border: 2px solid map-get($colors, base)
+    color: map-get($colors, font)
+    background: map-get($colors, base)
+
+    &:hover,
+    &:active,
+    &:active:hover,
+    &:active:focus,
+    &:focus,
+      border-color: darken(map-get($colors, base), 9%)
+      background-color: darken(map-get($colors, base), 9%)
+
+  .button-#{$name}
+    &.outline
+      border: 2px solid map-get($colors, base)
+      color: map-get($colors, base)
+      background: none
+
+      &:hover,
+      &:active,
+      &:active:hover,
+      &:active:focus,
+      &:focus,
+        border-color: map-get($colors, base)
+        color: map-get($colors, font)
+        background-color: map-get($colors, base)
+
+  .font-#{$name}
+    color: map-get($colors, base) !important
+
+  .icon-#{$name}
+    color: map-get($colors, base)
+
+  .section-#{$name}
+    background: map-get($colors, base)
+    color: map-get($colors, font)
+
+@each $name, $colors in $card-colors
+
+  .card-list-item
+    &.card-#{$name}
+      background: map-get($colors, base)
+
+      .card-box
+        color: map-get($colors, font)
+
+      &.stacked
+        &:after,
+        &:before
+          background: map-get($colors, base)
+
+@each $name, $colors in $gradient-colors
+  .gradient-#{$name}
+    +linear-gradient(15deg, map-get($colors, from), map-get($colors, to))
+    color: map-get($colors, font)

@@ -1,0 +1,47 @@
+.tabs
+  +clearfix
+  +pad(0)
+  margin: 15px 0 30px
+  width: 100%
+
+  .tab-header
+    list-style: none
+    position: relative
+    bottom: -2px
+
+    +mq($min, $desktop-screen)
+      display: inline
+
+    .tab-link
+      @extend .sbold
+      +pad(16px 24px)
+      border-bottom: 2px solid $border-color
+      color: $text-muted
+      display: block
+
+      &.is-active
+        border-bottom: 2px solid $brand
+        color: $brand
+
+      &:hover,
+      &:focus
+        color: $brand
+
+      +mq($min, $desktop-screen)
+        display: inline-block
+
+  .tab-button
+    +pad(10px 24px)
+    display: inline-block
+
+  .tab-content
+    +pad(30px 0 10px)
+    display: none
+    width: 100%
+    z-index: -9
+
+    +mq($min, $desktop-screen)
+      +pad(30px 0)
+      border-top: 2px solid $border-color
+      float: left
+
