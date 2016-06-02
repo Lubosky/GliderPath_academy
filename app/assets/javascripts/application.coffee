@@ -3,8 +3,10 @@
 #= require turbolinks
 #= require cocoon
 #= require bootstrap-notify
+#= require accordion
 #= require dropdown
 #= require refile
+#= require tabs
 #= require_tree .
 
 $(document).on 'turbolinks:load', ->
