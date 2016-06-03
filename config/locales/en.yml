@@ -18,6 +18,20 @@ en:
         not_authorized: 'You are not authorized to edit this course.'
       destroy:
         info: 'Course was successfully deleted.'
+  social:
+    twitter: 'GliderPath on Twitter'
+    youtube: 'GliderPath on Youtube'
+    facebook: 'GliderPath on Facebook'
+    google: 'GliderPath on Google Plus'
+    linkedin: 'GliderPath on LinkedIn'
+  footer:
+    about: 'About'
+    contact: 'Contact Us'
+    products: 'Products'
+    resources: 'Resources'
+    support: 'Support'
+    terms: 'Terms of Service'
+    webinars: 'Webinars'
   users:
     account:
       edit: 'Manage Account'

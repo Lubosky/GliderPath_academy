@@ -100,9 +100,13 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    config (1.2.1)
+      activesupport (>= 3.0)
+      deep_merge (~> 1.0, >= 1.0.1)
     csso-rails (0.3.4)
       execjs (>= 1)
     database_cleaner (1.5.3)
+    deep_merge (1.0.1)
     devise (4.1.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -329,6 +333,7 @@ DEPENDENCIES
   capybara-email
   cocoon
   coffee-rails (~> 4.1.0)
+  config (~> 1.2, >= 1.2.1)
   database_cleaner
   devise
   email_spec

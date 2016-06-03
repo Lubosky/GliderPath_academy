@@ -6,6 +6,7 @@ gem 'pg', '~> 0.15'
 gem 'jbuilder', '~> 2.0'
 gem 'simple_form'
 gem 'cocoon'
+gem 'config', '~> 1.2', '>= 1.2.1'
 gem 'title'
 
 gem 'devise'

@@ -1,0 +1,16 @@
+application:
+  company: 'GliderPath Limited'
+  name: 'GliderPath Academy'
+
+links:
+  facebook: 'https://www.facebook.com/GliderPath'
+  google: 'https://plus.google.com/+Gliderpath'
+  linkedin: 'https://www.linkedin.com/company/gliderpath'
+  phone: 'tel://+442038086313'
+  twitter: 'https://twitter.com/GliderPath'
+  youtube: 'https://www.youtube.com/channel/UCFKY5D8EYYJ9OAx0D1MATSw'
+
+products:
+  blog: 'https://blog.gliderpath.com/'
+  consultancy: 'https://gliderpath.com/'
+  tms: 'https://tms.gliderpath.com/'
