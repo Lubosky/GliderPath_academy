@@ -1,0 +1,49 @@
+%footer.footer
+  .row
+    .twelve.columns.centered
+      %ul.footer-column-list
+        %li.footer-column-title
+          = t('titles.application')
+        %li.footer-column-item
+          = link_to t('footer.about'), '#', class: 'footer-column-link'
+      %ul.footer-column-list
+        %li.footer-column-title
+          = t('titles.products')
+        %li.footer-column-item
+          = link_to 'GliderPath TMS', Settings.products.tms, target: '_blank', class: 'footer-column-link'
+        %li.footer-column-item
+          = link_to 'GliderPath Consultancy', Settings.products.consultancy, target: '_blank', class: 'footer-column-link'
+      %ul.footer-column-list
+        %li.footer-column-title
+          = t('titles.resources')
+        %li.footer-column-item
+          = link_to 'Blog', Settings.products.blog, target: '_blank', class: 'footer-column-link'
+        %li.footer-column-item
+          = link_to t('footer.webinars'), '#', class: 'footer-column-link disabled'
+      %ul.footer-column-list
+        %li.footer-column-title
+          = t('titles.support')
+        %li.footer-column-item
+          = link_to t('footer.contact'), '#', class: 'footer-column-link'
+        %li.footer-column-item
+          = link_to '+44 (0)20 3808 6313', Settings.links.phone, class: ' footer-column-link'
+  .row
+    %ul.footer-list
+      %li.footer-list-item.footer-list-social-item
+        = link_to Settings.links.twitter, target: '_blank', title: t('social.twitter'), class: 'footer-link social-link' do
+          = icon_tag 'logo-twitter'
+      %li.footer-list-item.footer-list-social-item
+        = link_to Settings.links.youtube, target: '_blank', title: t('social.youtube'), class: 'footer-link social-link' do
+          = icon_tag 'logo-youtube'
+      %li.footer-list-item.footer-list-social-item
+        = link_to Settings.links.facebook, target: '_blank', title: t('social.facebook'), class: 'footer-link social-link' do
+          = icon_tag 'logo-facebook'
+      %li.footer-list-item.footer-list-social-item
+        = link_to Settings.links.google, target: '_blank', title: t('social.google'), class: 'footer-link social-link' do
+          = icon_tag 'logo-google-plus'
+      %li.footer-list-item.footer-list-social-item
+        = link_to Settings.links.linkedin, target: '_blank', title: t('social.linkedin'), class: 'footer-link social-link' do
+          = icon_tag 'logo-linkedin'
+      %li.footer-list-item.footer-list-text-item
+        = link_to t('footer.terms'), '#', class: 'footer-link'
+      %li.footer-list-item.footer-list-copyright © #{ Time.now.year } #{ Settings.application.company }
