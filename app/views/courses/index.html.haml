@@ -1,7 +1,13 @@
-%ul
+%ul.card-list.three-columns
   - @courses.each do |course|
-    %li
-      = link_to course.name, course_path(course)
-      = course.sections.count
-      \/
-      = course.lessons.count
+    %li.card-list-item.stacked{ class: "card-#{course.id}" }
+      = link_to course_path(course), class: 'card-box' do
+        .card-box-title
+          %h3
+            = course.name
+        .card-box-meta
+          %p
+            with
+            %strong #{course.user.first_name} #{course.user.last_name}
+          %p
+            = t('lessons.count', count: course.lessons.count)

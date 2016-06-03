@@ -1,8 +1,25 @@
-%li
-  = @lesson.title
-  = @lesson.notes
+.video-container
 
-  %ul
-    - @lesson.uploads.each do |upload|
-      %li
-        = link_to upload.file_filename, download_upload_path(upload)
+.meta-container
+  %h1
+    = @lesson.title
+  .text-muted
+    by #{ @lesson.course.user.first_name } #{ @lesson.course.user.last_name } &#8226; #{ @lesson.course.name }
+  %p
+    = @lesson.notes
+
+  %ul.tabs
+    %li.tab-button.pull-right
+      = link_to t('lessons.next'), 'javascript:void(0)', class: 'button button-green button-small'
+    %li.tab-header
+      %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.notes') }
+      .tab-content
+        = @lesson.notes
+    - if @lesson.uploads.any?
+      %li.tab-header
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.attachments') }
+        .tab-content
+          %ul
+            - @lesson.uploads.each do |upload|
+              %li
+                = link_to upload.file_filename, download_upload_path(upload)

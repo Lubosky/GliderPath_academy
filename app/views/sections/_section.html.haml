@@ -1,8 +1,20 @@
-%li
-  = section.title
-  = section.objective
+%ul.step-list
+  %li.step-list-header
+    %h3
+      = section.title
+    %p
+      = section.objective
   - if section.lessons.any?
-    %ul
-      - section.lessons.each do |lesson|
-        %li
-          = link_to lesson.title, course_lesson_path(@course, lesson)
+    - section.lessons.each do |lesson|
+      %li
+        = link_to course_lesson_path(@course, lesson) do
+          .icon-holder
+            = icon_tag 'check'
+          %h5
+            = lesson.title
+          %p
+            = lesson.notes
+    %li.step-list-footer
+      %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
+        = icon_tag 'chevron-up', size: :m
+        = t('lessons.count', count: section.lessons.count)
