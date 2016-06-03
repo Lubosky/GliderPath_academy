@@ -32,6 +32,13 @@ en:
     support: 'Support'
     terms: 'Terms of Service'
     webinars: 'Webinars'
+  lessons:
+    count:
+      one: '%{count} lesson'
+      other: '%{count} lessons'
+    next: 'Next Lesson'
+    notes: 'Lesson Notes'
+    attachments: 'Attachments'
   users:
     account:
       edit: 'Manage Account'
