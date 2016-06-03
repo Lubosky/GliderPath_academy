@@ -1,0 +1,117 @@
+.footer
+  +pad(45px 45px 0)
+  text-align: left
+  background: $footer-bg-color
+  position: relative
+  page-break-inside: avoid
+
+  .footer-list
+    +clearfix
+    +pad(20px 0)
+    border-top: 1px solid rgba($white, .1)
+    list-style-type: none
+    margin: 20px 0 0
+
+  .footer-list
+    &-item
+      +font-size(14px)
+      color: $text-muted
+      float: left
+      line-height: 27px
+      margin-right: 20px
+
+    &-social-item
+      +border-radius(15px)
+      +size(27px)
+      overflow: hidden
+      margin-right: 10px
+
+      &:nth-child(5)
+        margin-right: 20px
+
+    &-text-item,
+    &-copyright
+      @extend .sbold
+
+    &-copyright
+      margin-right: 0
+      float: right
+
+    .footer-link
+      color: inherit
+      text-decoration: none
+
+      &:hover,
+      &:focus
+        color: $brand
+
+      &.social-link
+        +size(100%)
+        display: block
+        background: rgba($white, .1)
+
+        .icon
+          position: relative
+          left: 7px
+          top: -2px
+
+        &:hover,
+        &:focus
+          background: $brand
+
+          .icon
+            color: $white
+
+
+    +mq($max, $mobile-max)
+      .footer-list-item
+        margin-bottom: 10px
+
+      .footer-list-copyright
+        clear: left
+        float: left
+        margin: 20px 0 0
+
+      .footer-list-text-item
+        clear: left
+        margin: 0
+
+      .footer-list-social-item
+        margin-bottom: 15px
+
+  .footer-column-list
+    list-style-type: none
+    +span-columns(3 of 12)
+    +omega(4n)
+
+    +mq($max, $mobile-max)
+      +omega-reset(4n)
+      +span-columns(6 of 12)
+      +omega(2n)
+
+    +media($mobile)
+      +omega-reset(2n)
+      +span-columns(12)
+      +pad(0)
+      text-align: center
+
+    .footer-column
+      &-title
+        @extend .sbold
+        +font-size(15px)
+        color: darken($white, 25%)
+        text-transform: uppercase
+        white-space: nowrap
+        line-height: $line-height-base
+        margin-bottom: 10px
+
+      &-item
+        margin-bottom: 10px
+
+      &-link
+        color: $text-muted
+        text-decoration: none
+
+        &:hover,
+        &:focus
+          color: $brand
