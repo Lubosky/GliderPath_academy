@@ -13,7 +13,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.present? && ( user.is_admin? || ( user.is_instructor? && ( user == course.user ) ) )
+    return true if user.present? && ( user.is_admin? || ( user.is_instructor? && ( user == course.instructor ) ) )
   end
 
   def destroy?

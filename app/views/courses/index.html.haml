@@ -8,6 +8,6 @@
         .card-box-meta
           %p
             with
-            %strong #{course.user.first_name} #{course.user.last_name}
+            %strong #{course.instructor.first_name} #{course.instructor.last_name}
           %p
             = t('lessons.count', count: course.lessons.count)

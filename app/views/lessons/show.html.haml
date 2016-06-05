@@ -4,7 +4,7 @@
   %h1
     = @lesson.title
   .text-muted
-    by #{ @lesson.course.user.first_name } #{ @lesson.course.user.last_name } &#8226; #{ @lesson.course.name }
+    by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ @lesson.course.name }
   %p
     = @lesson.notes
 

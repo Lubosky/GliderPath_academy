@@ -12,12 +12,12 @@ class CoursesController < ApplicationController
   end
 
   def new
-    @course = current_user.courses.build
+    @course = current_user.courses_as_instructor.build
     authorize @course
   end
 
   def create
-    @course = current_user.courses.build(course_params)
+    @course = current_user.courses_as_instructor.build(course_params)
     authorize @course
     if @course.save
       redirect_to @course
@@ -59,7 +59,7 @@ class CoursesController < ApplicationController
     end
 
     def owned_course
-      unless current_user == @course.user
+      unless current_user == @course.instructor
         flash[:alert] = t('flash.courses.update.not_authorized')
         redirect_to :back
       end

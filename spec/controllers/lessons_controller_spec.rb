@@ -9,7 +9,7 @@ RSpec.describe LessonsController, type: :controller do
     before do
       user.confirm
       login user
-      @course = create(:course, user: user)
+      @course = create(:course, instructor: user)
       @section = create(:section, course: @course)
       @lesson = create(:lesson, section: @section)
       get :show, params: { course_id: @course, id: @lesson }

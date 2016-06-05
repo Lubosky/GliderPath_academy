@@ -23,7 +23,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #show' do
 
     before do
-      @course = create(:course, user: user)
+      @course = create(:course, instructor: user)
       get :show, params: { id: @course }
     end
 
@@ -71,7 +71,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #update' do
 
     before :each do
-      @course = create(:course, user: user)
+      @course = create(:course, instructor: user)
     end
 
     context 'when updated course is invalid' do
@@ -97,7 +97,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #destroy' do
 
     before do
-      @course = create(:course, user: user)
+      @course = create(:course, instructor: user)
     end
 
     it 'deletes the course and redirects to courses index page' do

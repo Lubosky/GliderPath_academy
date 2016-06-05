@@ -1,9 +1,9 @@
 class Course < ActiveRecord::Base
-  belongs_to :user, inverse_of: :courses
+  belongs_to :instructor, inverse_of: :courses_as_instructor, class_name: 'User'
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :user_id, presence: true
+  validates :instructor_id, presence: true
 
   has_many :sections, autosave: true, dependent: :destroy, inverse_of: :course
   has_many :lessons, through: :sections
