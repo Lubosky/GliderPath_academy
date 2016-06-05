@@ -5,6 +5,8 @@ class Course < ActiveRecord::Base
   validates :description, presence: true
   validates :instructor_id, presence: true
 
+  has_many :enrollments, inverse_of: :courses_as_student, dependent: :destroy, foreign_key: :course_id
+  has_many :students, through: :enrollments, class_name: 'User', foreign_key: :student_id
   has_many :sections, autosave: true, dependent: :destroy, inverse_of: :course
   has_many :lessons, through: :sections
 

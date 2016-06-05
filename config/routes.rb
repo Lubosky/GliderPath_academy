@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :lessons, only: [:show]
+    resource :enrollment, only: [:create], path: 'enroll'
   end
 
   resources :uploads, only: [:download], concerns: :downloadable
