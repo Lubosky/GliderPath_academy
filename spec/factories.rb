@@ -38,6 +38,11 @@ FactoryGirl.define do
     notes 'Lesson description #1'
   end
 
+  factory :enrollment do
+    association :course, factory: :course
+    association :student, factory: :user
+  end
+
   factory :upload do
     file Refile::FileDouble.new('yoda', Rails.root.to_s + 'spec/support/images/yoda.jpg', content_type: 'image/jpg')
   end

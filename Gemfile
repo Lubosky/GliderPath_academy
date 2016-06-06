@@ -7,6 +7,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'simple_form'
 gem 'cocoon'
 gem 'config', '~> 1.2', '>= 1.2.1'
+gem 'state_machines-activerecord', '~> 0.4.0'
 gem 'title'
 
 gem 'devise'

@@ -8,7 +8,7 @@ class EnrollmentsController < ApplicationController
     @enrollment = current_user.enroll(@course)
     authorize @enrollment
 
-    if @enrollment.save
+    if @enrollment.save && @enrollment.activate
       flash[:success] = t('flash.enrollments.success', course: @course.name)
       redirect_to course_lesson_path(@course, @course.lessons.first)
     else
