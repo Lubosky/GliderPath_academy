@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe UploadsController, type: :controller do
   include Downloadable
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   describe 'GET #download' do
 

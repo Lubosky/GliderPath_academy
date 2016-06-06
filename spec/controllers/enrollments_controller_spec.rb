@@ -2,9 +2,9 @@ require 'spec_helper'
 
 RSpec.describe EnrollmentsController, type: :controller do
 
-  let(:u1) { FactoryGirl.create(:user, :instructor) }
-  let(:u2) { FactoryGirl.create(:user) }
-  let(:u3) { FactoryGirl.create(:user) }
+  let(:u1) { create(:user, :instructor) }
+  let(:u2) { create(:user) }
+  let(:u3) { create(:user) }
 
   describe 'GET #create' do
 

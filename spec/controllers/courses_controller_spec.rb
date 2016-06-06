@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe CoursesController, type: :controller do
 
-  let(:user) { FactoryGirl.create(:user, :instructor, :admin) }
+  let(:user) { create(:user, :instructor, :admin) }
 
   before :each do
     user.confirm
@@ -59,7 +59,7 @@ RSpec.describe CoursesController, type: :controller do
     context 'when new course is valid' do
       it 'creates the course and redirects to courses index page' do
         expect {
-          post :create, params: { course: FactoryGirl.attributes_for(:course) }
+          post :create, params: { course: attributes_for(:course) }
         }.to change(Course, :count).by(1)
         expect(response).to redirect_to Course.last
         expect(flash[:success]).to match(/^Course has been successfuly created./)

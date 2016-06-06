@@ -3,9 +3,9 @@ require 'pundit/rspec'
 
 RSpec.describe CoursePolicy do
 
-  let(:admin) { FactoryGirl.create(:user, :admin) }
-  let(:instructor) { FactoryGirl.create(:user, :instructor) }
-  let(:student) { FactoryGirl.create(:user) }
+  let(:admin) { create(:user, :admin) }
+  let(:instructor) { create(:user, :instructor) }
+  let(:student) { create(:user) }
 
   subject { described_class }
 

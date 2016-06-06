@@ -1,5 +1,5 @@
 feature 'User signs in' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   scenario 'can sign in with valid credentials' do
     sign_in_user(user)

@@ -26,16 +26,19 @@ FactoryGirl.define do
   factory :course do
     name 'Course #1'
     description 'Course description #1'
+    association :instructor, factory: [ :user, :instructor ]
   end
 
   factory :section do
     title 'Section #1'
     objective 'Section description #1'
+    association :course, factory: :course
   end
 
   factory :lesson do
     title 'Lesson #1'
     notes 'Lesson description #1'
+    association :section, factory: :section
   end
 
   factory :enrollment do

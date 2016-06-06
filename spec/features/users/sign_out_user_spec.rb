@@ -1,5 +1,5 @@
 feature 'User signs out' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   scenario 'signs out' do
     sign_in_user(user)

@@ -1,5 +1,5 @@
 feature 'Edit Account' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   before(:each) do
     sign_in_user(user)

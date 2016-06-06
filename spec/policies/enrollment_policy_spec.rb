@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe EnrollmentPolicy do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   subject { described_class }
 

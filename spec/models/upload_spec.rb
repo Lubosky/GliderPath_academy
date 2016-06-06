@@ -4,7 +4,7 @@ describe Upload, type: :model do
 
   describe 'validations' do
 
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     it 'validates and associates with' do
       RequestStore.store[:current_user] = user

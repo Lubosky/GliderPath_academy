@@ -3,9 +3,9 @@ require 'pundit/rspec'
 
 RSpec.describe LessonPolicy do
 
-  let(:instructor) { FactoryGirl.create(:user, :instructor) }
-  let(:u1) { FactoryGirl.create(:user) }
-  let(:u2) { FactoryGirl.create(:user) }
+  let(:instructor) { create(:user, :instructor) }
+  let(:u1) { create(:user) }
+  let(:u2) { create(:user) }
 
   subject { described_class }
 
