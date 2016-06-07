@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :enrollments, inverse_of: :student, foreign_key: 'student_id'
   has_many :courses_as_student, through: :enrollments, inverse_of: :students, class_name: 'Course'
   has_many :courses_as_instructor, inverse_of: :instructor, class_name: 'Course', foreign_key: :instructor_id
+  has_many :enrolled_lessons, inverse_of: :student, foreign_key: 'student_id'
+  has_many :lessons, through: :enrolled_lessons, inverse_of: :students
   has_many :uploads, inverse_of: :user
 
   after_create :assign_default_role

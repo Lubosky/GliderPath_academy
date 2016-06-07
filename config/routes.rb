@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :courses do
-    resources :lessons, only: [:show]
+    resources :lessons, only: [:show] do
+      post :complete, on: :member
+    end
     resource :enrollment, only: [:create], path: 'enroll'
   end
 
