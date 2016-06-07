@@ -11,6 +11,8 @@ describe User, type: :model do
       is_expected.to have_many :courses_as_instructor
       is_expected.to have_many :courses_as_student
       is_expected.to have_many :enrollments
+      is_expected.to have_many :lessons
+      is_expected.to have_many :enrolled_lessons
       is_expected.to have_many :uploads
     end
   end

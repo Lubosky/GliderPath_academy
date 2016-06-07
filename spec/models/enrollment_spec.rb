@@ -12,9 +12,8 @@ describe Enrollment, type: :model do
   end
 
   describe 'set enrollment status to "Active" automatically after student enrolls in course' do
-    let(:u1) { create(:user, :instructor) }
     let(:u2) { create(:user) }
-    let(:course) { create(:course, instructor: u1) }
+    let(:course) { create(:course) }
     let(:enrollment) { create(:enrollment, student_id: u2.id, course_id: course.id) }
 
     it { expect { enrollment.activate }.to change(enrollment, :status).from('initial').to('active') }
