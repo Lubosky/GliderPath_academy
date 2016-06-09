@@ -18,6 +18,7 @@ en:
         not_authorized: 'You are not authorized to edit this course.'
       destroy:
         info: 'Course was successfully deleted.'
+      complete: 'Awesome! You have just completed course %{course}.'
     enrollments:
       success: 'You have enrolled in the course %{course}.'
       error: 'Ooops! We are having trouble enrolling you in this course. Please try again.'

@@ -12,7 +12,13 @@ class LessonsController < ApplicationController
     authorize @lesson
     enrolled_lesson = current_user.enrolled_lessons.find_by(lesson_id: @lesson.id)
     enrolled_lesson.complete
-    redirect_back(fallback_location: root_path)
+    @next_lesson = @lesson.next_lesson
+    if @next_lesson == nil
+      flash[:success] = t('flash.courses.complete', course: @course.name)
+      redirect_back(fallback_location: course_lesson_path(@course, @lesson))
+    else
+      redirect_to course_lesson_path(@course, @next_lesson)
+    end
   end
 
   private

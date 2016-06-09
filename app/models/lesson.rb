@@ -15,6 +15,15 @@ class Lesson < ApplicationRecord
 
   after_save :set_position, on: :create
 
+  def next_lesson
+    lessons = self.course.lessons.order('position ASC')
+    if self.position >= lessons.first.position + lessons.size - 1
+      return nil
+    else
+      return lessons.find_by_position(self.position + 1)
+    end
+  end
+
   protected
 
     def set_position
