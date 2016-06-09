@@ -24,6 +24,14 @@ class Lesson < ApplicationRecord
     end
   end
 
+  def completed?(user)
+    self.enrolled_lessons.completed.where(student_id: user.id).present?
+  end
+
+  def active?(user)
+    self.enrolled_lessons.active.where(student_id: user.id).present?
+  end
+
   protected
 
     def set_position

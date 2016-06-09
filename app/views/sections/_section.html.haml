@@ -9,7 +9,10 @@
       %li
         = link_to course_lesson_path(@course, lesson) do
           .icon-holder
-            = icon_tag 'check'
+            - if lesson.completed?(current_user)
+              = icon_tag 'check'
+            - else
+              .icon
           %h5
             = lesson.title
           %p
