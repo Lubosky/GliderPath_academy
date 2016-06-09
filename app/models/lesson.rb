@@ -13,4 +13,15 @@ class Lesson < ApplicationRecord
   accepts_nested_attributes_for :lesson_uploads, reject_if: :all_blank, allow_destroy: true
   accepts_attachments_for :uploads, append: true
 
+  after_save :set_position, on: :create
+
+  protected
+
+    def set_position
+      i = 0
+      if self.position.to_i.zero?
+        self.course.lessons.each_with_index { |n, i| n.update_attribute( :position, i + 1 ) }
+      end
+    end
+
 end
