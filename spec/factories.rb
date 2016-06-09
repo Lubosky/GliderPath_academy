@@ -32,12 +32,14 @@ FactoryGirl.define do
   factory :section do
     title 'Section #1'
     objective 'Section description #1'
+    position 1
     association :course, factory: :course
   end
 
   factory :lesson do
     title 'Lesson #1'
     notes 'Lesson description #1'
+    position 1
     association :section, factory: :section
   end
 

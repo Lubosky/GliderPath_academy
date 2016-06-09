@@ -25,4 +25,49 @@ RSpec.describe LessonsController, type: :controller do
     }
   end
 
+  describe 'POST #complete lesson' do
+
+    context 'when completed lesson is not the last lesson' do
+
+      before do
+        u1.confirm
+        u2.confirm
+        login u1
+        login u2
+        @course = create(:course, instructor: u1)
+        @section = create(:section, course: @course)
+        @l1 = create(:lesson, section: @section, position: 1)
+        @l2 = create(:lesson, section: @section, position: 2)
+        u2.enroll(@course)
+        @enrolled_lesson = create(:enrolled_lesson, lesson: @l1, student: u2)
+      end
+
+      it {
+        post :complete, params: { course_id: @course, id: @l1 }
+        expect(response).to redirect_to course_lesson_path(@course, @l1.next_lesson)
+      }
+
+    end
+
+    context 'when completed lesson is last lesson' do
+
+      before do
+        u1.confirm
+        u2.confirm
+        login u1
+        login u2
+        @course = create(:course, instructor: u1)
+        @section = create(:section, course: @course)
+        @l1 = create(:lesson, section: @section)
+        u2.enroll(@course)
+        @enrolled_lesson = create(:enrolled_lesson, lesson: @l1, student: u2)
+      end
+
+      it {
+        post :complete, params: { course_id: @course, id: @l1 }
+        expect(response).to redirect_to course_lesson_path(@course, @l1)
+      }
+
+    end
+  end
 end
