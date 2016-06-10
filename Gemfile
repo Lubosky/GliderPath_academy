@@ -10,6 +10,7 @@ gem 'cocoon'
 gem 'config', '~> 1.2', '>= 1.2.1'
 gem 'state_machines-activerecord', '~> 0.4.0'
 gem 'title'
+gem 'video_info', github: 'thibaudgg/video_info'
 
 gem 'devise'
 gem 'pundit'
