@@ -11,4 +11,9 @@ class Course < ActiveRecord::Base
   has_many :lessons, -> { order(position: :asc) }, through: :sections
 
   accepts_nested_attributes_for :sections, reject_if: :all_blank, allow_destroy: true
+
+  def progress(user)
+    100 * (self.lessons.completed.count.to_f / self.lessons.count.to_f)
+  end
+
 end

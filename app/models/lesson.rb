@@ -15,6 +15,9 @@ class Lesson < ApplicationRecord
 
   after_save :set_position, on: :create
 
+  scope :completed, -> { joins(:enrolled_lessons).where('enrolled_lessons.status = ? AND student_id = ?', 'completed', User.current.id) }
+  scope :active, -> { joins(:enrolled_lessons).where('enrolled_lessons.status = ? AND student_id = ?', 'active', User.current.id) }
+
   def next_lesson
     lessons = self.course.lessons.order('position ASC')
     if self.position >= lessons.first.position + lessons.size - 1

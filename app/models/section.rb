@@ -11,6 +11,10 @@ class Section < ApplicationRecord
 
   before_validation :set_position, on: :create
 
+  def progress(user)
+    100 * (self.lessons.completed.count.to_f / self.lessons.count.to_f)
+  end
+
   protected
 
     def set_position

@@ -42,6 +42,9 @@ en:
     count:
       one: '%{count} lesson'
       other: '%{count} lessons'
+    progress:
+      one: '%{completed} / %{count} lesson completed'
+      other: '%{completed} / %{count} lessons completed'
     complete: 'Complete & Continue'
     completing: 'Completing...'
     notes: 'Lesson Notes'
