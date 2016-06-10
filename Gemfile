@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0.rc1'
+gem 'dotenv-rails'
 
 gem 'pg', '~> 0.15'
 gem 'jbuilder', '~> 2.0'
