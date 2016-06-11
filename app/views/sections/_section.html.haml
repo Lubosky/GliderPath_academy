@@ -13,6 +13,9 @@
               = icon_tag 'check'
             - else
               .icon
+          - if lesson.video.present?
+            %span.step-duration
+              = duration_for(lesson.video.video_duration)
           %h5
             = lesson.title
           %p

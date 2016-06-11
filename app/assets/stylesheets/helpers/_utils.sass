@@ -50,3 +50,18 @@ strong,
 .disabled
   cursor: default
   pointer-events: none
+
+.video-wrapper
+  +pad(56.25% 0 0)
+  overflow: hidden
+  position: relative
+  iframe,
+  object,
+  embed,
+  .responsive-wrapper
+    +size(100%)
+    position: absolute
+    top: 0
+    left: 0
+    .wistia_embed
+      +size(100%)

@@ -1,10 +1,15 @@
 .video-container
+  = embed_video(@lesson.video)
 
 .meta-container
-  %h1
-    = @lesson.title
-  .text-muted
-    by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ @lesson.course.name }
+  .lesson-heading
+    %h1
+      = @lesson.title
+    - if @lesson.video.present?
+      %span.lesson-duration
+        = duration_for(@lesson.video.video_duration)
+    .lesson-meta
+      by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ link_to @lesson.course.name, course_path(@lesson.course) }
   %p
     = @lesson.notes
 
