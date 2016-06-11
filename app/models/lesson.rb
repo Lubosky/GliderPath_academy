@@ -1,4 +1,6 @@
 class Lesson < ApplicationRecord
+  include Concerns::Videoable
+
   validates :title, presence: true
 
   belongs_to :section, inverse_of: :lessons, foreign_key: :section_id
@@ -11,6 +13,7 @@ class Lesson < ApplicationRecord
   has_one :course, through: :section
 
   accepts_nested_attributes_for :lesson_uploads, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
   accepts_attachments_for :uploads, append: true
 
   after_save :set_position, on: :create
