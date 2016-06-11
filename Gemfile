@@ -43,6 +43,9 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails', '~> 3.5.0.beta3'
   gem 'rspec-its'
+  gem 'rack-mini-profiler'
+  gem 'flamegraph'
+  gem 'stackprof'
 end
 
 group :development do
