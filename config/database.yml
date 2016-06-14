@@ -1,11 +1,11 @@
 development: &default
   adapter: postgresql
   encoding: unicode
-  url: <%= ENV.fetch('DATABASE_URL', 'postgres://localhost:5432/gliderpath_academy_development') %>
+  url: <%= ENV.fetch("DATABASE_URL", "postgres://localhost:5432/gliderpath_academy_development") %>
 
 test:
   <<: *default
-  url: <%= ENV.fetch('DATABASE_URL', "postgres://localhost:5432/gliderpath_academy_test#{ENV['TEST_ENV_NUMBER']}") %>
+  url: <%= ENV.fetch("DATABASE_URL", "postgres://localhost:5432/gliderpath_academy_test#{ENV["TEST_ENV_NUMBER"]}") %>
 
 production:
   <<: *default
