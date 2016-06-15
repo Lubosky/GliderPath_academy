@@ -4,8 +4,6 @@ en:
     courses:
       index: 'Courses'
   flash:
-    application:
-      not_authorized: 'You are not authorized to perform this action.'
     attachments:
       error: 'There was an error downloading requested file.'
     courses:
@@ -61,3 +59,6 @@ en:
   sign_up: 'Sign Up'
   sign_in: 'Sign In'
   sign_out: 'Sign Out'
+
+  pundit:
+    default: 'You are not authorized to perform this action.'
