@@ -39,6 +39,13 @@ GIT
       tilt (~> 2.0)
 
 GIT
+  remote: git://github.com/stympy/faker.git
+  revision: 9a486ff0b0e91753e5dd3c4f2d79236b5a421f96
+  specs:
+    faker (1.6.3)
+      i18n (~> 0.5)
+
+GIT
   remote: git://github.com/thibaudgg/video_info.git
   revision: 2928baf68947e8eb9756a2f50716edd4647cd1aa
   specs:
@@ -155,8 +162,6 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
-    faker (1.6.3)
-      i18n (~> 0.5)
     flamegraph (0.9.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -386,7 +391,7 @@ DEPENDENCIES
   dotenv-rails
   email_spec
   factory_girl_rails
-  faker
+  faker!
   flamegraph
   gon!
   haml-rails

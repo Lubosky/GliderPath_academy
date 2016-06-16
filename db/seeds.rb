@@ -24,6 +24,12 @@ unless Role.any?
   end
 end
 
+unless Plan.any?
+  create_for 'plans', Plan::NAMES do |_, plan_id|
+    Plan.create! braintree_plan_id: plan_id, name: 'GliderPath Academy - Monthly'
+  end
+end
+
 case Rails.env
 when 'development'
 
@@ -58,4 +64,26 @@ when 'development'
     u.add_role :admin
   end
 
+  create_for 'courses', [
+    9.times.map do
+      { name: Faker::Book.title,
+        description: Faker::ChuckNorris.fact,
+        instructor_id: User.with_role('instructor').map { |instructor| instructor.id }.sample,
+        sections_attributes: rand(1..5).times.map do |section|
+          {
+            title: Faker::Hipster.sentence,
+            objective: Faker::Lorem.paragraph,
+            lessons_attributes: rand(1..9).times.map do |lesson|
+              {
+                title: Faker::Hipster.sentence,
+                notes: Faker::Lorem.paragraph(2)
+              }
+            end
+          }
+        end
+      }
+    end
+  ] do |_, params|
+    course = Course.create(params)
+  end
 end
