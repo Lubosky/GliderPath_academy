@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610184642) do
+ActiveRecord::Schema.define(version: 20160616114150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 20160610184642) do
     t.index ["section_id"], name: "index_lessons_on_section_id", using: :btree
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string   "name",              null: false
+    t.string   "braintree_plan_id", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.string   "resource_type"
@@ -79,6 +86,16 @@ ActiveRecord::Schema.define(version: 20160610184642) do
     t.datetime "updated_at", null: false
     t.integer  "position"
     t.index ["course_id"], name: "index_sections_on_course_id", using: :btree
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "braintree_subscription_id"
+    t.integer  "plan_id",                   null: false
+    t.integer  "subscriber_id",             null: false
+    t.string   "status"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["subscriber_id", "plan_id"], name: "index_subscriptions_on_subscriber_id_and_plan_id", using: :btree
   end
 
   create_table "uploads", force: :cascade do |t|
@@ -114,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160610184642) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "braintree_customer_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -144,4 +162,5 @@ ActiveRecord::Schema.define(version: 20160610184642) do
   add_foreign_key "enrollments", "users", column: "student_id"
   add_foreign_key "lessons", "sections"
   add_foreign_key "sections", "courses"
+  add_foreign_key "subscriptions", "users", column: "subscriber_id"
 end

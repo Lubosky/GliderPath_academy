@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :lessons, through: :enrolled_lessons, inverse_of: :students
   has_many :uploads, inverse_of: :user
 
+  has_one :subscription, inverse_of: :subscriber, foreign_key: 'subscriber_id'
+  has_one :plan, through: :subscription, inverse_of: :subscribers
+
   after_create :assign_default_role
 
   def assign_default_role
@@ -31,6 +34,14 @@ class User < ApplicationRecord
 
   def enrolled?(course)
     self.enrollments.where(course_id: course.id).present?
+  end
+
+  def subscribed?
+    self.subscription.present? && self.subscription.active?
+  end
+
+  def braintree_customer?
+    self.braintree_customer_id
   end
 
   private

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     resource :enrollment, only: [:create], path: 'enroll'
   end
 
+  resource :subscription, only: [:new, :create], path: 'subscribe'
+  delete 'unsubscribe', to: 'subscriptions#destroy', as: 'cancel_subscription'
+
   resources :uploads, only: [:download], concerns: :downloadable
 
 end

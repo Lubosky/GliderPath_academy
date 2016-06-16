@@ -21,6 +21,13 @@ en:
       success: 'You have enrolled in the course %{course}.'
       error: 'Ooops! We are having trouble enrolling you in this course. Please try again.'
       alert: 'You are already enrolled in this course.'
+    subscriptions:
+      create:
+        success: 'Awesome! You have been subscribed to the plan %{plan}.'
+        error: 'Ooops! Something went wrong while processing your payment. Please try again!'
+      cancel:
+        success: 'Your subscription has been successfully cancelled!'
+        error: 'Something went terribly wrong. Please try again!'
 
   social:
     twitter: 'GliderPath on Twitter'
@@ -62,3 +69,7 @@ en:
 
   pundit:
     default: 'You are not authorized to perform this action.'
+    subscription_policy:
+      new?: 'You are already subscribed!'
+    enrollment_policy:
+      create?: 'Subscribe to the plan or purchase this course to enroll.'

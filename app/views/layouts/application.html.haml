@@ -8,7 +8,7 @@
 
     = include_gon
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'https://js.braintreegateway.com/v2/braintree.js', 'data-turbolinks-track' => true
 
   %body{class: "#{body_css}"}
     = render 'flash_messages'

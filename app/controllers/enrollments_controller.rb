@@ -5,8 +5,8 @@ class EnrollmentsController < ApplicationController
 
 
   def create
+    authorize :enrollment
     @enrollment = current_user.enroll(@course)
-    authorize @enrollment
 
     if @enrollment.save && @enrollment.activate
       flash[:success] = t('flash.enrollments.success', course: @course.name)

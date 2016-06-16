@@ -6,6 +6,7 @@
 #= require accordion
 #= require dropdown
 #= require refile
+#= require subscription
 #= require tabs
 #= require_tree .
 
