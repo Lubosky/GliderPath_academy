@@ -18,6 +18,8 @@ gem 'pundit'
 gem 'request_store'
 gem 'rolify'
 
+gem 'braintree'
+
 gem 'coffee-rails', '~> 4.1.0'
 gem 'haml-rails'
 gem 'jquery-rails'
@@ -28,6 +30,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bourbon', '~> 5.0.0.beta.5'
 gem 'neat', '~> 1.7'
 gem 'normalize-rails'
+gem 'gon', github: 'gazay/gon'
 
 gem 'refile', require: 'refile/rails', github: 'refile/refile'
 gem 'refile-mini_magick'
