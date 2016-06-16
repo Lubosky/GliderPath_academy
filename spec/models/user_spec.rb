@@ -14,6 +14,8 @@ describe User, type: :model do
       is_expected.to have_many :lessons
       is_expected.to have_many :enrolled_lessons
       is_expected.to have_many :uploads
+      is_expected.to have_one :subscription
+      is_expected.to have_one :plan
     end
   end
 end

@@ -13,9 +13,14 @@ RSpec.describe EnrollmentsController, type: :controller do
       u2.confirm
       u3.confirm
       login u1
+      login u2
+      login u3
       @course = create(:course, instructor: u1)
       @section = create(:section, course: @course)
       @lesson = create(:lesson, section: @section)
+      @plan = create(:plan)
+      @s1 = create(:subscription, subscriber: u2, plan: @plan, status: 'active')
+      @s2 = create(:subscription, subscriber: u3, plan: @plan, status: 'active')
     end
 
     context 'when enrollment is valid' do

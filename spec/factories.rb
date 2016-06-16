@@ -53,6 +53,18 @@ FactoryGirl.define do
     association :student, factory: :user
   end
 
+  factory :plan do
+    id 1
+    braintree_plan_id 'gliderpath_academy_monthly'
+    name 'GliderPath Academy - Monthly'
+  end
+
+  factory :subscription do
+    association :plan, factory: :plan
+    association :subscriber, factory: :user
+    status 'active'
+  end
+
   factory :upload do
     file Refile::FileDouble.new('yoda', Rails.root.to_s + 'spec/support/images/yoda.jpg', content_type: 'image/jpg')
   end
