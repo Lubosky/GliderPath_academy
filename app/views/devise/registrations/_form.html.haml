@@ -1,0 +1,11 @@
+= simple_form_for(resource, as: resource_name, html: { class: 'form registration-form' }, url: registration_path(resource_name)) do |f|
+  = f.error_notification
+  .row
+    = f.input :first_name, required: true, autofocus: true, wrapper_html: { class: 'five columns reset-mobile-column' }
+    = f.input :last_name, required: true, wrapper_html: { class: 'seven columns reset-mobile-column' }
+  .row
+    = f.input :email, required: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+    = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), wrapper_html: { class: 'six columns reset-mobile-column' }
+  .row
+    .form-item.twelve.columns.reset-mobile-column
+      = f.button :submit, t('button.account.create'), class: 'button-purple wide', data: { 'disable-with': 'Signing up...' }

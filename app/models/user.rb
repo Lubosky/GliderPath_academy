@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_one :subscription, inverse_of: :subscriber, foreign_key: 'subscriber_id'
   has_one :plan, through: :subscription, inverse_of: :subscribers
 
+  before_save :skip_confirmation_notification, on: :create
   after_create :assign_default_role
 
   def assign_default_role
@@ -52,6 +53,10 @@ class User < ApplicationRecord
 
     def self.current=(user)
       RequestStore.store[:current_user] = user
+    end
+
+    def skip_confirmation_notification
+      skip_confirmation_notification!
     end
 
 end

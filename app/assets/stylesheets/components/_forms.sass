@@ -66,3 +66,10 @@ form
       .hint
         +font-size($font-size-small)
         color: $text-muted
+
+    .error-notification
+      +border-radius($border-radius)
+      +pad(10px)
+      color: $white
+      background: map-deep-get($component-colors, red, base)
+      margin-bottom: 20px

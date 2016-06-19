@@ -17,6 +17,8 @@ class SubscriptionsController < ApplicationController
     )
 
     if result.success?
+      current_user.confirm unless current_user.confirmed?
+
       subscription_attributes = {
         braintree_subscription_id: result.subscription.id,
         subscriber_id: current_user.id,
@@ -29,6 +31,8 @@ class SubscriptionsController < ApplicationController
       redirect_to root_path
 
     else
+      current_user.send_confirmation_instructions unless current_user.confirmed?
+
       flash[:alert] = t('flash.subscriptions.create.error')
       gon.braintree_client_token = generate_braintree_client_token
       render :new
@@ -53,7 +57,7 @@ class SubscriptionsController < ApplicationController
 
     def redirect_to_signup
       if !user_signed_in?
-        session['user_return_to'] = new_subscription_path
+        session['user_return_to'] = new_subscription_path(plan: params[:plan])
         redirect_to new_user_registration_path
       end
     end

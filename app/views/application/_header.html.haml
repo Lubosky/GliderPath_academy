@@ -28,9 +28,9 @@
               %li
                 = link_to t('users.account.edit'), edit_user_registration_path
             .dropdown-footer
-              = link_to t('sign_out'), destroy_user_session_path, method: :delete
+              = link_to t('button.account.sign_out'), destroy_user_session_path, method: :delete
       - else
         %li.menu-item
-          = link_to t('sign_in'), new_user_session_path
+          = link_to t('button.account.sign_in'), new_user_session_path
         %li.menu-item.sticky
-          = link_to t('sign_up'), new_user_registration_path, class: 'button-sticky'
+          = link_to t('button.account.sign_up'), new_user_registration_path, class: 'button-sticky'

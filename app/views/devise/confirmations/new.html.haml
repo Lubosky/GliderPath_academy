@@ -1,9 +1,12 @@
-%h2 Resend confirmation instructions
-= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  = f.full_error :confirmation_token
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-  .form-actions
-    = f.button :submit, "Resend confirmation instructions"
-= render "devise/shared/links"
+.row
+  .six.columns.centered
+    %h2.content-center Resend confirmation instructions
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = f.error_notification
+      = f.full_error :confirmation_token
+      .row
+        = f.input :email, required: true, autofocus: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+      .row
+        .form-item.twelve.columns.reset-mobile-column
+          = f.button :submit, 'Resend confirmation instructions', class: 'button-green wide', data: { 'disable-with': 'Processing...' }
+    = render 'devise/shared/links'

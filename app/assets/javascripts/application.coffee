@@ -4,6 +4,7 @@
 #= require cocoon
 #= require growl
 #= require accordion
+#= require checkout
 #= require dropdown
 #= require refile
 #= require subscription

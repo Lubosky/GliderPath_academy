@@ -1,7 +1,7 @@
 class SubscriptionPolicy < ApplicationPolicy
 
   def new?
-    return true if user.present?
+    return true if user.present? && !user.subscribed?
   end
 
   def create?

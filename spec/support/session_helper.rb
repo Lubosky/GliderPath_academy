@@ -2,12 +2,12 @@ def sign_in_user(user, opts={})
   visit new_user_session_path
   fill_in t('users.email'), with: user.email
   fill_in t('users.password'), with: (opts[:password] || user.password)
-  click_button t('sign_in')
+  click_button t('button.account.sign_in')
 end
 
 def login(user = double('user'))
   if user.nil?
-    allow(request.env['warden']).to receive(:authenticate!).and_throw(:warden, {:scope => :user})
+    allow(request.env['warden']).to receive(:authenticate!).and_throw(:warden, {scope: :user})
     allow(controller).to receive(:current_user).and_return(nil)
   else
     allow(request.env['warden']).to receive(:authenticate!).and_return(user)

@@ -63,9 +63,21 @@ en:
     first_name: 'First Name'
     last_name: 'Last Name'
 
-  sign_up: 'Sign Up'
-  sign_in: 'Sign In'
-  sign_out: 'Sign Out'
+  button:
+    account:
+      create: 'Create Your Account'
+      sign_up: 'Sign Up'
+      sign_in: 'Sign In'
+      sign_out: 'Sign Out'
+    subscription:
+      new: Subscribe
+
+  link:
+    account:
+      forgotten password: 'Forgot your password?'
+      confirmation_instructions: "Didn't receive confirmation instructions?"
+      unlock_instructions: "Didn't receive unlock instructions?"
+
 
   pundit:
     default: 'You are not authorized to perform this action.'
