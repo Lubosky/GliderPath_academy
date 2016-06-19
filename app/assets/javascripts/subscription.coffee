@@ -1,8 +1,8 @@
-$ ->
+$(document).on 'turbolinks:load', ->
   unless typeof gon is 'undefined'
     clientToken = gon.braintree_client_token
     braintree.setup clientToken, 'dropin',
-      container: 'payment-form'
+      container: 'braintree-subscription-form'
       form: 'subscription-form'
       paypal:
         singleUse: false
