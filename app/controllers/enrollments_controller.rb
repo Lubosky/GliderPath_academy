@@ -1,8 +1,8 @@
 class EnrollmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_course
+  before_action :check_if_eligible_to_enroll
   before_action :check_if_student_enrolled
-
 
   def create
     authorize :enrollment
@@ -21,6 +21,13 @@ class EnrollmentsController < ApplicationController
 
     def find_course
       @course = Course.find(params[:course_id])
+    end
+
+    def check_if_eligible_to_enroll
+      if !( current_user.subscribed? || current_user.purchased?(@course) )
+        flash[:warning] = t('flash.enrollments.notice')
+        redirect_back(fallback_location: root_path)
+      end
     end
 
     def check_if_student_enrolled

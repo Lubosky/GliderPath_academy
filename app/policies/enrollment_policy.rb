@@ -1,7 +1,7 @@
 class EnrollmentPolicy < ApplicationPolicy
 
   def create?
-    return true if user.present? && user.subscribed?
+    return true if user.present?
   end
 
 end

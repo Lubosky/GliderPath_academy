@@ -7,6 +7,7 @@
 #= require checkout
 #= require dropdown
 #= require refile
+#= require purchase
 #= require subscription
 #= require tabs
 #= require_tree .

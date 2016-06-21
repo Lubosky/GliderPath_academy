@@ -1,14 +1,17 @@
 .pull-right
   -if user_signed_in?
-    - if !current_user.enrolled?(course) && current_user.subscribed?
+    - if !current_user.enrolled?(course) && ( current_user.subscribed? || current_user.purchased?(course) )
       - enrollment = current_user.enrollments.build( course_id: course.id )
       = simple_form_for enrollment, url: course_enrollment_path(course) do |f|
         = f.submit 'Start Course', class: 'button button-purple'
     - elsif current_user.is_admin? || current_user.id == course.instructor_id
       = link_to 'Edit', edit_course_path(course), class: 'button button-green button-small'
       = link_to 'Delete', course_path(course), method: :delete, data: { confirm: 'Are you sure you want to delete this course?' }, class: 'button button-red button-small'
+    - elsif !( current_user.subscribed? || current_user.purchased?(course) )
+      = link_to t('button.purchase.new'), course_purchase_path(course_id: course.id), class: 'button button-brand'
   - else
     = link_to t('button.subscription.new'), new_subscription_path(plan: 1), class: 'button button-brand'
+    = link_to t('button.purchase.new'), course_purchase_path(course_id: course.id), class: 'button button-brand'
 
 %h1
   = course.name

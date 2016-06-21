@@ -19,6 +19,7 @@ en:
       complete: 'Awesome! You have just completed course %{course}.'
     enrollments:
       success: 'You have enrolled in the course %{course}.'
+      notice: 'Subscribe to the plan or purchase this course to enroll.'
       error: 'Ooops! We are having trouble enrolling you in this course. Please try again.'
       alert: 'You are already enrolled in this course.'
     subscriptions:
@@ -28,6 +29,13 @@ en:
       cancel:
         success: 'Your subscription has been successfully cancelled!'
         error: 'Something went terribly wrong. Please try again!'
+    purchases:
+      alert: "You've already purchased %{purchase}."
+      create:
+        success: "Thank you %{user}! You've just purchased %{purchase}."
+        error: 'Ooops! Something went wrong while processing your payment. Please try again!'
+    payment:
+      alert: 'Sorry, there has been a problem processing your payment...'
 
   social:
     twitter: 'GliderPath on Twitter'
@@ -70,7 +78,9 @@ en:
       sign_in: 'Sign In'
       sign_out: 'Sign Out'
     subscription:
-      new: Subscribe
+      new: 'Subscribe'
+    purchase:
+      new: 'Purchase'
 
   link:
     account:

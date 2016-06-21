@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616114150) do
+ActiveRecord::Schema.define(version: 20160620144754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,17 @@ ActiveRecord::Schema.define(version: 20160616114150) do
     t.string   "braintree_plan_id", null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.string   "braintree_purchase_id"
+    t.integer  "purchaser_id",          null: false
+    t.string   "purchasable_type",      null: false
+    t.integer  "purchasable_id",        null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id", using: :btree
+    t.index ["purchaser_id", "purchasable_type", "purchasable_id"], name: "index_purchases_on_purchaser_id_purchasable_type_purchasable_id", unique: true, using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -161,6 +172,7 @@ ActiveRecord::Schema.define(version: 20160616114150) do
   add_foreign_key "enrolled_lessons", "users", column: "student_id"
   add_foreign_key "enrollments", "users", column: "student_id"
   add_foreign_key "lessons", "sections"
+  add_foreign_key "purchases", "users", column: "purchaser_id"
   add_foreign_key "sections", "courses"
   add_foreign_key "subscriptions", "users", column: "subscriber_id"
 end

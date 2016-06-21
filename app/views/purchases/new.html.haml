@@ -1,0 +1,5 @@
+- body_css 'checkout'
+
+#braintree-purchase-form
+= simple_form_for @purchasable, url: [@purchasable, :purchase], html: { id: 'purchase-form' }, method: :post do |f|
+  = f.button :submit, t('button.purchase.new'), class: 'button button-green', data: { 'disable-with': 'Processing...'}

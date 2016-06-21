@@ -1,4 +1,6 @@
 class Course < ActiveRecord::Base
+  include Concerns::Purchasable
+
   belongs_to :instructor, inverse_of: :courses_as_instructor, class_name: 'User'
 
   validates :name, presence: true
