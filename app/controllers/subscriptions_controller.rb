@@ -74,24 +74,18 @@ class SubscriptionsController < ApplicationController
       end
     end
 
-    def set_braintree_customer
-      if current_user.braintree_customer?
-        @customer = Braintree::Customer.find(current_user.braintree_customer_id)
-      else
-        result = Braintree::Customer.create(
-          first_name: current_user.first_name,
-          last_name: current_user.last_name,
-          email: current_user.email,
-          payment_method_nonce: params[:payment_method_nonce],
-          credit_card: {
-            options: {
-              verify_card: true
-            }
-          }
-        )
-        @customer = result.customer
+    def find_braintree_customer
+      @customer = Braintree::Customer.find(current_user.braintree_customer_id)
+    end
 
-        current_user.update(braintree_customer_id: @customer.id)
+    def set_braintree_customer
+      payment_method_nonce = params[:payment_method_nonce]
+      current_user.init_braintree_customer(payment_method_nonce)
+      if false
+        flash[:alert] = t('flash.payment.alert')
+        redirect_back(fallback_location: root_path)
+      else
+        find_braintree_customer
       end
     end
 

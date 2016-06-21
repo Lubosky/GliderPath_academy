@@ -45,6 +45,29 @@ class User < ApplicationRecord
     self.braintree_customer_id
   end
 
+  def init_braintree_customer(payment_method_nonce)
+    if !braintree_customer?
+      result = Braintree::Customer.create(
+        first_name: self.first_name,
+        last_name: self.last_name,
+        email: self.email,
+        payment_method_nonce: payment_method_nonce,
+        credit_card: {
+          options: {
+            verify_card: true
+          }
+        }
+      )
+      if result.success?
+        self.braintree_customer_id = result.customer.id
+        self.save
+        true
+      else
+        false
+      end
+    end
+  end
+
   private
 
     def self.current
