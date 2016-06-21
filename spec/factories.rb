@@ -65,6 +65,13 @@ FactoryGirl.define do
     status 'active'
   end
 
+  factory :purchase do
+    association :purchaser, factory: :user
+    trait :course_purchase do
+      association :purchasable, factory: :course
+    end
+  end
+
   factory :upload do
     file Refile::FileDouble.new('yoda', Rails.root.to_s + 'spec/support/images/yoda.jpg', content_type: 'image/jpg')
   end

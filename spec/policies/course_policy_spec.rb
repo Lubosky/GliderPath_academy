@@ -59,7 +59,6 @@ RSpec.describe CoursePolicy do
 
     it 'grants access if user is an admin' do
       expect(subject).to permit(admin, Course)
-
     end
 
   end

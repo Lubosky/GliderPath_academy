@@ -9,6 +9,8 @@ describe Course, type: :model do
 
       is_expected.to have_many :sections
       is_expected.to have_many :lessons
+      is_expected.to have_many :purchases
+      is_expected.to have_many :purchasers
 
       is_expected.to belong_to :instructor
     end
