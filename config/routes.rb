@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resource :enrollment, only: [:create], path: 'enroll'
   end
 
+  post '/braintree/webhooks', to: 'subscriptions#webhook'
+
   resource :subscription, only: [:new, :create], path: 'subscribe'
   delete 'unsubscribe', to: 'subscriptions#destroy', as: 'cancel_subscription'
 

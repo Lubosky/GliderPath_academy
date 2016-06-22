@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
-  before_action :authenticate_user!, except: [:new]
+  protect_from_forgery except: :webhook
+  before_action :authenticate_user!, except: [:new, :webhook]
   before_action :redirect_to_signup, only: [:new]
   before_action :set_plan, only: [:create]
   before_action :set_braintree_customer, only: [:create]
@@ -51,6 +52,42 @@ class SubscriptionsController < ApplicationController
       flash[:error] = t('flash.subscriptions.cancel.error')
     end
     redirect_to root_path
+  end
+
+  def webhook
+    skip_authorization
+
+    if params[:bt_challenge]
+      return render plain: Braintree::WebhookNotification.verify(params[:bt_challenge])
+    end
+
+    webhook_notification = Braintree::WebhookNotification.parse(params[:bt_signature], params[:bt_payload])
+
+    kind = webhook_notification.kind
+
+    # subscription_canceled
+    # subscription_charged_successfully
+    # subscription_charged_unsuccessfully
+
+    case kind
+      when 'subscription_canceled'
+        puts webhook_notification.kind
+
+      when 'subscription_charged_successfully'
+        puts webhook_notification.kind
+
+      when 'subscription_charged_unsuccessfully'
+        puts webhook_notification.kind
+        puts webhook_notification.subscription.failure_count
+
+        transaction = webhook_notification.subscription.transactions.last
+        errors = transaction.errors
+
+      else
+        raise "Braintree notification: #{kind} - #{webhook_notification.subscription.id} - #{webhook_notification.timestamp}"
+    end
+
+    head :ok
   end
 
   private
