@@ -29,8 +29,22 @@ class PurchasesController < ApplicationController
       purchaser_id: current_user.id
     }
 
+    charge_params = {
+      product: @purchasable.name,
+      amount: result.transaction.amount,
+      braintree_transaction_id: result.transaction.id,
+      braintree_payment_method: result.transaction.payment_instrument_type,
+      paypal_email: result.transaction.paypal_details.payer_email,
+      card_type: result.transaction.credit_card_details.card_type,
+      card_exp_month: result.transaction.credit_card_details.expiration_month,
+      card_exp_year: result.transaction.credit_card_details.expiration_year,
+      card_last4: result.transaction.credit_card_details.last_4
+    }
+
     if ( result.success? && @purchase.update_attributes(options) )
       current_user.confirm unless current_user.confirmed?
+
+      current_user.charges.create(charge_params)
 
       flash[:success] = t('flash.purchases.create.success', user: current_user.first_name, purchase: @purchasable.name)
       redirect_to @purchasable

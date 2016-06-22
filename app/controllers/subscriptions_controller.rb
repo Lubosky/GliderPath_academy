@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   protect_from_forgery except: :webhook
   before_action :authenticate_user!, except: [:new, :webhook]
   before_action :redirect_to_signup, only: [:new]
-  before_action :set_plan, only: [:create]
+  before_action :set_plan, only: [:create, :webhook]
   before_action :set_braintree_customer, only: [:create]
 
   def new
@@ -75,6 +75,21 @@ class SubscriptionsController < ApplicationController
 
       when 'subscription_charged_successfully'
         puts webhook_notification.kind
+
+        transaction = webhook_notification.subscription.transactions.last
+        user = User.find_by_braintree_customer_id(transaction.customer_details.id)
+
+        user.charges.create(
+          product: user.plan.name,
+          amount: transaction.amount,
+          braintree_transaction_id: transaction.id,
+          braintree_payment_method: transaction.payment_instrument_type,
+          paypal_email: transaction.paypal_details.payer_email,
+          card_type: transaction.credit_card_details.card_type,
+          card_exp_month: transaction.credit_card_details.expiration_month,
+          card_exp_year: transaction.credit_card_details.expiration_year,
+          card_last4: transaction.credit_card_details.last_4
+        )
 
       when 'subscription_charged_unsuccessfully'
         puts webhook_notification.kind

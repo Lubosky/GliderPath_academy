@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620144754) do
+ActiveRecord::Schema.define(version: 20160622192934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "charges", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "product"
+    t.decimal  "amount"
+    t.string   "braintree_transaction_id"
+    t.string   "braintree_payment_method"
+    t.string   "paypal_email"
+    t.string   "card_type"
+    t.integer  "card_exp_month"
+    t.integer  "card_exp_year"
+    t.string   "card_last4"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["braintree_transaction_id"], name: "index_charges_on_braintree_transaction_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_charges_on_user_id", using: :btree
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"

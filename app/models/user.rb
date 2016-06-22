@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :enrolled_lessons, inverse_of: :student, foreign_key: 'student_id'
   has_many :lessons, through: :enrolled_lessons, inverse_of: :students
   has_many :uploads, inverse_of: :user
+  has_many :charges, inverse_of: :user
 
   has_one :subscription, inverse_of: :subscriber, foreign_key: 'subscriber_id'
   has_one :plan, through: :subscription, inverse_of: :subscribers
