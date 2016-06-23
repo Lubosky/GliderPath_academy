@@ -1,22 +1,24 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :first_name, required: true, autofocus: true
-    = f.input :last_name, required: true
-    = f.input :email, required: true
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %p
-        Currently waiting confirmation for: #{resource.unconfirmed_email}
-    = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
-    = f.input :password_confirmation, required: false
-    = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
-  .form-actions
-    = f.button :submit, "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-%p
-  = link_to 'Cancel Subscription', cancel_subscription_path, method: :delete, data: { confirm: 'Are you sure you want to unsubscribe?' } if current_user.subscribed?
-= link_to "Back", :back
+.row
+  .eight.columns.centered
+    %h2.content-center Edit #{resource_name.to_s.humanize}
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = f.error_notification
+      .row
+        = f.input :first_name, required: true, autofocus: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+        = f.input :last_name, required: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+      .row
+        = f.input :email, required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %p
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+      .row
+        = f.input :password, autocomplete: 'off', required: false, wrapper_html: { class: 'six columns reset-mobile-column' }
+        = f.input :password_confirmation, required: false, wrapper_html: { class: 'six columns reset-mobile-column' }
+      .row
+        = f.input :current_password, required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+      %hr
+      .row
+        .form-item.twelve.columns.reset-mobile-column
+          = f.button :submit, t('button.account.update'), class: 'button-green wide', data: { 'disable-with': 'Saving...' }
+    %p
+      = link_to t('subscriptions.cancel.button'), cancel_subscription_path, method: :delete, class: 'button button-red', data: { confirm: t('subscriptions.cancel.confirm') } if current_user.subscribed?

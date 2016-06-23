@@ -3,7 +3,9 @@
     = f.input :email, required: false, autofocus: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
   .row
     = f.input :password, required: false, wrapper_html: { class: 'twelve columns reset-mobile-column' }
-    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+  %hr
   .row
     .form-item.twelve.columns.reset-mobile-column
       = f.button :submit, t('button.account.sign_in'), class: 'button-purple wide', data: { 'disable-with': 'Signing in...' }
+  .row.content-center
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?

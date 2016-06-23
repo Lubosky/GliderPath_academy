@@ -5,16 +5,17 @@ en:
     required:
       html: '<span class="required">*</span>'
     error_notification:
-      default_message: 'Please review the problems below:'
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
+      default_message: 'Please review the issues below:'
+    labels:
+      defaults:
+        password: 'Password'
+      user:
+        edit:
+          password: 'New password'
+    placeholders:
+      user:
+        edit:
+          current_password: 'Confirm the changes by typing your current password'
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
