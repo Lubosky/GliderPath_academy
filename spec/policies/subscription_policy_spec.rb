@@ -2,13 +2,13 @@ require 'spec_helper'
 
 RSpec.describe SubscriptionPolicy do
 
-  let(:u1) { create(:user) }
-  let(:u2) { create(:user) }
+  let(:u1) { build_stubbed(:user) }
+  let(:u2) { build_stubbed(:user) }
 
   subject { described_class }
 
   before :each do
-    subscription = build(:subscription, subscriber: u2)
+    subscription = build_stubbed(:subscription, subscriber: u2)
   end
 
   permissions :new? do

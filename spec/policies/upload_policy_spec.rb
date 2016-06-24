@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe UploadPolicy do
 
-  let(:user) { create(:user) }
+  let(:user) { build_stubbed(:user) }
 
   subject { described_class }
 

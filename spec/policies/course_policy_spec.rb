@@ -29,8 +29,8 @@ RSpec.describe CoursePolicy do
   end
 
   before do
-    @c1 = create(:course, instructor: instructor)
-    @c2 = create(:course, instructor: admin)
+    @c1 = build_stubbed(:course, instructor: instructor)
+    @c2 = build_stubbed(:course, instructor: admin)
   end
 
   permissions :update?, :edit? do

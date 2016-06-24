@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe UploadsController, type: :controller do
   include Downloadable
 
-  let(:user) { create(:user) }
+  let(:user) { build_stubbed(:user) }
 
   describe 'GET #download' do
 
