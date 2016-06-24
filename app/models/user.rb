@@ -53,6 +53,11 @@ class User < ApplicationRecord
     self.braintree_customer_id
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  alias_method :name, :full_name
+
   def init_braintree_customer(payment_method_nonce)
     if !braintree_customer?
       result = Braintree::Customer.create(

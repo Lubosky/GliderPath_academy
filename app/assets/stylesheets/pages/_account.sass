@@ -1,0 +1,43 @@
+.account
+  h3
+    margin: 0 0 35px
+
+  #account-sidebar
+    +border-radius($border-radius)
+    +box-shadow(0 2px 0 rgba($black,.05))
+    +pad(0)
+    border: 2px solid $border-color
+    background: lighten($default, 3%)
+    list-style-type: none
+    margin: 0 0 20px
+    overflow: hidden
+
+    li
+      +transition(background-color 250ms ease, color 250ms ease)
+      border-bottom: 1px solid $border-color
+      position: relative
+
+      &:first-child
+        border-radius: 5px 5px 0 0
+
+      &:last-child
+        border-bottom: none
+        border-radius: 0 0 5px 5px
+
+      &:hover,
+      &:focus,
+      .active
+        +box-shadow(0 1px 0 rgba($black,0.05))
+        background: $white
+        z-index: 1
+
+        a
+          color: darken($text-muted, 15%)
+
+      a
+        @extend .sbold
+        +pad(18px 15px)
+        +transition(color 200ms ease)
+        color: darken($text-muted, 5%)
+        display: block
+        line-height: 1

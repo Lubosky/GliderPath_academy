@@ -1,0 +1,16 @@
+%h3 Email & Password
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.error_notification
+  .row
+    = f.input :email, required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %p
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+  .row
+    = f.input :password, autocomplete: 'off', required: false, wrapper_html: { class: 'six columns reset-mobile-column' }
+    = f.input :password_confirmation, required: false, wrapper_html: { class: 'six columns reset-mobile-column' }
+  .row
+    = f.input :current_password, required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    .form-item.twelve.columns.reset-mobile-column
+      = f.button :submit, t('button.account.update'), class: 'button-green', data: { 'disable-with': 'Saving...' }

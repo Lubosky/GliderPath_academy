@@ -60,3 +60,33 @@ a
   &:active
     color: darken($brand, 15%)
     text-decoration: none
+
+// DESCRIPTION LISTS
+.dl-row
+  +clearfix
+  +pad(0 0 10px)
+  margin-bottom: 15px
+  border-bottom: 1px solid $default
+
+dl
+  margin: 15px 0 30px
+
+  dt,dd
+    +pad(0 15px)
+    line-height: $line-height-base
+    margin: 5px 0
+
+  dt
+    @extend .sbold
+    +span-columns(4)
+    clear: right
+    text-align: left
+
+  dd
+    +span-columns(8)
+    float: none
+
+  +mq($max, $mobile-screen)
+    dt,dd
+      +span-columns(12)
+      margin: 0 0 10px

@@ -1,0 +1,18 @@
+.row
+  .three.columns.reset-mobile-column
+    = render 'sidebar'
+  .nine.columns.reset-mobile-column
+    %h3 Profile Info
+    %dl
+      .dl-row
+        %dt Name
+        %dd= current_user.name
+      .dl-row
+        %dt Email Address
+        %dd= current_user.email
+      .dl-row
+        %dt Password
+        %dd • • • • • • • •
+    %p
+      = link_to t('button.account.edit'), [:edit, :account], class: 'button button-green'
+      = link_to t('button.account.password.change'), [:edit, :user, :registration], class: 'button button-default'

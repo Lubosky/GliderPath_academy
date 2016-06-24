@@ -4,6 +4,11 @@ en:
     courses:
       index: 'Courses'
   flash:
+    account:
+      not_authorized: 'You are not authorized to view this account!'
+      update:
+        success: 'Your account has been successfully updated!'
+        error: 'Sorry! We are having trouble updating your account.'
     attachments:
       error: 'There was an error downloading requested file.'
     courses:
@@ -65,10 +70,12 @@ en:
   subscriptions:
     cancel:
       button: 'Cancel Subscription'
-      confirm: 'Are you sure you want to unsubscribe?'
+      confirm: "Are you sure you want to cancel? You'll no longer be able to access GliderPath Academy content except the content you've purchased."
   users:
     account:
-      edit: 'Manage Account'
+      edit:
+        profile: 'Edit Profile'
+        email: 'Email & Password'
       show: 'View Profile'
     email: 'Email'
     password: 'Password'
@@ -78,12 +85,16 @@ en:
   button:
     account:
       create: 'Create Your Account'
+      edit: 'Edit Account'
       update: 'Save Changes'
       sign_up: 'Sign Up'
       sign_in: 'Sign In'
       sign_out: 'Sign Out'
+      password:
+        change: 'Change Password'
     subscription:
       new: 'Subscribe'
+      cancel: 'Cancel Subscription'
     purchase:
       new: 'Purchase'
 

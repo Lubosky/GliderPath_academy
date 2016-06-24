@@ -1,0 +1,9 @@
+%h3 Edit Profile
+= simple_form_for current_user, url: { controller: 'accounts', action: 'update_account' }, html: { method: :patch } do |f|
+  = f.error_notification
+  .row
+    = f.input :first_name, required: true, autofocus: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+    = f.input :last_name, required: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+  .row
+    .form-item.twelve.columns.reset-mobile-column
+      = f.button :submit, t('button.account.update'), class: 'button-green', data: { 'disable-with': 'Saving...' }

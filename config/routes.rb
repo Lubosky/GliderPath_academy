@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'registrations' }, path: 'account', path_names: { sign_in: 'signin', sign_out: 'signout', password: 'password', sign_up: 'signup' }
+  devise_for :users, controllers: { registrations: 'registrations' }, path: 'account', path_names: { sign_in: 'signin', sign_out: 'signout', password: 'password', sign_up: 'signup', edit: 'password/change' }
+
+  resource :account, only: [:show, :edit], path: 'account' do
+    patch 'update_account', to: 'accounts#update_account'
+    resources :charges, only: [:index, :show]
+  end
 
   root 'courses#index'
 

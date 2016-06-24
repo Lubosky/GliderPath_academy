@@ -1,0 +1,37 @@
+table
+  border-collapse: collapse
+  margin-bottom: 30px
+  width: 100%
+
+  +mq($max, $mobile-max)
+    margin-bottom: 20px
+
+  thead
+    border-bottom: 2px solid $default
+
+  tr
+    border-bottom: 1px solid $default
+
+    &:last-child
+      border: none
+
+  td, th
+    +pad(15px)
+    line-height: $line-height-base
+    text-align: left
+    vertical-align: top
+
+    &:first-child
+      padding-left: 0
+    &:last-child
+      padding-right: 0
+
+    +mq($max, $tablet-max)
+      +pad(15px 5px)
+
+  td
+    +font-size($font-size-small)
+
+  th
+    @extend .sbold
+    color: $text-muted

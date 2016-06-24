@@ -13,20 +13,25 @@
         %li.menu-item.bordered.hide-on-desktop
           = link_to t('sign_out'), destroy_user_session_path, method: :delete
         %li.menu-item.menu-profile
-          = link_to edit_user_registration_path, data: { toggle: 'dropdown' } do
+          = link_to 'javascript:void(0)', data: { toggle: 'dropdown' } do
             %figure.avatar
               = image_tag '', class: 'avatar-circle', alt: "#{ current_user.first_name } #{ current_user.last_name }", width: '45px', height: '45px'
-              %figcaption #{ current_user.first_name } #{ current_user.last_name }
+              %figcaption= current_user.name
               = icon_tag 'chevron-down', size: :m
           .dropdown.right
             .dropdown-header
-              = link_to edit_user_registration_path do
-                %h4 #{ current_user.first_name } #{ current_user.last_name }
+              = link_to :account do
+                %h4
+                  = current_user.name
                 %span
                   = t('users.account.show')
             %ul
               %li
-                = link_to t('users.account.edit'), edit_user_registration_path
+                = link_to t('users.account.edit.profile'), [:edit, :account]
+              %li
+                = link_to t('users.account.edit.email'), edit_user_registration_path
+              %li
+                = link_to t('users.account.billing'), [:account, :charges]
             .dropdown-footer
               = link_to t('button.account.sign_out'), destroy_user_session_path, method: :delete
       - else

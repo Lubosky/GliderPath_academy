@@ -1,0 +1,23 @@
+.row
+  .three.columns.reset-mobile-column
+    = render partial: 'accounts/sidebar'
+  .nine.columns.reset-mobile-column
+    %h3 Billing History
+    %table
+      %thead
+        %tr
+          %th Invoice no.
+          %th Date
+          %th Product
+          %th Card charged
+          %th Amount
+      %tbody
+      - if @charges.any?
+        - @charges.each do |charge|
+          %tr
+            %td= charge.invoice_number
+            %td= charge.created_at.strftime('%b %e, %Y')
+            %td= charge.product
+            %td= "xxxx-#{charge.card_last4}"
+            %td= "$#{charge.amount.to_s}"
+    = render partial: 'subscriptions/cancel' if current_user.subscribed?

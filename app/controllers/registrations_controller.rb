@@ -6,4 +6,8 @@ class RegistrationsController < Devise::RegistrationsController
       new_user_session_path
     end
 
+    def after_update_path_for(resource)
+      account_path(resource)
+    end
+
 end
