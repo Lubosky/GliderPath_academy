@@ -72,12 +72,52 @@ class User < ApplicationRecord
         }
       )
       if result.success?
+        payment_method = result.customer.payment_methods.find{ |pm| pm.default? }
+
         self.braintree_customer_id = result.customer.id
+        self.braintree_payment_method = payment_method.class.to_s.gsub(/^.*::/, '')
+        self.paypal_email = payment_method.try(:email)
+        self.card_type = payment_method.try(:card_type)
+        self.card_last4 = payment_method.try(:last_4)
+        self.card_exp_month = payment_method.try(:expiration_month)
+        self.card_exp_year = payment_method.try(:expiration_year)
         self.save
         true
       else
         false
       end
+    end
+  end
+
+  def init_braintree_payment_method(payment_method_nonce)
+    if braintree_customer?
+      result = Braintree::PaymentMethod.create(
+        customer_id: self.braintree_customer_id,
+        payment_method_nonce: payment_method_nonce,
+        options: {
+          fail_on_duplicate_payment_method: true,
+          make_default: true,
+          verify_card: true
+        }
+      )
+
+      payment_method = result.payment_method
+
+      if result.success?
+        self.braintree_payment_method = payment_method.class.to_s.gsub(/^.*::/, '')
+        self.paypal_email = payment_method.try(:email)
+        self.card_type = payment_method.try(:card_type)
+        self.card_last4 = payment_method.try(:last_4)
+        self.card_exp_month = payment_method.try(:expiration_month)
+        self.card_exp_year = payment_method.try(:expiration_year)
+        self.save
+        true
+      else
+        false
+      end
+
+    else
+      self.init_braintree_customer(payment_method_nonce)
     end
   end
 

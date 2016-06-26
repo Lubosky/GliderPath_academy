@@ -23,6 +23,14 @@ strong,
   .pull-#{$position}
     float: $position !important
 
+@each $size in 0 5 10 15 20 25 30
+  .margin-#{$size}
+    margin: #{$size}px 0 !important
+
+  @each $position in top bottom
+    .margin-#{$position}-#{$size}
+      margin-#{$position}: #{$size}px !important
+
 .centered
   float: none !important
   margin: 0 auto !important
@@ -50,6 +58,14 @@ strong,
 .disabled
   cursor: default
   pointer-events: none
+
+.revealer
+  +pad(0 !important)
+  +size(100%, 0)
+  +transition(height 0.3s ease-in-out)
+  clear: both
+  overflow: hidden
+  position: relative
 
 .video-wrapper
   +pad(56.25% 0 0)

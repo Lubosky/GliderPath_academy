@@ -1,0 +1,27 @@
+.box
+  +clearfix
+  +border-radius($border-radius)
+  border: 2px solid $border-color
+  margin-bottom: 30px
+  position: relative
+
+  h5,
+  p
+    margin: 0
+
+  p
+    float: left
+
+  *,
+  *:before,
+  *:after
+    box-sizing: border-box
+
+  .box-header,
+  .box-content,
+  .box-footer
+    +clearfix
+    +pad(15px 20px)
+
+    .button-box
+      margin-top: -18px

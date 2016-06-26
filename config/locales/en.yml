@@ -39,6 +39,9 @@ en:
       create:
         success: "Thank you %{user}! You've just purchased %{purchase}."
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
+    payment_methods:
+      success: 'Your default payment method has been successfully updated.'
+      alert: 'Ooops! Something went wrong while updating your default payment method. Please try again!'
     payment:
       alert: 'Sorry, there has been a problem processing your payment...'
 
@@ -83,6 +86,7 @@ en:
     last_name: 'Last Name'
 
   button:
+    cancel: 'Cancel'
     account:
       create: 'Create Your Account'
       edit: 'Edit Account'
@@ -97,6 +101,9 @@ en:
       cancel: 'Cancel Subscription'
     purchase:
       new: 'Purchase'
+    payment_method:
+      add: 'Add payment method'
+      save: 'Save payment method'
 
   link:
     account:
