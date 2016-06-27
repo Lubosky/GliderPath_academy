@@ -162,6 +162,11 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    fake_braintree (0.8.0)
+      activesupport
+      braintree (~> 2.32)
+      capybara (>= 2.2.0)
+      sinatra
     flamegraph (0.9.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -391,6 +396,7 @@ DEPENDENCIES
   dotenv-rails
   email_spec
   factory_girl_rails
+  fake_braintree
   faker!
   flamegraph
   gon!

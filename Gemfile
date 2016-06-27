@@ -61,6 +61,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-email'
   gem 'email_spec'
+  gem 'fake_braintree'
   gem 'poltergeist'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'

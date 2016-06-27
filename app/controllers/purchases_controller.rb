@@ -15,7 +15,7 @@ class PurchasesController < ApplicationController
     authorize :purchase
     result = Braintree::Transaction.sale(
       payment_method_token: @customer.payment_methods.find{ |pm| pm.default? }.token,
-      amount: 99,
+      amount: 99.0,
       options: {
         store_in_vault_on_success: true,
         submit_for_settlement: true
