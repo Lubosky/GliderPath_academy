@@ -14,3 +14,8 @@ products:
   blog: 'https://blog.gliderpath.com/'
   consultancy: 'https://gliderpath.com/'
   tms: 'https://tms.gliderpath.com/'
+
+company:
+  name: 'GliderPath Limited'
+  address: "Winnington House\n2 Woodberry Grove\nNorth Finchley\nLondon N12 0DR, UK"
+  email: 'academy@gliderpath.com'

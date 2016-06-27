@@ -72,6 +72,25 @@ FactoryGirl.define do
     end
   end
 
+  factory :charge do
+    association :user, factory: :user
+    product 'GliderPath Academy - Monthly'
+    amount '99.0'
+    braintree_transaction_id '123456789'
+    trait :paypal do
+      braintree_payment_method 'PayPalAccount'
+      paypal_email email
+    end
+
+    trait :credit_card do
+      braintree_payment_method 'CreditCard'
+      card_type 'Visa'
+      card_exp_month '09'
+      card_exp_year '2027'
+      card_last4 '4242'
+    end
+  end
+
   factory :upload do
     file Refile::FileDouble.new('yoda', Rails.root.to_s + 'spec/support/images/yoda.jpg', content_type: 'image/jpg')
   end

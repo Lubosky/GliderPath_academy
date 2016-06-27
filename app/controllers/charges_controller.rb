@@ -9,6 +9,14 @@ class ChargesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.pdf {
+        send_data @charge.receipt.render,
+          filename: "receipt-#{@charge.receipt_number}.pdf",
+          type: 'application/pdf',
+          disposition: :attachment
+      }
+    end
   end
 
   private

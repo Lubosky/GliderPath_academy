@@ -7,18 +7,22 @@
     %table
       %thead
         %tr
-          %th Invoice no.
+          %th Receipt no.
           %th Date
           %th Product
           %th Card charged
           %th Amount
+          %th
       %tbody
       - if @charges.any?
         - @charges.each do |charge|
           %tr
-            %td= charge.invoice_number
+            %td= charge.receipt_number
             %td= charge.created_at.strftime('%b %e, %Y')
             %td= charge.product
             %td= "xxxx-#{charge.card_last4}"
             %td= "$#{charge.amount.to_s}"
+            %td
+              = link_to account_charge_path(charge, format: :pdf) do
+                = icon_tag :receipt, size: :xl
     = render partial: 'subscriptions/cancel' if current_user.subscribed?

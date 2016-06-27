@@ -32,6 +32,8 @@ gem 'neat', '~> 1.7'
 gem 'normalize-rails'
 gem 'gon', github: 'gazay/gon'
 
+gem 'prawn', '~> 2.1'
+gem 'prawn-table', '~> 0.2.2'
 gem 'refile', require: 'refile/rails', github: 'refile/refile'
 gem 'refile-mini_magick'
 
