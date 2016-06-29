@@ -17,23 +17,16 @@ class SubscriptionsController < ApplicationController
       plan_id: @plan.braintree_plan_id
     )
 
+    braintree_subscription = result.subscription
+
     if result.success?
       current_user.confirm unless current_user.confirmed?
-
-      subscription_attributes = {
-        braintree_subscription_id: result.subscription.id,
-        subscriber_id: current_user.id,
-        plan_id: @plan.id
-      }
-
       @subscription = Subscription.where(subscriber_id: current_user.id).first_or_initialize
-      @subscription.update(subscription_attributes) && @subscription.activate
+      @subscription.update(subscription_params(braintree_subscription, @plan)) && @subscription.activate
       flash[:success] = t('flash.subscriptions.create.success', plan: @plan.name)
       redirect_to root_path
-
     else
       current_user.send_confirmation_instructions unless current_user.confirmed?
-
       flash[:alert] = t('flash.subscriptions.create.error')
       gon.braintree_client_token = generate_braintree_client_token
       render :new
@@ -78,18 +71,8 @@ class SubscriptionsController < ApplicationController
 
         transaction = webhook_notification.subscription.transactions.last
         user = User.find_by_braintree_customer_id(transaction.customer_details.id)
-
-        user.charges.create(
-          product: user.plan.name,
-          amount: transaction.amount,
-          braintree_transaction_id: transaction.id,
-          braintree_payment_method: transaction.payment_instrument_type,
-          paypal_email: transaction.paypal_details.payer_email,
-          card_type: transaction.credit_card_details.card_type,
-          card_exp_month: transaction.credit_card_details.expiration_month,
-          card_exp_year: transaction.credit_card_details.expiration_year,
-          card_last4: transaction.credit_card_details.last_4
-        )
+        plan = user.plan
+        user.charges.create(charge_params(plan, transaction))
 
       when 'subscription_charged_unsuccessfully'
         puts webhook_notification.kind
@@ -119,26 +102,29 @@ class SubscriptionsController < ApplicationController
     end
 
     def generate_braintree_client_token
-      if current_user.braintree_customer?
-        Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
-      else
-        Braintree::ClientToken.generate
-      end
+      current_user.init_braintree_client_token
     end
 
-    def find_braintree_customer
-      @customer = Braintree::Customer.find(current_user.braintree_customer_id)
+    def subscription_params(braintree_subscription, plan)
+      {
+        braintree_subscription_id: braintree_subscription.id,
+        subscriber_id: current_user.id,
+        plan_id: plan.id
+      }
     end
 
-    def set_braintree_customer
-      payment_method_nonce = params[:payment_method_nonce]
-      current_user.init_braintree_customer(payment_method_nonce)
-      if false
-        flash[:alert] = t('flash.payment.alert')
-        redirect_back(fallback_location: root_path)
-      else
-        find_braintree_customer
-      end
+    def charge_params(plan, transaction)
+      {
+        product: plan.name,
+        amount: transaction.amount,
+        braintree_transaction_id: transaction.id,
+        braintree_payment_method: transaction.payment_instrument_type,
+        paypal_email: transaction.paypal_details.payer_email,
+        card_type: transaction.credit_card_details.card_type,
+        card_exp_month: transaction.credit_card_details.expiration_month,
+        card_exp_year: transaction.credit_card_details.expiration_year,
+        card_last4: transaction.credit_card_details.last_4
+      }
     end
 
 end

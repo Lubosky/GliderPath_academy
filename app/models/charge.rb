@@ -32,7 +32,7 @@ class Charge < ApplicationRecord
       ['Account billed',  "<b>#{user.name}</b> (#{user.email})"],
       ['Item',            "<b>#{self.product}</b>"],
       ['Amount',          "<b>USD $#{self.amount}"],
-      ['Charged to',      "<b>#{self.card_type}</b> xxxx-#{self.card_last4}"],
+      ['Charged to',      self.paypal_email.present? ? "<b>PayPal</b> (#{self.paypal_email})" : "<b>#{self.card_type}</b> xxxx-#{self.card_last4}"],
       ['Transaction ID',  "<b>#{self.braintree_transaction_id}</b>"],
     ]
   end

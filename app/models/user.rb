@@ -58,29 +58,23 @@ class User < ApplicationRecord
   end
   alias_method :name, :full_name
 
+
+  def init_braintree_client_token
+    if braintree_customer?
+      Braintree::ClientToken.generate(customer_id: self.braintree_customer_id)
+    else
+      Braintree::ClientToken.generate
+    end
+  end
+
   def init_braintree_customer(payment_method_nonce)
     if !braintree_customer?
-      result = Braintree::Customer.create(
-        first_name: self.first_name,
-        last_name: self.last_name,
-        email: self.email,
-        payment_method_nonce: payment_method_nonce,
-        credit_card: {
-          options: {
-            verify_card: true
-          }
-        }
-      )
+      result = create_braintree_customer(payment_method_nonce)
       if result.success?
-        payment_method = result.customer.payment_methods.find{ |pm| pm.default? }
+        @payment_method = result.customer.payment_methods.find{ |pm| pm.default? }
 
         self.braintree_customer_id = result.customer.id
-        self.braintree_payment_method = payment_method.class.to_s.gsub(/^.*::/, '')
-        self.paypal_email = payment_method.try(:email)
-        self.card_type = payment_method.try(:card_type)
-        self.card_last4 = payment_method.try(:last_4)
-        self.card_exp_month = payment_method.try(:expiration_month)
-        self.card_exp_year = payment_method.try(:expiration_year)
+        self.braintree_payment_method_attributes(@payment_method)
         self.save
         true
       else
@@ -91,34 +85,53 @@ class User < ApplicationRecord
 
   def init_braintree_payment_method(payment_method_nonce)
     if braintree_customer?
-      result = Braintree::PaymentMethod.create(
-        customer_id: self.braintree_customer_id,
-        payment_method_nonce: payment_method_nonce,
-        options: {
-          fail_on_duplicate_payment_method: true,
-          make_default: true,
-          verify_card: true
-        }
-      )
-
-      payment_method = result.payment_method
-
+      result = create_braintree_payment_method(payment_method_nonce)
       if result.success?
-        self.braintree_payment_method = payment_method.class.to_s.gsub(/^.*::/, '')
-        self.paypal_email = payment_method.try(:email)
-        self.card_type = payment_method.try(:card_type)
-        self.card_last4 = payment_method.try(:last_4)
-        self.card_exp_month = payment_method.try(:expiration_month)
-        self.card_exp_year = payment_method.try(:expiration_year)
+        @payment_method = result.payment_method
+        self.braintree_payment_method_attributes(@payment_method)
         self.save
         true
       else
         false
       end
-
     else
       self.init_braintree_customer(payment_method_nonce)
     end
+  end
+
+  def braintree_payment_method_attributes(payment_method)
+    self.braintree_payment_method = payment_method.class.to_s.gsub(/^.*::/, '')
+    self.paypal_email = payment_method.try(:email)
+    self.card_type = payment_method.try(:card_type)
+    self.card_last4 = payment_method.try(:last_4)
+    self.card_exp_month = payment_method.try(:expiration_month)
+    self.card_exp_year = payment_method.try(:expiration_year)
+  end
+
+  def create_braintree_customer(payment_method_nonce)
+    Braintree::Customer.create(
+      first_name: self.first_name,
+      last_name: self.last_name,
+      email: self.email,
+      payment_method_nonce: payment_method_nonce,
+      credit_card: {
+        options: {
+          verify_card: true
+        }
+      }
+    )
+  end
+
+  def create_braintree_payment_method(payment_method_nonce)
+    Braintree::PaymentMethod.create(
+      customer_id: self.braintree_customer_id,
+      payment_method_nonce: payment_method_nonce,
+      options: {
+        fail_on_duplicate_payment_method: true,
+        make_default: true,
+        verify_card: true
+      }
+    )
   end
 
   private

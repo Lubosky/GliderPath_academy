@@ -21,37 +21,16 @@ class PurchasesController < ApplicationController
         submit_for_settlement: true
       }
     )
-
+    transaction = result.transaction
     @purchase = @purchasable.purchases.build(params[:purchase])
 
-    options = {
-      braintree_purchase_id: result.transaction.id,
-      purchaser_id: current_user.id
-    }
-
-    charge_params = {
-      product: @purchasable.name,
-      amount: result.transaction.amount,
-      braintree_transaction_id: result.transaction.id,
-      braintree_payment_method: result.transaction.payment_instrument_type,
-      paypal_email: result.transaction.paypal_details.payer_email,
-      card_type: result.transaction.credit_card_details.card_type,
-      card_exp_month: result.transaction.credit_card_details.expiration_month,
-      card_exp_year: result.transaction.credit_card_details.expiration_year,
-      card_last4: result.transaction.credit_card_details.last_4
-    }
-
-    if ( result.success? && @purchase.update_attributes(options) )
+    if ( result.success? && @purchase.update_attributes(purchase_params(transaction)) )
       current_user.confirm unless current_user.confirmed?
-
-      current_user.charges.create(charge_params)
-
+      current_user.charges.create(charge_params(@purchasable, transaction))
       flash[:success] = t('flash.purchases.create.success', user: current_user.first_name, purchase: @purchasable.name)
       redirect_to @purchasable
-
     else
       current_user.send_confirmation_instructions unless current_user.confirmed?
-
       flash[:alert] = t('flash.purchases.create.error')
       gon.braintree_client_token = generate_braintree_client_token
       render :new
@@ -81,26 +60,27 @@ class PurchasesController < ApplicationController
     end
 
     def generate_braintree_client_token
-      if current_user.braintree_customer?
-        Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
-      else
-        Braintree::ClientToken.generate
-      end
+      current_user.init_braintree_client_token
     end
 
-    def find_braintree_customer
-      @customer = Braintree::Customer.find(current_user.braintree_customer_id)
+    def purchase_params(transaction)
+      {
+        braintree_purchase_id: transaction.id,
+        purchaser_id: current_user.id
+      }
     end
 
-    def set_braintree_customer
-      payment_method_nonce = params[:payment_method_nonce]
-      current_user.init_braintree_customer(payment_method_nonce)
-      if false
-        flash[:alert] = t('flash.payment.alert')
-        redirect_back(fallback_location: root_path)
-      else
-        find_braintree_customer
-      end
+    def charge_params(product, transaction)
+      {
+        product: product.name,
+        amount: transaction.amount,
+        braintree_transaction_id: transaction.id,
+        braintree_payment_method: transaction.payment_instrument_type,
+        paypal_email: transaction.paypal_details.payer_email,
+        card_type: transaction.credit_card_details.card_type,
+        card_exp_month: transaction.credit_card_details.expiration_month,
+        card_exp_year: transaction.credit_card_details.expiration_year,
+        card_last4: transaction.credit_card_details.last_4
+      }
     end
-
 end

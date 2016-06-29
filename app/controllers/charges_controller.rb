@@ -27,11 +27,7 @@ class ChargesController < ApplicationController
     end
 
     def generate_braintree_client_token
-      if current_user.braintree_customer?
-        Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
-      else
-        Braintree::ClientToken.generate
-      end
+      current_user.init_braintree_client_token
     end
 
 end
