@@ -15,6 +15,9 @@ module GliderPathAcademy
     end
 
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.middleware.use Rack::Deflater
+
     config.sass.preferred_syntax = :sass
 
     config.i18n.default_locale = :en
