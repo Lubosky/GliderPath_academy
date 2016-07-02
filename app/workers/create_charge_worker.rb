@@ -5,6 +5,9 @@ class CreateChargeWorker
     transaction = Braintree::Transaction.find(transaction_id)
     user = User.find_by_id(user_id)
     user.charges.create(charge_params(product, transaction))
+    if user.has_suspended_subscription?
+      user.subscription.activate
+    end
   end
 
   def charge_params(product, transaction)

@@ -9,14 +9,19 @@ class Subscription < ApplicationRecord
   state_machine :status, initial: :initial do
     state :initial
     state :active
+    state :suspended
     state :canceled
 
     event :activate do
-      transition [ :initial, :canceled ] => :active
+      transition [ :initial, :suspended, :canceled ] => :active
+    end
+
+    event :suspend do
+      transition active: :suspended
     end
 
     event :cancel do
-      transition active: :canceled
+      transition [ :active, :suspended ] => :canceled
     end
   end
 end

@@ -25,4 +25,4 @@
             %td
               = link_to account_charge_path(charge, format: :pdf) do
                 = icon_tag :receipt, size: :xl
-    = render partial: 'subscriptions/cancel' if current_user.subscribed?
+    = render partial: 'subscriptions/cancel' if current_user.has_active_subscription?

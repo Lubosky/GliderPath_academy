@@ -60,9 +60,11 @@ class SubscriptionsController < ApplicationController
       when 'subscription_charged_unsuccessfully'
         puts webhook_notification.kind
         failure_count = webhook_notification.subscription.failure_count
+        braintree_subscription_id = webhook_notification.subscription.id
 
-        transaction = webhook_notification.subscription.transactions.last
-        errors = transaction.errors
+        if failure_count >= 3
+          SuspendSubscriptionWorker.perform_async(braintree_subscription_id)
+        end
 
       else
         raise "Braintree notification: #{kind} - #{webhook_notification.subscription.id} - #{webhook_notification.timestamp}"

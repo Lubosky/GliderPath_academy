@@ -24,7 +24,7 @@ class EnrollmentsController < ApplicationController
     end
 
     def check_if_eligible_to_enroll
-      if !( current_user.subscribed? || current_user.purchased?(@course) )
+      if !( current_user.has_active_subscription? || current_user.purchased?(@course) )
         flash[:warning] = t('flash.enrollments.notice')
         redirect_back(fallback_location: root_path)
       end

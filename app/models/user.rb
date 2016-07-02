@@ -45,8 +45,12 @@ class User < ApplicationRecord
     self.purchases.where(purchasable_id: resource.id, purchasable_type: resource.class.to_s).present?
   end
 
-  def subscribed?
+  def has_active_subscription?
     self.subscription.present? && self.subscription.active?
+  end
+
+  def has_suspended_subscription?
+    self.subscription.present? && self.subscription.suspended?
   end
 
   def full_name
@@ -124,7 +128,7 @@ class User < ApplicationRecord
   end
 
   def cancel_subscription
-    unless !subscribed?
+    unless !has_active_subscription?
       CancelSubscriptionWorker.perform_async(self.id, self.subscription.braintree_subscription_id)
     end
   end
