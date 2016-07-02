@@ -9,7 +9,7 @@ RSpec.describe PurchasesController, type: :controller do
     context 'when user is logged in' do
       before do
         login user
-        braintree_customer
+        init_braintree_customer
       end
 
       it {
@@ -28,7 +28,7 @@ RSpec.describe PurchasesController, type: :controller do
     context 'when user already purchased' do
       before do
         login user
-        braintree_customer
+        init_braintree_customer
       end
 
       it {
@@ -43,7 +43,7 @@ RSpec.describe PurchasesController, type: :controller do
   describe 'GET #create' do
     before do
       login user
-      braintree_customer
+      init_braintree_customer
     end
 
     it {

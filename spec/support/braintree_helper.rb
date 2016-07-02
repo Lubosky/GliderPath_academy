@@ -8,7 +8,7 @@ RSpec.configure do |c|
   end
 end
 
-def braintree_customer
+def init_braintree_customer
   Braintree::Customer.create(
     id: user.braintree_customer_id,
     first_name: user.first_name,
@@ -33,7 +33,7 @@ def braintree_nonce(options = {})
   FakeBraintree::PaymentMethod.tokenize_card(hash)
 end
 
-def braintree_subscription
+def init_braintree_subscription
   Braintree::Subscription.create(
     id: 1,
     payment_method_nonce: braintree_nonce,

@@ -2,6 +2,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'sidekiq/testing'
 require 'site_prism'
 require 'simplecov'
 SimpleCov.start
@@ -46,6 +47,26 @@ RSpec.configure do |config|
   # Keep RequestStore clean between specs
   config.before(:each) do
     RequestStore.clear!
+  end
+
+  config.before(:each) do |f|
+    Sidekiq::Worker.clear_all
+
+    if f.metadata[:sidekiq] == :fake
+      Sidekiq::Testing.fake!
+    elsif f.metadata[:sidekiq] == :inline
+      Sidekiq::Testing.inline!
+    elsif f.metadata[:sidekiq] == true
+      Sidekiq::Testing.inline!
+    elsif f.metadata[:type] == :feature
+      Sidekiq::Testing.inline!
+    else
+      Sidekiq::Testing.fake!
+    end
+  end
+
+  config.after(:suite) do
+    Sidekiq::Worker.clear_all
   end
 
   # Run specs in random order to surface order dependencies. If you find an
