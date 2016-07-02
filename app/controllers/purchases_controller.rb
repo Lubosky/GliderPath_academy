@@ -13,24 +13,11 @@ class PurchasesController < ApplicationController
 
   def create
     authorize :purchase
-    result = Braintree::Transaction.sale(
-      payment_method_token: @customer.payment_methods.find{ |pm| pm.default? }.token,
-      amount: 99.0,
-      options: {
-        store_in_vault_on_success: true,
-        submit_for_settlement: true
-      }
-    )
-    transaction = result.transaction
-    @purchase = @purchasable.purchases.build(params[:purchase])
-
-    if ( result.success? && @purchase.update_attributes(purchase_params(transaction)) )
-      current_user.confirm unless current_user.confirmed?
-      current_user.charges.create(charge_params(@purchasable, transaction))
+    current_user.create_purchase(@purchasable)
+    if true
       flash[:success] = t('flash.purchases.create.success', user: current_user.first_name, purchase: @purchasable.name)
       redirect_to @purchasable
     else
-      current_user.send_confirmation_instructions unless current_user.confirmed?
       flash[:alert] = t('flash.purchases.create.error')
       gon.braintree_client_token = generate_braintree_client_token
       render :new
@@ -63,24 +50,4 @@ class PurchasesController < ApplicationController
       current_user.init_braintree_client_token
     end
 
-    def purchase_params(transaction)
-      {
-        braintree_purchase_id: transaction.id,
-        purchaser_id: current_user.id
-      }
-    end
-
-    def charge_params(product, transaction)
-      {
-        product: product.name,
-        amount: transaction.amount,
-        braintree_transaction_id: transaction.id,
-        braintree_payment_method: transaction.payment_instrument_type,
-        paypal_email: transaction.paypal_details.payer_email,
-        card_type: transaction.credit_card_details.card_type,
-        card_exp_month: transaction.credit_card_details.expiration_month,
-        card_exp_year: transaction.credit_card_details.expiration_year,
-        card_last4: transaction.credit_card_details.last_4
-      }
-    end
 end

@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   protect_from_forgery except: :webhook
   before_action :authenticate_user!, except: [:new, :webhook]
   before_action :redirect_to_signup, only: [:new]
-  before_action :set_plan, only: [:create, :webhook]
+  before_action :redirect_when_plan_not_found, only: [:new, :create]
   before_action :set_braintree_customer, only: [:create]
 
   def new
@@ -12,38 +12,21 @@ class SubscriptionsController < ApplicationController
 
   def create
     authorize :subscription
-    result = Braintree::Subscription.create(
-      payment_method_token: @customer.payment_methods.find{ |pm| pm.default? }.token,
-      plan_id: @plan.braintree_plan_id
-    )
-
-    braintree_subscription = result.subscription
-
-    if result.success?
-      current_user.confirm unless current_user.confirmed?
-      @subscription = Subscription.where(subscriber_id: current_user.id).first_or_initialize
-      @subscription.update(subscription_params(braintree_subscription, @plan)) && @subscription.activate
-      flash[:success] = t('flash.subscriptions.create.success', plan: @plan.name)
+    current_user.create_subscription(plan)
+    if true
+      flash[:success] = t('flash.subscriptions.create.success', plan: plan.name)
       redirect_to root_path
     else
-      current_user.send_confirmation_instructions unless current_user.confirmed?
       flash[:alert] = t('flash.subscriptions.create.error')
       gon.braintree_client_token = generate_braintree_client_token
       render :new
     end
-
   end
 
   def destroy
     authorize :subscription
-    subscription = current_user.subscription.braintree_subscription_id
-    result = Braintree::Subscription.cancel(subscription)
-    if result.success?
-      current_user.subscription.cancel
-      flash[:info] = t('flash.subscriptions.cancel.success')
-    else
-      flash[:error] = t('flash.subscriptions.cancel.error')
-    end
+    current_user.cancel_subscription
+    flash[:info] = t('flash.subscriptions.cancel')
     redirect_to root_path
   end
 
@@ -70,13 +53,13 @@ class SubscriptionsController < ApplicationController
         puts webhook_notification.kind
 
         transaction = webhook_notification.subscription.transactions.last
-        user = User.find_by_braintree_customer_id(transaction.customer_details.id)
-        plan = user.plan
-        user.charges.create(charge_params(plan, transaction))
+        subscriber = User.find_by_braintree_customer_id(transaction.customer_details.id)
+
+        CreateChargeWorker.perform_async(subscriber.id, transaction.id, subscriber.plan.name)
 
       when 'subscription_charged_unsuccessfully'
         puts webhook_notification.kind
-        puts webhook_notification.subscription.failure_count
+        failure_count = webhook_notification.subscription.failure_count
 
         transaction = webhook_notification.subscription.transactions.last
         errors = transaction.errors
@@ -97,34 +80,19 @@ class SubscriptionsController < ApplicationController
       end
     end
 
-    def set_plan
-      @plan = Plan.find_by(id: params[:plan])
+    def plan
+      Plan.find_by(id: params[:plan])
+    end
+
+    def redirect_when_plan_not_found
+      if !plan.present?
+        redirect_to root_path
+        flash[:info] = t('flash.plans.not_found')
+      end
     end
 
     def generate_braintree_client_token
       current_user.init_braintree_client_token
-    end
-
-    def subscription_params(braintree_subscription, plan)
-      {
-        braintree_subscription_id: braintree_subscription.id,
-        subscriber_id: current_user.id,
-        plan_id: plan.id
-      }
-    end
-
-    def charge_params(plan, transaction)
-      {
-        product: plan.name,
-        amount: transaction.amount,
-        braintree_transaction_id: transaction.id,
-        braintree_payment_method: transaction.payment_instrument_type,
-        paypal_email: transaction.paypal_details.payer_email,
-        card_type: transaction.credit_card_details.card_type,
-        card_exp_month: transaction.credit_card_details.expiration_month,
-        card_exp_year: transaction.credit_card_details.expiration_year,
-        card_last4: transaction.credit_card_details.last_4
-      }
     end
 
 end

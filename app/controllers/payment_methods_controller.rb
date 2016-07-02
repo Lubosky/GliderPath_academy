@@ -3,7 +3,7 @@ class PaymentMethodsController < ApplicationController
 
   def create
     authorize :payment_method
-    current_user.init_braintree_payment_method(params[:payment_method_nonce])
+    current_user.ensure_customer_exists(params[:payment_method_nonce])
     if false
       flash[:alert] = t('flash.payment_methods.alert')
     else

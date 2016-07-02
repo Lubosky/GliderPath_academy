@@ -31,9 +31,9 @@ en:
       create:
         success: 'Awesome! You have been subscribed to the plan %{plan}.'
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
-      cancel:
-        success: 'Your subscription has been successfully cancelled!'
-        error: 'Something went terribly wrong. Please try again!'
+      cancel: 'Your subscription has been successfully canceled!'
+    plans:
+      not_found: "Ooops! Looks like you haven't choose any plan."
     purchases:
       alert: "You've already purchased %{purchase}."
       create:

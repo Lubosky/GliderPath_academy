@@ -37,12 +37,12 @@ class ApplicationController < ActionController::Base
 
     def set_braintree_customer
       payment_method_nonce = params[:payment_method_nonce]
-      current_user.init_braintree_customer(payment_method_nonce)
+      current_user.create_customer(payment_method_nonce)
       if false
         flash[:alert] = t('flash.payment.alert')
         redirect_back(fallback_location: root_path)
       else
-        @customer = find_braintree_customer
+        find_braintree_customer
       end
     end
 
