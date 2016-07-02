@@ -182,6 +182,10 @@ class User < ApplicationRecord
     self.card_exp_year = payment_method.try(:expiration_year)
   end
 
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
   private
 
     def self.current
