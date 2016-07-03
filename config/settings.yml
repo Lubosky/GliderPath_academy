@@ -1,6 +1,7 @@
 application:
   company: 'GliderPath Limited'
   name: 'GliderPath Academy'
+  mailer: 'gliderbot@gliderpath.com'
 
 links:
   facebook: 'https://www.facebook.com/GliderPath'

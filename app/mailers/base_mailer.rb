@@ -7,7 +7,7 @@ class BaseMailer < ActionMailer::Base
   default template_path: Proc.new { self.class.name.gsub(/Mailer$/, '').underscore }
   prepend_view_path ['app/views/mailers']
 
-  default from: Settings.application.name, reply_to: Settings.company.email
+  default from: Settings.application.name, reply_to: Settings.application.mailer
 
   private
 
