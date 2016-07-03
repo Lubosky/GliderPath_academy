@@ -1,0 +1,98 @@
+// COLORS
+$white:                 #fff
+$default:               #edeff0
+$brand:                 #4bf
+$light-shade:           #e8ebed
+
+// TEXT COLORS
+$text-color:            #4c5760
+$text-muted:            #7b8b8e
+
+// BORDERS
+$border-radius:         5px
+$border-color:          $light-shade
+
+// TYPOGRAPHY
+$helvetica:            'Helvetica Neue', Helvetica, Arial
+$sans-serif:            sans-serif
+
+$font-size-base:        16px
+
+$line-height-base:      1.6
+$line-height-small:     1.25
+
+html, body
+  color: $text-color
+  font-family: $helvetica, $sans-serif
+  font-size: $font-size-base
+  margin: 0
+  padding: 0
+
+body, .mailer
+  background: $default
+  padding: 10px 20px
+
+table
+
+  &.header
+    overflow: hidden
+
+    div
+      text-align: center
+
+      img
+        border:none
+        max-height: 25px
+        margin: 10px
+        outline: none
+        text-decoration: none
+
+  &.content
+    background: $white
+    border-radius: $border-radius
+    margin-bottom: 20px
+
+    div
+      max-width: 600px
+      margin: 0 auto
+
+      p
+        color: $text-muted
+        line-height: $line-height-base
+
+  &.footer
+    color: $text-muted
+    font-size: floor($font-size-base * 0.9)
+
+    p
+      font-size: floor($font-size-base * 0.8)
+      line-height: $line-height-small
+      margin: 15px 0
+      text-align: center
+
+  a
+    color: $brand
+    text-decoration: none
+    word-break: break-word
+
+    &.button
+      background: $brand none repeat scroll 0% 0%
+      border-color: $brand
+      border-radius: $border-radius
+      border-style: solid
+      border-width: 10px 20px
+      color: $white
+      display: inline-block
+      margin: 10px auto
+      text-decoration: none
+
+  hr
+    background-color: $border-color
+    border: none
+    color: $border-color
+    height: 1px
+    margin: 25px 0
+
+  .emoji
+    width: 1.25em
+    height: 1.25em

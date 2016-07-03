@@ -14,6 +14,8 @@ module GliderPathAcademy
       generate.helper false
     end
 
+    config.assets.precompile += %w(mailer.css)
+
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.middleware.use Rack::Deflater
