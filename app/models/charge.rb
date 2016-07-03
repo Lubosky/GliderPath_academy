@@ -4,6 +4,8 @@ class Charge < ApplicationRecord
   validates_presence_of :user_id
   validates :braintree_transaction_id, uniqueness: true
 
+  after_commit :send_receipt
+
   def receipt_number
     "#{self.created_at.strftime('%Y-%m-%d')}-#{self.id}"
   end
@@ -35,6 +37,10 @@ class Charge < ApplicationRecord
       ['Charged to',      self.paypal_email.present? ? "<b>PayPal</b> (#{self.paypal_email})" : "<b>#{self.card_type}</b> xxxx-#{self.card_last4}"],
       ['Transaction ID',  "<b>#{self.braintree_transaction_id}</b>"],
     ]
+  end
+
+  def send_receipt
+    SendChargeReceiptEmailWorker.perform_async(self.user_id, self.id)
   end
 
 end

@@ -1,0 +1,32 @@
+%h3 Hi #{@user.first_name}
+
+%p
+  This is a receipt for your latest #{Settings.application.name} payment.
+
+.receipt
+  %h4 Payment Details
+  %hr
+  %table
+    %tr
+      %td Date:
+      %td= @charge.created_at.strftime('%b %e, %Y')
+    %tr
+      %td Item:
+      %td= @charge.product
+    %tr
+      %td Amount:
+      %td USD $#{@charge.amount}
+    %tr
+      %td Charged to:
+      %td= @charge.paypal_email.present? ? "PayPal (#{@charge.paypal_email})" : "#{@charge.card_type} xxxx-#{@charge.card_last4}"
+    %tr
+      %td Transaction ID:
+      %td= @charge.braintree_transaction_id
+
+%hr
+
+%p The receipt is attached to this email or you can review it by signing into your account.
+
+%p Happy Learning,
+%p
+  %b= Settings.application.name
