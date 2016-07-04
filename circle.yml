@@ -2,3 +2,5 @@ machine:
   ruby:
     version:
       2.3.0
+  services:
+    - redis
