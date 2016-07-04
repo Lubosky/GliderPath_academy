@@ -1,17 +1,18 @@
 require 'spec_helper'
 
 describe ChargeMailer do
-  let(:user) { create :user }
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
 
   describe "#receipt" do
+    let(:user) { create :user }
     let(:charge) { create :charge, user: user }
     subject { ChargeMailer.receipt(user.id, charge.id) }
 
     it 'sends the expected email' do
-      expect(subject.subject).to eq '[GliderPath Academy] Payment Receipt - GliderPath Academy - Monthly'
-      expect(subject.to).to match_array [user.email]
-
-      expect(subject.body.encoded).to include('This is a receipt for your latest GliderPath Academy payment.')
+      expect(subject).to have_subject '[GliderPath Academy] Payment Receipt - GliderPath Academy - Monthly'
+      expect(subject).to deliver_to user.email
+      expect(subject).to have_body_text(/This is a receipt for your latest GliderPath Academy payment./)
     end
 
     it 'contains the receipt as an attachment' do
