@@ -206,6 +206,7 @@ GEM
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_avatar (0.3.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -445,6 +446,7 @@ DEPENDENCIES
   html-pipeline
   jbuilder (~> 2.0)
   jquery-rails
+  letter_avatar
   neat (~> 1.8)
   normalize-rails
   pg (~> 0.15)
