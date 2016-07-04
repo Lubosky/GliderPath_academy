@@ -96,6 +96,8 @@ en:
       sign_out: 'Sign Out'
       password:
         change: 'Change Password'
+      avatar:
+        change: Change
     subscription:
       new: 'Subscribe'
       cancel: 'Cancel Subscription'

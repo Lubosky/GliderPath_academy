@@ -29,6 +29,8 @@ class User < ApplicationRecord
   before_save :skip_confirmation_notification, on: :create
   after_create :assign_default_role
 
+  attachment :avatar, type: :image
+
   def assign_default_role
     add_role(:student)
   end

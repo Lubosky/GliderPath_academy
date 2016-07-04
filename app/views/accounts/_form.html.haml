@@ -2,8 +2,15 @@
 = simple_form_for current_user, url: { controller: 'accounts', action: 'update_account' }, html: { method: :patch } do |f|
   = f.error_notification
   .row
-    = f.input :first_name, required: true, autofocus: true, wrapper_html: { class: 'six columns reset-mobile-column' }
-    = f.input :last_name, required: true, wrapper_html: { class: 'six columns reset-mobile-column' }
-  .row
-    .form-item.twelve.columns.reset-mobile-column
-      = f.button :submit, t('button.account.update'), class: 'button-green', data: { 'disable-with': 'Saving...' }
+    .two.columns.reset-mobile-column
+      = user_avatar(current_user, id: 'preview_img', class: 'avatar-circle', alt: "#{ current_user.first_name } #{ current_user.last_name }", width: '90px', height: '90px')
+      = f.attachment_field :avatar, direct: true, presigned: true, label: false, class: 'file-upload hidden', id: 'previewable'
+      %label{ for: 'previewable' }
+        %strong= t('button.account.avatar.change')
+    .ten.columns.reset-mobile-column
+      .row
+        = f.input :first_name, required: true, autofocus: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+        = f.input :last_name, required: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+      .row
+        .form-item.twelve.columns.reset-mobile-column
+          = f.button :submit, t('button.account.update'), class: 'button-green pull-right', data: { 'disable-with': 'Saving...' }

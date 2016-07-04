@@ -73,3 +73,23 @@ form
       color: $white
       background: map-deep-get($component-colors, red, base)
       margin-bottom: 20px
+
+    .file-upload + label
+      +border-radius($border-radius)
+      +font-size($font-size-small)
+      +pad(6px 10px)
+      +size(90px, 30px)
+      background-color: $light-shade
+      color: $text-color
+      cursor: pointer
+      display: block
+      overflow: hidden
+      text-align: center
+      text-overflow: ellipsis
+      white-space: nowrap
+
+      &:hover,
+      &:focus,
+      &:active
+        background-color: map-deep-get($component-colors, purple, base)
+        color: white
