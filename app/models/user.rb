@@ -11,6 +11,8 @@ class User < ApplicationRecord
           # :timeoutable, :omniauthable
 
   validates_presence_of :first_name, :last_name
+  validates_length_of :headline, maximum: 80
+  validates_length_of :bio, maximum: 800
 
   has_many :enrollments, inverse_of: :student, foreign_key: 'student_id'
   has_many :courses_as_student, through: :enrollments, inverse_of: :students, class_name: 'Course'

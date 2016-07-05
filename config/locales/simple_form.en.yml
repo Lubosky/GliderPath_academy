@@ -16,13 +16,8 @@ en:
       user:
         edit:
           current_password: 'Confirm the changes by typing your current password'
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
+    hints:
+      users:
+        bio: "Write a bio describing your general experience and expertise. Bios help others understand
+              who you are and why you're a good person to teach the course. (Limit: 800 characters)"
+        headline: "Add a professional headline like, 'Visionary Entrepreneur and Investor'. (Limit: 80 characters)"

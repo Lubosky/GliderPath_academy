@@ -11,6 +11,11 @@
       .row
         = f.input :first_name, required: true, autofocus: true, wrapper_html: { class: 'six columns reset-mobile-column' }
         = f.input :last_name, required: true, wrapper_html: { class: 'six columns reset-mobile-column' }
+      - if current_user.is_instructor?
+        .row
+          = f.input :headline, wrapper_html: { class: 'twelve columns reset-mobile-column' }, hint: t('simple_form.hints.users.headline')
+        .row
+          = f.input :bio, wrapper_html: { class: 'twelve columns reset-mobile-column' }, hint: t('simple_form.hints.users.bio')
       .row
         .form-item.twelve.columns.reset-mobile-column
           = f.button :submit, t('button.account.update'), class: 'button-green pull-right', data: { 'disable-with': 'Saving...' }

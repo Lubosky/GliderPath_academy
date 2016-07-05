@@ -13,6 +13,13 @@
       .dl-row
         %dt Password
         %dd • • • • • • • •
+      - if current_user.is_instructor?
+        .dl-row
+          %dt Headline
+          %dd= current_user.headline
+        .dl-row
+          %dt Bio
+          %dd= format_markdown current_user.bio
     %p
       = link_to t('button.account.edit'), [:edit, :account], class: 'button button-green'
       = link_to t('button.account.password.change'), [:edit, :user, :registration], class: 'button button-default'

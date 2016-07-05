@@ -7,6 +7,8 @@ describe User, type: :model do
       is_expected.to validate_presence_of(:last_name)
       is_expected.to validate_presence_of(:email)
       is_expected.to validate_presence_of(:password)
+      is_expected.to validate_length_of(:headline)
+      is_expected.to validate_length_of(:bio)
 
       is_expected.to have_many :courses_as_instructor
       is_expected.to have_many :courses_as_student
