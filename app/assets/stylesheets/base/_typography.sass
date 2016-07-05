@@ -1,11 +1,16 @@
 // BODY
 body
   +font-size($font-size-base)
-  font-family: $proxima_regular
   color: $text-color
+  font-family: $proxima_regular
 
 // HEADINGS
-h1, h2, h3, h4, h5, h6
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
   display: block
   font-family: $proxima_semibold
   line-height: $line-height-base
@@ -13,14 +18,19 @@ h1, h2, h3, h4, h5, h6
 
 h1
   +font-size($font-size-h1)
+
 h2
   +font-size($font-size-h2)
+
 h3
   +font-size($font-size-h3)
+
 h4
   +font-size($font-size-h4)
+
 h5
   +font-size($font-size-h5)
+
 h6
   +font-size($font-size-h6)
 
@@ -44,9 +54,11 @@ ul,
 ol
   +font-size($font-size-base)
   line-height: $line-height-base
+
   &.no-bullets
     +pad(0)
     list-style-type: none
+
   > li
     > .icon
       padding-right: 5px
@@ -55,6 +67,7 @@ ol
 a
   color: $brand
   text-decoration: none
+  
   &:focus,
   &:hover,
   &:active
@@ -65,13 +78,14 @@ a
 .dl-row
   +clearfix
   +pad(0 0 10px)
-  margin-bottom: 15px
   border-bottom: 1px solid $default
+  margin-bottom: 15px
 
 dl
   margin: 15px 0 30px
 
-  dt,dd
+  dt,
+  dd
     +pad(0 15px)
     line-height: $line-height-base
     margin: 5px 0
@@ -84,9 +98,9 @@ dl
 
   dd
     +span-columns(8)
-    float: none
 
   +mq($max, $mobile-screen)
-    dt,dd
+    dt,
+    dd
       +span-columns(12)
       margin: 0 0 10px
