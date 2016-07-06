@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @sections = @course.sections.includes(lessons: :video)
   end
 
   def new

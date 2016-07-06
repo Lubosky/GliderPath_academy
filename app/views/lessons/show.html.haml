@@ -11,7 +11,7 @@
     .lesson-meta
       by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ link_to @lesson.course.name, course_path(@lesson.course) }
   %p
-    = @lesson.notes
+    = format_markdown @lesson.notes
 
   %ul.tabs
     %li.tab-button.pull-right
@@ -20,7 +20,7 @@
     %li.tab-header
       %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.notes') }
       .tab-content
-        = @lesson.notes
+        = format_markdown @lesson.notes
     - if @lesson.uploads.any?
       %li.tab-header
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.attachments') }

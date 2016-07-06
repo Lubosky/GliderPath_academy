@@ -20,6 +20,5 @@
         .dl-row
           %dt Bio
           %dd= format_markdown current_user.bio
-    %p
-      = link_to t('button.account.edit'), [:edit, :account], class: 'button button-green'
-      = link_to t('button.account.password.change'), [:edit, :user, :registration], class: 'button button-default'
+    = link_to t('button.account.edit'), [:edit, :account], class: 'button button-green'
+    = link_to t('button.account.password.change'), [:edit, :user, :registration], class: 'button button-default'
