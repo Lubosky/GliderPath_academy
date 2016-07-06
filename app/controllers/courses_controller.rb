@@ -1,7 +1,6 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :find_course, only: [:show, :edit, :update, :destroy]
-  before_action :owned_course, only: [:edit, :update]
 
   def index
     @courses = Course.all.order('created_at DESC')
@@ -57,13 +56,6 @@ class CoursesController < ApplicationController
 
     def course_params
       params.require(:course).permit(:name, :description, video_attributes: [ :id, :video_url ], sections_attributes: [ :id, :title, :objective, :_destroy, lessons_attributes: [ :id, :title, :notes, :_destroy, video_attributes: [ :id, :video_url ], lesson_uploads_attributes: [ :id, :_destroy ], uploads_files: [ ] ] ])
-    end
-
-    def owned_course
-      unless current_user == @course.instructor
-        flash[:alert] = t('flash.courses.update.not_authorized')
-        redirect_to :back
-      end
     end
 
 end
