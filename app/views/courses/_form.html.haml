@@ -1,6 +1,8 @@
 = simple_form_for @course do |f|
   = f.input :name
   = f.input :description
+  = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|
+    = video.input :video_url
   #modules
     = f.simple_fields_for :sections do |ff|
       = render 'sections/form', f: ff
