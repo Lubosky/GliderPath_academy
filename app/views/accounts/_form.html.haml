@@ -3,7 +3,7 @@
   = f.error_notification
   .row
     .two.columns.reset-mobile-column
-      = user_avatar(current_user, id: 'preview_img', class: 'avatar-circle', alt: "#{ current_user.first_name } #{ current_user.last_name }", width: '90px', height: '90px')
+      = user_avatar(current_user, id: 'preview_img', class: 'avatar-circle bordered', alt: current_user.name, width: '90px', height: '90px')
       = f.attachment_field :avatar, direct: true, presigned: true, label: false, class: 'file-upload hidden', id: 'previewable'
       %label{ for: 'previewable' }
         %strong= t('button.account.avatar.change')
