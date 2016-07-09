@@ -20,4 +20,12 @@ class Course < ActiveRecord::Base
     100 * (self.lessons.completed.count.to_f / self.lessons.count.to_f)
   end
 
+  def completed_lessons(student)
+    @completed_lessons ||= self.lessons.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' }).pluck(:id)
+  end
+
+  def completed_for(student, lesson)
+    self.completed_lessons(student).include?(lesson.id)
+  end
+
 end

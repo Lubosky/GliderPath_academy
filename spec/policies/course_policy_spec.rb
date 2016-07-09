@@ -63,4 +63,22 @@ RSpec.describe CoursePolicy do
 
   end
 
+  before do
+    @course = create(:course)
+    @student = create(:user)
+    @enrollment = create(:enrollment, student_id: @student.id, course_id: @course.id)
+  end
+
+  permissions :progress? do
+
+    it 'denies access if student is not enrolled' do
+      expect(subject).not_to permit(student, @course)
+    end
+
+    it 'grants access if student is enrolled' do
+      expect(subject).to permit(@student, @course)
+    end
+
+  end
+
 end

@@ -1,0 +1,15 @@
+%ul.step-list.compact
+  %li.step-list-header
+    %h3= section.title
+    %p= section.objective
+  - if section.lessons.any?
+    - section.lessons.each do |lesson|
+      %li
+        .topic-wrapper
+          .icon-holder= icon_tag 'lock', class: 'locked'
+          %span.step-duration= duration_for(lesson.video.video_duration) if lesson.video.present?
+          %h5= lesson.title
+    %li.step-list-footer
+      %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
+        = icon_tag 'chevron-up', size: :m
+        = t('lessons.count', count: section.lessons.count)

@@ -20,6 +20,10 @@ class CoursePolicy < ApplicationPolicy
     user.present? && user.is_admin?
   end
 
+  def progress?
+    user.present? && user.enrolled?(course)
+  end
+
   private
 
     def course

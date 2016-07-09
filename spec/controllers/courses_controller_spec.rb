@@ -108,4 +108,21 @@ RSpec.describe CoursesController, type: :controller do
 
     end
   end
+
+  describe 'GET #progress' do
+
+    before do
+      @course = create(:course)
+      @student = create(:user)
+      @enrollment = create(:enrollment, student_id: @student.id, course_id: @course.id)
+      @student.confirm
+      login @student
+      get :progress, params: { id: @course }
+    end
+    it {
+      is_expected.to respond_with :ok
+      is_expected.to render_template :progress
+    }
+  end
+
 end

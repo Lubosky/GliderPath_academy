@@ -116,7 +116,9 @@ en:
 
   pundit:
     default: 'You are not authorized to perform this action.'
-    subscription_policy:
-      new?: 'You are already subscribed!'
+    course_policy:
+      progress?: 'You have in enroll in the course first.'
     enrollment_policy:
       create?: 'Subscribe to the plan or purchase this course to enroll.'
+    subscription_policy:
+      new?: 'You are already subscribed!'

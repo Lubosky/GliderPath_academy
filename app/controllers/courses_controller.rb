@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :find_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :progress]
+  before_action :set_sections, only: [:show, :progress]
 
   def index
     @courses = Course.all.order('created_at DESC')
@@ -8,7 +9,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @sections = @course.sections.includes(lessons: :video)
   end
 
   def new
@@ -47,11 +47,19 @@ class CoursesController < ApplicationController
       redirect_to root_path
   end
 
+  def progress
+    authorize @course
+  end
+
   private
 
-    def find_course
+    def set_course
       @course = Course.find(params[:id])
       authorize @course
+    end
+
+    def set_sections
+      @sections = @course.sections.includes(lessons: :video)
     end
 
     def course_params
