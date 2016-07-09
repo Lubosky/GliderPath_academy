@@ -103,6 +103,7 @@ en:
       cancel: 'Cancel Subscription'
     purchase:
       new: 'Purchase'
+      with_price: 'Purchase for $%{price}'
     payment_method:
       add: 'Add payment method'
       save: 'Save payment method'

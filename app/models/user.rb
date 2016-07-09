@@ -113,7 +113,7 @@ class User < ApplicationRecord
   end
 
   def create_purchase(product)
-    result = create_braintree_purchase
+    result = create_braintree_purchase(product.price)
     if result.success?
       self.confirm unless self.confirmed?
       self.purchases.create(braintree_purchase_id: result.transaction.id, purchaser_id: self.id, purchasable_id: product.id, purchasable_type: product.class)
@@ -170,10 +170,10 @@ class User < ApplicationRecord
     )
   end
 
-  def create_braintree_purchase
+  def create_braintree_purchase(price)
     Braintree::Transaction.sale(
       payment_method_token: default_payment_method(braintree_customer).token,
-      amount: 99.0,
+      amount: price,
       options: {
         store_in_vault_on_success: true,
         submit_for_settlement: true

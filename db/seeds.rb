@@ -68,6 +68,7 @@ when 'development'
     9.times.map do
       { name: Faker::Book.title,
         description: Faker::ChuckNorris.fact,
+        price: Faker::Commerce.price,
         instructor_id: User.with_role('instructor').map { |instructor| instructor.id }.sample,
         sections_attributes: rand(1..5).times.map do |section|
           {
