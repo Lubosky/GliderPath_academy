@@ -1,16 +1,17 @@
 .dropdown
   +border-radius($border-radius)
+  +box-shadow($box-shadow)
   background: $white
-  border: 2px solid $default
   display: none
-  min-width: 200px
   max-width: 360px
+  min-width: 200px
   position: absolute
   top: 40px
   z-index: 99
+
   &:before
     +border-radius(3px 0 0 0)
-    +box-shadow(-2px -2px 0 $default)
+    +box-shadow(-1px -1px 0 rgba($dark-shade, .05))
     +rotate(45deg)
     +size(12px)
     background: $white
@@ -20,11 +21,13 @@
 
   &.left
     left: 0
+
     &:before
       left: 20px
 
   &.right
     right: -20px
+
     &:before
       right: 20px
 
@@ -41,14 +44,18 @@
     position: relative
 
   .dropdown-header
+    +border-radius($border-radius $border-radius 0 0)
     border-bottom: 2px solid $default
+
     a
       &:hover
+        +border-radius($border-radius $border-radius 0 0)
         background-color: $white
 
       h4
         +font-size(14px)
         margin: 0
+
       span
         @extend .regular
         +font-size(12px)
@@ -56,10 +63,14 @@
         display: block
 
   .dropdown-footer
+    +border-radius(0 0 $border-radius $border-radius)
     border-top: 2px solid $default
+
     a
       +transition(background-color 200ms ease)
+
       &:hover
+        +border-radius(0 0 $border-radius $border-radius)
         background-color: $default
 
   a
@@ -99,5 +110,5 @@
         +clearfix
         +transition(color 200ms ease-in-out)
         +pad(15px 20px)
-        position: relative
         display: block
+        position: relative

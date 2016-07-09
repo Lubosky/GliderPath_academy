@@ -1,5 +1,5 @@
 .meta-container
-  +pad(30px 0)
+  +pad(20px 0)
 
   .lesson-heading
     +clearfix
@@ -7,16 +7,20 @@
 
     h1
       float: left
+      line-height: $line-height-small
       margin: 0
 
     .lesson-duration
       +font-size(24px)
       color: darken($light-shade, 18%)
       float: right
-      line-height: 57px
+      line-height: 52px
       margin-right: -90px
 
     .lesson-meta
-      +pad(0 0 20px)
+      +pad(10px 0 20px)
       clear: left
       color: $text-muted
+
+  .lesson-objective
+    margin: 5px 0 25px

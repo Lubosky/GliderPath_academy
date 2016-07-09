@@ -1,9 +1,9 @@
 ul.card-list
   +pad(0)
   list-style: none
-  overflow: hidden
   margin-top: 45px
   max-width: none
+  overflow: hidden
   width: 100%
 
 
@@ -56,12 +56,12 @@ ul.card-list
           +box-shadow(inset 0 -2px 0 rgba($black, .09))
           +transition(height 100ms ease-in-out)
           content: ''
-          height: 3px
           display: block
-          position: absolute
-          top: 100%
-          right: 5px
+          height: 3px
           left: 5px
+          position: absolute
+          right: 5px
+          top: 100%
 
         &:before
           height: 6px
@@ -71,6 +71,7 @@ ul.card-list
         &:hover
           &:after
             height: 5px
+
           &:before
             height: 10px
 
@@ -83,18 +84,19 @@ ul.card-list
         &-title
           +border-radius($border-radius $border-radius 0 0)
           +pad(25px 45px)
-          background: rgba($black,0.09)
+          background: rgba($black, .09)
           display: block
+          left: 0
           min-height: 150px
           position: absolute
-          top: 0
-          left: 0
           right: 0
+          top: 0
+
           h3
             +font-size(26px)
+            +text-shadow(0 2px 1px rgba($black, .25))
             line-height: $line-height-small
             margin: 0
-            +text-shadow(0 2px 1px rgba($black,.25))
 
         &-meta
           +pad(15px 45px)
@@ -102,102 +104,164 @@ ul.card-list
 
 ul.step-list
   +border-radius($border-radius)
+  +box-shadow($box-shadow)
   +pad(0)
   background-color: lighten($default, 3%)
-  border: 2px solid $border-color
   margin: 45px 0
+
   li:not(.step-list-footer)
     list-style-type: none
-    > a
+
+    .topic-wrapper
       +clearfix
       +pad(20px 30px 20px 110px)
       +transition(background-color 200ms ease)
-      border-bottom: 1px solid $border-color
+      border-bottom: 1px solid lighten($border-color, 5%)
       display: block
       overflow: hidden
       position: relative
+
       h5
+        +transition(color 200ms ease)
         color: darken($text-muted, 9%)
         display: block
         margin: 0
         overflow: hidden
         text-overflow: ellipsis
         white-space: nowrap
+
       p
         +font-size($font-size-base)
         color: $text-muted
         margin: 5px 0
+
       .icon-holder
         +size(110px, 100%)
         float: left
+        left: 0
         position: absolute
         top: 0
-        left: 0
-        span.icon
-          +size(20px)
-          color: $white
+
+        .icon
+          +transition(color 200ms ease)
           display: block
           margin: -10px auto
           overflow: visible
           top: 50%
+
           &:before
             +border-radius(50%)
             +size(30px)
-            background-color: map-deep-get($component-colors, green, base)
+            +transition(border 200ms ease)
+            background-color: $white
             content: ''
             display: inline-block
+            left: 50%
             margin: -15px
             position: absolute
-            left: 50%
             top: 50%
-        div.icon
+
+        .completed
+          +size(20px)
+          color: $white
+
           &:before
-            +border-radius(50%)
-            +size(30px)
+            background-color: map-deep-get($component-colors, green, base) !important
+
+        .locked,
+        .unlocked
+          color: darken($default, 9%)
+
+          &:before
             border: 2px solid darken($default, 9%)
-            content: ''
-            display: inline-block
-            margin: -15px
-            position: absolute
-            left: 50%
-            top: 50%
-      &:hover
+
+        .locked
+          +size(16px)
+
+      &:hover,
+      &:focus
         background: $white
+
         h5
           color: $text-color
+
+        .icon-holder
+          .icon:not(.completed)
+            color: $brand
+
+            &:before
+              border-color: $brand
+
       .step-duration
         color: darken($light-shade, 18%)
         float: right
         line-height: $line-height-base
         margin-bottom: 0
+        margin-left: 10px
 
   li
     &.step-list-header,
     &.step-list-footer
-      background-color: $default
+      background-color: $white
       display: block
+
     &.step-list-header
       +border-radius($border-radius $border-radius 0 0)
       +pad(10px 30px)
       border-bottom: 1px solid $border-color
+
     &.step-list-footer
       +border-radius(0 0 $border-radius $border-radius)
       +box-shadow(0 2px 0 rgba($black, .09))
       border: none
       margin-bottom: 0
+
       a
         +pad(10px 30px)
         color: $text-muted
         display: block
+
         .icon
           +transition(transform 300ms)
           margin: -2px 5px 0 0
+
       &:hover,
       &:focus
         .icon
           color: $text-color
+
   &.is-closed
     li
       &.step-list-footer
         a > .icon
           +transform(rotate(180deg))
+
+  &.compact
+    +box-shadow(none)
+    background: $white
+    border: none
+    margin: 0 0 45px
+
+    &:first-child
+      margin-top: -30px
+
+    li
+      &:last-child
+        border-bottom: none
+
+      &.step-list-header
+        +border-radius($border-radius $border-radius 0 0)
+        background-color: $white
+        border-bottom: 2px solid $border-color
+
+      &.step-list-footer
+        +box-shadow(none)
+        +pad(0)
+        background-color: $white
+
+      .topic-wrapper
+        border-bottom: 1px solid lighten($border-color, 8%)
+
+        &:hover,
+        &:focus
+          background: lighten($default, 3%)

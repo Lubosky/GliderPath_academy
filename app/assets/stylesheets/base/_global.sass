@@ -1,16 +1,17 @@
 body
+  +linear-gradient(180deg, lighten($default, 1%), $light-shade)
   +size(100%, auto)
   +pad(0)
+  -webkit-font-smoothing: antialiased
   border: 0
   cursor: default
   margin: 0 auto
   overflow-x: hidden
-  -webkit-font-smoothing: antialiased
 
 .page-container
   position: relative
   +mq($max, $mobile-screen)
-    +transition(transform 0.3s cubic-bezier(0.35, -0.25, 0.35, 0))
+    +transition(transform .3s cubic-bezier(.35, -.25, .35, 0))
     padding-top: $mobile-menu-height
 
     .menu-expanded &
@@ -37,25 +38,41 @@ section
 
     &.one
       +span-columns(1)
+
     &.two
       +span-columns(2)
+
     &.three
       +span-columns(3)
+
     &.four
       +span-columns(4)
+
     &.five
       +span-columns(5)
+
     &.six
       +span-columns(6)
+
     &.seven
       +span-columns(7)
+
     &.eight
       +span-columns(8)
+
     &.nine
       +span-columns(9)
+
     &.ten
       +span-columns(10)
+
     &.eleven
       +span-columns(11)
+
     &.twelve
       +span-columns(12)
+
+
+  aside
+    @extend .column
+    +span-columns(3, block-collapse)

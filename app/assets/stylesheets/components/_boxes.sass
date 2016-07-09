@@ -1,16 +1,11 @@
 .box
   +clearfix
   +border-radius($border-radius)
-  border: 2px solid $border-color
+  +box-shadow($box-shadow)
+  background: $white
   margin-bottom: 30px
+  overflow: hidden
   position: relative
-
-  h5,
-  p
-    margin: 0
-
-  p
-    float: left
 
   *,
   *:before,
@@ -21,7 +16,23 @@
   .box-content,
   .box-footer
     +clearfix
-    +pad(15px 20px)
+    +pad(15px 25px)
 
     .button-box
       margin-top: -18px
+
+  .box-header
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+      margin: 0
+
+    &.video-container
+      +pad(0)
+
+  .payment-method
+    float: left
+    margin: 0

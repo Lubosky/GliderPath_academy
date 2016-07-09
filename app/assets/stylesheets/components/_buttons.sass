@@ -2,11 +2,11 @@
   @extend .sbold
   +border-radius($border-radius)
   +font-size($font-size-base)
-  +pad(14px 36px)
+  +pad(9px 26px)
   +transition(background 250ms ease, border-color 250ms ease, color 250ms ease)
   cursor: pointer
   display: inline-block
-  height: 54px
+  height: 44px
   line-height: $line-height-base
   text-decoration: none
   text-transform: uppercase
@@ -15,3 +15,8 @@
     +font-size($font-size-small)
     +pad(5px 20px)
     height: 36px
+
+  &-large
+    +font-size($font-size-small)
+    +pad(14px 36px)
+    height: 54px

@@ -5,9 +5,9 @@
   width: 100%
 
   .tab-header
+    bottom: -2px
     list-style: none
     position: relative
-    bottom: -2px
 
     +mq($min, $desktop-screen)
       display: inline
@@ -31,8 +31,12 @@
         display: inline-block
 
   .tab-button
-    +pad(10px 24px)
+    +pad(7px 24px)
     display: inline-block
+
+    &-small
+      +pad(10px 24px)
+      display: inline-block
 
   .tab-content
     +pad(30px 0 10px)
@@ -44,4 +48,3 @@
       +pad(30px 0)
       border-top: 2px solid $border-color
       float: left
-

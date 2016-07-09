@@ -1,77 +1,83 @@
 form
   &.form
-    .form-item
-      margin-bottom: 25px
+    .form
+      &-button,
+      &-item
+        .column &,
+        .columns &
+          +pad(0)
 
-      .column &,
-      .columns &
-        +pad(0)
+      &-button
+        margin-bottom: 15px
 
-      input[type=text],
-      input[type=password],
-      input[type=email],
-      input[type=url],
-      input[type=tel],
-      input[type=color],
-      input[type=number],
-      input[type=search],
-      select,
-      textarea
-        +border-radius($border-radius)
-        +size(100%, 44px)
-        +pad(9px 15px)
-        +transition(border .25s ease)
-        background: $white
-        border: 2px solid $border-color
-        color: $text-color
-        font-size: 1rem
-        display: block
+      &-item
+        margin-bottom: 25px
 
-        &:focus,
-        &:hover
-          border-color: $brand
-          outline: 0
-
-      textarea
-        min-height: 135px
-
-      input[disabled]
-        background-color: $default
-        color: $text-muted
-        cursor: default
-
-        &:focus,
-        &:hover
-          border-color: $border-color
-
-      .form-label
-        @extend .sbold
-        +font-size(14px)
-        color: darken($text-muted, 9%)
-
-        .required
-          +font-size(16px)
-          color: map-deep-get($component-colors, red, base)
-
-      &.has-error
-        input,
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=url],
+        input[type=tel],
+        input[type=color],
+        input[type=number],
+        input[type=search],
         select,
         textarea
-          border-color: map-deep-get($component-colors, red, base)
+          +border-radius($border-radius)
+          +size(100%, 44px)
+          +pad(9px 15px)
+          +transition(border .25s ease)
+          background: $white
+          border: 2px solid $border-color
+          color: $text-color
+          display: block
+          font-size: 1rem
 
-      .error
-        +font-size($font-size-small)
-        color: map-deep-get($component-colors, red, base)
+          &:focus,
+          &:hover
+            border-color: $brand
+            outline: 0
 
-      .hint
-        +font-size($font-size-small)
-        color: $text-muted
+        textarea
+          min-height: 135px
+
+        input[disabled]
+          background-color: $default
+          color: $text-muted
+          cursor: default
+
+          &:focus,
+          &:hover
+            border-color: $border-color
+
+        .form-label
+          @extend .sbold
+          +font-size(14px)
+          color: darken($text-muted, 9%)
+
+          .required
+            +font-size(16px)
+            color: map-deep-get($component-colors, red, base)
+
+        &.has-error
+          input,
+          select,
+          textarea
+            border-color: map-deep-get($component-colors, red, base)
+
+        .error
+          +font-size($font-size-small)
+          color: map-deep-get($component-colors, red, base)
+
+        .hint
+          +font-size($font-size-small)
+          color: $text-muted
 
     .error-notification
       +border-radius($border-radius)
       +pad(10px)
-      color: $white
       background: map-deep-get($component-colors, red, base)
+      color: $white
       margin-bottom: 20px
 
     .file-upload + label
@@ -92,4 +98,4 @@ form
       &:focus,
       &:active
         background-color: map-deep-get($component-colors, purple, base)
-        color: white
+        color: $white
