@@ -1,6 +1,5 @@
 - body_css 'checkout'
 
-#braintree-subscription-form
-= simple_form_for :subscription, url: subscription_path, html: { id: 'subscription-form' } do |f|
-  = f.input :plan, as: :hidden, input_html: { name: 'plan', value: "#{ params[:plan] }" }
-  = f.button :submit, class: ' button button-green'
+= render 'title'
+= render 'form'
+= render 'sidebar'

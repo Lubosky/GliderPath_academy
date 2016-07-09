@@ -1,0 +1,29 @@
+.checkout-sidebar
+  %h4 Order Summary
+  .order-summary
+    .table-row.table-header
+      .title= @purchasable.name
+    -# TODO: Add course duration
+    .table-row
+      %div X Hours of Content
+      = icon_tag 'check'
+    .table-row
+      %div Includes Lifetime Access
+      = icon_tag 'check'
+    .table-row
+      %div Self-Paced
+      = icon_tag 'check'
+    .table-row
+      %div Direct Access to the Instructor
+      = icon_tag 'check'
+    .divider
+    .table-row.table-header
+      .title Total Due Today
+      .order-price.total
+        %span.currency $
+        -# TODO: Replace hard-coded course price
+        %span.price 99
+  .order-summary-footer
+    %p.text-small.text-muted.uppercase.content-center
+      = icon_tag 'lock', class: 'icon-green'
+      Secure Server

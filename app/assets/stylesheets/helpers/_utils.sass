@@ -68,6 +68,13 @@ strong,
 .inline-block
   display: inline-block
 
+.reset
+  +mq($max, $mobile-screen)
+    &-mobile-column
+      width: auto !important
+      margin-left: 0 !important
+      margin-right: 0 !important
+
 .revealer
   +pad(0 !important)
   +size(100%, 0)

@@ -1,0 +1,38 @@
+.checkout-sidebar
+  %h4 Order Summary
+  .order-summary
+    .table-row.table-header
+      .title= @plan.name
+      .order-price
+        %span.currency $
+        %span.price 49
+        %span.term /mo
+    .table-row
+      %div Unlimited Access to All Courses
+      = icon_tag 'check'
+    .table-row
+      %div Self-Paced
+      = icon_tag 'check'
+    .table-row
+      %div Direct Access to Our Instructors
+      = icon_tag 'check'
+    .table-row
+      %div Get help in our members-only forum
+      = icon_tag 'check'
+    .table-row
+      %div Cancel Online Any Time
+      = icon_tag 'check'
+    .divider
+    .table-row
+      %div Billing Cycle
+      %div Every 1 Month
+    .divider
+    .table-row.table-header
+      .title Total Due Today
+      .order-price.total
+        %span.currency $
+        %span.price 49
+  .order-summary-footer
+    %p.text-small.text-muted.uppercase.content-center
+      = icon_tag 'lock', class: 'icon-green'
+      Secure Server

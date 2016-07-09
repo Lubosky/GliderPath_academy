@@ -83,7 +83,7 @@ class SubscriptionsController < ApplicationController
     end
 
     def plan
-      Plan.find_by(id: params[:plan])
+      @plan ||= Plan.find_by(id: params[:plan])
     end
 
     def redirect_when_plan_not_found
