@@ -1,24 +1,27 @@
 .row
-  .three.columns.reset-mobile-column
-    = render 'sidebar'
+  = render 'sidebar'
   .nine.columns.reset-mobile-column
-    %h3 Profile Info
-    %dl
-      .dl-row
-        %dt Name
-        %dd= current_user.name
-      .dl-row
-        %dt Email Address
-        %dd= current_user.email
-      .dl-row
-        %dt Password
-        %dd • • • • • • • •
-      - if current_user.is_instructor?
-        .dl-row
-          %dt Headline
-          %dd= current_user.headline
-        .dl-row
-          %dt Bio
-          %dd= format_markdown current_user.bio
-    = link_to t('button.account.edit'), [:edit, :account], class: 'button button-green'
-    = link_to t('button.account.password.change'), [:edit, :user, :registration], class: 'button button-default'
+    .box
+      .box-header
+        %h3 Profile Info
+      .box-content
+        %dl
+          .dl-row
+            %dt Name
+            %dd= current_user.name
+          .dl-row
+            %dt Email Address
+            %dd= current_user.email
+          .dl-row
+            %dt Password
+            %dd • • • • • • • •
+          - if current_user.is_instructor?
+            .dl-row
+              %dt Headline
+              %dd= current_user.headline
+            .dl-row
+              %dt Bio
+              %dd= format_markdown current_user.bio
+        .margin-bottom-15.pull-right
+          = link_to t('button.account.edit'), [:edit, :account], class: 'button button-green'
+          = link_to t('button.account.password.change'), [:edit, :user, :registration], class: 'button button-default'

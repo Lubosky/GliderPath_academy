@@ -1,0 +1,9 @@
+%tr
+  %td= charge.receipt_number
+  %td= charge.created_at.strftime('%b %e, %Y')
+  %td= charge.product
+  %td= charge.paypal_email.present? ? "PayPal" : "xxxx-#{charge.card_last4}"
+  %td= "$#{charge.amount.to_s}"
+  %td
+    = link_to account_charge_path(charge, format: :pdf) do
+      = icon_tag :receipt, size: :xl

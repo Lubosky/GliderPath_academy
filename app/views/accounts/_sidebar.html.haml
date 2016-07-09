@@ -1,7 +1,8 @@
 - body_css 'account'
 
-%ul#account-sidebar
-  = nav_path 'Profile Info', [:account]
-  = nav_path 'Edit Profile', [:edit, :account]
-  = nav_path 'Email & Password', [:edit, :user, :registration]
-  = nav_path 'Billing', [:account, :charges]
+%aside
+  %ul#account-sidebar
+    = nav_path 'Profile Info', [:account]
+    = nav_path 'Edit Profile', [:edit, :account]
+    = nav_path 'Email & Password', [:edit, :user, :registration]
+    = nav_path 'Billing', [:account, :charges]

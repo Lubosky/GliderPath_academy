@@ -1,31 +1,33 @@
-.video-container
-  = embed_video(@lesson.video)
+.box
+  - if @lesson.video
+    .box-header.video-container
+      = embed_video(@lesson.video)
 
-.meta-container
-  .lesson-heading
-    %h1
-      = @lesson.title
-    - if @lesson.video.present?
-      %span.lesson-duration
-        = duration_for(@lesson.video.video_duration)
-    .lesson-meta
-      by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ link_to @lesson.course.name, course_path(@lesson.course) }
-  %p
-    = format_markdown @lesson.notes
-
-  %ul.tabs
-    %li.tab-button.pull-right
-      = form_for current_user.enrolled_lessons.build( lesson_id: @lesson.id ), url: complete_course_lesson_path(@lesson.course.id, @lesson) do |f|
-        = f.button t('lessons.complete'), data: { disable_with: t('lessons.completing') }, class: 'button button-green button-small'
-    %li.tab-header
-      %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.notes') }
-      .tab-content
-        = format_markdown @lesson.notes
-    - if @lesson.uploads.any?
-      %li.tab-header
-        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.attachments') }
-        .tab-content
-          %ul
-            - @lesson.uploads.each do |upload|
-              %li
-                = link_to upload.file_filename, download_upload_path(upload)
+  .box-content
+    .meta-container
+      .lesson-heading
+        %h1
+          = @lesson.title
+        - if @lesson.video.present?
+          %span.lesson-duration
+            = duration_for(@lesson.video.video_duration)
+        .lesson-meta
+          by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ link_to @lesson.course.name, course_path(@lesson.course) }
+      %p.lesson-objective
+        = @lesson.notes
+      %ul.tabs
+        %li.tab-button-small.pull-right
+          = form_for current_user.enrolled_lessons.build( lesson_id: @lesson.id ), url: complete_course_lesson_path(@lesson.course.id, @lesson) do |f|
+            = f.button t('lessons.complete'), data: { disable_with: t('lessons.completing') }, class: 'button button-green button-small'
+        %li.tab-header
+          %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.notes') }
+          .tab-content
+            = format_markdown @lesson.notes
+        - if @lesson.uploads.any?
+          %li.tab-header
+            %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.attachments') }
+            .tab-content
+              %ul
+                - @lesson.uploads.each do |upload|
+                  %li
+                    = link_to upload.file_filename, download_upload_path(upload)

@@ -3,13 +3,11 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :complete]
 
   def show
-    authorize @lesson
     enrolled_lesson = current_user.enrolled_lessons.find_or_initialize_by(lesson: @lesson)
     enrolled_lesson.activate && enrolled_lesson.save
   end
 
   def complete
-    authorize @lesson
     enrolled_lesson = current_user.enrolled_lessons.find_by(lesson_id: @lesson.id)
     enrolled_lesson.complete
     @next_lesson = @lesson.next_lesson
@@ -26,6 +24,7 @@ class LessonsController < ApplicationController
     def set_lesson
       @course = Course.find(params[:course_id])
       @lesson = @course.lessons.find(params[:id])
+      authorize @lesson
     end
 
 end

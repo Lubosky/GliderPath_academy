@@ -1,0 +1,15 @@
+.box
+  .box-header
+    %h3 Billing History
+  .box-content
+    %table
+      %thead
+        %tr
+          %th Receipt no.
+          %th Date
+          %th Product
+          %th Card charged
+          %th Amount
+          %th
+      %tbody
+        = render @charges

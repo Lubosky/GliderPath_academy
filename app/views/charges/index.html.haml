@@ -1,28 +1,6 @@
 .row
-  .three.columns.reset-mobile-column
-    = render partial: 'accounts/sidebar'
+  = render partial: 'accounts/sidebar'
   .nine.columns.reset-mobile-column
     = render 'accounts/payment_method'
-    %h3 Billing History
-    %table
-      %thead
-        %tr
-          %th Receipt no.
-          %th Date
-          %th Product
-          %th Card charged
-          %th Amount
-          %th
-      %tbody
-      - if @charges.any?
-        - @charges.each do |charge|
-          %tr
-            %td= charge.receipt_number
-            %td= charge.created_at.strftime('%b %e, %Y')
-            %td= charge.product
-            %td= charge.paypal_email.present? ? "PayPal" : "xxxx-#{charge.card_last4}"
-            %td= "$#{charge.amount.to_s}"
-            %td
-              = link_to account_charge_path(charge, format: :pdf) do
-                = icon_tag :receipt, size: :xl
+    = render 'charges'
     = render partial: 'subscriptions/cancel' if current_user.has_active_subscription?
