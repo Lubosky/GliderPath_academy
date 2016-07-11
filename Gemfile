@@ -51,11 +51,11 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker', github: 'stympy/faker'
-  gem 'flamegraph'
-  gem 'rack-mini-profiler'
+  gem 'flamegraph', require: false
+  gem 'rack-mini-profiler', require: false
   gem 'rspec-its'
   gem 'rspec-rails', '~> 3.5.0.beta3'
-  gem 'stackprof'
+  gem 'stackprof', require: false
 end
 
 group :development do
