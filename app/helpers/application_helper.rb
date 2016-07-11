@@ -9,6 +9,14 @@ module ApplicationHelper
     @body_css.join(" ")
   end
 
+  def e *args, &block
+    escape_javascript *args, &block
+  end
+
+  def css_id(*args)
+    "##{dom_id(*args)}"
+  end
+
   def nav_path(link_text, link_path, http_method = nil)
     css_class = 'active' if
       current_page?(link_path)
