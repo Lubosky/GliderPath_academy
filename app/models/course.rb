@@ -18,11 +18,11 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
 
   def progress(user)
-    100 * (self.lessons.completed.count.to_f / self.lessons.count.to_f)
+    @course_progress ||= 100 * (self.lessons_completed_for(user).count.to_f / self.lessons.count.to_f)
   end
 
   def lessons_completed_for(student)
-    @completed_lessons ||= self.lessons.lessons_completed_for(student)
+    self.lessons.lessons_completed_for(student)
   end
 
   def lessons_remaining_for(student)

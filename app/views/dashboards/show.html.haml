@@ -5,8 +5,7 @@
       %li.card-list-item.stacked.card-wrapper{ class: "card-#{course.id}" }
         .card-header
           %strong= course.class
-          .card-progress
-            .progress= number_to_percentage(course.progress(current_user), precision: 0)
+          = progress_for(course, current_user)
         = link_to progress_course_path(course), class: 'card-content' do
           %h4= course.name
           %p Eu aeterno docendi civibus nec, nostrum conclusionemque pro ut. Eius dicta at has. No dico debitis assueverit pro. Ea iudico everti cetero mei.
@@ -23,8 +22,7 @@
       %li.card-list-item.stacked.card-wrapper{ class: "card-#{course.id}" }
         .card-header
           %strong= course.class
-          .card-progress
-            .progress= number_to_percentage(course.progress(current_user), precision: 0)
+          = progress_for(course, current_user)
         = link_to course_path(course), class: 'card-content' do
           %h4= course.name
           %p Eu aeterno docendi civibus nec, nostrum conclusionemque pro ut. Eius dicta at has. No dico debitis assueverit pro. Ea iudico everti cetero mei.
