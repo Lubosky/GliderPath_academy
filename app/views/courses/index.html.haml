@@ -1,14 +1,2 @@
 %ul.card-list.three-columns
-  - @courses.each do |course|
-    %li.card-list-item.stacked{ class: "card-#{course.id}" }
-      = link_to course_path(course), class: 'card-box' do
-        .card-box-title
-          %h3
-            = course.name
-        .card-box-meta
-          %p
-            with
-            %strong #{course.instructor.first_name} #{course.instructor.last_name}
-          %p
-            = t('lessons.count', count: course.lessons.count)
-            = course.progress(current_user)
+  = render @courses

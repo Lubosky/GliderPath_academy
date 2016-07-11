@@ -1,1 +1,31 @@
-= render @course
+.course-header
+  %h1
+    = @course.name
+  .course-meta
+    = user_avatar(@course.instructor, class: 'avatar-circle', alt: @course.instructor.name, width: '45px', height: '45px')
+    %h5= @course.instructor.name
+.box
+  .box-header.video-container
+    = embed_video(@course.video)
+  .box-content
+    %ul.tabs
+      %li.tab-button.pull-right
+        -if user_signed_in?
+          - if !current_user.enrolled?(@course) && ( current_user.has_active_subscription? || current_user.purchased?(@course) )
+            = render 'button_enroll', resource: @course
+          - elsif current_user.is_admin? || current_user.id == @course.instructor_id
+            = render 'button_edit', resource: @course
+            = render 'button_delete', resource: @course
+          - elsif !( current_user.has_active_subscription? || current_user.purchased?(@course) )
+            = render 'button_purchase', resource: @course
+        - else
+          = link_to t('button.subscription.new'), new_subscription_path(plan: 1), class: 'button button-brand'
+          = render 'button_purchase', resource: @course
+      %li.tab-header
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('@course.description') }
+        .tab-content
+          = @course.description
+      %li.tab-header
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('@course.curriculum') }
+        .tab-content
+          = render @sections

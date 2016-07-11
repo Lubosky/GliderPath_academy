@@ -1,0 +1,1 @@
+= link_to_if current_user.is_admin?, t('button.delete'), course_path(resource), method: :delete, data: { confirm: 'Are you sure you want to delete this course?' }, class: 'button button-red'
