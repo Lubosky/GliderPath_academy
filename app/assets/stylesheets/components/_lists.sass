@@ -1,11 +1,13 @@
 ul.card-list
   +pad(0)
+  display: inline-block
   list-style: none
   margin-top: 45px
   max-width: none
-  overflow: hidden
   width: 100%
 
+  &.compact
+    margin: 0
 
   &.three-columns
     .card-list-item
@@ -101,6 +103,80 @@ ul.card-list
         &-meta
           +pad(15px 45px)
           text-align: left
+
+      &.card-wrapper
+        +border-radius($border-radius)
+        +box-shadow(-1px 0 1px rgba($dark-shade, .1), 1px 0 1px rgba($dark-shade, .1))
+        +pad(70px 30px 30px)
+        +transition(all 150ms ease-in-out)
+        background: $white
+        display: block
+        min-height: 320px
+        position: relative
+
+        &.stacked
+          &:after,
+          &:before
+            background-color: lighten($default, 3%)
+
+        &:hover,
+        &:focus
+          +box-shadow(0px 2px 40px 0px rgba($black, .1))
+
+        .card-header
+          +border-radius($border-radius $border-radius 0 0)
+          +pad(0 30px)
+          display: block
+          height: 60px
+          left: 0
+          line-height: 60px
+          position: absolute
+          right: 0
+          top: 0
+          transition: background-color 300ms 0s ease
+
+          .card-progress
+            +border-radius(50%)
+            +size(50px)
+            background: $white
+            color: $text-muted
+            position: absolute
+            right: 15px
+            top: 35px
+
+            .progress
+              @extend .sbold
+              +size(46px)
+              display: block
+              line-height: 46px
+              text-align: center
+
+        .card-content
+          color: $text-muted
+
+          h4
+            margin-bottom: 10px
+
+          p
+            +font-size($font-size-small)
+            margin: 0
+            overflow: hidden
+            position: relative
+
+        .card-footer
+          +border-radius(0 0 $border-radius $border-radius)
+          +box-shadow(inset 0 -2px 0 rgba($black, 0.09))
+          +pad(15px 30px)
+          background-color: lighten($default, 3%)
+          border-top: 1px solid $border-color
+          bottom: 0
+          left: 0
+          position: absolute
+          right: 0
+          text-align: right
+
+          .button
+            @extend .button-small
 
 ul.step-list
   +border-radius($border-radius)

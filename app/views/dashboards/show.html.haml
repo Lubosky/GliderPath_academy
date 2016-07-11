@@ -1,0 +1,38 @@
+- if enrolled_courses.any?
+  %h2= t('titles.courses.enrolled')
+  %ul.card-list.compact.three-columns
+    - enrolled_courses.each do |course|
+      %li.card-list-item.stacked.card-wrapper{ class: "card-#{course.id}" }
+        .card-header
+          %strong= course.class
+          .card-progress
+            .progress= number_to_percentage(course.progress(current_user), precision: 0)
+        = link_to progress_course_path(course), class: 'card-content' do
+          %h4= course.name
+          %p Eu aeterno docendi civibus nec, nostrum conclusionemque pro ut. Eius dicta at has. No dico debitis assueverit pro. Ea iudico everti cetero mei.
+        .card-footer
+          - if course.progress(current_user) != 100
+            = link_to t('button.course.continue'), course_lesson_path(course, course.first_remaining_lesson_for(current_user)), class: 'button button-small'
+          - else
+            = link_to t('button.course.completed'), progress_course_path(course), class: 'button button-small'
+
+- if accessible_courses.any?
+  %h2= t('titles.courses.accessible')
+  %ul.card-list.compact.three-columns
+    - accessible_courses.each do |course|
+      %li.card-list-item.stacked.card-wrapper{ class: "card-#{course.id}" }
+        .card-header
+          %strong= course.class
+          .card-progress
+            .progress= number_to_percentage(course.progress(current_user), precision: 0)
+        = link_to course_path(course), class: 'card-content' do
+          %h4= course.name
+          %p Eu aeterno docendi civibus nec, nostrum conclusionemque pro ut. Eius dicta at has. No dico debitis assueverit pro. Ea iudico everti cetero mei.
+        .card-footer
+          = render 'courses/button_enroll', resource: course
+
+- else
+  %h2= t('titles.courses.index')
+  %ul.card-list.compact.three-columns
+    - available_courses.each do |course|
+      = render 'courses/course', course: course

@@ -7,6 +7,9 @@
     %ul.menu-list
       %li.menu-item.hide-on-desktop
         = link_to t('home'), root_path
+      - if user_signed_in?
+        %li.menu-item.hide-on-mobile
+          = link_to t('dashboard'), root_path
       %li.menu-item
         = link_to t('courses'), courses_path
       - if user_signed_in?

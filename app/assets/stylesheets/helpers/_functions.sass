@@ -45,10 +45,43 @@
     &.card-#{$name}
       background: map-get($colors, base)
 
+      &.card-wrapper
+
+        &:hover,
+        &:active,
+        &:active:hover,
+        &:active:focus,
+        &:focus
+
+          .card-content
+            h4
+              color: map-get($colors, base)
+
+        .card-header
+          background: map-get($colors, base)
+          color: map-get($colors, font)
+
+          .card-progress
+            border: 2px solid map-get($colors, base)
+
+        .card-footer
+          .button
+            background: map-get($colors, base)
+            border: 2px solid map-get($colors, base)
+            color: map-get($colors, font)
+
+            &:hover,
+            &:active,
+            &:active:hover,
+            &:active:focus,
+            &:focus
+              border-color: darken(map-get($colors, base), 9%)
+              background-color: darken(map-get($colors, base), 9%)
+
       .card-box
         color: map-get($colors, font)
 
-      &.stacked
+      &.stacked:not(.card-wrapper)
         &:after,
         &:before
           background: map-get($colors, base)

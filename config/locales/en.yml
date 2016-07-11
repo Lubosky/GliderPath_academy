@@ -2,6 +2,8 @@ en:
   titles:
     application: 'GliderPath Academy'
     courses:
+      accessible: 'My Courses'
+      enrolled: 'Enrolled Courses'
       index: 'Courses'
   flash:
     account:
@@ -86,6 +88,8 @@ en:
     last_name: 'Last Name'
 
   button:
+    delete: 'Delete'
+    edit: 'Edit'
     cancel: 'Cancel'
     account:
       create: 'Create Your Account'
@@ -98,6 +102,10 @@ en:
         change: 'Change Password'
       avatar:
         change: Change
+    course:
+      completed: 'Course Completed'
+      continue: 'Continue'
+      enroll: 'Start Course'
     subscription:
       new: 'Subscribe'
       cancel: 'Cancel Subscription'

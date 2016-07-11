@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }, path: 'account', path_names: { sign_in: 'signin', sign_out: 'signout', password: 'password', sign_up: 'signup', edit: 'password/change' }
 
+  authenticated :user do
+    root 'dashboards#show', as: :authenticated_root
+  end
+
   root 'courses#index'
+
   post '/braintree/webhooks', to: 'subscriptions#webhook'
 
   resource :account, only: [:show, :edit], path: 'account' do

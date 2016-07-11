@@ -21,12 +21,34 @@ class Course < ActiveRecord::Base
     100 * (self.lessons.completed.count.to_f / self.lessons.count.to_f)
   end
 
-  def completed_lessons(student)
-    @completed_lessons ||= self.lessons.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' }).pluck(:id)
+  def lessons_completed_for(student)
+    @completed_lessons ||= self.lessons.lessons_completed_for(student)
   end
 
-  def completed_for(student, lesson)
-    self.completed_lessons(student).include?(lesson.id)
+  def lessons_remaining_for(student)
+    self.lessons.lessons_remaining_for(student)
   end
+
+  def lesson_completed_for(student, lesson)
+    self.lessons_completed_for(student).include?(lesson.id)
+  end
+
+  def first_remaining_lesson_for(student)
+    self.lessons_remaining_for(student).first
+  end
+
+  private
+
+    def self.enrolled_courses_for(student)
+      self.joins(:enrollments).where(enrollments: { student: student })
+    end
+
+    def self.accessible_courses_for(student)
+      self.joins(:purchases).where(purchases: { purchaser: student }).where.not(id: self.enrolled_courses_for(student))
+    end
+
+    def self.available_courses_for(student)
+      self.where.not(id: self.accessible_courses_for(student)).where.not(id: self.enrolled_courses_for(student))
+    end
 
 end
