@@ -1,0 +1,141 @@
+- content_for :page_title, t('titles.pages.faq.title')
+- content_for :page_subtitle, t('titles.pages.faq.subtitle')
+
+%section.page-content
+  .row
+    .twelve.columns.centered
+      .row
+        %ul.no-bullets
+          %li
+            %h4.text-muted
+              About #{Settings.application.name}
+          %li
+            = link_to "What is #{Settings.application.name}?", 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'what-is-gliderpath-academy' }
+          %li
+            = link_to 'How often are new online courses being released?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'how-often-are-new-online-courses-being-released' }
+          %li
+            = link_to 'I have an idea for a module or course. What should I do?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-have-an-idea-for-a-module-or-course-what-should-i-do' }
+          %li
+            = link_to 'I have a question regarding specific lesson, which was not discussed in detail. Where can I get more information?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-have-a-question-regarding-specific-lesson-which-was-not-discussed-in-detail-where-can-i-get-more-information'}
+          %li
+            = link_to 'Is there a time frame to complete my courses?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'is-there-a-time-frame-to-complete-my-courses' }
+          %li
+            = link_to 'I am interested in a private consulting session. How can I make an appointment?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-am-interested-in-a-private-consulting-session-how-can-i-make-an-appointment'}
+          %li
+            = link_to 'Is it possible to get a free consultation?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'is-it-possible-to-get-a-free-consultation' }
+          %li
+            = link_to 'I am interested in an online training tailored for our company. Who should I contact?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-am-interested-in-an-online-training-tailored-for-our-company-who-should-i-contact'}
+          %li
+            %h4.text-muted
+              Getting Started with the Courses
+          %li
+            = link_to 'I cannot sign in. What should I do?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-cannot-sign-in-what-should-i-do' }
+          %li
+            = link_to 'I forgot my password. What should I do?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-forgot-my-password-what-should-i-do' }
+          %li
+            = link_to 'One (or more) of the videos does not display properly. What should I do?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'one-or-more-of-the-videos-does-not-display-properly-what-should-i-do'}
+          %li
+            = link_to 'Where do I manage the volume from?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'where-do-i-manage-the-volume-from' }
+          %li
+            = link_to 'How long is my account set up for?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'how-long-is-my-account-set-up-for' }
+          %li
+            = link_to 'I am not satisfied with the content of the course. Can I get my money back?', 'javascript:void(0)', data: { trigger: 'scroller', target_id: 'i-am-not-satisfied-with-the-content-of-the-course-can-i-get-my-money-back'}
+        %hr
+        %h2
+          About #{Settings.application.name}
+        %h4{ data: { shelf_id: 'what-is-gliderpath-academy' } }
+          What is #{Settings.application.name}?
+        %p
+          #{Settings.application.name} is the place for entrepreneurs, solopreneurs and freelancers to share and gain knowledge. It is an online learning platform where you can find courses, e-learning videos, webinars and tons of tips to help you grow your business or boost your career.
+        %h4{ data: { shelf_id: 'how-often-are-new-online-courses-being-released' } }
+          How often are new online courses being released?
+        %p New modules or courses are released approximately once every one or two months however free webinars may be released more frequently.
+        %h4{ data: { shelf_id: 'i-have-an-idea-for-a-module-or-course-what-should-i-do' } }
+          I have an idea for a module or course. What should I do?
+        %p Great! Do let us know by writing directly to #{mail_to Settings.company.email, Settings.company.email}. We will consider your proposal and get back to you.
+        %h4{ data: { shelf_id: 'i-have-a-question-regarding-specific-lesson-which-was-not-discussed-in-detail-where-can-i-get-more-information' } }
+          I have a question regarding specific lesson, which was not discussed in detail. Where can I get more information?
+        %p You can discuss the course and single lessons in the forum. There, you can also ask your questions. You can send a private message to the instructor, if you want. If you have any technical questions, you can engage us via the form which is accessible #{link_to 'here', contact_path}.
+        %h4{ data: { shelf_id: 'is-there-a-time-frame-to-complete-my-courses' } }
+          Is there a time frame to complete my courses?
+        %p Nope! The courses are self-paced. Once you purchase a course, you can view it as many times as you want. Therefore you can proceed through the course at your own pace whenever you want.
+        %h4{ data: { shelf_id: 'i-am-interested-in-a-private-consulting-session-how-can-i-make-an-appointment' } }
+          I am interested in a private consulting session. How can I make an appointment?
+        %p If you are interested in private consulting session, please let us know via the #{link_to 'contact form', contact_path} or write directly to #{mail_to Settings.company.email, Settings.company.email}. Be sure to include your name, name of your company and your phone number. We will contact you within two days.
+        %h4{ data: { shelf_id: 'is-it-possible-to-get-a-free-consultation' } }
+          Is it possible to get a free consultation?
+        %p
+          Consultations are provided within
+          "Ask Me Anything"
+          webinars. Questions will be collected prior to start of the webinar and then answered during the webinar.
+        %h4{ data: { shelf_id: 'i-am-interested-in-an-online-training-tailored-for-our-company-who-should-i-contact' } }
+          I am interested in an online training tailored for our company. Who should I contact?
+        %p
+          We are happy you mentioned that! Let us know via the contact form or write directly to #{mail_to Settings.company.email, Settings.company.email}. Be sure to include your name, name of your company and your phone number. We will contact you within two days.
+        %hr
+        %h2
+          Getting Started with the Courses
+        %h4{ data: { shelf_id: 'i-cannot-sign-in-what-should-i-do' } }
+          I cannot sign in. What should I do?
+        %p
+          First, you may want to check your Caps Lock and Num Lock. Often this is the cause of not being able to sign in as these buttons can be accidentally turned on or off. However, if the problem persists, contact us via contact form accessible #{link_to 'here', contact_path}.
+        %h4{ data: { shelf_id: 'i-forgot-my-password-what-should-i-do' } }
+          I forgot my password. What should I do?
+        %p
+          No worries! In case you forgot your password, the solution is just couple of clicks away.
+        %ol
+          %li
+            Click
+            %strong Sign In
+            on the top right corner of the page.
+          %li
+            Click
+            %strong Forgot your password?.
+          %li Enter your e-mail address. You will receive an e-mail with a link to reset your password.
+        %h4{ data: { shelf_id: 'one-or-more-of-the-videos-does-not-display-properly-what-should-i-do' } }
+          One (or more) of the videos does not display properly. What should I do?
+        %p Have you tried from a different browser (updated to the latest version)? If you see only the black screen but can hear the audio, often the problem is in the browser settings. Please follow the instructions below for specific browsers:
+        %p Mozilla:
+        %ol
+          %li
+            Click the menu button on the upper right corner and choose
+            %strong Options
+          %li
+            Select the
+            %strong Advanced panel
+            and the
+            %strong General tab
+          %li
+            Uncheck
+            %strong Use hardware acceleration when available
+          %li Restart Firefox.
+        %p Chrome:
+        %ol
+          %li
+            Click the menu button on the upper right corner. It says
+            %strong Customize and control Google Chrome
+            when you hover over it.
+          %li
+            Click the
+            %strong Settings
+            option near the bottom of the menu.
+          %li
+            Scroll to the bottom of this page and click the
+            %strong Show advanced settings
+            link.
+          %li
+            Scroll to the bottom of the page again, then click the box to the left of
+            %strong Use hardware acceleration when available
+            to remove the check mark.
+        %h4{ data: { shelf_id: 'where-do-i-manage-the-volume-from' } }
+          Where do I manage the volume from?
+        %p
+          First and foremost, we ask you to check the volume on your device, and then you can adjust the volume directly on the video at right bottom corner.
+        %h4{ data: { shelf_id: 'how-long-is-my-account-set-up-for' } }
+          How long is my account set up for?
+        %p
+          = emojify('The account is set up for unlimited time :smile:.')
+        %h4{ data: { shelf_id: 'i-am-not-satisfied-with-the-content-of-the-course-can-i-get-my-money-back' } }
+          I am not satisfied with the content of the course. Can I get my money back?
+        %p
+          Yes, all courses have 100% money back guarantee, however the condition is to send us your complaint in writing (via e-mail) including invoice number within 48 hours of your purchase.

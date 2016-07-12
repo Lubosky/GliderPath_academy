@@ -12,6 +12,11 @@ en:
       user:
         edit:
           password: 'New password'
+      contact_form:
+        name: 'Your name'
+        email: 'Your email address'
+        subject: 'What do you need help with?'
+        message: 'Describe your problem/question'
     placeholders:
       user:
         edit:

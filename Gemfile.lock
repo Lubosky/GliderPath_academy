@@ -19,6 +19,14 @@ GIT
       nokogiri (>= 1.4)
 
 GIT
+  remote: git://github.com/plataformatec/mail_form.git
+  revision: 9671af0bcef63a1a2c6be6756ac3c35d2bc30a6b
+  specs:
+    mail_form (1.5.0)
+      actionmailer (>= 3.2, < 5.1)
+      activemodel (>= 3.2, < 5.1)
+
+GIT
   remote: git://github.com/refile/refile.git
   revision: d7a42dcd7cf631ba94b01231f535bda061f6af92
   specs:
@@ -440,6 +448,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_avatar
+  mail_form!
   neat (~> 1.8)
   normalize-rails
   pg (~> 0.15)

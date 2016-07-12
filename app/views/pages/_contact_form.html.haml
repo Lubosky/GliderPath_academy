@@ -1,0 +1,7 @@
+= simple_form_for @contact_form, url: contact_path do |f|
+  = f.input :name, required: true
+  = f.input :email, required: true
+  = f.input :subject, required: true
+  = f.input :message, as: :text, required: true
+  = f.input :gliderbot, wrapper_html: { class: 'hidden' }
+  = f.button :submit, t('button.contact_form.send'), class: 'button button-large button-purple wide', data: { disable_with: 'Sending...' }

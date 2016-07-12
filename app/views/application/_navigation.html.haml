@@ -1,0 +1,44 @@
+%nav
+  %section
+    #mobile-menu-toggler
+      %a#menu-toggle{ href: 'javascript:void(0)', data: { toggle: 'mobile-menu' } }
+        %span.toggler
+    = render 'logo'
+    %ul.menu-list
+      %li.menu-item.hide-on-desktop
+        = link_to t('home'), root_path
+      - if user_signed_in?
+        %li.menu-item.hide-on-mobile
+          = link_to t('dashboard'), root_path
+      %li.menu-item
+        = link_to t('courses'), courses_path
+      - if user_signed_in?
+        %li.menu-item.bordered.hide-on-desktop
+          = link_to t('sign_out'), destroy_user_session_path, method: :delete
+        %li.menu-item.menu-profile
+          = link_to 'javascript:void(0)', data: { toggle: 'dropdown' } do
+            %figure.avatar
+              = user_avatar(current_user, class: 'avatar-circle bordered', alt: current_user.name, width: '45px', height: '45px')
+              %figcaption= current_user.name
+              = icon_tag 'chevron-down', size: :m
+          .dropdown.right
+            .dropdown-header
+              = link_to :account do
+                %h4
+                  = current_user.name
+                %span
+                  = t('users.account.show')
+            %ul
+              %li
+                = link_to t('users.account.edit.profile'), [:edit, :account]
+              %li
+                = link_to t('users.account.edit.email'), edit_user_registration_path
+              %li
+                = link_to t('users.account.billing'), [:account, :charges]
+            .dropdown-footer
+              = link_to t('button.account.sign_out'), destroy_user_session_path, method: :delete
+      - else
+        %li.menu-item
+          = link_to t('button.account.sign_in'), new_user_session_path
+        %li.menu-item.sticky
+          = link_to t('button.account.sign_up'), new_user_registration_path, class: 'button-sticky'

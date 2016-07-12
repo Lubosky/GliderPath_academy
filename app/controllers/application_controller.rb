@@ -11,29 +11,27 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  after_action :verify_authorized, unless: :devise_controller?
+  after_action :verify_authorized, unless: [ :devise_controller?, :pages_controller? ]
 
   protected
+
+    def after_sign_out_path_for(resource_or_scope)
+      new_user_session_path
+    end
 
     def configure_permitted_parameters
       added_attributes = [:first_name, :last_name]
       devise_parameter_sanitizer.permit( :sign_up, keys: added_attributes )
     end
 
-    def user_not_authorized(exception)
-      policy_name = exception.policy.class.to_s.underscore
-
-      flash[:alert] = t("#{policy_name}.#{exception.query}", scope: 'pundit', default: :default)
-      redirect_to ( request.referrer || root_path )
-    end
-
-    def after_sign_out_path_for(resource_or_scope)
-      new_user_session_path
-    end
-
     def find_braintree_customer
       Braintree::Customer.find(current_user.braintree_customer_id)
     end
+
+    def pages_controller?
+      controller_name == 'pages'
+    end
+
 
     def set_braintree_customer
       payment_method_nonce = params[:payment_method_nonce]
@@ -44,6 +42,13 @@ class ApplicationController < ActionController::Base
       else
         find_braintree_customer
       end
+    end
+
+    def user_not_authorized(exception)
+      policy_name = exception.policy.class.to_s.underscore
+
+      flash[:alert] = t("#{policy_name}.#{exception.query}", scope: 'pundit', default: :default)
+      redirect_to ( request.referrer || root_path )
     end
 
 end

@@ -1,0 +1,9 @@
+- content_for :page_title, t('titles.pages.home.title')
+- content_for :page_subtitle, t('titles.pages.home.subtitle')
+
+%section.page-content
+  .row
+    .twelve.columns.centered
+      .row
+        %ul.card-list.three-columns
+          = render @courses

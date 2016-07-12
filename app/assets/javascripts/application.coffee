@@ -11,6 +11,7 @@
 #= require payment-method
 #= require purchase
 #= require revealer
+#= require scroller
 #= require subscription
 #= require tabs
 #= require_tree .

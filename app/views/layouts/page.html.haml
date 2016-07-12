@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    = csrf_meta_tags
+    = render 'meta'
+
+    %title= [(content_for(:page_title) || title), t('titles.application')].compact.uniq.join(' | ')
+
+    = stylesheet_link_tag 'application', media: 'all', data_turbolinks_track: true
+    = javascript_include_tag 'application', data_turbolinks_track: true
+
+  %body{ class: "#{body_css 'static'}" }
+    = render 'flash_messages'
+    = render 'navigation'
+    %section.page-container
+      = render 'header'
+      = yield
+    = render 'footer'

@@ -5,6 +5,22 @@ en:
       accessible: 'My Courses'
       enrolled: 'Enrolled Courses'
       index: 'Courses'
+    pages:
+      contact:
+        title: 'Contact Us'
+        subtitle: "Looking for more information? We've got you covered. Drop us a note and we'll get back to you."
+      faq:
+        title: 'Questions & Answers'
+        subtitle: 'Questions or concerns? Please take a look at our top frequently asked questions for guidance.'
+      home:
+        title: 'Love the way you learn'
+        subtitle: 'The perfect place for for entrepreneurs, solopreneurs and freelancers to share and gain knowledge'
+      privacy:
+        title: 'Privacy Policy'
+        subtitle: "Effective Date: %{date}"
+      terms:
+        title: 'Terms of Service'
+        subtitle: "Last updated on: %{date}"
   flash:
     account:
       not_authorized: 'You are not authorized to view this account!'
@@ -13,6 +29,10 @@ en:
         error: 'Sorry! We are having trouble updating your account.'
     attachments:
       error: 'There was an error downloading requested file.'
+    contact_form:
+      success: 'Your message has been sent successfully. Well get back to you as soon as possible. Thank you.'
+      error: 'Oh no! There was a problem with your form submission. Please check your input and try again.'
+      script_error: 'The message could not be delivered! The rabbits have been nibbling the cables again...'
     courses:
       create:
         success: 'Course has been successfuly created.'
@@ -56,6 +76,8 @@ en:
   footer:
     about: 'About'
     contact: 'Contact Us'
+    faq: 'FAQ'
+    privacy: 'Privacy Policy'
     products: 'Products'
     resources: 'Resources'
     support: 'Support'
@@ -102,6 +124,8 @@ en:
         change: 'Change Password'
       avatar:
         change: Change
+    contact_form:
+      send: 'Send Message'
     course:
       completed: 'Course Completed'
       continue: 'Continue'

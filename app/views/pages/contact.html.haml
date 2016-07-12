@@ -1,0 +1,10 @@
+- content_for :page_title, t('titles.pages.contact.title')
+- content_for :page_subtitle, t('titles.pages.contact.subtitle')
+
+%section.page-content
+  .row
+    .seven.columns.centered.reset-mobile-column
+      .row
+        %h3.margin-top-0 Getting in touch is easy!
+        %p.margin-bottom-30 We are here to answer any questions you may have about our #{Settings.application.name}. Reach out to us and we'll respond as soon as we can.
+        = render 'contact_form'

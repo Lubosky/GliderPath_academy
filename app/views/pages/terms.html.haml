@@ -1,0 +1,66 @@
+- content_for :page_title, t('titles.pages.terms.title')
+- content_for :page_subtitle, t('titles.pages.terms.subtitle', date: 'June 1, 2016')
+
+%section.page-content
+  .row
+    .twelve.columns.centered
+      .row
+        %p
+          This is an agreement between the company you represent (hereinafter “You”) and #{Settings.company.name} (hereinafter “GliderPath” or “We”) governing the use of #{Settings.application.name} (hereinafter “Website” or “Site”).
+        %p
+          By using this Website, you are agreeing to be bound by the following terms and conditions (“Terms of Service”).
+        %p
+          #{Settings.company.name} (“Company”) reserves the right to update and change these Terms of Service without notice.
+        %p
+          Use of the Company's Website and Services (as defined below) is expressly conditioned upon your assent to all the terms and conditions of this agreement, to the exclusion of all other terms.
+        %p
+          Violation of any of the terms below may result in the termination of your account.
+        %h2
+          Account Creation
+        %p
+          In order to use certain features of the Website, you must register for an account and provide certain information about yourself as prompted by the account registration form. You represent and warrant that:
+        %ul
+          %li
+            all required registration information you submit is truthful and accurate;
+          %li
+            you will maintain the accuracy of such information.
+        %p
+          You may delete your account at any time, for any reason, by following the instructions on the Website.
+        %p
+          You agree not to create an account or use the Website if you have been previously removed by us or banned from any of the Websites. GliderPath reserves the right in its sole discretion to suspend or terminate your account and refuse any and all current or future use of the Website (or any portion thereof) at any time for any reason. You agree that GliderPath will not be liable to you or to any third party for any suspension or termination of your account or any refusal of any use of the Website (or any portion thereof). Information on your profile may include information and content you provide. GliderPath reserves the right in its sole discretion to remove profile information at any time for any reason. You agree that GliderPath will not be liable to you or to any third party for such removal.
+        %h2
+          Use of the Website
+        %p
+          You must not use this Website for anything that is unlawful or is prohibited by these Terms of Service and/or any notices elsewhere on this Website.
+        %p
+          The Company advises that you seek professional advice before relying on any information on this Website. Under no circumstances will Company be liable in any way for any information it provides on the Website, including, but not limited to, any errors or omissions in any content and information, including but not limited to text, software, music, sound, photographs, graphics, video or other material (also known as “Content”), or any loss or damage of any kind incurred in connection with use of or exposure to any Content posted, emailed, accessed, transmitted, or otherwise made available via the Website.
+        %p
+          You represent and warrant to Company that you are of legal age to form a binding contract or have your parent's permission to do so. You also certify that you are legally permitted to use and access the Website and take full responsibility for the selection and use of and access to the Website. This agreement is void where prohibited by law, and the right to access the Website is revoked in such jurisdictions.
+        %h2
+          Charges and Pricing
+        %p
+          GliderPath offers paid Services (e.g., Courses) for a fee. Unless otherwise stated, all fees are quoted in U.S. Dollars. Payment for all Services are payable upon registration, enrollment or the relevant periodic payment date. You are responsible for paying all fees and applicable taxes in a timely manner with a payment mechanism associated with the applicable paid Services. If your payment method fails or your account is past due, we may collect fees using other collection mechanisms. Fees may vary based on your location and other factors, and GliderPath reserves the right to change any fees at any time at its sole discretion. Any change, update, or modification will be effective immediately upon posting through the relevant Services.
+        %p
+          Payments can be made by any MasterCard, Visa, or American Express credit card or any other payment methods the Company accepts. Your payment details will be encrypted to minimize the possibility of unauthorized access or disclosure. At the time of registration, you will be asked to provide payment method details. In the event that the Company is unable at any time to obtain payment of any charges using such payment methods, the Company may freeze your account until it has received settlement in full.
+        %p
+          All payments are made to #{Settings.company.name}.
+        %h2
+          Intellectual Property
+        %p
+          You acknowledge and agree that all Content provided on the Website or through the Services, contained in sponsor advertisements or, presented to you by the Company, its partners or advertisers, is protected by copyrights, trademarks, service marks, patents, or other proprietary rights and laws. You shall abide by all copyright notices, trademark rules, information, and restrictions contained in any Content accessed through the Services, and except as expressly permitted herein, shall not use, copy, reproduce, modify, translate, publish, broadcast, transmit, distribute, perform, upload, display, license, sell or otherwise exploit for any purposes whatsoever any Content or third party submissions or other proprietary rights not owned by you: (i) without the express prior written consent of the respective owners, and (ii) in any way that violates any third party right.
+        %p
+          You acknowledge and agree that you are permitted to review, print and make one copy for your personal use of the Content (and other items displayed on the Website for download), provided that you maintain all copyright and other notices contained in such Content. You shall not store any significant Content in any form.
+        %p
+          We do not claim ownership
+          of any Content that you post on the Website or through the Services. Instead, you hereby grant to Company a non-exclusive, fully paid and royalty-free, transferable, sub-licensable, perpetual, worldwide license to use the Content that you post on the Website or through the Services, subject to the Company's #{link_to t('footer.privacy'), privacy_path}
+        %h2
+          Modifying and Terminating our Services
+        %p
+          Users can terminate their accounts and/or subscription at any time by logging into their accounts or by contacting Customer Support at #{mail_to Settings.company.email, Settings.company.email} and requesting cancellation.
+        %p
+          GliderPath may terminate the right of any user to access the Site at any time, with or without cause, in GliderPath's absolute discretion and without notice. Upon termination of your rights under these Terms, your account and right to access and use the Site will terminate immediately. We will not have any liability whatsoever to you for any termination of your rights under these Terms, including for termination of your account. Even after your rights under these Terms are terminated, all provisions of these Terms which by their nature should survive, will survive, including, without limitation, ownership provisions, warranty disclaimers, and limitations of liability.
+        %p
+          We are constantly changing and improving our Services. We may add or remove functions, features, or requirements, and we may suspend or stop a Service altogether. You can stop using our Services at any time, although we'll be sorry to see you go.
+        %p.uppercase Make sure you have carefully read the above terms.
+        %p
+          If you have any questions or concerns regarding this agreement, please contact us at #{mail_to Settings.company.email, Settings.company.email}.
