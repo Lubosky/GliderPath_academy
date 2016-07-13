@@ -14,7 +14,6 @@
 #= require scroller
 #= require subscription
 #= require tabs
-#= require_tree .
 
 $(document).on 'turbolinks:load', ->
   $html = $('html')
@@ -27,3 +26,8 @@ $(document).on 'turbolinks:load', ->
 
   $('a.disabled').click (e) ->
     e.preventDefault()
+
+  content = $('*[data-layout-element=\'content\']')
+  footer = $('*[data-layout-element=\'footer\']')
+  height = $(window).height() - footer.outerHeight()
+  content.attr 'style', 'min-height:' + height + 'px'

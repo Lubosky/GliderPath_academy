@@ -12,7 +12,7 @@
   %body{ class: "#{body_css 'static'}" }
     = render 'flash_messages'
     = render 'navigation'
-    %section.page-container
+    %section.page-container{ data: { layout_element: 'content' } }
       = render 'header'
       = yield
     = render 'footer'
