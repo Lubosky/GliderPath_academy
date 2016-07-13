@@ -8,6 +8,14 @@ header
   position: relative
   width: 100%
 
+  .home &
+    +radial-gradient(map-deep-get($component-colors, orange, base), map-deep-get($component-colors, pink, base))
+    +size(100%, 550px)
+    margin-top: -$menu-height
+
+    +mq($max, $mobile-screen)
+      +size(100%, 540px)
+
   h1
     +font-size(48px)
     margin-bottom: 5px
@@ -17,7 +25,35 @@ header
     +mq($max, $mobile-max)
       +font-size(36px)
 
+    .home &
+      +font-size(64px)
+      color: $white
+      margin: 30px auto
+      top: 90px
+
+      +mq($max, $tablet-max)
+        +font-size(48px)
+
+      +mq($max, $mobile-max)
+        top: 0
+
   h2
     @extend .regular
     +font-size(20px)
     margin: 0 auto 10px
+
+    .home &
+      +font-size(26px)
+      top: 90px
+
+      +mq($max, $tablet-max)
+        +font-size($font-size-large)
+
+      +mq($max, $mobile-max)
+        top: 0
+
+  h1,
+  h2
+    .home &
+      +text-shadow(0 2px 1px rgba($black, .15))
+      position: relative

@@ -1,3 +1,4 @@
+- body_css 'home'
 - content_for :page_title, t('titles.pages.home.title')
 - content_for :page_subtitle, t('titles.pages.home.subtitle')
 
@@ -7,3 +8,10 @@
       .row
         %ul.card-list.three-columns
           = render @courses
+
+%section.page-content.gradient-purple-blue
+  .row
+    .ten.columns.content-center.centered
+      %h2 Take your career to the next level!
+      %p.lead Ready to master some skills? You're in the right place.
+      = link_to 'Explore Courses', courses_path, class: 'button button-white outline margin-top-15 margin-bottom-15'
