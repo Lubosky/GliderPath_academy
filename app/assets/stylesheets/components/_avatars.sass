@@ -1,11 +1,19 @@
 .avatar
   display: inline-block
   position: relative
-  top: -10px
 
   &-circle
     +border-radius(50%)
+    vertical-align: middle
 
     &.bordered
       +pad(2px)
       border: 2px solid $default
+
+  &-default
+    align-items: center
+    background: $brand
+    color: $white
+    display: inline-flex
+    justify-content: center
+    position: relative

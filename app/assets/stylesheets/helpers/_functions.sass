@@ -39,8 +39,12 @@
     background: map-get($colors, base)
     color: map-get($colors, font)
 
-@each $name, $colors in $card-colors
+@each $name, $colors in $avatar-colors
+  .avatar-#{$name}
+    background: map-get($colors, base) !important
+    color: map-get($colors, font) !important
 
+@each $name, $colors in $card-colors
   .card-list-item
     &.card-#{$name}
       background: map-get($colors, base)

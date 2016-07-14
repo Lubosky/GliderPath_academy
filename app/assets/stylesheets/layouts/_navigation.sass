@@ -78,6 +78,17 @@ nav
           figure
             margin: 0
 
+            +mq($max, $mobile-screen)
+              top: -5px
+
+            [class*='avatar']
+              +size(45px)
+              position: relative
+              top: -10px
+
+              +mq($max, $mobile-screen)
+                +size(40px)
+
             figcaption
               +size(180px, auto)
               color: $white
@@ -86,7 +97,7 @@ nav
               overflow: hidden
               position: relative
               left: 5px
-              top: -5px
+              top: 0
               text-overflow: ellipsis
               white-space: nowrap
 
@@ -96,8 +107,8 @@ nav
             .icon
               color: $default
               position: relative
-              bottom: 15px
               left: 10px
+              top: -10px
 
               +mq($max, $mobile-screen)
                 display: none

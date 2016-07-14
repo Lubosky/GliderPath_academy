@@ -24,6 +24,35 @@ $gradient-colors: (
   'turquoise-blue': (from: #3BE8B0, to: #44BBFF, font: #FFFFFF)
 );
 
+$avatar-colors: (
+  a:  (base: #3BE8B0, font: #FFFFFF),
+  b:  (base: #6A69A0, font: #FFFFFF),
+  c:  (base: #E66F5E, font: #FFFFFF),
+  d:  (base: #40ACC6, font: #FFFFFF),
+  e:  (base: #81CC88, font: #FFFFFF),
+  f:  (base: #F4EC6A, font: #FFFFFF),
+  g:  (base: #41B0DC, font: #FFFFFF),
+  h:  (base: #9C5073, font: #FFFFFF),
+  i:  (base: #A177FF, font: #FFFFFF),
+  j:  (base: #C66673, font: #FFFFFF),
+  k:  (base: #6A2C70, font: #FFFFFF),
+  l:  (base: #CDDC39, font: #FFFFFF),
+  m:  (base: #FC7279, font: #FFFFFF),
+  n:  (base: #C0B6D9, font: #FFFFFF),
+  o:  (base: #FF9800, font: #FFFFFF),
+  p:  (base: #7496B1, font: #FFFFFF),
+  q:  (base: #86D04C, font: #FFFFFF),
+  r:  (base: #E98B65, font: #FFFFFF),
+  s:  (base: #3D84A8, font: #FFFFFF),
+  t:  (base: #5EBEBA, font: #FFFFFF),
+  u:  (base: #AF4667, font: #FFFFFF),
+  v:  (base: #FFE26F, font: #FFFFFF),
+  w:  (base: #F38181, font: #FFFFFF),
+  x:  (base: #B6B2C5, font: #FFFFFF),
+  y:  (base: #1AAFD0, font: #FFFFFF),
+  z:  (base: #48466D, font: #FFFFFF)
+);
+
 $card-colors: (
   1:  (base: #A177FF, font: #FFFFFF),
   2:  (base: #CDDC39, font: #FFFFFF),

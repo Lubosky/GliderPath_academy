@@ -7,6 +7,7 @@
 #= require avatar-preview
 #= require checkout
 #= require dropdown
+#= require initials
 #= require refile
 #= require payment-method
 #= require purchase
