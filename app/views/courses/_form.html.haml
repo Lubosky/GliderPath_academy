@@ -9,4 +9,4 @@
       = render 'sections/form', f: ff
     #module_add
       = link_to_add_association 'Add module', f, :sections, partial: 'sections/form'
-  = f.button :submit
+  = f.button :button, class: 'button-large button-purple', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.saving')}" }

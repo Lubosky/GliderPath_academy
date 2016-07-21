@@ -10,3 +10,12 @@ $(document).on 'turbolinks:load', ->
         locale: 'en_us'
       dataCollector:
         paypal: true
+      onError: ->
+        $button = $('#purchase-form').find('.button')
+        enableButton = ->
+          if $button.attr('disabled')
+            $button.removeProp 'disabled'
+            $button.empty().text('Purchase')
+          else
+            setTimeout enableButton, 500
+        enableButton()

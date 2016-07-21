@@ -91,7 +91,6 @@ en:
       one: '%{completed} / %{count} lesson completed'
       other: '%{completed} / %{count} lessons completed'
     complete: 'Complete & Continue'
-    completing: 'Completing...'
     notes: 'Lesson Notes'
     attachments: 'Attachments'
   subscriptions:
@@ -139,6 +138,15 @@ en:
     payment_method:
       add: 'Add payment method'
       save: 'Save payment method'
+    disabled:
+      canceling: 'Canceling...'
+      completing: 'Completing...'
+      enrolling: 'Enrolling...'
+      processing: 'Processing...'
+      saving: 'Saving...'
+      sending: 'Sending...'
+      signing_in: 'Signing in...'
+      signing_up: 'Signing up...'
 
   link:
     account:

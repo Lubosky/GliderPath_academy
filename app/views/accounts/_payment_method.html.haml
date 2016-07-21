@@ -16,4 +16,4 @@
     .box-content.revealer{ data: { shelf_id: 'payment-method' } }
       #braintree-payment-method-form{ style: 'padding: 15px 0 5px' }
       = simple_form_for account_payment_method_path, url: [:account, :payment_method], html: { id: 'payment-method-form' } do |f|
-        = f.button :submit, t('button.payment_method.save'), class: 'button button-green button-small wide', data: { 'disable-with': 'Processing...'}
+        = f.button :button, t('button.payment_method.save'), class: 'button button-green button-small wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }

@@ -9,4 +9,4 @@
   %hr
   .row
     .form-item.twelve.columns.reset-mobile-column
-      = f.button :submit, t('button.account.create'), class: 'button-purple wide', data: { 'disable-with': 'Signing up...' }
+      = f.button :button, t('button.account.create'), class: 'button-purple wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.signing_up')}" }

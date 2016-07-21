@@ -18,7 +18,7 @@
       %ul.tabs
         %li.tab-button-small.pull-right
           = form_for current_user.enrolled_lessons.build( lesson_id: @lesson.id ), url: complete_course_lesson_path(@lesson.course.id, @lesson) do |f|
-            = f.button t('lessons.complete'), data: { disable_with: t('lessons.completing') }, class: 'button button-green button-small'
+            = f.button t('lessons.complete'), data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.completing')}" }, class: 'button button-green button-small'
         %li.tab-header
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.notes') }
           .tab-content

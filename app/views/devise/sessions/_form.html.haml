@@ -6,6 +6,6 @@
   %hr
   .row
     .form-item.twelve.columns.reset-mobile-column
-      = f.button :submit, t('button.account.sign_in'), class: 'button-purple wide', data: { 'disable-with': 'Signing in...' }
+      = f.button :button, t('button.account.sign_in'), class: 'button-purple wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.signing_in')}" }
   .row.content-center
     = f.input :remember_me, as: :boolean if devise_mapping.rememberable?

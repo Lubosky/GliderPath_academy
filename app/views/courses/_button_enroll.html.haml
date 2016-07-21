@@ -1,3 +1,3 @@
 - enrollment = current_user.enrollments.build( course_id: resource.id )
-= simple_form_for enrollment, url: course_enrollment_path(resource) do |f|
-  = f.submit t('button.course.enroll'), class: 'button button-purple'
+= form_for enrollment, url: course_enrollment_path(resource) do |f|
+  = f.button t('button.course.enroll'), class: 'button button-purple', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.enrolling')}" }

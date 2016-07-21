@@ -1,4 +1,4 @@
 .box
   .box-header
     %h3.inline-block Cancel Subscription
-    = link_to t('button.subscription.cancel'), cancel_subscription_path, class: 'button button-red button-small pull-right', method: :delete, data: { confirm: t('subscriptions.cancel.confirm') }
+    = link_to t('button.subscription.cancel'), cancel_subscription_path, class: 'button button-red button-small pull-right', method: :delete, data: { confirm: t('subscriptions.cancel.confirm'), disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.canceling')}" }

@@ -16,4 +16,4 @@
         = f.input :current_password, required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
       .row
         .form-button.twelve.columns.reset-mobile-column
-          = f.button :submit, t('button.account.update'), class: 'button-green pull-right', data: { 'disable-with': 'Saving...' }
+          = f.button :button, t('button.account.update'), class: 'button-green pull-right', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.saving')}" }
