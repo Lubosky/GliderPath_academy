@@ -3,7 +3,10 @@ require 'spec_helper'
 RSpec.describe UploadsController, type: :controller do
   include Downloadable
 
-  let(:user) { build_stubbed(:user) }
+  let(:user) { create(:user) }
+  let(:course) { create(:course) }
+  let(:section) { create(:section, course: course) }
+  let(:lesson) { create(:lesson, section: section, position: 1) }
 
   describe 'GET #download' do
 
@@ -11,7 +14,7 @@ RSpec.describe UploadsController, type: :controller do
       user.confirm
       login user
       RequestStore.store[:current_user] = user
-      @upload = create(:upload, user: user)
+      @upload = create(:upload, uploader: user, uploadable: lesson)
     end
 
     it {

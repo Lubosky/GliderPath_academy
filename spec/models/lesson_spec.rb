@@ -7,7 +7,6 @@ describe Lesson, type: :model do
 
       is_expected.to have_one :course
       is_expected.to have_many :enrolled_lessons
-      is_expected.to have_many :lesson_uploads
       is_expected.to have_many :uploads
       is_expected.to belong_to :section
     end
