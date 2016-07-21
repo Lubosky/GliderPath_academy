@@ -14,15 +14,15 @@ class User < ApplicationRecord
   validates_length_of :headline, maximum: 80
   validates_length_of :bio, maximum: 800
 
-  has_many :enrollments, inverse_of: :student, foreign_key: 'student_id'
+  has_many :enrollments, inverse_of: :student, foreign_key: :student_id
   has_many :courses_as_student, through: :enrollments, inverse_of: :students, class_name: 'Course'
   has_many :courses_as_instructor, inverse_of: :instructor, class_name: 'Course', foreign_key: :instructor_id
-  has_many :enrolled_lessons, inverse_of: :student, foreign_key: 'student_id'
+  has_many :enrolled_lessons, inverse_of: :student, foreign_key: :student_id
   has_many :lessons, through: :enrolled_lessons, inverse_of: :students
-  has_many :uploads, inverse_of: :user
+  has_many :uploads, foreign_key: :uploader_id
   has_many :charges, inverse_of: :user
 
-  has_one :subscription, inverse_of: :subscriber, foreign_key: 'subscriber_id'
+  has_one :subscription, inverse_of: :subscriber, foreign_key: :subscriber_id
   has_one :plan, through: :subscription, inverse_of: :subscribers
 
   has_many :purchases, inverse_of: :purchaser, foreign_key: :purchaser_id

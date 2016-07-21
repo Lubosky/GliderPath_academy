@@ -30,4 +30,4 @@
               %ul
                 - @lesson.uploads.each do |upload|
                   %li
-                    = link_to upload.file_filename, download_upload_path(upload)
+                    = link_to upload.file_filename, download_upload_path(upload), data: { turbolinks: false }

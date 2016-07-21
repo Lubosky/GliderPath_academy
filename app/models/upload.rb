@@ -1,16 +1,13 @@
 class Upload < ApplicationRecord
-  belongs_to :user, inverse_of: :uploads
+  belongs_to :uploadable, polymorphic: true
+  belongs_to :uploader, foreign_key: :uploader_id, class_name: 'User'
 
-  has_many :lesson_uploads, dependent: :destroy, inverse_of: :upload
-  has_many :lessons, through: :lesson_uploads, inverse_of: :uploads
-
-  before_validation :set_user_id
+  before_save :set_uploader_id
 
   attachment :file, extension: [ 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'pdf', 'zip', 'jpg', 'jpeg', 'png', 'gif' ]
 
   validates_presence_of :file
   validates :file_size, numericality: { less_than_or_equal_to: 5.megabytes }
-  validates :user_id, presence: true
 
   def basename
     File.basename(file_filename, extension)
@@ -22,8 +19,8 @@ class Upload < ApplicationRecord
 
   private
 
-    def set_user_id
-      self.user_id = User.current.id
+    def set_uploader_id
+      self.uploader_id = User.current.id
     end
 
 end

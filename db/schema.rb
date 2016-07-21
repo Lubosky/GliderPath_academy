@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709125836) do
+ActiveRecord::Schema.define(version: 20160721101928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,15 +57,6 @@ ActiveRecord::Schema.define(version: 20160709125836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id", "course_id"], name: "index_enrollments_on_student_id_and_course_id", using: :btree
-  end
-
-  create_table "lesson_uploads", force: :cascade do |t|
-    t.integer  "lesson_id"
-    t.integer  "upload_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_lesson_uploads_on_lesson_id", using: :btree
-    t.index ["upload_id"], name: "index_lesson_uploads_on_upload_id", using: :btree
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -131,10 +122,13 @@ ActiveRecord::Schema.define(version: 20160709125836) do
     t.string   "file_filename",     null: false
     t.integer  "file_size",         null: false
     t.string   "file_content_type", null: false
-    t.integer  "user_id",           null: false
+    t.integer  "uploader_id",       null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["user_id"], name: "index_uploads_on_user_id", using: :btree
+    t.string   "uploadable_type",   null: false
+    t.integer  "uploadable_id",     null: false
+    t.index ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree
+    t.index ["uploader_id"], name: "index_uploads_on_uploader_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -201,4 +195,5 @@ ActiveRecord::Schema.define(version: 20160709125836) do
   add_foreign_key "purchases", "users", column: "purchaser_id"
   add_foreign_key "sections", "courses"
   add_foreign_key "subscriptions", "users", column: "subscriber_id"
+  add_foreign_key "uploads", "users", column: "uploader_id"
 end

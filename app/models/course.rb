@@ -13,6 +13,7 @@ class Course < ActiveRecord::Base
   has_many :students, through: :enrollments, class_name: 'User', foreign_key: :student_id
   has_many :sections, -> { order(position: :asc) }, autosave: true, dependent: :destroy, inverse_of: :course
   has_many :lessons, -> { order(position: :asc) }, through: :sections
+  has_many :uploads, through: :lessons
 
   accepts_nested_attributes_for :sections, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
