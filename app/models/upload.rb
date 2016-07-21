@@ -14,7 +14,7 @@ class Upload < ApplicationRecord
   end
 
   def extension
-    File.extname(file_filename)
+    File.extname(file_filename).delete('.')
   end
 
   private
