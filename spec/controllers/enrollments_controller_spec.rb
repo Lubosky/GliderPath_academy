@@ -28,7 +28,7 @@ RSpec.describe EnrollmentsController, type: :controller do
       it 'creates the enrollment' do
         login u2
         expect {
-          post :create, params: { course_id: @course.id, student_id: u2.id }
+          post :create, params: { course_id: @course, student_id: u2.id }
         }.to change(Enrollment, :count).by(1)
         expect(response).to redirect_to course_lesson_path(@course, @lesson)
       end
@@ -37,10 +37,10 @@ RSpec.describe EnrollmentsController, type: :controller do
     context 'when user already enrolled' do
       it 'displays warning about user already enrolled' do
         login u3
-        post :create, params: { course_id: @course.id, student_id: u3.id }
+        post :create, params: { course_id: @course, student_id: u3.id }
         @course.reload
         expect {
-          post :create, params: { course_id: @course.id, student_id: u3.id }
+          post :create, params: { course_id: @course, student_id: u3.id }
         }.to change(Enrollment, :count).by(0)
         expect(flash[:warning]).to match t('flash.enrollments.alert')
       end
@@ -50,7 +50,7 @@ RSpec.describe EnrollmentsController, type: :controller do
       it 'does not allow the enrollment' do
         login u4
         expect {
-          post :create, params: { course_id: @course.id, student_id: u4.id }
+          post :create, params: { course_id: @course, student_id: u4.id }
         }.to change(Enrollment, :count).by(0)
       end
     end

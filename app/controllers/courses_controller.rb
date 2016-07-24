@@ -54,7 +54,7 @@ class CoursesController < ApplicationController
   private
 
     def set_course
-      @course = Course.find(params[:id])
+      @course = Course.find_by_slug(params[:id])
       authorize @course
     end
 

@@ -36,7 +36,7 @@ class PurchasesController < ApplicationController
 
     def set_purchase
       klass = [Course].detect { |p| params["#{ p.name.underscore }_id"] }
-      @purchasable = klass.find_by(id: params["#{ klass.name.underscore }_id"])
+      @purchasable = klass.find_by_slug(params["#{ klass.name.underscore }_id"])
     end
 
     def check_if_purchased

@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def purchased?(resource)
-    self.purchases.where(purchasable_id: resource.id, purchasable_type: resource.class.to_s).present?
+    self.purchases.where(purchasable: resource).present?
   end
 
   def has_active_subscription?

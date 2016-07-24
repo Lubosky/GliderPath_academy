@@ -1,6 +1,6 @@
 class EnrollmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_course
+  before_action :set_course
   before_action :check_if_eligible_to_enroll
   before_action :check_if_student_enrolled
 
@@ -19,8 +19,8 @@ class EnrollmentsController < ApplicationController
 
   private
 
-    def find_course
-      @course = Course.find(params[:course_id])
+    def set_course
+      @course = Course.find_by_slug(params[:course_id])
     end
 
     def check_if_eligible_to_enroll

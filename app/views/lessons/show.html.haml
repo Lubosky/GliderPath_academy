@@ -12,12 +12,12 @@
           %span.lesson-duration
             = duration_for(@lesson.video.video_duration)
         .lesson-meta
-          by #{ @lesson.course.instructor.first_name } #{ @lesson.course.instructor.last_name } &#8226; #{ link_to @lesson.course.name, course_path(@lesson.course) }
+          by #{ @course.instructor.name } &#8226; #{ link_to @course.name, course_path(@course) }
       %p.lesson-objective
         = @lesson.notes
       %ul.tabs
         %li.tab-button-small.pull-right
-          = form_for current_user.enrolled_lessons.build( lesson_id: @lesson.id ), url: complete_course_lesson_path(@lesson.course.id, @lesson) do |f|
+          = form_for current_user.enrolled_lessons.build( lesson_id: @lesson.id ), url: complete_course_lesson_path(@course, @lesson) do |f|
             = f.button t('lessons.complete'), data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.completing')}" }, class: 'button button-green button-small'
         %li.tab-header
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.notes') }

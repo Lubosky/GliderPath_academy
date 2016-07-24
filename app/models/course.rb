@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   include Concerns::Purchasable
+  include Concerns::Sluggable
   include Concerns::Videoable
 
   belongs_to :instructor, inverse_of: :courses_as_instructor, class_name: 'User'
@@ -39,6 +40,10 @@ class Course < ActiveRecord::Base
   end
 
   private
+
+    def slug_source
+      self.name
+    end
 
     def self.enrolled_courses_for(student)
       self.joins(:enrollments).where(enrollments: { student: student })

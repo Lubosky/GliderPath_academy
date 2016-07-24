@@ -13,14 +13,14 @@ RSpec.describe PurchasesController, type: :controller do
       end
 
       it {
-        get :new, params: { course_id: course.id }
+        get :new, params: { course_id: course }
         expect(response).to render_template :new
       }
     end
 
     context 'when user is not logged in' do
       it {
-        get :new, params: { course_id: course.id }
+        get :new, params: { course_id: course }
         expect(response).to redirect_to new_user_registration_path
       }
     end
@@ -32,8 +32,8 @@ RSpec.describe PurchasesController, type: :controller do
       end
 
       it {
-        post :create, params: { course_id: course.id, purchaser_id: user.id }
-        get :new, params: { course_id: course.id }
+        post :create, params: { course_id: course, purchaser_id: user.id }
+        get :new, params: { course_id: course }
         expect(response).to redirect_to root_path
         expect(flash[:warning]).to match t('flash.purchases.alert', purchase: course.name)
       }
@@ -48,7 +48,7 @@ RSpec.describe PurchasesController, type: :controller do
 
     it {
       expect {
-        post :create, params: { course_id: course.id, purchaser_id: user.id }
+        post :create, params: { course_id: course, purchaser_id: user.id }
       }.to change(Purchase, :count).by(1)
       expect(response).to redirect_to course_path(course)
     }
