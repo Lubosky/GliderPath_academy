@@ -9,10 +9,6 @@ class Upload < ApplicationRecord
   validates_presence_of :file
   validates :file_size, numericality: { less_than_or_equal_to: 5.megabytes }
 
-  def basename
-    File.basename(file_filename, extension)
-  end
-
   def extension
     File.extname(file_filename).delete('.')
   end

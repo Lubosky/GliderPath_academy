@@ -23,7 +23,7 @@ RSpec.describe UploadsController, type: :controller do
       get :download, params: { id: @upload.id.to_s }
       expect(response.status).to eq(200)
       expect(response.header['Content-Type']).to match('image/jpg')
-      expect(@upload.basename).to eq('yoda')
+      expect(@upload.extension).to eq('jpg')
     }
   end
 
