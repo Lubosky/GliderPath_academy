@@ -1,4 +1,5 @@
 class Lesson < ApplicationRecord
+  include Concerns::Sluggable
   include Concerns::Uploadable
   include Concerns::Videoable
 
@@ -15,6 +16,7 @@ class Lesson < ApplicationRecord
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
   accepts_attachments_for :uploads, append: true
 
+  before_save :generate_slug, on: :create
   after_save :set_position, on: :create
 
   scope :completed, -> { joins(:enrolled_lessons).where('enrolled_lessons.status = ? AND student_id = ?', 'completed', User.current.id) }
@@ -38,6 +40,10 @@ class Lesson < ApplicationRecord
   end
 
   protected
+
+    def slug_source
+      self.title
+    end
 
     def set_position
       i = 0

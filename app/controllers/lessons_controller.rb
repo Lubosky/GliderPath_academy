@@ -23,7 +23,7 @@ class LessonsController < ApplicationController
 
     def set_lesson
       @course = Course.find_by_slug(params[:course_id])
-      @lesson = @course.lessons.find(params[:id])
+      @lesson = @course.lessons.find_by_slug(params[:id])
       authorize @lesson
     end
 
