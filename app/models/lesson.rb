@@ -46,9 +46,10 @@ class Lesson < ApplicationRecord
     end
 
     def set_position
-      i = 0
-      if self.position.to_i.zero?
-        self.course.lessons.each_with_index { |n, i| n.update_attribute( :position, i + 1 ) }
+      lesson_ids = self.course.lesson_ids.reject(&:blank?).map(&:to_i)
+
+      lesson_ids.each_with_index do |lesson_id, index|
+        Lesson.where(id: lesson_id).update_all(position: index + 1)
       end
     end
 

@@ -18,9 +18,10 @@ class Section < ApplicationRecord
   protected
 
     def set_position
-      i = 0
       if self.position.to_i.zero?
-        self.course.sections.each_with_index { |n, i| n.update_attribute( :position, i + 1 ) }
+        self.course.sections.each_with_index do |section, index|
+          section.update_attribute(:position, index + 1)
+        end
       end
     end
 
