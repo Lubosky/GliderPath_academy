@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :progress, :sort_lessons]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :progress, :sort]
   before_action :set_sections, only: [:show, :progress]
 
   def index
@@ -51,10 +51,19 @@ class CoursesController < ApplicationController
     authorize @course
   end
 
-  def sort_lessons
+  def sort
     authorize @course
-    params[:order].each do |key, value|
-      Lesson.find(value[:id]).update(section_id: value[:section_id], position: value[:position])
+    if params[:sort_sections]
+      params[:sort_sections].each do |key, value|
+        Section.find(value[:section_id]).update_attribute(:position, value[:position])
+      end
+      params[:sort_lessons].each do |key, value|
+        Lesson.find(value[:lesson_id]).update_attribute(:position, value[:position])
+      end
+    elsif params[:lesson_order]
+      params[:lesson_order].each do |key, value|
+        Lesson.find(value[:id]).update(section_id: value[:section_id], position: value[:position])
+      end
     end
     head :ok
   end

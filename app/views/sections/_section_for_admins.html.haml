@@ -1,11 +1,11 @@
 .draggable-list
   .icon-draggable
     = icon_tag :drag, class: 'draggable'
-  %ul.step-list.compact{ data: { layout_element: 'section', section_id: section.id } }
+  %ul.step-list.compact{ data: { element: 'section', section_id: section.id } }
     %li.step-list-header
       %h3= section.title
     - section.lessons.each do |lesson|
-      %li.list-item{ data: { layout_element: 'lesson', lesson_id: lesson.id } }
+      %li.list-item{ data: { element: 'lesson', lesson_id: lesson.id } }
         .topic-wrapper
           .icon-holder
             = icon_tag :drag, class: 'draggable'

@@ -35,6 +35,6 @@
         %li.tab-header
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
             = t('courses.admin')
-          .tab-content{ id: 'sortable', data: { url: "#{sort_lessons_course_path(@course)}" } }
+          .tab-content{ id: 'sortable', data: { url: "#{sortable_course_path(@course)}" } }
             - @sections.each do |section|
               = render 'sections/section_for_admins', section: section
