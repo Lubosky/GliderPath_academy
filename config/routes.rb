@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   # COURSES
   resources :courses do
+    put :sort_lessons, on: :member
     resource :enrollment, only: [:create], path: 'enroll'
     resources :lessons, only: [:show] do
       post :complete, on: :member

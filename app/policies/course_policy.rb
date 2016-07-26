@@ -24,6 +24,10 @@ class CoursePolicy < ApplicationPolicy
     user.present? && user.enrolled?(course)
   end
 
+  def sort_lessons?
+    update?
+  end
+
   private
 
     def course

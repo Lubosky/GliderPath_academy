@@ -7,12 +7,14 @@
 #= require avatar-preview
 #= require checkout
 #= require dropdown
+#= require html.sortable
 #= require initials
 #= require refile
 #= require payment-method
 #= require purchase
 #= require revealer
 #= require scroller
+#= require sortable
 #= require subscription
 #= require tabs
 

@@ -22,10 +22,19 @@
           = link_to t('button.subscription.new'), new_subscription_path(plan: 1), class: 'button button-brand'
           = render 'button_purchase', resource: @course
       %li.tab-header
-        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('@course.description') }
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
+          = t('courses.description')
         .tab-content
           = @course.description
       %li.tab-header
-        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('@course.curriculum') }
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
+          = t('courses.curriculum')
         .tab-content
           = render @sections
+      - if policy(@course).update?
+        %li.tab-header
+          %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
+            = t('courses.admin')
+          .tab-content{ id: 'sortable', data: { url: "#{sort_lessons_course_path(@course)}" } }
+            - @sections.each do |section|
+              = render 'sections/section_for_admins', section: section
