@@ -54,11 +54,11 @@ class Lesson < ApplicationRecord
     end
 
     def self.lessons_completed_for(student)
-      self.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' }).pluck(:id)
+      self.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' })
     end
 
     def self.lessons_remaining_for(student)
-      self.where.not(id: self.lessons_completed_for(student)).pluck(:id)
+      self.where.not(id: self.lessons_completed_for(student))
     end
 
 end
