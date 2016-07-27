@@ -16,6 +16,7 @@ class PurchasesController < ApplicationController
     current_user.create_purchase(@purchasable)
     if true
       flash[:success] = t('flash.purchases.create.success', user: current_user.first_name, purchase: @purchasable.name)
+      analytics.track_product_purchased(analytics_metadata_for_purchasable)
       redirect_to @purchasable
     else
       flash[:alert] = t('flash.purchases.create.error')
@@ -48,6 +49,14 @@ class PurchasesController < ApplicationController
 
     def generate_braintree_client_token
       current_user.init_braintree_client_token
+    end
+
+    def analytics_metadata_for_purchasable
+      {
+        type: @purchasable.class.to_s,
+        product: @purchasable.name,
+        price: @purchasable.price
+      }
     end
 
 end

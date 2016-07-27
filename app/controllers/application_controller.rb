@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def analytics
+      Analytics.new(current_user)
+    end
+
     def after_sign_out_path_for(resource_or_scope)
       new_user_session_path
     end

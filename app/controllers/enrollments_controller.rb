@@ -10,6 +10,7 @@ class EnrollmentsController < ApplicationController
 
     if @enrollment.save && @enrollment.activate
       flash[:success] = t('flash.enrollments.success', course: @course.name)
+      analytics.track_course_enrolled(analytics_metadata_for_enrollment)
       redirect_to course_lesson_path(@course, @course.lessons.first)
     else
       flash[:danger] = t('flash.enrollments.error')
@@ -35,6 +36,12 @@ class EnrollmentsController < ApplicationController
         flash[:warning] = t('flash.enrollments.alert')
         redirect_back(fallback_location: root_path)
       end
+    end
+
+    def analytics_metadata_for_enrollment
+      {
+        course: @course.name,
+      }
     end
 
 end
