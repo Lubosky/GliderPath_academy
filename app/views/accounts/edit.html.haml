@@ -1,3 +1,5 @@
+- content_for :page_title, title(user_name: current_user.name)
+
 .row
   = render 'sidebar'
   .nine.columns.reset-mobile-column

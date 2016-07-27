@@ -1,10 +1,24 @@
 en:
   titles:
     application: 'GliderPath Academy'
+    accounts:
+      edit: "Edit Account | %{user_name}"
+      show: "%{user_name}"
+    charges:
+      index: "Billing | %{user_name}"
     courses:
       accessible: 'My Courses'
       enrolled: 'Enrolled Courses'
+      new: 'New Course'
       index: 'Courses'
+    dashboards:
+      show: 'Dashboard'
+    devise:
+      registrations:
+        edit: "Edit Account | %{user_name}"
+        new: 'Sign Up for GliderPath Academy'
+      sessions:
+        new: 'Sign In to GliderPath Academy'
     pages:
       contact:
         title: 'Contact Us'
@@ -21,6 +35,14 @@ en:
       terms:
         title: 'Terms of Service'
         subtitle: "Last updated on: %{date}"
+    purchases:
+      new: "Purchase %{product}"
+    subscriptions:
+      new: 'Subscribe'
+
+  meta:
+    title: 'GliderPath Academy - A Perfect Space to Share & Gain Knowledge'
+    description: 'GliderPath Academy is an e-learning platform for entrepreneurs, solopreneurs and freelancers. A perfect space to share and gain knowledge and benefit from community discussion!'
   flash:
     account:
       not_authorized: 'You are not authorized to view this account!'

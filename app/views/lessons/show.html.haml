@@ -1,3 +1,6 @@
+- content_for :page_title, @lesson.title
+- content_for :page_description, @course.short_description
+
 .box
   - if @lesson.video
     .box-header.video-container

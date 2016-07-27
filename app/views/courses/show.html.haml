@@ -1,3 +1,6 @@
+- content_for :page_title, @course.name
+- content_for :page_description, @course.short_description
+
 .course-header
   %h1
     = @course.name
