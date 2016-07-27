@@ -145,6 +145,17 @@
   width: $width
   height: $height
 
+// TEXT OVERFLOW
+=text-overflow($lineHeight, $lineCount)
+  -webkit-line-clamp: $lineCount
+  -webkit-box-orient: vertical
+  display: block
+  display: -webkit-box
+  height: $lineHeight * $lineCount
+  line-height: $lineHeight
+  overflow: hidden
+  text-overflow: ellipsis
+
 // TEXT SHADOW
 =text-shadow($args...)
   -webkit-text-shadow: $args

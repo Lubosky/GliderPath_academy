@@ -163,6 +163,9 @@ ul.card-list
             overflow: hidden
             position: relative
 
+            &.ellipsis
+              +text-overflow($line-height-base, 4)
+
         .card-footer
           +border-radius(0 0 $border-radius $border-radius)
           +box-shadow(inset 0 -2px 0 rgba($black, 0.09))

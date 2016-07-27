@@ -8,7 +8,7 @@
           = progress_for(course, current_user)
         = link_to progress_course_path(course), class: 'card-content' do
           %h4= course.name
-          %p= course.short_description
+          %p.ellipsis= course.short_description
         .card-footer
           - if course.progress(current_user) != 100
             = link_to t('button.course.continue'), course_lesson_path(course, course.first_remaining_lesson_for(current_user)), class: 'button button-small'
@@ -25,7 +25,7 @@
           = progress_for(course, current_user)
         = link_to course_path(course), class: 'card-content' do
           %h4= course.name
-          %p= course.short_description
+          %p.ellipsis= course.short_description
         .card-footer
           = render 'courses/button_enroll', resource: course
 
