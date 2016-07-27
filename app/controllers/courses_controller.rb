@@ -80,7 +80,16 @@ class CoursesController < ApplicationController
     end
 
     def course_params
-      params.require(:course).permit(:name, :description, :price, video_attributes: [ :id, :video_url ], sections_attributes: [ :id, :title, :objective, :_destroy, lessons_attributes: [ :id, :title, :notes, :_destroy, video_attributes: [ :id, :video_url ], uploads_attributes: [ :id, :_destroy ], uploads_files: [ ] ] ])
+      params.require(:course).permit(:name, :short_description, :description, :price,
+        video_attributes: [ :id, :video_url ],
+        sections_attributes: [ :id, :title, :objective, :_destroy,
+          lessons_attributes: [ :id, :title, :notes, :_destroy,
+            video_attributes: [ :id, :video_url ],
+            uploads_attributes: [ :id, :_destroy ],
+            uploads_files: [ ]
+          ]
+        ]
+      )
     end
 
 end

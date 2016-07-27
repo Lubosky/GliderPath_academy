@@ -8,6 +8,7 @@
   .box-header.video-container
     = embed_video(@course.video)
   .box-content
+    %p= @course.short_description
     %ul.tabs
       %li.tab-button.pull-right
         -if user_signed_in?

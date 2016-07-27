@@ -4,6 +4,7 @@ describe Course, type: :model do
   describe 'validations' do
     it 'validates and associates with' do
       is_expected.to validate_presence_of(:name)
+      is_expected.to validate_presence_of(:short_description)
       is_expected.to validate_presence_of(:description)
       is_expected.to validate_presence_of(:instructor_id)
       is_expected.to validate_presence_of(:price)

@@ -1,5 +1,6 @@
 = simple_form_for @course do |f|
   = f.input :name
+  = f.input :short_description, as: :text, input_html: { style: 'min-height: 65px;' }, hint: t('simple_form.hints.courses.short_description')
   = f.input :description
   = f.input :price
   = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|

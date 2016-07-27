@@ -6,6 +6,7 @@ class Course < ActiveRecord::Base
   belongs_to :instructor, inverse_of: :courses_as_instructor, class_name: 'User'
 
   validates :name, presence: true
+  validates :short_description, presence: true
   validates :description, presence: true
   validates :instructor_id, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9999.99 }

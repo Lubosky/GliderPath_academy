@@ -67,6 +67,7 @@ when 'development'
   create_for 'courses', [
     9.times.map do
       { name: Faker::Book.title,
+        short_description: Faker::Lorem.paragraph(2),
         description: Faker::ChuckNorris.fact,
         price: Faker::Commerce.price,
         instructor_id: User.with_role('instructor').map { |instructor| instructor.id }.sample,
