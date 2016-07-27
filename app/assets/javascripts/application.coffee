@@ -17,6 +17,10 @@
 #= require sortable
 #= require subscription
 #= require tabs
+#= require fastclick
+
+$ ->
+  FastClick.attach document.body
 
 $(document).on 'turbolinks:load', ->
   $html = $('html')
