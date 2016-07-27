@@ -33,7 +33,7 @@ RSpec.describe CoursePolicy do
     @c2 = build_stubbed(:course, instructor: admin)
   end
 
-  permissions :update?, :edit? do
+  permissions :update?, :edit?, :sort? do
 
     it 'denies access if user is a student' do
       expect(subject).not_to permit(student, Course)

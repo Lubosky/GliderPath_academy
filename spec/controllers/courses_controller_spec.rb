@@ -125,4 +125,14 @@ RSpec.describe CoursesController, type: :controller do
     }
   end
 
+  describe 'PUT #sort' do
+    before do
+      course = create(:course)
+      put :sort, params: { id: course }
+    end
+    it {
+      is_expected.to respond_with :ok
+    }
+  end
+
 end
