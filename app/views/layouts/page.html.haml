@@ -15,3 +15,4 @@
       = render 'header'
       = yield
     = render 'footer'
+    = render 'google_analytics' if Rails.env.production?
