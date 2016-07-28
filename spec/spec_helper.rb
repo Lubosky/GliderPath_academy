@@ -24,6 +24,7 @@ DEFAULT_HOST = 'lvh.me'
 DEFAULT_PORT = 9887 + ENV['TEST_ENV_NUMBER'].to_i
 
 RSpec.configure do |config|
+  config.before(:each) { Analytics.backend = FakeIntercom.new }
 
   config.fixture_path = '#{::Rails.root}/spec/fixtures'
 
@@ -87,6 +88,7 @@ RSpec.configure do |config|
     @get_file ||= File.open Rails.root.join('spec', 'support', 'images', filename)
   end
 
+  config.include AnalyticsHelper
   config.include AbstractController::Translation
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
