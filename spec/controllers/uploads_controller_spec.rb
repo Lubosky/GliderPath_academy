@@ -14,7 +14,7 @@ RSpec.describe UploadsController, type: :controller do
       user.confirm
       login user
       RequestStore.store[:current_user] = user
-      @upload = create(:upload, uploader: user, uploadable: lesson)
+      @upload = create(:upload, :refile, uploader: user, uploadable: lesson)
     end
 
     it {
