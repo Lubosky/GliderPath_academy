@@ -35,6 +35,12 @@ class Analytics
     )
   end
 
+  def track_course_completed(course:)
+    track('Completed course',
+      course: course
+    )
+  end
+
   def track_downloaded(file:, type:, source:)
     track('Downloaded file',
       file: file,

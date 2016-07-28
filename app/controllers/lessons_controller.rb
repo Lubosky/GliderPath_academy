@@ -15,6 +15,7 @@ class LessonsController < ApplicationController
     @next_lesson = @lesson.next_lesson
     if @next_lesson == nil
       flash[:success] = t('flash.courses.complete', course: @course.name)
+      analytics.track_course_completed(analytics_metadata_for_course)
       redirect_back(fallback_location: course_lesson_path(@course, @lesson))
     else
       redirect_to course_lesson_path(@course, @next_lesson)
@@ -27,6 +28,12 @@ class LessonsController < ApplicationController
       @course = Course.find_by_slug(params[:course_id])
       @lesson = @course.lessons.find_by_slug(params[:id])
       authorize @lesson
+    end
+
+    def analytics_metadata_for_course
+      {
+        course: @course.name
+      }
     end
 
     def analytics_metadata_for_lesson

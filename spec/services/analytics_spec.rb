@@ -79,6 +79,22 @@ describe Analytics do
     end
   end
 
+  describe '#track_course_completed' do
+    it 'tracks course completion event' do
+      course = build_stubbed(:course)
+
+      analytics_instance.track_course_completed(
+        course: course.name
+      )
+
+      expect(analytics).to have_tracked('Completed course').
+        for_user(user).
+        with_metadata(
+          course: course.name
+        )
+    end
+  end
+
   describe '#track_downloaded' do
     it 'tracks file download event' do
       attachment = build_stubbed(:upload, :attachment)
