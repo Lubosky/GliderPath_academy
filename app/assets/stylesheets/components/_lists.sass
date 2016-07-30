@@ -197,7 +197,6 @@ ul.step-list
       +transition(background-color 200ms ease)
       border-bottom: 1px solid lighten($border-color, 5%)
       display: block
-      overflow: hidden
       position: relative
 
       h5
@@ -222,40 +221,19 @@ ul.step-list
         top: 0
 
         .icon
+          +size(28px)
           +transition(color 200ms ease)
           display: block
-          margin: -10px auto
+          margin: -15px auto
           overflow: visible
           top: 50%
 
-          &:before
-            +border-radius(50%)
-            +size(30px)
-            +transition(border 200ms ease)
-            background-color: $white
-            content: ''
-            display: inline-block
-            left: 50%
-            margin: -15px
-            position: absolute
-            top: 50%
-
         .completed
-          +size(20px)
-          color: $white
-
-          &:before
-            background-color: map-deep-get($component-colors, green, base) !important
+          color: map-deep-get($component-colors, green, base)
 
         .locked,
         .unlocked
           color: darken($default, 9%)
-
-          &:before
-            border: 2px solid darken($default, 9%)
-
-        .locked
-          +size(16px)
 
       &:hover,
       &:focus
@@ -267,9 +245,6 @@ ul.step-list
         .icon-holder
           .icon:not(.completed)
             color: $brand
-
-            &:before
-              border-color: $brand
 
       .step-duration
         color: darken($light-shade, 18%)
@@ -357,45 +332,20 @@ ul.step-list
       +transition(color 200ms ease)
       color: darken($default, 9%)
       display: block
+      margin: 0 auto !important
       overflow: visible
       top: 50%
-
-      &:before
-        +border-radius(50%)
-        +size(30px)
-        +transition(border 200ms ease)
-        background-color: $white
-        content: ''
-        display: inline-block
-        left: 50%
-        margin: -15px
-        position: absolute
-        top: 50%
 
     &:focus,
     &:hover
       .icon
         color: $brand
 
-        &:before
-          border-color: $brand
-
   .draggable
+    +size(18px !important)
     color: darken($default, 9%)
     cursor: pointer
-
-    &:before
-      +border-radius(50%)
-      +size(30px)
-      +transition(border 200ms ease)
-      background-color: $white
-      border: 2px solid transparent
-      content: ''
-      display: inline-block
-      left: 50%
-      margin: -15px
-      position: absolute
-      top: 50%
+    margin: -10px auto !important
 
 .draggable-placeholder
   +border-radius($border-radius)
