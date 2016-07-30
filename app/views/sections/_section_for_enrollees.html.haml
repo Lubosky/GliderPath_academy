@@ -8,9 +8,9 @@
         = link_to course_lesson_path(@course, lesson), class: 'topic-wrapper' do
           .icon-holder
             - if @course.lesson_completed_for(current_user, lesson)
-              = icon_tag 'check', class: 'completed'
+              = icon_tag 'check-circle-full', class: 'completed', data: { tooltip: t('tooltip.completed', element: 'Lesson'), tooltip_position: 'top center' }
             - else
-              = icon_tag 'unlock', class: 'unlocked'
+              = icon_tag 'unlock-circle', class: 'unlocked', data: { tooltip: t('tooltip.unlocked', element: 'lesson'), tooltip_position: 'top center' }
           - if lesson.video.present?
             %span.step-duration
               = duration_for(lesson.video.video_duration)

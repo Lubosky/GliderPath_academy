@@ -1,0 +1,210 @@
+[data-tooltip]
+  &:before,
+  &:after
+    +opacity(0)
+    visibility: hidden
+    z-index: 999
+
+  &:before
+    +size(10px)
+    +transition(opacity .2s ease-in-out)
+    background: $tooltip-background
+    content: ''
+    position: absolute
+
+  &:after
+    +border-radius($border-radius)
+    +pad(.5rem 1rem)
+    +size(180px, auto)
+    +transition(all .2s ease)
+    background: $tooltip-background
+    color: $white
+    content: attr(data-tooltip)
+    cursor: pointer
+    position: absolute
+    text-align: center
+
+  &:hover:before,
+  &:hover:after
+    +opacity(1)
+    visibility: visible
+
+[data-tooltip-position='top right']
+  &:before
+    +border-radius(0 0 3px 0)
+    +transform(translate(-50%, -15px) rotate(45deg))
+    right: 5px
+    top: 0
+
+  &:after
+    +transform(translate(0, 0))
+    bottom: 100%
+    right: 0
+
+  &:hover:after
+    +transform(translate(0, -10px))
+
+[data-tooltip-position='top center']
+  &:before
+    +border-radius(0 0 3px 0)
+    +transform(translate(-50%, -15px) rotate(45deg))
+    left: 50%
+    top: 0
+
+  &:after
+    +transform(translate(-50%, 0))
+    bottom: 100%
+    left: 50%
+
+  &:hover:after
+    +transform(translate(-50%, -10px))
+
+[data-tooltip-position='top left']
+  &:before
+    +border-radius(0 0 3px 0)
+    +transform(translate(50%, -15px) rotate(45deg))
+    left: 5px
+    top: 0
+
+  &:after
+    +transform(translate(0, 0))
+    bottom: 100%
+    left: 0
+
+  &:hover:after
+    +transform(translate(0, -10px))
+
+[data-tooltip-position='bottom right']
+  &:before
+    +border-radius(3px 0 0 0)
+    +transform(translate(-50%, 15px) rotate(45deg))
+    right: 5px
+    bottom: 0
+
+  &:after
+    +transform(translate(0, 0))
+    right: 0
+    top: 100%
+
+  &:hover:after
+    +transform(translate(0, 10px))
+
+[data-tooltip-position='bottom center']
+  &:before
+    +border-radius(3px 0 0 0)
+    +transform(translate(-50%, 15px) rotate(45deg))
+    left: 50%
+    bottom: 0
+
+  &:after
+    +transform(translate(-50%, 0))
+    left: 50%
+    top: 100%
+
+  &:hover:after
+    +transform(translate(-50%, 10px))
+
+[data-tooltip-position='bottom left']
+  &:before
+    +border-radius(3px 0 0 0)
+    +transform(translate(50%, 15px) rotate(45deg))
+    left: 5px
+    bottom: 0
+
+  &:after
+    +transform(translate(0, 0))
+    left: 0
+    top: 100%
+
+  &:hover:after
+    +transform(translate(0, 10px))
+
+[data-tooltip-position='right top']
+  &:before
+    +border-radius(0 0 0 3px)
+    +transform(translate(15px, -50%) rotate(45deg))
+    right: 0
+    top: 0
+
+  &:after
+    +transform(translate(0, 50%))
+    left: 100%
+    bottom: 0
+
+  &:hover:after
+    +transform(translate(10px, 50%))
+
+[data-tooltip-position='right middle']
+  &:before
+    +border-radius(0 0 0 3px)
+    +transform(translate(15px, -50%) rotate(45deg))
+    right: 0
+    top: 50%
+
+  &:after
+    +transform(translate(0, -50%))
+    left: 100%
+    top: 50%
+
+  &:hover:after
+    +transform(translate(10px, -50%))
+
+[data-tooltip-position='right bottom']
+  &:before
+    +border-radius(0 0 0 3px)
+    +transform(translate(15px, 50%) rotate(45deg))
+    right: 0
+    bottom: 0
+
+  &:after
+    +transform(translate(0, -50%))
+    left: 100%
+    top: 0
+
+  &:hover:after
+    +transform(translate(10px, -50%))
+
+[data-tooltip-position='left top']
+  &:before
+    +border-radius(0 3px 0 0)
+    +transform(translate(-15px, -50%) rotate(45deg))
+    left: 0
+    top: 0
+
+  &:after
+    +transform(translate(0, 50%))
+    right: 100%
+    bottom: 0
+
+  &:hover:after
+    +transform(translate(-10px, 50%))
+
+[data-tooltip-position='left middle']
+  &:before
+    +border-radius(0 3px 0 0)
+    +transform(translate(-15px, -50%) rotate(45deg))
+    left: 0
+    top: 50%
+
+  &:after
+    +transform(translate(0, -50%))
+    right: 100%
+    top: 50%
+
+  &:hover:after
+    +transform(translate(-10px, -50%))
+
+[data-tooltip-position='left bottom']
+  &:before
+    +border-radius(0 3px 0 0)
+    +transform(translate(-15px, 50%) rotate(45deg))
+    left: 0
+    bottom: 0
+
+  &:after
+    +transform(translate(0, -50%))
+    right: 100%
+    top: 0
+
+  &:hover:after
+    +transform(translate(-10px, -50%))
