@@ -34,6 +34,14 @@ en:
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
+      password_request:
+        button: 'Send Reset Instructions'
+        instructions: "Provide your email address and we'll send instructions in an email to set a new password."
+        title: 'Forgot your password?'
+      password_reset:
+        button: 'Change Password'
+        instructions: 'Provide a new password for your GliderPath Academy account.'
+        title: 'Change your password'
     registrations:
       destroyed: "Bye! Your account has been successfully canceled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."

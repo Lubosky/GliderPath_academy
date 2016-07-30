@@ -1,14 +1,20 @@
 .row
-  .six.columns.centered
-    %h2.content-center Change your password
-    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-      = f.error_notification
-      = f.input :reset_password_token, as: :hidden
-      = f.full_error :reset_password_token
-      .row
-        = f.input :password, label: 'New password', required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), wrapper_html: { class: 'twelve columns reset-mobile-column' }
-        = f.input :password_confirmation, label: 'Confirm your new password', required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
-      .row
-        .form-item.twelve.columns.reset-mobile-column
-          = f.button :submit, 'Change Password', class: 'button-green wide', data: { 'disable-with': 'Processing...' }
-    = render 'devise/shared/links'
+  .six.columns.centered.reset-mobile-column
+    .box
+      .box-header
+        %h3.content-center
+          = t('devise.passwords.password_reset.title')
+      .box-content
+        %p.margin-top-0
+          = t('devise.passwords.password_reset.instructions')
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+          = f.error_notification
+          = f.input :reset_password_token, as: :hidden
+          = f.full_error :reset_password_token
+          .row
+            = f.input :password, label: 'New password', required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), wrapper_html: { class: 'twelve columns reset-mobile-column' }
+            = f.input :password_confirmation, label: 'Confirm your new password', required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+          .row
+            .form-item.twelve.columns.reset-mobile-column
+              = f.button :button, = t('devise.passwords.password_reset.button'), class: 'button-green wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }
+        = render 'devise/shared/links'

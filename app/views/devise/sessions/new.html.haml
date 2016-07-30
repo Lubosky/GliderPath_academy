@@ -1,8 +1,10 @@
 - content_for :page_title, t('titles.devise.sessions.new')
 
 .row
-  .six.columns.centered
-    %h2.content-center Sign into your account
-    = render 'form'
-    .note
-      = render 'devise/shared/links'
+  .six.columns.centered.reset-mobile-column
+    .box
+      .box-header
+        %h3.content-center Sign into your account
+      .box-content
+        = render 'form'
+        = render 'devise/shared/links'

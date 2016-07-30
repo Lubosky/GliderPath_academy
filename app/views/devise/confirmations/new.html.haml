@@ -1,12 +1,15 @@
 .row
-  .six.columns.centered
-    %h2.content-center Resend confirmation instructions
-    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-      = f.error_notification
-      = f.full_error :confirmation_token
-      .row
-        = f.input :email, required: true, autofocus: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
-      .row
-        .form-item.twelve.columns.reset-mobile-column
-          = f.button :submit, 'Resend confirmation instructions', class: 'button-green wide', data: { 'disable-with': 'Processing...' }
-    = render 'devise/shared/links'
+  .six.columns.centered.reset-mobile-column
+    .box
+      .box-header
+        %h3.content-center Resend confirmation instructions
+        .box-content
+          = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+            = f.error_notification
+            = f.full_error :confirmation_token
+            .row
+              = f.input :email, required: true, autofocus: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+            .row
+              .form-item.twelve.columns.reset-mobile-column
+                = f.button :button, 'Resend confirmation instructions', class: 'button-green wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }
+          = render 'devise/shared/links'
