@@ -165,6 +165,8 @@ GEM
     faker (1.6.5)
       i18n (~> 0.5)
     flamegraph (0.9.5)
+    foreman (0.82.0)
+      thor (~> 0.19.1)
     github-markdown (0.6.9)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -254,6 +256,7 @@ GEM
     premailer-rails (1.9.4)
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
+    puma (3.6.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.1)
@@ -438,6 +441,7 @@ DEPENDENCIES
   fake_braintree
   faker (~> 1.6)
   flamegraph
+  foreman
   github-markdown
   gon (~> 6.1)
   haml-rails
@@ -454,6 +458,7 @@ DEPENDENCIES
   prawn (~> 2.1)
   prawn-table (~> 0.2.2)
   premailer-rails
+  puma
   pundit
   purpur!
   rack-mini-profiler

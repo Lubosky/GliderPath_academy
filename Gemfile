@@ -23,6 +23,7 @@ gem 'pg', '~> 0.15'
 gem 'prawn', '~> 2.1'
 gem 'prawn-table', '~> 0.2.2'
 gem 'premailer-rails'
+gem 'puma'
 gem 'pundit'
 gem 'purpur', github: 'cimon-io/purpur'
 gem 'rails', '~> 5.0'
@@ -62,6 +63,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'foreman'
   gem 'spring'
 end
 
