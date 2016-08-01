@@ -108,4 +108,12 @@ FactoryGirl.define do
       uploadable_id 1
     end
   end
+
+  factory :workshop do
+    name 'Workshop #1'
+    short_description 'Workshop short description'
+    notes 'Workshop notes'
+    price 9.99
+    association :instructor, factory: [ :user, :instructor ]
+  end
 end
