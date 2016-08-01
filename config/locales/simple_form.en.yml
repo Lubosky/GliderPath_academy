@@ -24,6 +24,8 @@ en:
     hints:
       courses:
         short_description: 'Limit: 255 characters'
+      workshops:
+        short_description: 'Limit: 255 characters'
       users:
         bio: "Write a bio describing your general experience and expertise. Bios help others understand
               who you are and why you're a good person to teach the course. (Limit: 800 characters)"

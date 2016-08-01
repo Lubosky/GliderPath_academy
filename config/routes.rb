@@ -48,4 +48,10 @@ Rails.application.routes.draw do
   # UPLOADS
   resources :uploads, only: [:download], concerns: :downloadable
 
+  # WORKSHOPS
+  resources :workshops do
+    get 'purchase', to: 'purchases#new'
+    resource :purchase, only: [:create]
+  end
+
 end

@@ -12,6 +12,8 @@
           = link_to t('dashboard'), root_path
       %li.menu-item
         = link_to t('courses'), courses_path
+      %li.menu-item
+        = link_to t('workshops'), workshops_path
       - if user_signed_in?
         %li.menu-item.bordered.hide-on-desktop
           = link_to t('sign_out'), destroy_user_session_path, method: :delete

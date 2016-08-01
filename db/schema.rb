@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727085013) do
+ActiveRecord::Schema.define(version: 20160801064818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,19 @@ ActiveRecord::Schema.define(version: 20160727085013) do
     t.index ["videoable_type", "videoable_id"], name: "index_videos_on_videoable_type_and_videoable_id", using: :btree
   end
 
+  create_table "workshops", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.text     "notes"
+    t.decimal  "price",             precision: 6, scale: 2
+    t.string   "slug",                                      null: false
+    t.integer  "instructor_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["instructor_id"], name: "index_workshops_on_instructor_id", using: :btree
+    t.index ["slug"], name: "index_workshops_on_slug", unique: true, using: :btree
+  end
+
   add_foreign_key "courses", "users", column: "instructor_id"
   add_foreign_key "enrolled_lessons", "users", column: "student_id"
   add_foreign_key "enrollments", "users", column: "student_id"
@@ -201,4 +214,5 @@ ActiveRecord::Schema.define(version: 20160727085013) do
   add_foreign_key "sections", "courses"
   add_foreign_key "subscriptions", "users", column: "subscriber_id"
   add_foreign_key "uploads", "users", column: "uploader_id"
+  add_foreign_key "workshops", "users", column: "instructor_id"
 end

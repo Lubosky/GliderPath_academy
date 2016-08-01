@@ -89,6 +89,16 @@ en:
       alert: 'Ooops! Something went wrong while updating your default payment method. Please try again!'
     payment:
       alert: 'Sorry, there has been a problem processing your payment...'
+    workshops:
+      create:
+        success: 'Workshop has been successfuly created.'
+        alert: 'Ooops! We are having trouble creating this workshop. Please check your form.'
+      update:
+        success: 'Workshop has been successfuly updated.'
+        alert: 'Sorry! We are having trouble updating this workshop.'
+        not_authorized: 'You are not authorized to edit this workshop.'
+      destroy:
+        info: 'Workshop was successfully deleted.'
 
   social:
     twitter: 'GliderPath on Twitter'

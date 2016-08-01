@@ -1,10 +1,10 @@
 - content_for :page_title, @course.name
 - content_for :page_description, @course.short_description
 
-.course-header
+.library-header
   %h1
     = @course.name
-  .course-meta
+  .library-meta
     = user_avatar(@course.instructor, class: 'avatar-circle', alt: @course.instructor.name, width: '45px', height: '45px')
     %h5= @course.instructor.name
 .box

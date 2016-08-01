@@ -1,0 +1,18 @@
+= simple_form_for @workshop do |f|
+  .row
+    = f.input :name, autofocus: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :price, input_html: { value: f.object.price || 0.0 }, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|
+      = video.input :video_url, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :short_description, as: :text, input_html: { style: 'min-height: 65px;' }, hint: t('simple_form.hints.workshops.short_description'), wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :notes, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    .twelve.columns.reset-mobile-column
+      = f.attachment_field :uploads_files, multiple: true, direct: true, presigned: true
+  .row
+    .twelve.columns.reset-mobile-column
+      = f.button :button, class: 'button-large button-purple pull-right margin-top-25', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.saving')}" }

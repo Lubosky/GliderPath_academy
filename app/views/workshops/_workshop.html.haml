@@ -1,0 +1,9 @@
+%li.card-list-item.stacked{ class: "card-#{workshop.id}" }
+  = link_to workshop_path(workshop), class: 'card-box' do
+    .card-box-title
+      %h3
+        = workshop.name
+    .card-box-meta
+      %p
+        with
+        %strong #{workshop.instructor.name}

@@ -1,0 +1,34 @@
+- content_for :page_title, workshop.name
+- content_for :page_description, workshop.short_description
+
+.library-header
+  %h1
+    = workshop.name
+  .library-meta
+    = user_avatar(workshop.instructor, class: 'avatar-circle', alt: workshop.instructor.name, width: '45px', height: '45px')
+    %h5= workshop.instructor.name
+.box
+  .box-header.video-container
+    = embed_video(workshop.video)
+  .box-content
+    %p= workshop.short_description
+    %ul.tabs
+      %li.tab-button.pull-right
+        -if user_signed_in?
+          = render 'button_edit', resource: workshop if policy(workshop).update?
+          = render 'button_delete', resource: workshop if policy(workshop).destroy?
+          = render 'button_purchase', resource: workshop unless current_user.has_access_to?(workshop) || policy(workshop).destroy? || policy(workshop).update?
+        - else
+          = render 'button_purchase', resource: workshop
+      %li.tab-header
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
+          = t('workshops.notes')
+        .tab-content
+          = workshop.notes
+      - if workshop.uploads.any?
+        %li.tab-header
+          %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('workshops.attachments') }
+          .tab-content
+            %ul.attachment-list
+              - workshop.uploads.each do |upload|
+                = render 'attachment', upload: upload
