@@ -8,8 +8,9 @@
     = user_avatar(workshop.instructor, class: 'avatar-circle', alt: workshop.instructor.name, width: '45px', height: '45px')
     %h5= workshop.instructor.name
 .box
-  .box-header.video-container
-    = embed_video(workshop.video)
+  - if user_signed_in?
+    .box-header.video-container
+      = embed_video(workshop.video) if workshop.watchable_for(current_user)
   .box-content
     %p= workshop.short_description
     %ul.tabs
@@ -25,7 +26,7 @@
           = t('workshops.notes')
         .tab-content
           = workshop.notes
-      - if workshop.uploads.any?
+      - if user_signed_in? && (workshop.has_attachments? && workshop.watchable_for(current_user))
         %li.tab-header
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('workshops.attachments') }
           .tab-content

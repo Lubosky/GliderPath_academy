@@ -21,8 +21,16 @@ class Workshop < ApplicationRecord
     self.video.video_duration
   end
 
+  def has_attachments?
+    self.uploads.any?
+  end
+
   def is_free?
     self.price == 0
+  end
+
+  def watchable_for(user)
+    user.has_access_to?(self) || is_free?
   end
 
   private
