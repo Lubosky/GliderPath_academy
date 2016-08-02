@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 
+gem 'autoprefixer-rails', '~> 6.3'
 gem 'bourbon', '~> 5.0.0.beta.6'
 gem 'braintree'
 gem 'cocoon'

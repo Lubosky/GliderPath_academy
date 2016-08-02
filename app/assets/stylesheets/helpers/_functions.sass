@@ -45,30 +45,23 @@
     color: map-get($colors, font) !important
 
 @each $name, $colors in $card-colors
-  .card-list-item
-    &.card-#{$name}
-      background: map-get($colors, base)
-
-      &.card-wrapper
+  .tile-container
+    .tile
+      &.tile-#{$name}
+        border-top-color: map-get($colors, base) !important
 
         &:hover,
-        &:active,
-        &:active:hover,
-        &:active:focus,
         &:focus
 
-          .card-content
-            h4
+          .tile-header
+            .tile-progress
+              border: 2px solid map-get($colors, base)
+
+            .icon,
+            h1
               color: map-get($colors, base)
 
-        .card-header
-          background: map-get($colors, base)
-          color: map-get($colors, font)
-
-          .card-progress
-            border: 2px solid map-get($colors, base)
-
-        .card-footer
+        .tile-footer
           .button
             background: map-get($colors, base)
             border: 2px solid map-get($colors, base)
@@ -81,14 +74,6 @@
             &:focus
               border-color: darken(map-get($colors, base), 9%)
               background-color: darken(map-get($colors, base), 9%)
-
-      .card-box
-        color: map-get($colors, font)
-
-      &.stacked:not(.card-wrapper)
-        &:after,
-        &:before
-          background: map-get($colors, base)
 
 @each $name, $colors in $gradient-colors
   .gradient-#{$name}

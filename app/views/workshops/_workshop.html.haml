@@ -1,9 +1,13 @@
-%li.card-list-item.stacked{ class: "card-#{workshop.id}" }
-  = link_to workshop_path(workshop), class: 'card-box' do
-    .card-box-title
-      %h3
-        = workshop.name
-    .card-box-meta
-      %p
-        with
-        %strong #{workshop.instructor.name}
+.tile.stacked
+  .tile-header
+    = link_to workshop_path(workshop) do
+      = icon_tag 'play-circle'
+      %h1= workshop.name
+      %small= duration_for(workshop.video.video_duration) if workshop.video.present?
+  .tile-content
+    .tile-meta
+      %small Presented by
+      %h3= workshop.instructor.name
+    %figure
+      = user_avatar(workshop.instructor, class: 'avatar-default', alt: workshop.instructor.name, width: '45px', height: '45px')
+  %p.description= workshop.short_description
