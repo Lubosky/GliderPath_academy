@@ -3,7 +3,7 @@
     = link_to workshop_path(workshop) do
       = icon_tag 'play-circle'
       %h1= workshop.name
-      %small= duration_for(workshop.video.video_duration) if workshop.video.present?
+      %small= duration_in_minutes(workshop.content_length) if workshop.video.present?
   .tile-content
     .tile-meta
       %small Presented by

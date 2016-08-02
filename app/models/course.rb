@@ -24,6 +24,10 @@ class Course < ActiveRecord::Base
     @course_progress ||= 100 * (self.lessons_completed_for(user).count.to_f / self.lessons.count.to_f)
   end
 
+  def content_length
+    self.lessons.joins(:video).sum(:video_duration)
+  end
+
   def lessons_completed_for(student)
     self.lessons.lessons_completed_for(student)
   end

@@ -3,7 +3,10 @@
     = link_to course_path(course) do
       = icon_tag 'course'
       %h1= course.name
-      %small= t('lessons.count', count: course.lessons.count)
+      %small
+        = t('lessons.count', count: course.lessons.count)
+        \/
+        = duration_in_hours(course.content_length)
   .tile-content
     .tile-meta
       %small Instructed by

@@ -197,6 +197,16 @@ en:
     unlocked: "Lesson unlocked"
     purchase: "Purchase now to unlock this %{element}"
 
+  helpers:
+    duration_in_hours:
+      count:
+        one: "%{count} hour"
+        other: "%{count} hours"
+    duration_in_minutes:
+      count:
+        one: "%{count} minute"
+        other: "%{count} minutes"
+
   pundit:
     default: 'You are not authorized to perform this action.'
     course_policy:

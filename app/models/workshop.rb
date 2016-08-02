@@ -17,6 +17,10 @@ class Workshop < ApplicationRecord
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
   accepts_attachments_for :uploads, append: true
 
+  def content_length
+    self.video.video_duration
+  end
+
   def is_free?
     self.price == 0
   end
