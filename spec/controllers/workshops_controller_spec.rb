@@ -2,15 +2,17 @@ require 'spec_helper'
 
 RSpec.describe WorkshopsController, type: :controller do
 
+  before do
+    stub_video
+  end
+
+  before :each do
+    user.confirm
+    login user
+  end
+
   let(:user) { create(:user, :instructor, :admin) }
-  let(:valid_attributes) {
-    {
-      name: 'Workshop #1',
-      short_description: 'Workshop short description',
-      notes: 'Workshop notes',
-      price: 9.99
-    }
-  }
+  let(:valid_attributes) { attributes_for(:workshop, video_attributes: attributes_for(:video)) }
 
   let(:invalid_attributes) {
     {
@@ -27,11 +29,6 @@ RSpec.describe WorkshopsController, type: :controller do
       notes: 'Updated workshop notes #1'
     }
   }
-
-  before :each do
-    user.confirm
-    login user
-  end
 
   describe 'GET #index' do
     before do

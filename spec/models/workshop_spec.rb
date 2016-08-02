@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Workshop, type: :model do
+
   describe 'validations' do
     it 'validates and associates with' do
       is_expected.to validate_presence_of(:name)
@@ -22,6 +23,7 @@ describe Workshop, type: :model do
 
   context 'uniqueness' do
     before do
+      stub_video
       create :workshop
     end
 

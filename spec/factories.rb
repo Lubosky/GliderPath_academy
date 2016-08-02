@@ -115,5 +115,10 @@ FactoryGirl.define do
     notes 'Workshop notes'
     price 9.99
     association :instructor, factory: [ :user, :instructor ]
+    association :video, factory: :video
+  end
+
+  factory :video do
+    video_url 'https://vimeo.com/132090907/'
   end
 end
