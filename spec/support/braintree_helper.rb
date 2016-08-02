@@ -1,13 +1,3 @@
-require 'fake_braintree'
-
-FakeBraintree.activate!
-
-RSpec.configure do |c|
-  c.before do
-    FakeBraintree.clear!
-  end
-end
-
 def init_braintree_customer
   Braintree::Customer.create(
     id: user.braintree_customer_id,

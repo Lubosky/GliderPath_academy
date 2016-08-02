@@ -5,6 +5,9 @@ require 'rspec/rails'
 require 'sidekiq/testing'
 require 'site_prism'
 require 'simplecov'
+require 'fake_braintree'
+require 'webmock/rspec'
+
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -22,10 +25,12 @@ ActiveRecord::Migration.maintain_test_schema!
 
 DEFAULT_HOST = 'lvh.me'
 DEFAULT_PORT = 9887 + ENV['TEST_ENV_NUMBER'].to_i
+BRAINTREE_PORT = 8181 + ENV['TEST_ENV_NUMBER'].to_i
+
+WebMock.disable_net_connect!(allow_localhost: true)
+FakeBraintree.activate!(gateway_port: "#{BRAINTREE_PORT}")
 
 RSpec.configure do |config|
-  config.before(:each) { Analytics.backend = FakeIntercom.new }
-
   config.fixture_path = '#{::Rails.root}/spec/fixtures'
 
   config.use_transactional_fixtures = false
@@ -38,7 +43,9 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    Analytics.backend = FakeIntercom.new
     DatabaseCleaner.start
+    FakeBraintree.clear!
   end
 
   config.after(:each) do

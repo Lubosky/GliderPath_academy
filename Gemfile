@@ -80,4 +80,5 @@ group :test do
   gem 'simplecov'
   gem 'site_prism'
   gem 'timecop'
+  gem 'webmock'
 end

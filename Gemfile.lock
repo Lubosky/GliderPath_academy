@@ -127,6 +127,8 @@ GEM
       activesupport (>= 3.0)
       deep_merge (~> 1.0, >= 1.0.1)
     connection_pool (2.2.0)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     crass (1.0.2)
     css_parser (1.4.5)
       addressable
@@ -185,6 +187,7 @@ GEM
       haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    hashdiff (0.3.0)
     html-pipeline (2.4.2)
       activesupport (>= 2)
       nokogiri (>= 1.4)
@@ -337,6 +340,7 @@ GEM
       ast
     ruby_parser (3.8.2)
       sexp_processor (~> 4.1)
+    safe_yaml (1.0.4)
     sanitize (4.1.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
@@ -417,6 +421,10 @@ GEM
     unf_ext (0.0.7.2)
     warden (1.2.6)
       rack (>= 1.0)
+    webmock (2.1.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -495,6 +503,7 @@ DEPENDENCIES
   twemoji (~> 3.0)
   uglifier (>= 1.3.0)
   video_info!
+  webmock
 
 RUBY VERSION
    ruby 2.3.0p0
