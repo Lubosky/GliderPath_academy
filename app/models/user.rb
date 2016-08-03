@@ -26,7 +26,7 @@ class User < ApplicationRecord
   has_one :subscription, inverse_of: :subscriber, foreign_key: :subscriber_id
   has_one :plan, through: :subscription, inverse_of: :subscribers
 
-  has_many :purchases, inverse_of: :purchaser, foreign_key: :purchaser_id
+  has_many :purchases, foreign_key: :purchaser_id
   has_many :courses, through: :purchases, inverse_of: :purchasers, source: :purchasable, source_type: 'Course'
 
   before_save :skip_confirmation_notification, on: :create
