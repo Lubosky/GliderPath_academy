@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', ->
-  unless typeof gon is 'undefined'
+  if !(typeof gon == 'undefined') &&  $('#braintree-payment-method-form').length > 0
     clientToken = gon.braintree_client_token
     braintree.setup clientToken, 'dropin',
       container: 'braintree-payment-method-form'
