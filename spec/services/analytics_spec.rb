@@ -114,4 +114,12 @@ describe Analytics do
         )
     end
   end
+
+  describe '#track_forum_accessed' do
+    it 'tracks that the user accessed the forum' do
+      analytics_instance.track_forum_accessed
+
+      expect(analytics).to have_tracked('Logged into Forum').for_user(user)
+    end
+  end
 end

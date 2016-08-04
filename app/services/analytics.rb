@@ -49,6 +49,10 @@ class Analytics
     )
   end
 
+  def track_forum_accessed
+    track('Logged into Forum')
+  end
+
   private
 
     attr_reader :user

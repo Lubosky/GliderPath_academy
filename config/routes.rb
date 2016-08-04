@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resource :purchase, only: [:create]
   end
 
+  # DISCOURSE
+  resource :forum_sessions, only: :new
+  get '/forum', to: redirect("#{Forum.url('session/sso')}")
+
   # DOWNLOADS
   concern :downloadable do
     get 'download', on: :member
