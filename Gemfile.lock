@@ -315,6 +315,8 @@ GEM
       netrc (~> 0.7)
     rinku (2.0.0)
     rolify (5.1.0)
+    rollbar (2.12.0)
+      multi_json
     rouge (2.0.5)
     rspec-core (3.5.1)
       rspec-support (~> 3.5.0)
@@ -482,6 +484,7 @@ DEPENDENCIES
   request_store
   rinku
   rolify
+  rollbar
   rouge
   rspec-its
   rspec-rails (~> 3.5)
