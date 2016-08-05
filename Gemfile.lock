@@ -112,6 +112,8 @@ GEM
     capybara-email (2.5.0)
       capybara (~> 2.4)
       mail
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
     cliver (0.3.2)
     cocoon (1.2.9)
     coderay (1.1.1)
@@ -444,6 +446,7 @@ DEPENDENCIES
   braintree
   capybara
   capybara-email
+  climate_control
   cocoon
   coffee-rails (~> 4.1.0)
   config (~> 1.2, >= 1.2.1)

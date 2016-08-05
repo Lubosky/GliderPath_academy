@@ -73,6 +73,7 @@ end
 group :test do
   gem 'capybara'
   gem 'capybara-email'
+  gem 'climate_control'
   gem 'email_spec'
   gem 'fake_braintree'
   gem 'poltergeist'
