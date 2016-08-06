@@ -33,3 +33,7 @@
               %ul.attachment-list
                 - @lesson.uploads.each do |upload|
                   = render 'attachment', upload: upload
+        %li.tab-header
+          %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('lessons.questions') }
+          .tab-content
+            = render 'comments', course: @course, lesson: @lesson

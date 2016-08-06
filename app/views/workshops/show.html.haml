@@ -33,3 +33,8 @@
             %ul.attachment-list
               - workshop.uploads.each do |upload|
                 = render 'attachment', upload: upload
+      %li.tab-header
+        %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
+          = t('workshops.questions')
+        .tab-content
+          = render 'comments', workshop: workshop
