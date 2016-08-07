@@ -1,4 +1,4 @@
-feature 'Submit Contact Form' do
+feature 'Visitor submits contact form' do
 
   let(:name) { 'John Doe' }
   let(:user_email) { 'john@example.com' }

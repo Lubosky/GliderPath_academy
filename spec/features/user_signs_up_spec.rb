@@ -1,4 +1,4 @@
-feature 'User registration' do
+feature 'User signs up' do
 
   let(:first_name) { 'John' }
   let(:last_name) { 'Doe' }

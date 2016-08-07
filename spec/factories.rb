@@ -32,14 +32,14 @@ FactoryGirl.define do
   end
 
   factory :section do
-    title 'Section #1'
+    sequence(:title) { |n| "Section ##{n}" }
     objective Faker::Lorem.paragraph(2)
     position 1
     association :course, factory: :course
   end
 
   factory :lesson do
-    title 'Lesson #1'
+    sequence(:title) { |n| "Lesson ##{n}" }
     notes Faker::Lorem.paragraph(2)
     position 1
     association :section, factory: :section
