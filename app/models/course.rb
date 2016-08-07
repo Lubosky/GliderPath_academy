@@ -36,10 +36,6 @@ class Course < ActiveRecord::Base
     self.lessons.lessons_remaining_for(student)
   end
 
-  def lesson_completed_for(student, lesson)
-    self.lessons_completed_for(student).include?(lesson)
-  end
-
   def first_remaining_lesson_for(student)
     self.lessons_remaining_for(student).first
   end

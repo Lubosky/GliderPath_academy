@@ -7,7 +7,7 @@
       %li
         = link_to course_lesson_path(@course, lesson), class: 'topic-wrapper' do
           .icon-holder
-            - if @course.lesson_completed_for(current_user, lesson)
+            - if lesson.completed?(current_user)
               = icon_tag 'check-circle-full', class: 'completed', data: { tooltip: t('tooltip.completed', element: 'Lesson'), tooltip_position: 'top center' }
             - else
               = icon_tag 'unlock-circle', class: 'unlocked', data: { tooltip: t('tooltip.unlocked', element: 'lesson'), tooltip_position: 'top center' }
