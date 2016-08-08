@@ -19,4 +19,29 @@ describe Enrollment, type: :model do
     it { expect { enrollment.activate }.to change(enrollment, :status).from('initial').to('active') }
   end
 
+  describe '#activate' do
+    it 'updates the subscription record by setting the status to "active"' do
+      user = create(:user)
+      course = create(:course)
+      enrollment = create :enrollment, status: 'initial', course_id: course.id, student_id: user.id
+
+      enrollment.activate
+      enrollment.reload
+
+      expect(enrollment.status).to eq 'active'
+    end
+  end
+
+  describe '#complete' do
+    it 'updates the subscription record by setting the status to "completed"' do
+      user = create(:user)
+      course = create(:course)
+      enrollment = create :enrollment, status: 'active', course_id: course.id, student_id: user.id
+
+      enrollment.complete
+      enrollment.reload
+
+      expect(enrollment.status).to eq 'completed'
+    end
+  end
 end

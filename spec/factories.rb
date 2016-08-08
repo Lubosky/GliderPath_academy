@@ -24,7 +24,7 @@ FactoryGirl.define do
   end
 
   factory :course do
-    name 'Course #1'
+    sequence(:name) { |n| "Course ##{n}" }
     short_description Faker::Lorem.paragraph(2)
     description 'Course description #1'
     price 99.99

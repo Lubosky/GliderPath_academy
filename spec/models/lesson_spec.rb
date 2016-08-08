@@ -51,10 +51,10 @@ describe Lesson, type: :model do
         status: 'active'
       )
 
-      expect(l1.completed?(user)).to eq(true)
-      expect(l2.completed?(user)).to eq(false)
-      expect(l1.active?(user)).to eq(false)
-      expect(l2.active?(user)).to eq(true)
+      expect(l1.completed?(user)).to be_truthy
+      expect(l2.completed?(user)).to be_falsy
+      expect(l1.active?(user)).to be_falsy
+      expect(l2.active?(user)).to be_truthy
     end
   end
 
