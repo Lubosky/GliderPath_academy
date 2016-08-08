@@ -16,7 +16,10 @@ module GliderPathAcademy
 
     config.assets.precompile += %w(mailer.css)
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += [
+      "#{config.root}/lib",
+      "#{config.root}/vendor/lib"
+    ]
 
     config.middleware.use Rack::Deflater
 
