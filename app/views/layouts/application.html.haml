@@ -6,8 +6,8 @@
     = render 'meta'
     = open_graph_tags
     = include_gon
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'https://js.braintreegateway.com/v2/braintree.js', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', data_turbolinks_track: true
+    = javascript_include_tag 'application', "#{STRIPE_JS_HOST}/v2/", data_turbolinks_track: true
 
   %body{ class: "#{body_css}" }
     = render 'flash_messages'

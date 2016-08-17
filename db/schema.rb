@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801064818) do
+ActiveRecord::Schema.define(version: 20160817163533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,16 +19,14 @@ ActiveRecord::Schema.define(version: 20160801064818) do
     t.integer  "user_id"
     t.string   "product"
     t.decimal  "amount"
-    t.string   "braintree_transaction_id"
-    t.string   "braintree_payment_method"
-    t.string   "paypal_email"
-    t.string   "card_type"
+    t.string   "stripe_charge_id"
+    t.string   "card_brand"
     t.integer  "card_exp_month"
     t.integer  "card_exp_year"
     t.string   "card_last4"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["braintree_transaction_id"], name: "index_charges_on_braintree_transaction_id", unique: true, using: :btree
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["stripe_charge_id"], name: "index_charges_on_stripe_charge_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_charges_on_user_id", using: :btree
   end
 
@@ -75,19 +73,19 @@ ActiveRecord::Schema.define(version: 20160801064818) do
   end
 
   create_table "plans", force: :cascade do |t|
-    t.string   "name",              null: false
-    t.string   "braintree_plan_id", null: false
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.string   "name",           null: false
+    t.string   "stripe_plan_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.string   "braintree_purchase_id"
-    t.integer  "purchaser_id",          null: false
-    t.string   "purchasable_type",      null: false
-    t.integer  "purchasable_id",        null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "stripe_charge_id"
+    t.integer  "purchaser_id",     null: false
+    t.string   "purchasable_type", null: false
+    t.integer  "purchasable_id",   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id", using: :btree
     t.index ["purchaser_id", "purchasable_type", "purchasable_id"], name: "index_purchases_on_purchaser_id_purchasable_type_purchasable_id", unique: true, using: :btree
   end
@@ -113,12 +111,12 @@ ActiveRecord::Schema.define(version: 20160801064818) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string   "braintree_subscription_id"
-    t.integer  "plan_id",                   null: false
-    t.integer  "subscriber_id",             null: false
+    t.string   "stripe_subscription_id"
+    t.integer  "plan_id",                null: false
+    t.integer  "subscriber_id",          null: false
     t.string   "status"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["subscriber_id", "plan_id"], name: "index_subscriptions_on_subscriber_id_and_plan_id", using: :btree
   end
 
@@ -137,14 +135,14 @@ ActiveRecord::Schema.define(version: 20160801064818) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name",               default: "", null: false
-    t.string   "last_name",                default: "", null: false
-    t.string   "email",                    default: "", null: false
-    t.string   "encrypted_password",       default: "", null: false
+    t.string   "first_name",             default: "", null: false
+    t.string   "last_name",              default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -153,18 +151,12 @@ ActiveRecord::Schema.define(version: 20160801064818) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",          default: 0,  null: false
+    t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "braintree_customer_id"
-    t.string   "braintree_payment_method"
-    t.string   "paypal_email"
-    t.string   "card_type"
-    t.integer  "card_exp_month"
-    t.integer  "card_exp_year"
-    t.string   "card_last4"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "stripe_customer_id"
     t.string   "avatar_id"
     t.text     "bio"
     t.string   "headline"

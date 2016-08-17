@@ -26,7 +26,7 @@ end
 
 unless Plan.any?
   create_for 'plans', Plan::NAMES do |_, plan_id|
-    Plan.create! braintree_plan_id: plan_id, name: 'GliderPath Academy - Monthly'
+    Plan.create! stripe_plan_id: plan_id, name: 'GliderPath Academy - Monthly'
   end
 end
 
