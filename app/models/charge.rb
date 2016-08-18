@@ -1,5 +1,5 @@
 class Charge < ApplicationRecord
-  belongs_to :user, inverse_of: :uploads
+  belongs_to :user, inverse_of: :charges
 
   validates_presence_of :user_id
   validates :stripe_charge_id, uniqueness: true

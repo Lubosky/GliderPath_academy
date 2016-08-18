@@ -18,7 +18,7 @@
       %td USD $#{@charge.amount}
     %tr
       %td Charged to:
-      %td= @charge.card_brand "xxxx-#{@charge.card_last4}"
+      %td "#{@charge.card_brand} xxxx-#{@charge.card_last4}"
     %tr
       %td Transaction ID:
       %td= @charge.stripe_charge_id

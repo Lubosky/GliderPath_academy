@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  # BRAINTREE
-  post '/braintree/webhooks', to: 'subscriptions#webhook'
+  # STRIPE
+  mount StripeEvent::Engine, at: '/stripe/webhook'
 
   # ACCOUNT
   resource :account, only: [:show, :edit], path: 'account' do
