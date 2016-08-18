@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resource :account, only: [:show, :edit], path: 'account' do
     patch 'update_account', to: 'accounts#update_account'
     resources :charges, only: [:index, :show]
-    resource :payment_method, only: [:create]
+    resource :credit_card, only: [:update]
   end
 
   # COURSES

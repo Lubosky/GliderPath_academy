@@ -20,28 +20,27 @@ class EnrollmentsController < ApplicationController
 
   private
 
-    def set_course
-      @course = Course.find_by_slug(params[:course_id])
-    end
+  def set_course
+    @course = Course.find_by_slug(params[:course_id])
+  end
 
-    def check_if_eligible_to_enroll
-      if !( current_user.has_active_subscription? || current_user.purchased?(@course) )
-        flash[:warning] = t('flash.enrollments.notice')
-        redirect_back(fallback_location: root_path)
-      end
+  def check_if_eligible_to_enroll
+    unless (current_user.has_active_subscription? || current_user.purchased?(@course))
+      flash[:warning] = t('flash.enrollments.notice')
+      redirect_back(fallback_location: root_path)
     end
+  end
 
-    def check_if_student_enrolled
-      if current_user.enrolled?(@course)
-        flash[:warning] = t('flash.enrollments.alert')
-        redirect_back(fallback_location: root_path)
-      end
+  def check_if_student_enrolled
+    if current_user.enrolled?(@course)
+      flash[:warning] = t('flash.enrollments.alert')
+      redirect_back(fallback_location: root_path)
     end
+  end
 
-    def analytics_metadata_for_enrollment
-      {
-        course: @course.name,
-      }
-    end
-
+  def analytics_metadata_for_enrollment
+    {
+      course: @course.name
+    }
+  end
 end

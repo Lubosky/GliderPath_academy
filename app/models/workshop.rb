@@ -35,8 +35,7 @@ class Workshop < ApplicationRecord
 
   private
 
-    def slug_source
-      self.name
-    end
-
+  def slug_source
+    self.name
+  end
 end

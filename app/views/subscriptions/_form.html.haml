@@ -1,7 +1,8 @@
 .checkout-form
   %h4 Payment Information
-  #braintree-subscription-form
   = simple_form_for :subscription, url: subscription_path, html: { id: 'subscription-form' } do |f|
+    .has-errors
+    = render 'credit_card_fields'
     = f.input :plan, as: :hidden, input_html: { name: 'plan', value: "#{ params[:plan] }" }
     = f.button :button, t('button.subscription.new'), class: 'button-large button-purple wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}"}
     %p.text-small.text-muted.content-center You can cancel or pause your subscription at any time.

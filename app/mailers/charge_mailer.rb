@@ -1,5 +1,4 @@
 class ChargeMailer < BaseMailer
-
   def receipt(user_id, charge_id)
     @charge = Charge.find_by_id(charge_id)
     @user = User.find_by_id(user_id)
@@ -12,5 +11,4 @@ class ChargeMailer < BaseMailer
       subject: "[#{Settings.application.name}] Payment Receipt - #{@charge.product}"
     )
   end
-
 end

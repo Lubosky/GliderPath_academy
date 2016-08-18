@@ -41,31 +41,31 @@ class WorkshopsController < ApplicationController
 
   def destroy
     workshop.destroy
-      flash[:info] = t('flash.workshops.destroy.info')
-      redirect_to root_path
+    flash[:info] = t('flash.workshops.destroy.info')
+    redirect_to root_path
   end
 
   private
 
-    def workshop
-      @workshop ||= Workshop.find_by_slug(params[:id])
-    end
-    helper_method :workshop
+  def workshop
+    @workshop ||= Workshop.find_by_slug(params[:id])
+  end
+  helper_method :workshop
 
-    def workshops
-      @workshops ||= Workshop.all.order('created_at DESC')
-    end
-    helper_method :workshops
+  def workshops
+    @workshops ||= Workshop.all.order('created_at DESC')
+  end
+  helper_method :workshops
 
-    def authorize_workshop
-      authorize workshop
-    end
+  def authorize_workshop
+    authorize workshop
+  end
 
-    def workshop_params
-      params.require(:workshop).permit(:name, :short_description, :notes, :price,
-        video_attributes: [ :id, :video_url ],
-        uploads_attributes: [ :id, :_destroy ],
-        uploads_files: [ ]
-      )
-    end
+  def workshop_params
+    params.require(:workshop).permit(:name, :short_description, :notes, :price,
+      video_attributes: [:id, :video_url],
+      uploads_attributes: [:id, :_destroy],
+      uploads_files: []
+    )
+  end
 end

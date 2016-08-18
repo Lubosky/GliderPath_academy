@@ -2,9 +2,9 @@
   %h4 Order Summary
   .order-summary
     .table-row.table-header
-      .title= @purchasable.name
+      .title= purchasable.name
     .table-row
-      %div #{duration_in_hours(@purchasable.content_length).titleize} of Content
+      %div #{duration_in_hours(purchasable.content_length).titleize} of Content
       = icon_tag 'check'
     .table-row
       %div Includes Lifetime Access
@@ -20,7 +20,7 @@
       .title Total Due Today
       .order-price.total
         %span.currency $
-        %span.price= @purchasable.price
+        %span.price= purchasable.price
   .order-summary-footer
     %p.text-small.text-muted.uppercase.content-center
       = icon_tag 'lock', class: 'icon-green'

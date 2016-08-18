@@ -1,24 +1,22 @@
 class SubscriptionsController < ApplicationController
-  protect_from_forgery except: :webhook
-  before_action :authenticate_user!, except: [:new, :webhook]
+  before_action :authenticate_user!, except: [:new]
   before_action :redirect_to_signup, only: [:new]
   before_action :redirect_when_plan_not_found, only: [:new, :create]
-  before_action :set_braintree_customer, only: [:create]
 
   def new
     authorize :subscription
-    gon.braintree_client_token = generate_braintree_client_token
+    gon.stripe_public_key = STRIPE_PUBLIC_KEY
+    @subscription = build_subscription({})
   end
 
   def create
     authorize :subscription
-    current_user.create_subscription(plan)
-    if true
+    @subscription = build_subscription(subscription_params)
+    if @subscription.fulfill
       flash[:success] = t('flash.subscriptions.create.success', plan: plan.name)
       redirect_to root_path
     else
       flash[:alert] = t('flash.subscriptions.create.error')
-      gon.braintree_client_token = generate_braintree_client_token
       render :new
     end
   end
@@ -30,71 +28,41 @@ class SubscriptionsController < ApplicationController
     redirect_to root_path
   end
 
-  def webhook
-    skip_authorization
-
-    if params[:bt_challenge]
-      return render plain: Braintree::WebhookNotification.verify(params[:bt_challenge])
-    end
-
-    webhook_notification = Braintree::WebhookNotification.parse(params[:bt_signature], params[:bt_payload])
-
-    kind = webhook_notification.kind
-
-    # subscription_canceled
-    # subscription_charged_successfully
-    # subscription_charged_unsuccessfully
-
-    case kind
-      when 'subscription_canceled'
-        puts webhook_notification.kind
-
-      when 'subscription_charged_successfully'
-        puts webhook_notification.kind
-
-        transaction = webhook_notification.subscription.transactions.last
-        subscriber = User.find_by_braintree_customer_id(transaction.customer_details.id)
-
-        CreateChargeWorker.perform_async(subscriber.id, transaction.id, subscriber.plan.name)
-
-      when 'subscription_charged_unsuccessfully'
-        puts webhook_notification.kind
-        failure_count = webhook_notification.subscription.failure_count
-        braintree_subscription_id = webhook_notification.subscription.id
-
-        if failure_count >= 3
-          SuspendSubscriptionWorker.perform_async(braintree_subscription_id)
-        end
-
-      else
-        raise "Braintree notification: #{kind} - #{webhook_notification.subscription.id} - #{webhook_notification.timestamp}"
-    end
-
-    head :ok
-  end
-
   private
 
-    def redirect_to_signup
-      if !user_signed_in?
-        session['user_return_to'] = new_subscription_path(plan: params[:plan])
-        redirect_to new_user_registration_path
-      end
-    end
+  def build_subscription(arguments)
+    subscription = Subscription.where(subscriber: current_user).first_or_initialize
+    subscription.attributes = arguments.merge(default_params)
+    subscription
+  end
 
-    def plan
-      @plan ||= Plan.find_by(id: params[:plan])
-    end
+  def default_params
+    {
+      plan: plan
+    }
+  end
 
-    def redirect_when_plan_not_found
-      if !plan.present?
-        redirect_to root_path
-        flash[:info] = t('flash.plans.not_found')
-      end
-    end
+  def subscription_params
+    params.require(:subscription).permit(
+      :stripe_token
+    )
+  end
 
-    def generate_braintree_client_token
-      current_user.init_braintree_client_token
-    end
+  def plan
+    @plan ||= Plan.find_by(id: params[:plan])
+  end
 
+  def redirect_to_signup
+    unless user_signed_in?
+      session['user_return_to'] = new_subscription_path(plan: params[:plan])
+      redirect_to new_user_registration_path
+    end
+  end
+
+  def redirect_when_plan_not_found
+    unless plan.present?
+      flash[:info] = t('flash.plans.not_found')
+      redirect_to root_path
+    end
+  end
 end

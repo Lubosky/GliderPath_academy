@@ -16,5 +16,4 @@ class ContactForm < MailForm::Base
       reply_to: %(#{email})
     }
   end
-
 end

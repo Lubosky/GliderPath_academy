@@ -4,8 +4,8 @@ class EnrolledLesson < ApplicationRecord
 
   validates_presence_of :lesson_id, :student_id
 
-  scope :active, ->{ with_status :active }
-  scope :completed, ->{ with_status :completed }
+  scope :active, -> { with_status :active }
+  scope :completed, -> { with_status :completed }
 
   state_machine :status, initial: :initial do
     state :initial
@@ -20,5 +20,4 @@ class EnrolledLesson < ApplicationRecord
       transition active: :completed
     end
   end
-
 end

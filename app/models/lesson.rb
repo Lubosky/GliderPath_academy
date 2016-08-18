@@ -39,26 +39,25 @@ class Lesson < ApplicationRecord
     self.enrolled_lessons.active.where(student_id: user.id).present?
   end
 
-  protected
+  private
 
-    def slug_source
-      self.title
+  def slug_source
+    self.title
+  end
+
+  def set_position
+    lesson_ids = self.course.lesson_ids.reject(&:blank?).map(&:to_i)
+
+    lesson_ids.each_with_index do |lesson_id, index|
+      Lesson.where(id: lesson_id).update_all(position: index + 1)
     end
+  end
 
-    def set_position
-      lesson_ids = self.course.lesson_ids.reject(&:blank?).map(&:to_i)
+  def self.lessons_completed_for(student)
+    self.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' })
+  end
 
-      lesson_ids.each_with_index do |lesson_id, index|
-        Lesson.where(id: lesson_id).update_all(position: index + 1)
-      end
-    end
-
-    def self.lessons_completed_for(student)
-      self.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' })
-    end
-
-    def self.lessons_remaining_for(student)
-      self.where.not(id: self.lessons_completed_for(student))
-    end
-
+  def self.lessons_remaining_for(student)
+    self.where.not(id: self.lessons_completed_for(student))
+  end
 end

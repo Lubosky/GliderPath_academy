@@ -1,5 +1,6 @@
 .checkout-form
   %h4 Payment Information
-  #braintree-purchase-form
-  = simple_form_for @purchasable, url: [@purchasable, :purchase], html: { id: 'purchase-form' }, method: :post do |f|
+  = simple_form_for purchasable, url: [purchasable, :purchase], html: { id: 'purchase-form' }, method: :post do |f|
+    .has-errors
+    = render 'credit_card_fields'
     = f.button :button, t('button.purchase.new'), class: 'button button-large button-purple wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }

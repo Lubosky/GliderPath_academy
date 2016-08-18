@@ -84,11 +84,12 @@ en:
       create:
         success: "Thank you %{user}! You've just purchased %{purchase}."
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
-    payment_methods:
-      success: 'Your default payment method has been successfully updated.'
-      alert: 'Ooops! Something went wrong while updating your default payment method. Please try again!'
+    credit_cards:
+      success: 'Your credit card has been successfully updated.'
+      alert: "There was a problem processing your credit card: %{message}"
     payment:
       alert: 'Sorry, there has been a problem processing your payment...'
+      problem_with_card: "There was a problem processing your credit card: %{message}"
     workshops:
       create:
         success: 'Workshop has been successfuly created.'
@@ -171,9 +172,9 @@ en:
     purchase:
       new: 'Purchase'
       with_price: 'Purchase for $%{price}'
-    payment_method:
-      add: 'Add payment method'
-      save: 'Save payment method'
+    credit_card:
+      add: 'Update credit card'
+      save: 'Save credit card'
     disabled:
       canceling: 'Canceling...'
       completing: 'Completing...'

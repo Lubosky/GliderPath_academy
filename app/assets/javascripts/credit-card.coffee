@@ -1,8 +1,8 @@
 $(document).on 'turbolinks:load', ->
-  if !(typeof gon == 'undefined') &&  $('#purchase-form').length > 0
+  if !(typeof gon == 'undefined') &&  $('#credit-card-form').length > 0
     Stripe.setPublishableKey gon.stripe_public_key
 
-    $form = $('#purchase-form')
+    $form = $('#credit-card-form')
 
     stripeResponseHandler = (status, response) ->
       if response.error
@@ -14,7 +14,7 @@ $(document).on 'turbolinks:load', ->
         # Get the token
         token = response['id']
         # Insert the token into the form so it gets submitted to the server
-        $form.append $('<input type=\'hidden\' name=\'purchase[stripe_token]\' />').val(token)
+        $form.append $('<input type=\'hidden\' name=\'stripe_token\' />').val(token)
         # Submit the form
         $form.get(0).submit()
       return

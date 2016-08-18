@@ -2,7 +2,7 @@
   %td= charge.receipt_number
   %td= timestamp(charge)
   %td= charge.product
-  %td= charge.paypal_email.present? ? "PayPal" : "xxxx-#{charge.card_last4}"
+  %td= "xxxx-#{charge.card_last4}"
   %td= "$#{charge.amount.to_s}"
   %td
     = link_to account_charge_path(charge, format: :pdf) do

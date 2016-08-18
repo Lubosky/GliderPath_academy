@@ -17,12 +17,11 @@ class Section < ApplicationRecord
 
   protected
 
-    def set_position
-      if self.position.to_i.zero?
-        self.course.sections.each_with_index do |section, index|
-          section.update_attribute(:position, index + 1)
-        end
+  def set_position
+    if self.position.to_i.zero?
+      self.course.sections.each_with_index do |section, index|
+        section.update_attribute(:position, index + 1)
       end
     end
-
+  end
 end

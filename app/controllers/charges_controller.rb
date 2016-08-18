@@ -5,7 +5,7 @@ class ChargesController < ApplicationController
   def index
     @charges = policy_scope(Charge).order('created_at DESC')
     authorize @charges
-    gon.braintree_client_token = generate_braintree_client_token
+    gon.stripe_public_key = STRIPE_PUBLIC_KEY
   end
 
   def show
@@ -21,13 +21,8 @@ class ChargesController < ApplicationController
 
   private
 
-    def set_charge
-      @charge = Charge.find(params[:id])
-      authorize @charge
-    end
-
-    def generate_braintree_client_token
-      current_user.init_braintree_client_token
-    end
-
+  def set_charge
+    @charge = Charge.find(params[:id])
+    authorize @charge
+  end
 end

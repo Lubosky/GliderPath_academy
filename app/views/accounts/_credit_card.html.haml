@@ -1,0 +1,14 @@
+.box
+  .box-header
+    %h5.text-muted Default credit card:
+    %p.credit-card
+      %b #{current_user.credit_card.brand} xxxx-#{current_user.credit_card.last4}
+      %span.text-muted expiring on #{current_user.credit_card.exp_month}/#{current_user.credit_card.exp_year}
+    %button.button.button-default.button-small.button-box.pull-right{ data: { trigger: 'revealer', revealer_id: 'credit-card' } }
+      = t('button.credit_card.add')
+    .box-content.revealer{ data: { shelf_id: 'credit-card' } }
+      %hr
+      = simple_form_for account_credit_card_path, url: [:account, :credit_card], html: { id: 'credit-card-form' }, method: :patch do |f|
+        .has-errors
+        = render 'credit_card_fields'
+        = f.button :button, t('button.credit_card.save'), class: 'button button-green button-small wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }

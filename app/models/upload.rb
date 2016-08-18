@@ -15,8 +15,7 @@ class Upload < ApplicationRecord
 
   private
 
-    def set_uploader_id
-      self.uploader_id = User.current.id
-    end
-
+  def set_uploader_id
+    self.uploader_id = User.current.id
+  end
 end

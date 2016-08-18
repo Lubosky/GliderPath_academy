@@ -18,10 +18,10 @@
       %td USD $#{@charge.amount}
     %tr
       %td Charged to:
-      %td= @charge.paypal_email.present? ? "PayPal (#{@charge.paypal_email})" : "#{@charge.card_type} xxxx-#{@charge.card_last4}"
+      %td= @charge.card_brand "xxxx-#{@charge.card_last4}"
     %tr
       %td Transaction ID:
-      %td= @charge.braintree_transaction_id
+      %td= @charge.stripe_charge_id
 
 %hr
 

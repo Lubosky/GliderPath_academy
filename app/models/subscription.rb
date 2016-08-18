@@ -4,7 +4,7 @@ class Subscription < ApplicationRecord
 
   validates_presence_of :plan_id, :subscriber_id
 
-  scope :active, ->{ with_status :active }
+  scope :active, -> { with_status :active }
 
   state_machine :status, initial: :initial do
     state :initial
@@ -13,7 +13,7 @@ class Subscription < ApplicationRecord
     state :canceled
 
     event :activate do
-      transition [ :initial, :suspended, :canceled ] => :active
+      transition [:initial, :suspended, :canceled] => :active
     end
 
     event :suspend do
@@ -21,7 +21,34 @@ class Subscription < ApplicationRecord
     end
 
     event :cancel do
-      transition [ :active, :suspended ] => :canceled
+      transition [:active, :suspended] => :canceled
     end
+  end
+
+  delegate :stripe_plan_id, to: :plan, prefix: false
+
+  attr_accessor :stripe_token
+
+  def fulfill
+    transaction do
+      create_subscription
+      activate
+    end
+  end
+
+  private
+
+  def create_subscription
+    if create_stripe_subscription && save
+      self.stripe_subscription_id = stripe_subscription.id
+    end
+  end
+
+  def create_stripe_subscription
+    stripe_subscription.create
+  end
+
+  def stripe_subscription
+    @stripe_subscription ||= StripeSubscription.new(self)
   end
 end

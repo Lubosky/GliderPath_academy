@@ -42,20 +42,19 @@ class Course < ActiveRecord::Base
 
   private
 
-    def slug_source
-      self.name
-    end
+  def slug_source
+    self.name
+  end
 
-    def self.enrolled_courses_for(student)
-      self.joins(:enrollments).where(enrollments: { student: student })
-    end
+  def self.enrolled_courses_for(student)
+    self.joins(:enrollments).where(enrollments: { student: student })
+  end
 
-    def self.accessible_courses_for(student)
-      self.joins(:purchases).where(purchases: { purchaser: student }).where.not(id: self.enrolled_courses_for(student))
-    end
+  def self.accessible_courses_for(student)
+    self.joins(:purchases).where(purchases: { purchaser: student }).where.not(id: self.enrolled_courses_for(student))
+  end
 
-    def self.available_courses_for(student)
-      self.where.not(id: self.accessible_courses_for(student)).where.not(id: self.enrolled_courses_for(student))
-    end
-
+  def self.available_courses_for(student)
+    self.where.not(id: self.accessible_courses_for(student)).where.not(id: self.enrolled_courses_for(student))
+  end
 end
