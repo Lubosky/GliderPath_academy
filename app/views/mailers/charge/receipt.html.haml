@@ -9,7 +9,7 @@
   %table
     %tr
       %td Date:
-      %td= @charge.created_at.strftime('%b %e, %Y')
+      %td= @charge.created_at.to_s(:default)
     %tr
       %td Item:
       %td= @charge.product

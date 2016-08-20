@@ -1,6 +1,6 @@
 %tr
   %td= charge.receipt_number
-  %td= timestamp(charge)
+  %td= charge.created_at.to_s(:default)
   %td= charge.product
   %td= "xxxx-#{charge.card_last4}"
   %td= "$#{charge.amount.to_s}"

@@ -5,4 +5,4 @@
   .nine.columns.reset-mobile-column
     = render 'accounts/credit_card' if current_user.has_credit_card?
     = render 'charges'
-    = render partial: 'subscriptions/cancel' if current_user.has_active_subscription?
+    = render current_user.subscription if current_user.subscription
