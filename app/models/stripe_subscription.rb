@@ -12,9 +12,13 @@ class StripeSubscription
     end
   end
 
-  private
+  def reactivate
+    rescue_stripe_exception do
+      reactivate_subscription
+    end
+  end
 
-  attr_reader :stripe_customer
+  private
 
   def rescue_stripe_exception
     yield
@@ -26,7 +30,7 @@ class StripeSubscription
   end
 
   def ensure_customer_exists
-    @stripe_customer = StripeCustomer.new(
+    StripeCustomer.new(
       @subscription.subscriber,
       @subscription.stripe_token
     ).ensure_customer_exists
@@ -45,9 +49,20 @@ class StripeSubscription
     @id = subscription.id
   end
 
+  def reactivate_subscription
+    subscription = stripe_customer.subscriptions.first
+    subscription.plan = subscription.plan.id
+    subscription.save
+  end
+
   def stripe_subscription_attributes
     {
       plan: @subscription.stripe_plan_id
     }
+  end
+
+  def stripe_customer
+    @stripe_customer ||=
+      Stripe::Customer.retrieve(@subscription.stripe_customer_id)
   end
 end

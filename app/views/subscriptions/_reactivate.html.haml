@@ -1,0 +1,4 @@
+= form_for :reactivation, url: reactivation_path, html: { class: 'reactivate' } do |f|
+  = f.button t('button.subscription.reactivate'),
+    class: 'button button-green button-small relative pull-right',
+    data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.reactivating')}", tooltip: t('tooltip.reactivate'), tooltip_position: 'left middle' }

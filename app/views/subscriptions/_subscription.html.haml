@@ -7,10 +7,11 @@
         %b #{subscription.plan.name}
         active since #{subscription.created_at.to_s(:simple)}
       - unless subscription.scheduled_for_cancellation?
-        = link_to t('button.subscription.cancel'), cancel_subscription_path, class: 'button button-red button-small pull-right', method: :delete, data: { confirm: t('subscriptions.cancel.confirm'), disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.canceling')}" }
+        = render 'subscriptions/cancel'
       - if subscription.scheduled_for_cancellation?
         %p.subscription
           = t('subscriptions.cancellation_scheduled_on', date: subscription.scheduled_for_cancellation_on.to_s(:simple))
+        = render 'subscriptions/reactivate'
     - else
       %p.subscription
         = t('subscriptions.canceled_on', date: subscription.canceled_on.to_s(:simple))

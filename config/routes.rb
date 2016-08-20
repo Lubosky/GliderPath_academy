@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get '/terms' => 'pages#terms'
 
   # SUBSCRIPTION
+  resource :reactivation, only: [:create]
   resource :subscription, only: [:new, :create], path: 'subscribe'
   delete 'unsubscribe', to: 'subscriptions#destroy', as: 'cancel_subscription'
 

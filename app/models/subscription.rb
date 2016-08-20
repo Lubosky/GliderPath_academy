@@ -36,6 +36,7 @@ class Subscription < ApplicationRecord
     end
   end
 
+  delegate :stripe_customer_id, to: :subscriber
   delegate :stripe_plan_id, to: :plan, prefix: false
 
   attr_accessor :stripe_token
@@ -49,6 +50,11 @@ class Subscription < ApplicationRecord
 
   def scheduled_for_cancellation?
     scheduled_for_cancellation_on.present?
+  end
+
+  def reactivate
+    update_column(:scheduled_for_cancellation_on, nil)
+    stripe_subscription.reactivate
   end
 
   private

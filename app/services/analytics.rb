@@ -57,6 +57,10 @@ class Analytics
     track('Cancelled subscription')
   end
 
+  def track_subscription_reactivated
+    track('Subscription reactivated')
+  end
+
   def track_subscribed(plan:, revenue:)
     track('Subscribed',
       plan: plan,

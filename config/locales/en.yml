@@ -77,6 +77,9 @@ en:
         success: 'Awesome! You have been subscribed to the plan %{plan}.'
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
       cancel: 'Your subscription has been successfully canceled!'
+      reactivate:
+       success: "Awesome! Your subscription has been reactivated. You won't regret this!"
+       error: "Ooops! Looks like we couldn't do that for some reason."
     plans:
       not_found: "Ooops! Looks like you haven't choose any plan."
     purchases:
@@ -171,6 +174,7 @@ en:
     subscription:
       new: 'Subscribe'
       cancel: 'Cancel Subscription'
+      reactivate: 'Reactivate'
     purchase:
       new: 'Purchase'
       with_price: 'Purchase for $%{price}'
@@ -182,6 +186,7 @@ en:
       completing: 'Completing...'
       enrolling: 'Enrolling...'
       processing: 'Processing...'
+      reactivating: 'Reactivating...'
       saving: 'Saving...'
       sending: 'Sending...'
       signing_in: 'Signing in...'
@@ -199,6 +204,7 @@ en:
     unlock: "Enroll now to unlock the %{element}"
     unlocked: "Lesson unlocked"
     purchase: "Purchase now to unlock this %{element}"
+    reactivate: "You can reactivate your subscription without any interruption in service, just like you never left!"
 
   helpers:
     duration_in_hours:
