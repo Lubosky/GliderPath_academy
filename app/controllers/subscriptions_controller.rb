@@ -13,6 +13,7 @@ class SubscriptionsController < ApplicationController
     authorize :subscription
     @subscription = build_subscription(subscription_params)
     if @subscription.fulfill
+      track_subscription
       flash[:success] = t('flash.subscriptions.create.success', plan: plan.name)
       redirect_to root_path
     else
@@ -23,7 +24,10 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     authorize :subscription
-    current_user.cancel_subscription
+    @cancellation = Cancellation.new(
+      subscription: current_user.subscription
+    ).schedule
+
     flash[:info] = t('flash.subscriptions.cancel')
     redirect_to root_path
   end
@@ -64,5 +68,12 @@ class SubscriptionsController < ApplicationController
       flash[:info] = t('flash.plans.not_found')
       redirect_to root_path
     end
+  end
+
+  def track_subscription
+    analytics.track_subscribed(
+      plan: plan.name,
+      revenue: '99.0'.freeze
+    )
   end
 end

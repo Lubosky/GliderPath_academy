@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817163533) do
+ActiveRecord::Schema.define(version: 20160819142211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,11 +112,13 @@ ActiveRecord::Schema.define(version: 20160817163533) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.string   "stripe_subscription_id"
-    t.integer  "plan_id",                null: false
-    t.integer  "subscriber_id",          null: false
+    t.integer  "plan_id",                       null: false
+    t.integer  "subscriber_id",                 null: false
     t.string   "status"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.date     "canceled_on"
+    t.date     "scheduled_for_cancellation_on"
     t.index ["subscriber_id", "plan_id"], name: "index_subscriptions_on_subscriber_id_and_plan_id", using: :btree
   end
 

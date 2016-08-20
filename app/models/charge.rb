@@ -7,7 +7,7 @@ class Charge < ApplicationRecord
   after_commit :send_receipt
 
   def receipt_number
-    "#{created_at.strftime('%Y-%m-%d')}-#{id}"
+    "#{created_at.to_s(:receipt)}-#{id}"
   end
 
   def receipt
@@ -30,7 +30,7 @@ class Charge < ApplicationRecord
 
   def receipt_items
     items = [
-      ['Date',            "<b>#{created_at.strftime('%b %e, %Y')}"],
+      ['Date',            "<b>#{created_at.to_s(:default)}"],
       ['Account billed',  "<b>#{user.name}</b> (#{user.email})"],
       ['Item',            "<b>#{product}</b>"],
       ['Amount',          "<b>USD $#{amount}"],

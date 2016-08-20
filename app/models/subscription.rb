@@ -12,6 +12,17 @@ class Subscription < ApplicationRecord
     state :suspended
     state :canceled
 
+    after_transition canceled: :active do |subscription|
+      subscription.update_column(:canceled_on, nil)
+    end
+
+    after_transition any => :canceled do |subscription|
+      subscription.update(
+        canceled_on: Time.zone.today,
+        scheduled_for_cancellation_on: nil
+      )
+    end
+
     event :activate do
       transition [:initial, :suspended, :canceled] => :active
     end
@@ -34,6 +45,10 @@ class Subscription < ApplicationRecord
       create_subscription
       activate
     end
+  end
+
+  def scheduled_for_cancellation?
+    scheduled_for_cancellation_on.present?
   end
 
   private

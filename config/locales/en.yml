@@ -134,6 +134,8 @@ en:
     cancel:
       button: 'Cancel Subscription'
       confirm: "Are you sure you want to cancel? You'll no longer be able to access GliderPath Academy content except the content you've purchased."
+    canceled_on: 'Canceled on %{date}'
+    cancellation_scheduled_on: 'Scheduled for cancellation on %{date}'
   users:
     account:
       edit:

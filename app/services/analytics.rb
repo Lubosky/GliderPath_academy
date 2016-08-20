@@ -53,6 +53,17 @@ class Analytics
     track('Logged into Forum')
   end
 
+  def track_cancelled
+    track('Cancelled subscription')
+  end
+
+  def track_subscribed(plan:, revenue:)
+    track('Subscribed',
+      plan: plan,
+      revenue: revenue,
+    )
+  end
+
   private
 
     attr_reader :user
