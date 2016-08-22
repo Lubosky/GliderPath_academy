@@ -1,7 +1,7 @@
 .row
   .form-item.twelve.columns.reset-mobile-column
     %label{ for: :card_number, class: 'form-label' } Card number
-    = text_field_tag :card_number, nil, name: nil, value: '4242 4242 4242 4242', placeholder: '**** **** **** ****', data: { stripe: 'number' }
+    = text_field_tag :card_number, nil, name: nil, placeholder: '**** **** **** ****', autocomplete: 'off', data: { stripe: 'number' }
 .row
   .form-item.five.columns.reset-mobile-column
     %label{ for: :date_month, class: 'form-label' } Exp. month
@@ -11,4 +11,4 @@
     = select_year nil, { prompt: 'Year', start_year: Date.today.year, end_year: Date.today.year+10 }, { name: nil, data: { stripe: 'exp-year' } }
   .form-item.three.columns.reset-mobile-column
     %label{ for: :card_code, class: 'form-label' } CVC
-    = text_field_tag :card_code, nil, name: nil,  value: '123', placeholder: '123', data: { stripe: 'cvc' }
+    = text_field_tag :card_code, nil, name: nil, autocomplete: 'off', data: { stripe: 'cvc' }
