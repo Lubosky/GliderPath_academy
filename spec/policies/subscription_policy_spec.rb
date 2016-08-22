@@ -3,13 +3,9 @@ require 'spec_helper'
 RSpec.describe SubscriptionPolicy do
 
   let(:u1) { build_stubbed(:user) }
-  let(:u2) { build_stubbed(:user) }
+  let(:u2) { create(:user, :with_subscription) }
 
   subject { described_class }
-
-  before :each do
-    subscription = build_stubbed(:subscription, subscriber: u2)
-  end
 
   permissions :new? do
     it 'allows user to subscribe if user present' do

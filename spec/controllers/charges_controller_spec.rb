@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe ChargesController, type: :controller do
 
   let(:user) { create(:user) }
-  let(:charge) { create(:charge, :credit_card, user: user) }
+  let(:charge) { create(:charge, user: user) }
 
   describe 'GET #index' do
     before do

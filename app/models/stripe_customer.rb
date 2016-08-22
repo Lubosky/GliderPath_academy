@@ -49,6 +49,6 @@ class StripeCustomer
 
   def stripe_customer
     @stripe_customer ||=
-      Stripe::Customer.retrieve(user.stripe_customer_id)
+      Stripe::Customer.retrieve(id)
   end
 end

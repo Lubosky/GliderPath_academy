@@ -7,7 +7,6 @@ describe Subscription, type: :model do
       is_expected.to belong_to :plan
       is_expected.to belong_to :subscriber
     end
-
   end
 
   describe '#activate' do
@@ -48,4 +47,36 @@ describe Subscription, type: :model do
     end
   end
 
+  describe '#reactivate' do
+    it 'clears the scheduled_for_cancellation_on field' do
+      subscription = create(
+        :subscription,
+        scheduled_for_cancellation_on: Date.today
+      )
+      fake_subscription = spy(plan: double(id: 'plan'))
+      allow(subscription).
+        to receive(:stripe_subscription).
+        and_return(fake_subscription)
+
+      subscription.reactivate
+
+      expect(subscription.scheduled_for_cancellation_on).to be_nil
+    end
+  end
+
+  describe '#scheduled_for_cancellation?' do
+    it 'returns false if scheduled_for_cancellation_on is nil' do
+      subscription = Subscription.new(scheduled_for_cancellation_on: nil)
+
+      expect(subscription).not_to be_scheduled_for_cancellation
+    end
+
+    it 'returns true if scheduled_for_cancellation_on is not nil' do
+      subscription = Subscription.new(
+        scheduled_for_cancellation_on: Time.zone.today
+      )
+
+      expect(subscription).to be_scheduled_for_cancellation
+    end
+  end
 end

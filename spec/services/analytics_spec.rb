@@ -122,4 +122,21 @@ describe Analytics do
       expect(analytics).to have_tracked('Logged into Forum').for_user(user)
     end
   end
+
+  describe '#track_cancelled' do
+    it 'tracks that the user cancelled along with user email' do
+      analytics_instance.track_cancelled
+
+      expect(analytics).to have_tracked('Cancelled subscription').
+        for_user(user)
+    end
+  end
+
+  describe '#track_subscription_reactivated' do
+    it 'tracks that an account was reactivated before it cancelled' do
+      analytics_instance.track_subscription_reactivated
+
+      expect(analytics).to have_tracked('Subscription reactivated')
+    end
+  end
 end

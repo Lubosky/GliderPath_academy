@@ -23,34 +23,33 @@ RSpec.describe LessonsController, type: :controller do
   end
 
   describe 'POST #complete lesson' do
-
-    before :each do
-      student.confirm
-      login student
-      student.enroll(course)
-      enrolled_lesson = create(:enrolled_lesson, lesson: lesson, student: student)
-    end
-
     context 'when completed lesson is not the last lesson' do
+      it 'redirects to the next lesson within a course' do
+        confirm_and_login_user_with(student)
+        student.enroll(course)
+        create(:enrolled_lesson, lesson: lesson, student: student)
+        create(:lesson, section: section, position: 2)
 
-      before do
-        l2 = create(:lesson, section: section, position: 2)
-      end
-
-      it {
         post :complete, params: { course_id: course, id: lesson }
         expect(response).to redirect_to course_lesson_path(course, lesson.next_lesson)
-      }
-
+      end
     end
 
     context 'when completed lesson is last lesson' do
+      it 'redirects to the next lesson within a course' do
+        lesson = create(:lesson, section: section)
+        confirm_and_login_user_with(student)
+        student.enroll(course)
+        create(:enrolled_lesson, lesson: lesson, student: student)
 
-      it {
         post :complete, params: { course_id: course, id: lesson }
         expect(response).to redirect_to course_lesson_path(course, lesson)
-      }
-
+      end
     end
+  end
+
+  def confirm_and_login_user_with(user)
+    user.confirm
+    login user
   end
 end
