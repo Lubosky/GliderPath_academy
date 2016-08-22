@@ -6,6 +6,10 @@ FactoryGirl.define do
     "test#{n}@example.com"
   end
 
+  sequence :uuid do |n|
+    "uuid_#{n}"
+  end
+
   factory :user do
     first_name 'John'
     last_name 'Doe'
@@ -15,12 +19,34 @@ FactoryGirl.define do
     confirmed_at 2.hours.ago
 
     trait :instructor do
-      after(:create) {|user| user.add_role(:instructor)}
-    end
-    trait :admin do
-      after(:create) {|user| user.add_role(:admin)}
+      after(:create) { |user| user.add_role(:instructor) }
     end
 
+    trait :admin do
+      after(:create) { |user| user.add_role(:admin) }
+    end
+
+    trait :with_stripe do
+      stripe_customer_id 'cus12345'
+    end
+
+    trait :with_subscription do
+      stripe_customer_id 'cus12345'
+
+      after :create do |instance|
+        plan = create(:plan)
+        create(:subscription, plan: plan, subscriber: instance)
+      end
+    end
+
+    trait :with_inactive_subscription do
+      stripe_customer_id 'cus12345'
+
+      after :create do |instance|
+        instance.subscription <<
+          create(:inactive_subscription, subscriber: instance)
+      end
+    end
   end
 
   factory :course do
@@ -57,14 +83,22 @@ FactoryGirl.define do
 
   factory :plan do
     id 1
-    braintree_plan_id 'gliderpath_academy_monthly'
+    stripe_plan_id 'gliderpath_academy_monthly'
     name 'GliderPath Academy - Monthly'
   end
 
-  factory :subscription do
+  factory :subscription, aliases: [:active_subscription] do
     association :plan, factory: :plan
-    association :subscriber, factory: :user
+    association :subscriber, :with_stripe, factory: :user
     status 'active'
+
+    factory :scheduled_for_cancellation_subscription do
+      scheduled_for_cancellation_on { Time.zone.tomorrow }
+    end
+
+    factory :canceled_subscription do
+      canceled_on { Time.zone.today }
+    end
   end
 
   factory :purchase do
@@ -78,19 +112,7 @@ FactoryGirl.define do
     association :user, factory: :user
     product 'GliderPath Academy - Monthly'
     amount '99.0'
-    braintree_transaction_id '123456789'
-    trait :paypal do
-      braintree_payment_method 'PayPalAccount'
-      paypal_email email
-    end
-
-    trait :credit_card do
-      braintree_payment_method 'CreditCard'
-      card_type 'Visa'
-      card_exp_month '09'
-      card_exp_year '2027'
-      card_last4 '4242'
-    end
+    stripe_charge_id '123456789'
   end
 
   factory :upload do

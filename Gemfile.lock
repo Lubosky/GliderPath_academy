@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/Lubosky/fake_stripe.git
+  revision: 42551bad2726c71676bfb0ffdb7af5af0c02e65c
+  branch: total-count
+  specs:
+    fake_stripe (0.0.10.6)
+      capybara
+      sinatra
+      webmock
+
+GIT
   remote: git://github.com/cimon-io/purpur.git
   revision: 130be3512e5fcfca38449f619defd573c88386e0
   specs:
@@ -452,6 +462,7 @@ DEPENDENCIES
   dotenv-rails
   email_spec
   factory_girl_rails
+  fake_stripe!
   faker (~> 1.6)
   flamegraph
   foreman

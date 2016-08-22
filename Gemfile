@@ -76,6 +76,7 @@ group :test do
   gem 'capybara-email'
   gem 'climate_control'
   gem 'email_spec'
+  gem 'fake_stripe', github: 'Lubosky/fake_stripe', branch: 'total-count'
   gem 'poltergeist'
   gem 'rails-controller-testing'
   gem 'shoulda'
