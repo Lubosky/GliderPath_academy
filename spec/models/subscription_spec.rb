@@ -20,21 +20,10 @@ describe Subscription, type: :model do
     end
   end
 
-  describe '#suspend' do
-    it 'updates the subscription record by setting the status to "suspended"' do
-      subscription = create :subscription, status: 'active'
-
-      subscription.suspend
-      subscription.reload
-
-      expect(subscription.status).to eq 'suspended'
-    end
-  end
-
   describe '#cancel' do
     it 'updates the subscription record by setting the status to "canceled"' do
-      s1 = create :subscription, status: 'active', plan_id: 1
-      s2 = create :subscription, status: 'suspended', plan_id: 2
+      s1 = create :active_subscription, plan_id: 1
+      s2 = create :active_subscription, plan_id: 2
 
       s1.cancel
       s2.cancel

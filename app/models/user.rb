@@ -54,10 +54,6 @@ class User < ApplicationRecord
     self.subscription.present? && self.subscription.active?
   end
 
-  def has_suspended_subscription?
-    self.subscription.present? && self.subscription.suspended?
-  end
-
   def has_access_to?(feature)
     self.has_active_subscription? || self.purchased?(feature)
   end
