@@ -29,7 +29,7 @@ class User < ApplicationRecord
   has_many :purchases, foreign_key: :purchaser_id
   has_many :courses, through: :purchases, inverse_of: :purchasers, source: :purchasable, source_type: 'Course'
 
-  before_save :skip_confirmation_notification, on: :create
+  before_save :skip_confirmation_notification, :confirm_user, on: :create
   after_create :assign_default_role
 
   attachment :avatar, type: :image
@@ -91,6 +91,10 @@ class User < ApplicationRecord
 
   def self.current=(user)
     RequestStore.store[:current_user] = user
+  end
+
+  def confirm_user
+    ConfirmUserWorker.perform_in(25.minutes, id)
   end
 
   def skip_confirmation_notification
