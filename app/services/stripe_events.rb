@@ -3,6 +3,12 @@ class StripeEvents
     @event = event
   end
 
+  def customer_subscription_updated
+    if subscription
+      track_user_updated(subscription)
+    end
+  end
+
   def customer_subscription_deleted
     if subscription
       Cancellation.new(subscription: subscription).process
@@ -22,6 +28,10 @@ class StripeEvents
       )
       nil
     end
+  end
+
+  def track_user_updated(subscription)
+    Analytics.new(subscription.subscriber).track_updated
   end
 
   def stripe_subscription

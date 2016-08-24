@@ -24,6 +24,29 @@ describe StripeEvents do
     end
   end
 
+  describe '#customer_subscription_updated' do
+    context 'no local subscription record found' do
+      it 'sends notifications if no local subscription is found' do
+        allow(Rollbar).to receive(:error)
+
+        StripeEvents.new(event).customer_subscription_updated
+
+        expect(Rollbar).to have_received(:error).once
+      end
+    end
+
+    context 'when a local subscription record is found' do
+      it "tracks the user's updated properties" do
+        stub_subscription
+        tracker = stub_analytics
+
+        StripeEvents.new(event).customer_subscription_updated
+
+        expect(tracker).to have_received(:track_updated)
+      end
+    end
+  end
+
   private
 
   def stub_subscription
@@ -45,5 +68,15 @@ describe StripeEvents do
       'StripeSubscription',
       id: 'sub12345'
     )
+  end
+
+  def stub_analytics
+    stub_instance_as_spy Analytics
+  end
+
+  def stub_instance_as_spy(class_to_stub)
+    spy(class_to_stub.to_s).tap do |instance|
+      allow(class_to_stub).to receive(:new).and_return(instance)
+    end
   end
 end
