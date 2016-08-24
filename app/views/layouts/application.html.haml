@@ -2,12 +2,13 @@
 %html
   %head
     %title= [(content_for(:page_title) || title), t('titles.application')].compact.uniq.join(' | ')
-    = csrf_meta_tags
     = render 'meta'
+    = csrf_meta_tags
     = open_graph_tags
     = include_gon
     = stylesheet_link_tag 'application', media: 'all', data_turbolinks_track: true
-    = javascript_include_tag 'application', "#{STRIPE_JS_HOST}/v2/", data_turbolinks_track: true
+    = javascript_include_tag 'application', data_turbolinks_track: true
+    = javascript_include_tag "#{STRIPE_JS_HOST}/v2/", data_turbolinks_track: true, rel: 'preconnect', async: 'async', defer: 'defer'
 
   %body{ class: "#{body_css}" }
     = render 'flash_messages'
