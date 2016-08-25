@@ -222,5 +222,7 @@ en:
       progress?: 'You have in enroll in the course first.'
     enrollment_policy:
       create?: 'Subscribe to the plan or purchase this course to enroll.'
+    lesson_policy:
+      show?: "You don't have an access to this lesson. Please subscribe or purchase this course."
     subscription_policy:
       new?: 'You are already subscribed!'

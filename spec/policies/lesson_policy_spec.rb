@@ -2,28 +2,32 @@ require 'spec_helper'
 require 'pundit/rspec'
 
 RSpec.describe LessonPolicy do
-
-  let(:instructor) { create(:user, :instructor) }
-  let(:u1) { create(:user) }
-  let(:u2) { create(:user) }
-
   subject { described_class }
 
   before do
-    @course = create(:course, instructor: instructor)
+    @course = create(:course)
     @section = create(:section, course: @course)
     @lesson = create(:lesson, section: @section)
-    u1.enroll(@course)
   end
 
   permissions :show? do
-    it 'grants access to enrolled student' do
-      expect(subject).to permit(u1, @lesson)
+    it 'grants access to enrolled student if user has active subscription' do
+      user = create(:user, :with_subscription)
+      user.enroll(@course)
+
+      expect(subject).to permit(user, @lesson)
+    end
+
+    it 'denies access if student does not have active subscription' do
+      user = build_stubbed(:user)
+
+      expect(subject).not_to permit(user, @lesson)
     end
 
     it 'denies access if student not enrolled' do
-      expect(subject).not_to permit(u2, @lesson)
+      user = build_stubbed(:user, :with_subscription)
+
+      expect(subject).not_to permit(user, @lesson)
     end
   end
-
 end

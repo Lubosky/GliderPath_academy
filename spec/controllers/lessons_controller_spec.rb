@@ -2,7 +2,6 @@ require 'spec_helper'
 
 RSpec.describe LessonsController, type: :controller do
 
-  let(:student) { create(:user) }
   let(:course) { create(:course) }
   let(:section) { create(:section, course: course) }
   let(:lesson) { create(:lesson, section: section, position: 1) }
@@ -10,6 +9,7 @@ RSpec.describe LessonsController, type: :controller do
   describe 'GET #show' do
 
     before do
+      student = create(:user, :with_subscription)
       student.confirm
       login student
       student.enroll(course)
@@ -25,6 +25,7 @@ RSpec.describe LessonsController, type: :controller do
   describe 'POST #complete lesson' do
     context 'when completed lesson is not the last lesson' do
       it 'redirects to the next lesson within a course' do
+        student = create(:user, :with_subscription)
         confirm_and_login_user_with(student)
         student.enroll(course)
         create(:enrolled_lesson, lesson: lesson, student: student)
@@ -37,6 +38,7 @@ RSpec.describe LessonsController, type: :controller do
 
     context 'when completed lesson is last lesson' do
       it 'redirects to the next lesson within a course' do
+        student = create(:user, :with_subscription)
         lesson = create(:lesson, section: section)
         confirm_and_login_user_with(student)
         student.enroll(course)
