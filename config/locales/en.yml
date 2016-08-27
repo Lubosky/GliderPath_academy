@@ -80,6 +80,7 @@ en:
       create:
         success: 'Awesome! You have been subscribed to the plan %{plan}.'
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
+      invalid_coupon: 'The coupon code %{code} is no longer valid and has been removed.'
       reactivate:
        success: "Awesome! Your subscription has been reactivated. You won't regret this!"
        error: "Ooops! Looks like we couldn't do that for some reason."
@@ -90,6 +91,7 @@ en:
       create:
         success: "Thank you %{user}! You've just purchased %{purchase}."
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
+      invalid_coupon: 'The coupon code %{code} is no longer valid and has been removed.'
     credit_cards:
       success: 'Your credit card has been successfully updated.'
       alert: "There was a problem processing your credit card: %{message}"

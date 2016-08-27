@@ -5,20 +5,26 @@ class SubscriptionsController < ApplicationController
 
   def new
     authorize :subscription
-    gon.stripe_public_key = STRIPE_PUBLIC_KEY
-    @subscription = build_subscription({})
+    build_subscription({}) do |subscription|
+      gon.stripe_public_key = STRIPE_PUBLIC_KEY
+      @subscription = subscription
+      render :new
+    end
   end
 
   def create
     authorize :subscription
-    @subscription = build_subscription(subscription_params)
-    if @subscription.fulfill
-      track_subscription
-      flash[:success] = t('flash.subscriptions.create.success', plan: plan.name)
-      redirect_to root_path
-    else
-      flash[:alert] = t('flash.subscriptions.create.error')
-      render :new
+    build_subscription(subscription_params) do |subscription|
+      success = subscription.fulfill
+      if success
+        session.delete(:coupon)
+        track_subscription
+        redirect_after_subscription
+      else
+        @subscription = subscription
+        flash[:alert] = t('flash.subscriptions.create.error')
+        render :new
+      end
     end
   end
 
@@ -36,13 +42,26 @@ class SubscriptionsController < ApplicationController
 
   def build_subscription(arguments)
     subscription = Subscription.where(subscriber: current_user).first_or_initialize
-    subscription.attributes = arguments.merge(default_params)
-    subscription
+    subscription.attributes = arguments
+        .merge(default_params)
+        .merge(coupon_params)
+
+    if subscription.has_invalid_coupon?
+      redirect_from_invalid_coupon
+    else
+      yield subscription
+    end
   end
 
   def default_params
     {
       plan: plan
+    }
+  end
+
+  def coupon_params
+    {
+      stripe_coupon_id: session[:coupon]
     }
   end
 
@@ -68,6 +87,11 @@ class SubscriptionsController < ApplicationController
       flash[:info] = t('flash.plans.not_found')
       redirect_to root_path
     end
+  end
+
+  def redirect_after_subscription
+    flash[:success] = t('flash.subscriptions.create.success', plan: plan.name)
+    redirect_to root_path
   end
 
   def track_subscription
