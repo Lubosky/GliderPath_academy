@@ -32,7 +32,7 @@ class Subscription < ApplicationRecord
   end
 
   delegate :stripe_customer_id, to: :subscriber
-  delegate :stripe_plan_id, to: :plan, prefix: false
+  delegate :interval_count, :interval_unit, :price, :stripe_plan_id, to: :plan
 
   attr_accessor :stripe_coupon_id, :stripe_token
 

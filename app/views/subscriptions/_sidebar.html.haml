@@ -5,8 +5,8 @@
       .title= @plan.name
       .order-price
         %span.currency $
-        %span.price 49
-        %span.term /mo
+        %span.price= @subscription.price
+        %span.term / #{ @subscription.interval_unit }
     .table-row
       %div Unlimited Access to All Courses
       = icon_tag 'check'
@@ -25,13 +25,18 @@
     .divider
     .table-row
       %div Billing Cycle
-      %div Every 1 Month
+      %div Every #{ subscription_interval(@subscription) }
+    - if @subscription.stripe_coupon_id
+      .table-row
+        %div Coupon Applied
+        .sbold= @subscription.stripe_coupon_id
     .divider
     .table-row.table-header
       .title Total Due Today
-      .order-price.total
-        %span.currency $
-        %span.price 49
+      = checkout_price(@subscription)
+    - if @subscription.stripe_coupon_id
+      .table-row.table-note
+        .text-muted.content-center= subscription_with_coupon(@subscription)
   .order-summary-footer
     %p.text-small.text-muted.uppercase.content-center
       = icon_tag 'lock', class: 'icon-green'
