@@ -1,7 +1,5 @@
 $(document).on 'turbolinks:load', ->
   if !(typeof gon == 'undefined') &&  $('#credit-card-form').length > 0
-    Stripe.setPublishableKey gon.stripe_public_key
-
     $form = $('#credit-card-form')
 
     stripeResponseHandler = (status, response) ->
@@ -20,6 +18,7 @@ $(document).on 'turbolinks:load', ->
       return
 
     $form.submit (event) ->
+      Stripe.setPublishableKey gon.stripe_public_key
 
       byAttr = (attr) ->
         $form.find('[data-stripe=\'' + attr + '\']')

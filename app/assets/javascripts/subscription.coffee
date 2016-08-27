@@ -1,7 +1,5 @@
 $(document).on 'turbolinks:load', ->
   if !(typeof gon == 'undefined') &&  $('#subscription-form').length > 0
-    Stripe.setPublishableKey gon.stripe_public_key
-
     $form = $('#subscription-form')
 
     stripeResponseHandler = (status, response) ->
@@ -20,6 +18,7 @@ $(document).on 'turbolinks:load', ->
       return
 
     $form.submit (event) ->
+      Stripe.setPublishableKey gon.stripe_public_key
 
       byAttr = (attr) ->
         $form.find('[data-stripe=\'' + attr + '\']')
