@@ -56,6 +56,9 @@ en:
       success: 'Your message has been sent successfully. Well get back to you as soon as possible. Thank you.'
       error: 'Oh no! There was a problem with your form submission. Please check your input and try again.'
       script_error: 'The message could not be delivered! The rabbits have been nibbling the cables again...'
+    coupons:
+      invalid: 'The coupon code you supplied is not valid.'
+      success: 'Your coupon %{code} was processed successfully. The discount will be applied at checkout.'
     courses:
       create:
         success: 'Course has been successfuly created.'
@@ -73,10 +76,10 @@ en:
       error: 'Ooops! We are having trouble enrolling you in this course. Please try again.'
       alert: 'You are already enrolled in this course.'
     subscriptions:
+      cancel: 'Your subscription has been successfully canceled!'
       create:
         success: 'Awesome! You have been subscribed to the plan %{plan}.'
         error: 'Ooops! Something went wrong while processing your payment. Please try again!'
-      cancel: 'Your subscription has been successfully canceled!'
       reactivate:
        success: "Awesome! Your subscription has been reactivated. You won't regret this!"
        error: "Ooops! Looks like we couldn't do that for some reason."

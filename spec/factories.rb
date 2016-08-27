@@ -2,6 +2,10 @@ require 'refile/file_double'
 
 FactoryGirl.define do
 
+  sequence :code do |n|
+    "code#{n}"
+  end
+
   sequence :email do |n|
     "test#{n}@example.com"
   end
@@ -49,12 +53,35 @@ FactoryGirl.define do
     end
   end
 
+  factory :coupon do
+    transient do
+      code
+      amount_off 2500
+      duration 'forever'
+      duration_in_months nil
+      percent_off nil
+    end
+
+    initialize_with { new(code) }
+    to_create {}
+
+    after(:create) do |_, attributes|
+      Stripe::Coupon.create(
+        id: attributes.code,
+        amount_off: attributes.amount_off,
+        duration: attributes.duration,
+        duration_in_months: attributes.duration_in_months,
+        percent_off: attributes.percent_off
+      )
+    end
+  end
+
   factory :course do
     sequence(:name) { |n| "Course ##{n}" }
     short_description Faker::Lorem.paragraph(2)
     description 'Course description #1'
     price 99.99
-    association :instructor, factory: [ :user, :instructor ]
+    association :instructor, factory: [:user, :instructor]
   end
 
   factory :section do
@@ -136,7 +163,7 @@ FactoryGirl.define do
     short_description 'Workshop short description'
     notes 'Workshop notes'
     price 9.99
-    association :instructor, factory: [ :user, :instructor ]
+    association :instructor, factory: [:user, :instructor]
     association :video, factory: :video
   end
 
