@@ -4,12 +4,20 @@ class Purchase < ApplicationRecord
 
   validates :purchaser_id, uniqueness: { scope: [:purchasable_id, :purchasable_type] }
 
-  attr_accessor :stripe_token, :product_name, :product_price
+  attr_accessor :stripe_coupon_id, :stripe_token, :name, :price
 
   def fulfill
     transaction do
       create_purchase
     end
+  end
+
+  def coupon
+    @coupon ||= Coupon.new(stripe_coupon_id)
+  end
+
+  def has_invalid_coupon?
+    stripe_coupon_id.present? && !coupon.valid?
   end
 
   private
