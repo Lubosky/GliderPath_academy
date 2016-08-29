@@ -32,15 +32,23 @@ class Subscription < ApplicationRecord
   end
 
   delegate :stripe_customer_id, to: :subscriber
-  delegate :stripe_plan_id, to: :plan, prefix: false
+  delegate :interval_count, :interval_unit, :price, :stripe_plan_id, to: :plan
 
-  attr_accessor :stripe_token
+  attr_accessor :stripe_coupon_id, :stripe_token
 
   def fulfill
     transaction do
       create_subscription
       activate
     end
+  end
+
+  def coupon
+    @coupon ||= Coupon.new(stripe_coupon_id)
+  end
+
+  def has_invalid_coupon?
+    stripe_coupon_id.present? && !coupon.valid?
   end
 
   def scheduled_for_cancellation?

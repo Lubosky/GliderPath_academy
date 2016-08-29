@@ -38,12 +38,40 @@ class StripeCharge
     @id = charge.id
   end
 
+  def charge_amount
+    if @purchase.stripe_coupon_id.blank?
+      @purchase.price
+    else
+      @purchase.coupon.apply(@purchase.price)
+    end
+  end
+
+  def amount_in_cents
+    (charge_amount * 100).to_i
+  end
+
   def stripe_charge_attributes
+    base_charge_attributes.merge(coupon_attributes)
+  end
+
+  def base_charge_attributes
     {
-      amount: (@purchase.product_price * 100).to_i,
+      amount: amount_in_cents,
       currency: 'usd',
       customer: stripe_customer.id,
-      description: @purchase.product_name
+      description: @purchase.name
     }
+  end
+
+  def coupon_attributes
+    if @purchase.stripe_coupon_id.present?
+      {
+        metadata: {
+          coupon: @purchase.stripe_coupon_id
+        }
+      }
+    else
+      {}
+    end
   end
 end

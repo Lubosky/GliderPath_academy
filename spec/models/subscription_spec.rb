@@ -36,6 +36,75 @@ describe Subscription, type: :model do
     end
   end
 
+  context '#fulfill' do
+    it 'creates a subscription with proper stripe_subscription_id' do
+      subscription = build(:subscription)
+      stripe_subscription = 'sub_3ewdhCIki3FxWt'
+
+      subscription.fulfill
+      result = subscription.stripe_subscription_id
+
+      expect(result).to eq(stripe_subscription)
+    end
+
+    it 'does not fulfill with a bad credit card' do
+      stripe_subscription = double('stripe_subscription', create: false)
+      allow(StripeSubscription).to receive(:new).
+        and_return(stripe_subscription)
+      subscription = build(:subscription)
+
+      expect(subscription.fulfill).to be_falsey
+    end
+  end
+
+  context '#coupon' do
+    it 'returns a coupon from stripe_coupon_id' do
+      create(:coupon, code: '5OFF')
+      subscription = build(:subscription, stripe_coupon_id: '5OFF')
+
+      expect(subscription.coupon.code).to eq '5OFF'
+    end
+  end
+
+  context '#has_invalid_coupon?' do
+    context 'with no coupon' do
+      it 'returns false' do
+        subscription = build(:subscription, stripe_coupon_id: nil)
+
+        expect(subscription).not_to have_invalid_coupon
+      end
+    end
+
+    context 'with a valid coupon' do
+      it 'returns false' do
+        subscription = build(
+          :subscription,
+          stripe_coupon_id: coupon_code(valid?: true)
+        )
+
+        expect(subscription).not_to have_invalid_coupon
+      end
+    end
+
+    context 'with an invalid coupon' do
+      it 'returns true' do
+        subscription = build(
+          :subscription,
+          stripe_coupon_id: coupon_code(valid?: false)
+        )
+
+        expect(subscription).to have_invalid_coupon
+      end
+    end
+
+    def coupon_code(*attributes)
+      generate(:code).tap do |code|
+        coupon = double(Coupon, *attributes)
+        allow(Coupon).to receive(:new).with(code).and_return(coupon)
+      end
+    end
+  end
+
   describe '#reactivate' do
     it 'clears the scheduled_for_cancellation_on field' do
       subscription = create(

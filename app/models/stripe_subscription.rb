@@ -49,16 +49,28 @@ class StripeSubscription
     @id = subscription.id
   end
 
+  def stripe_subscription_attributes
+    base_subscription_attributes.merge(coupon_attributes)
+  end
+
   def reactivate_subscription
     subscription = stripe_customer.subscriptions.first
     subscription.plan = subscription.plan.id
     subscription.save
   end
 
-  def stripe_subscription_attributes
+  def base_subscription_attributes
     {
       plan: @subscription.stripe_plan_id
     }
+  end
+
+  def coupon_attributes
+    if @subscription.stripe_coupon_id.present?
+      { coupon: @subscription.stripe_coupon_id }
+    else
+      {}
+    end
   end
 
   def stripe_customer

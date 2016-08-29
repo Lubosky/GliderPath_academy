@@ -16,11 +16,14 @@
       %div Direct Access to the Instructor
       = icon_tag 'check'
     .divider
+    - if @purchase.stripe_coupon_id
+      .table-row
+        %div Coupon Applied
+        .sbold= @purchase.stripe_coupon_id
+      .divider
     .table-row.table-header
       .title Total Due Today
-      .order-price.total
-        %span.currency $
-        %span.price= purchasable.price
+      = checkout_price(@purchase)
   .order-summary-footer
     %p.text-small.text-muted.uppercase.content-center
       = icon_tag 'lock', class: 'icon-green'

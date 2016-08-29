@@ -7,4 +7,26 @@ class Plan < ApplicationRecord
 
   validates_presence_of :name
   validates :stripe_plan_id, presence: true, uniqueness: true, inclusion: NAMES
+
+  def price
+    cents_to_dollars(stripe_plan.amount.to_f)
+  end
+
+  def interval_unit
+    stripe_plan.interval
+  end
+
+  def interval_count
+    stripe_plan.interval_count
+  end
+
+  private
+
+  def cents_to_dollars(amount)
+    amount / 100
+  end
+
+  def stripe_plan
+    @stripe_plan ||= Stripe::Plan.retrieve(stripe_plan_id)
+  end
 end

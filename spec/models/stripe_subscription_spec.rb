@@ -5,8 +5,6 @@ describe StripeSubscription do
     context 'when there is an existing Stripe Customer record' do
       it "updates the user's credit card" do
         customer = stub_existing_customer
-        allow(customer).to receive(:card=)
-        allow(customer).to receive(:save)
 
         subscription = build(
           :subscription,
@@ -22,8 +20,6 @@ describe StripeSubscription do
 
       it "updates the customer's plan" do
         customer = stub_existing_customer
-        allow(customer).to receive(:card=)
-        allow(customer).to receive(:save)
 
         subscription = build(:subscription, plan: create(:plan))
         stripe_subscription = StripeSubscription.new(subscription)
@@ -32,6 +28,20 @@ describe StripeSubscription do
 
         new_subscription = customer.subscriptions.first
         expect(new_subscription[:plan]).to eq subscription.stripe_plan_id
+      end
+
+      it 'updates the subscription with the given coupon' do
+        customer = stub_existing_customer
+        coupon = double('coupon', amount_off: 25)
+        allow(Stripe::Coupon).to receive(:retrieve).and_return(coupon)
+        subscription = build(:subscription, stripe_coupon_id: '25OFF')
+        stripe_subscription = StripeSubscription.new(subscription)
+
+        stripe_subscription.create
+
+        new_subscription = customer.subscriptions.first
+        expect(new_subscription[:plan]).to eq subscription.plan.stripe_plan_id
+        expect(new_subscription[:coupon]).to eq '25OFF'
       end
     end
 
@@ -78,6 +88,8 @@ describe StripeSubscription do
   def stub_existing_customer
     subscriptions = FakeSubscriptionList.new([FakeSubscription.new])
     customer = double('customer', subscriptions: subscriptions)
+    allow(customer).to receive(:card=)
+    allow(customer).to receive(:save)
     allow(Stripe::Customer).to receive(:retrieve).and_return(customer)
     customer
   end

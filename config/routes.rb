@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     resource :credit_card, only: [:update]
   end
 
+  # COUPONS
+  resources :coupons, only: [:show], path: 'coupon'
+
   # COURSES
   resources :courses do
     put :sort, on: :member, as: :sortable
