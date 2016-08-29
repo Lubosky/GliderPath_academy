@@ -89,6 +89,12 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def redirect_from_invalid_coupon
+    flash[:warning] = t('flash.subscriptions.invalid_coupon', code: session[:coupon])
+    session.delete(:coupon)
+    redirect_to new_subscription_path(plan: params[:plan])
+  end
+
   def redirect_after_subscription
     flash[:success] = t('flash.subscriptions.create.success', plan: plan.name)
     redirect_to root_path
