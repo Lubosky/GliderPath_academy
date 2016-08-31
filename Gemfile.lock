@@ -222,6 +222,7 @@ GEM
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -297,6 +298,11 @@ GEM
       nokogiri (~> 1.6.0)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.4)
     railties (5.0.0.1)
       actionpack (= 5.0.0.1)
       activesupport (= 5.0.0.1)
@@ -307,6 +313,7 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     redis (3.3.1)
+    ref (2.0.0)
     refile-mini_magick (0.2.0)
       mini_magick (~> 4.0)
       refile (~> 0.5)
@@ -409,6 +416,9 @@ GEM
     stripe_event (1.5.0)
       activesupport (>= 3.1)
       stripe (~> 1.6)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -487,6 +497,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 5.0)
   rails-controller-testing
+  rails_12factor
   refile!
   refile-mini_magick
   request_store
@@ -512,6 +523,7 @@ DEPENDENCIES
   state_machines-activerecord (~> 0.4.0)
   stripe
   stripe_event
+  therubyracer
   timecop
   title
   turbolinks (~> 5.0)

@@ -86,3 +86,8 @@ group :test do
   gem 'timecop'
   gem 'webmock'
 end
+
+group :production do
+  gem 'rails_12factor'
+  gem 'therubyracer', require: 'v8'
+end
