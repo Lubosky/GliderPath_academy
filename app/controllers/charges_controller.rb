@@ -5,7 +5,6 @@ class ChargesController < ApplicationController
   def index
     @charges = policy_scope(Charge).order('created_at DESC')
     authorize @charges
-    gon.stripe_public_key = STRIPE_PUBLIC_KEY
   end
 
   def show

@@ -6,7 +6,6 @@ class PurchasesController < ApplicationController
   def new
     authorize :purchase
     build_purchase({}) do |purchase|
-      gon.stripe_public_key = STRIPE_PUBLIC_KEY
       @purchase = purchase
     end
   end

@@ -6,7 +6,6 @@ class SubscriptionsController < ApplicationController
   def new
     authorize :subscription
     build_subscription({}) do |subscription|
-      gon.stripe_public_key = STRIPE_PUBLIC_KEY
       @subscription = subscription
       render :new
     end
