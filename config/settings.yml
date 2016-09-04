@@ -24,5 +24,4 @@ company:
 social:
   twitter: '@GliderPath'
 
-#TODO: Add Google Analytics tracking code
-google_analytics_id: ''
+google_analytics_id: 'UA-83635653-1'

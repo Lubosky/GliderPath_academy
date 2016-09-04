@@ -28,11 +28,11 @@ module GliderPathAcademy
     config.i18n.default_locale = :en
     I18n.config.enforce_available_locales = true
 
-    config.action_mailer.default_url_options = { host: ENV.fetch('SMTP_1_DOMAIN', 'lvh.me:3000') }
+    config.action_mailer.default_url_options = { host: ENV.fetch('SMTP_1_DOMAIN', 'lvh.me:5000') }
     config.action_mailer.smtp_settings = {
       address: ENV.fetch('SMTP_1_ADDRESS', 'localhost'),
       port: ENV.fetch('SMTP_1_PORT', 1025).to_i,
-      domain: ENV.fetch('SMTP_1_DOMAIN', 'lvh.me:3000'),
+      domain: ENV.fetch('SMTP_1_DOMAIN', 'lvh.me:5000'),
       authentication: ENV.fetch('SMTP_1_AUTHENTICATION', nil),
       enable_starttls_auto: ENV.fetch('SMTP_1_ENABLE_STARTTLS_AUTO', 'false') == 'true',
       user_name: ENV.fetch('SMTP_1_USER_NAME', nil),
