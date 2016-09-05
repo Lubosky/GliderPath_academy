@@ -6,19 +6,19 @@
     = render 'logo'
     %ul.menu-list
       %li.menu-item.hide-on-desktop
-        = link_to t('home'), root_path
+        = link_to t('navigation.home'), root_path
       - if user_signed_in?
         %li.menu-item.hide-on-mobile
-          = link_to t('dashboard'), root_path
+          = link_to t('navigation.dashboard'), root_path
       %li.menu-item
-        = link_to t('courses'), courses_path
+        = link_to t('navigation.courses'), courses_path
       %li.menu-item
-        = link_to t('workshops'), workshops_path
+        = link_to t('navigation.workshops'), workshops_path
       - if user_signed_in?
         %li.menu-item
-          = link_to t('forum'), forum_path
+          = link_to t('navigation.forum'), forum_path
         %li.menu-item.bordered.hide-on-desktop
-          = link_to t('sign_out'), destroy_user_session_path, method: :delete
+          = link_to t('button.account.sign_out'), destroy_user_session_path, method: :delete
         %li.menu-item.menu-profile
           = link_to 'javascript:void(0)', data: { toggle: 'dropdown' } do
             %figure.avatar

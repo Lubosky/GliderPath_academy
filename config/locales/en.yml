@@ -116,6 +116,13 @@ en:
     google: 'GliderPath on Google Plus'
     linkedin: 'GliderPath on LinkedIn'
 
+  navigation:
+    courses: 'Courses'
+    dashboard: 'Dashboard'
+    forum: 'Forum'
+    home: 'Home'
+    workshops: 'Workshops'
+
   footer:
     about: 'About'
     contact: 'Contact Us'
@@ -126,6 +133,12 @@ en:
     support: 'Support'
     terms: 'Terms of Service'
     webinars: 'Webinars'
+    workshops: 'Workshops'
+
+  courses:
+    admin: 'Admin'
+    curriculum: 'Curriculum'
+    description: 'Description'
 
   lessons:
     count:
@@ -137,6 +150,12 @@ en:
     complete: 'Complete & Continue'
     notes: 'Lesson Notes'
     attachments: 'Attachments'
+    questions: 'Questions'
+
+  workshops:
+    attachments: 'Attachments'
+    notes: 'Workshop Notes'
+    questions: 'Questions'
 
   subscriptions:
     cancel:
@@ -148,12 +167,14 @@ en:
       forever: '%{final_price}'
       once: '%{final_price} the first month, then %{full_price}'
       repeating: '%{final_price} for %{duration_in_months} months, then %{full_price}'
+
   users:
     account:
       edit:
         profile: 'Edit Profile'
         email: 'Email & Password'
       show: 'View Profile'
+      billing: 'Billing'
     email: 'Email'
     password: 'Password'
     first_name: 'First Name'
