@@ -5,7 +5,9 @@ $(document).on 'turbolinks:load', ->
     stripeResponseHandler = (status, response) ->
       if response.error
         # Re-enable the submit button
-        $form.find('button').removeAttr 'disabled'
+        $button = $form.find('button')
+        $button.removeAttr 'disabled'
+        jQuery.rails.enableFormElement($button)
         # show the errors on the form
         $('.has-errors').html response.error.message
       else
@@ -24,7 +26,9 @@ $(document).on 'turbolinks:load', ->
         $form.find('[data-stripe=\'' + attr + '\']')
 
       # Disable the submit button to prevent repeated clicks
-      $form.find('button').prop 'disabled', false
+      $button = $form.find('button')
+      $button.prop 'disabled', true
+      jQuery.rails.disableFormElement($button)
       # createToken returns immediately
       # The supplied callback submits the form if there are no errors
       Stripe.createToken {
