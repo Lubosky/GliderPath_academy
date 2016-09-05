@@ -29,8 +29,9 @@ class User < ApplicationRecord
   has_many :purchases, foreign_key: :purchaser_id
   has_many :courses, through: :purchases, inverse_of: :purchasers, source: :purchasable, source_type: 'Course'
 
-  before_save :skip_confirmation_notification, :confirm_user, on: :create
+  before_save :skip_confirmation_notification, on: :create
   after_create :assign_default_role
+  after_commit :confirm_user, on: :create
 
   attachment :avatar, type: :image
 
