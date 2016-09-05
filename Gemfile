@@ -87,6 +87,6 @@ group :test do
 end
 
 group :production do
+  gem 'mini_racer'
   gem 'rails_12factor'
-  gem 'therubyracer', require: 'v8'
 end

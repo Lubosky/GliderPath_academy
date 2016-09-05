@@ -217,7 +217,7 @@ GEM
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.13)
+    libv8 (5.0.71.48.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -226,6 +226,8 @@ GEM
     mime-types (2.99.2)
     mini_magick (4.5.1)
     mini_portile2 (2.1.0)
+    mini_racer (0.1.4)
+      libv8 (~> 5.0, < 5.1.11)
     minitest (5.9.0)
     multi_json (1.12.1)
     mustermann (1.0.0.beta2)
@@ -308,7 +310,6 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     redis (3.3.1)
-    ref (2.0.0)
     refile-mini_magick (0.2.0)
       mini_magick (~> 4.0)
       refile (~> 0.5)
@@ -411,9 +412,6 @@ GEM
     stripe_event (1.5.0)
       activesupport (>= 3.1)
       stripe (~> 1.6)
-    therubyracer (0.12.2)
-      libv8 (~> 3.16.14.0)
-      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -477,6 +475,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mail_form!
+  mini_racer
   neat (~> 1.8)
   newrelic_rpm
   normalize-rails
@@ -517,7 +516,6 @@ DEPENDENCIES
   state_machines-activerecord (~> 0.4.0)
   stripe
   stripe_event
-  therubyracer
   timecop
   title
   turbolinks (~> 5.0)
