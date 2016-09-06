@@ -1,5 +1,4 @@
 ---
-:pidfile: tmp/pids/worker.pid
 :concurrency: 1
 :production:
   :concurrency: 5
