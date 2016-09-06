@@ -16,5 +16,5 @@
             = f.input :password_confirmation, label: 'Confirm your new password', required: true, wrapper_html: { class: 'twelve columns reset-mobile-column' }
           .row
             .form-item.twelve.columns.reset-mobile-column
-              = f.button :button, = t('devise.passwords.password_reset.button'), class: 'button-green wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }
+              = f.button :button, t('devise.passwords.password_reset.button'), class: 'button-green wide', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.processing')}" }
         = render 'devise/shared/links'
