@@ -2,6 +2,7 @@ application:
   company: 'GliderPath Limited'
   name: 'GliderPath Academy'
   mailer: 'gliderbot@gliderpath.com'
+  mailer_sender: 'GliderPath Academy <academy@gliderpath.com>'
 
 links:
   facebook: 'https://www.facebook.com/GliderPath'
