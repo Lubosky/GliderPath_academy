@@ -28,6 +28,9 @@ module GliderPathAcademy
     config.i18n.default_locale = :en
     I18n.config.enforce_available_locales = true
 
-    config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'] }
+    config.action_mailer.default_url_options = {
+      host: ENV['APP_DOMAIN'],
+      protocol: 'https'
+    }
   end
 end
