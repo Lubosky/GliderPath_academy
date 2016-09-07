@@ -29,7 +29,7 @@
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
           = t('courses.description')
         .tab-content
-          = @course.description
+          = format_markdown @course.description
       %li.tab-header
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
           = t('courses.curriculum')
