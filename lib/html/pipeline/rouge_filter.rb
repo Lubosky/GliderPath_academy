@@ -1,4 +1,3 @@
-require 'html/pipeline'
 require 'rouge'
 require 'active_support/core_ext/string/inflections'
 
@@ -7,7 +6,7 @@ module HTML
     class RougeFilter < HTML::Pipeline::Filter
       def call
         doc.search('pre').each do |node|
-          default   = must_str(context[:highlight] && context[:highlight].to_s)
+          default = must_str(context[:highlight] && context[:highlight].to_s)
           next unless lang = node['lang'] || default
           next unless lexer = lexer_for(lang)
           node.css('br').each { |br| br.replace("\n") } if replace_br
