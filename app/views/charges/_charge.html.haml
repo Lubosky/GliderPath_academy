@@ -1,9 +1,10 @@
-%tr
-  %td= charge.receipt_number
-  %td= charge.created_at.to_s(:default)
-  %td= charge.product
-  %td= "xxxx-#{charge.card_last4}"
-  %td= "$#{charge.amount.to_s}"
-  %td
-    = link_to account_charge_path(charge, format: :pdf) do
-      = icon_tag :receipt, size: :xl
+- cache [controller_name, action_name, current_user.id, charge] do
+  %tr
+    %td= charge.receipt_number
+    %td= charge.created_at.to_s(:default)
+    %td= charge.product
+    %td= "xxxx-#{charge.card_last4}"
+    %td= "$#{charge.amount.to_s}"
+    %td
+      = link_to account_charge_path(charge, format: :pdf) do
+        = icon_tag :receipt, size: :xl

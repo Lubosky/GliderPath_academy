@@ -1,0 +1,7 @@
+- cache lesson do
+  %li.list-item{ data: { element: 'lesson', lesson_id: lesson.id } }
+    .topic-wrapper
+      .icon-holder
+        = icon_tag :drag, class: 'draggable', data: { tooltip: t('tooltip.reorder', element: 'lessons'), tooltip_position: 'right middle' }
+      %span.step-duration
+      %h5= lesson.title

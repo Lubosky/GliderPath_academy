@@ -1,13 +1,14 @@
-.tile.stacked
-  .tile-header
-    = link_to workshop_path(workshop) do
-      = icon_tag 'play-circle'
-      %h1= workshop.name
-      %small= duration_in_minutes(workshop.content_length) if workshop.video.present?
-  .tile-content
-    .tile-meta
-      %small Presented by
-      %h3= workshop.instructor.name
-    %figure
-      = user_avatar(workshop.instructor, class: 'avatar-default', alt: workshop.instructor.name, width: '45px', height: '45px')
-  %p.description= workshop.short_description
+- cache workshop do
+  .tile.stacked
+    .tile-header
+      = link_to workshop_path(workshop) do
+        = icon_tag 'play-circle'
+        %h1= workshop.name
+        %small= duration_in_minutes(workshop.content_length) if workshop.video.present?
+    .tile-content
+      .tile-meta
+        %small Presented by
+        %h3= workshop.instructor.name
+      %figure
+        = user_avatar(workshop.instructor, class: 'avatar-default', alt: workshop.instructor.name, width: '45px', height: '45px')
+    %p.description= workshop.short_description

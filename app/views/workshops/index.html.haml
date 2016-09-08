@@ -1,4 +1,4 @@
 - content_for :page_title, title
 
 .tile-container.flex-grid
-  = render workshops
+  = render partial: 'workshop', collection: @workshops, cached: true

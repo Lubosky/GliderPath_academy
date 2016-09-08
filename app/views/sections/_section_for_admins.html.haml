@@ -1,17 +1,12 @@
-.draggable-list
-  .icon-draggable
-    = icon_tag :drag, class: 'draggable', data: { tooltip: t('tooltip.reorder', element: 'sections'), tooltip_position: 'left middle' }
-  %ul.step-list.compact{ data: { element: 'section', section_id: section.id } }
-    %li.step-list-header
-      %h3= section.title
-    - section.lessons.each do |lesson|
-      %li.list-item{ data: { element: 'lesson', lesson_id: lesson.id } }
-        .topic-wrapper
-          .icon-holder
-            = icon_tag :drag, class: 'draggable', data: { tooltip: t('tooltip.reorder', element: 'lessons'), tooltip_position: 'right middle' }
-          %span.step-duration
-          %h5= lesson.title
-    %li.step-list-footer
-      %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
-        = icon_tag 'chevron-up', size: :m
-        = t('lessons.count', count: section.lessons.count)
+- cache section do
+  .draggable-list
+    .icon-draggable
+      = icon_tag :drag, class: 'draggable', data: { tooltip: t('tooltip.reorder', element: 'sections'), tooltip_position: 'left middle' }
+    %ul.step-list.compact{ data: { element: 'section', section_id: section.id } }
+      %li.step-list-header
+        %h3= section.title
+      = render partial: 'lessons/lesson_for_admins', collection: section.lessons, as: :lesson, cached: true
+      %li.step-list-footer
+        %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
+          = icon_tag 'chevron-up', size: :m
+          = t('lessons.count', count: section.lessons.count)

@@ -1,22 +1,11 @@
-%ul.step-list.compact
-  %li.step-list-header
-    %h3= section.title
-    %p= section.objective
-  - if section.lessons.any?
-    - section.lessons.each do |lesson|
-      %li
-        = link_to course_lesson_path(@course, lesson), class: 'topic-wrapper' do
-          .icon-holder
-            - if lesson.completed?(current_user)
-              = icon_tag 'check-circle-full', class: 'completed', data: { tooltip: t('tooltip.completed', element: 'Lesson'), tooltip_position: 'top center' }
-            - else
-              = icon_tag 'unlock-circle', class: 'unlocked', data: { tooltip: t('tooltip.unlocked', element: 'lesson'), tooltip_position: 'top center' }
-          - if lesson.video.present?
-            %span.step-duration
-              = duration_for(lesson.video.video_duration)
-          %h5= lesson.title
-          %p= lesson.notes
-    %li.step-list-footer
-      %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
-        = icon_tag 'chevron-up', size: :m
-        = t('lessons.progress', completed: section.lessons.completed.count, count: section.lessons.count)
+- cache [controller_name, action_name, current_user.id, section] do
+  %ul.step-list{ class: css_class }
+    %li.step-list-header
+      %h3= section.title
+      %p= section.objective
+    - if section.lessons.any?
+      = render partial: 'lessons/lesson_for_enrollees', collection: section.lessons, as: :lesson, cached: true
+      %li.step-list-footer
+        %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
+          = icon_tag 'chevron-up', size: :m
+          = t('lessons.progress', completed: section.lessons.completed.count, count: section.lessons.count)

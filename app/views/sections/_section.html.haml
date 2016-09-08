@@ -1,4 +1,0 @@
-- if !user_signed_in? || !(current_user.has_active_subscription? || current_user.purchased?(@course)) || !current_user.enrolled?(@course)
-  = render 'sections/section_for_visitors', section: section
-- else
-  = render 'sections/section_for_enrollees', section: section

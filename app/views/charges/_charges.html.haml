@@ -12,4 +12,4 @@
           %th Amount
           %th
       %tbody
-        = render @charges
+        = render partial: 'charge', collection: @charges, cached: true

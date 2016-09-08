@@ -1,0 +1,7 @@
+- cache [controller_name, action_name, lesson] do
+  %li
+    .topic-wrapper
+      .icon-holder
+        = icon_tag 'lock-circle', class: 'locked', data: { tooltip: t('tooltip.purchase', element: 'lesson'), tooltip_position: 'right middle' }
+      %span.step-duration= duration_for(lesson.video.video_duration) if lesson.video.present?
+      %h5= lesson.title

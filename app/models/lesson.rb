@@ -5,7 +5,7 @@ class Lesson < ApplicationRecord
 
   validates :title, presence: true
 
-  belongs_to :section, inverse_of: :lessons, foreign_key: :section_id
+  belongs_to :section, inverse_of: :lessons, foreign_key: :section_id, touch: true
 
   has_many :enrolled_lessons, inverse_of: :lesson, dependent: :destroy, foreign_key: :lesson_id
   has_many :students, through: :enrolled_lessons, class_name: 'User', foreign_key: :student_id

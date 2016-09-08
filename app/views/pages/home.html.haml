@@ -7,7 +7,7 @@
     .twelve.columns.centered
       .row
         .tile-container.flex-grid
-          = render @courses
+          = render partial: 'courses/course', collection: @courses, cached: true
 
 %section.page-content.gradient-purple-blue
   .row

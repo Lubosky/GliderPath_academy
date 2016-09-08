@@ -34,11 +34,13 @@
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
           = t('courses.curriculum')
         .tab-content
-          = render @sections
+          - if !user_signed_in? || !(current_user.has_active_subscription? || current_user.purchased?(@course)) || !current_user.enrolled?(@course)
+            = render partial: 'sections/section_for_visitors', collection: @sections, as: :section, cached: true
+          - else
+            = render partial: 'sections/section_for_enrollees', collection: @sections, as: :section, locals: { css_class: 'compact' }, cached: true
       - if policy(@course).update?
         %li.tab-header
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
             = t('courses.admin')
           .tab-content{ id: 'sortable', data: { url: "#{sortable_course_path(@course)}" } }
-            - @sections.each do |section|
-              = render 'sections/section_for_admins', section: section
+            = render partial: 'sections/section_for_admins', collection: @sections, as: :section, cached: true
