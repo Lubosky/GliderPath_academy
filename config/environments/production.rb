@@ -16,8 +16,13 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :readthis_store, {
+    expires_in: 1.week.to_i,
+    namespace: 'cache',
+    compress: true,
+    compression_threshold: 2.kilobytes,
+    redis: { url: ENV.fetch('REDIS_URL'), driver: :hiredis }
+  }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default(charset: 'utf-8')
