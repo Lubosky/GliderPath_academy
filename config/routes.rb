@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resource :enrollment, only: [:create], path: 'enroll'
     resources :lessons, only: [:show] do
       post :complete, on: :member
+      get :preview, on: :member
     end
     get 'progress', on: :member
     get 'purchase', to: 'purchases#new'

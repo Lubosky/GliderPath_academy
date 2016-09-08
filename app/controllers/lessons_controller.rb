@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_lesson, only: [:show, :complete]
+  before_action :set_lesson, only: [:show, :complete, :preview]
 
   def show
     enrolled_lesson = current_user.enrolled_lessons.find_or_initialize_by(lesson: @lesson)
@@ -20,6 +20,10 @@ class LessonsController < ApplicationController
     else
       redirect_to course_lesson_path(@course, @next_lesson)
     end
+  end
+
+  def preview
+    render :show
   end
 
   private

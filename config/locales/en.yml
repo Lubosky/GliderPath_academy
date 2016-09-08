@@ -148,6 +148,7 @@ en:
       one: '%{completed} / %{count} lesson completed'
       other: '%{completed} / %{count} lessons completed'
     complete: 'Complete & Continue'
+    preview: 'Preview'
     notes: 'Lesson Notes'
     attachments: 'Attachments'
     questions: 'Questions'
@@ -181,6 +182,7 @@ en:
     last_name: 'Last Name'
 
   button:
+    back: 'Back'
     delete: 'Delete'
     edit: 'Edit'
     cancel: 'Cancel'
