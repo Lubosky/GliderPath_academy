@@ -1,6 +1,6 @@
 class EnrolledLesson < ApplicationRecord
-  belongs_to :student, inverse_of: :enrolled_lessons, class_name: 'User'
-  belongs_to :lesson, inverse_of: :enrolled_lessons, touch: true
+  belongs_to :student, inverse_of: :enrolled_lessons, class_name: 'User', touch: true
+  belongs_to :lesson, inverse_of: :enrolled_lessons
 
   validates_presence_of :lesson_id, :student_id
 

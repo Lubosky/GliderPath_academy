@@ -2,7 +2,7 @@ require Rails.root.join('config/initializers/mail')
 
 Rails.application.configure do
   config.cache_classes = true
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
@@ -16,13 +16,15 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  config.cache_store = :readthis_store, {
-    expires_in: 1.week.to_i,
-    namespace: 'cache',
-    compress: true,
-    compression_threshold: 2.kilobytes,
-    redis: { url: ENV.fetch('REDIS_URL'), driver: :hiredis }
-  }
+  if ENV["REDIS_CACHE_URL"].present?
+    config.cache_store = :readthis_store, {
+      expires_in: 1.week.to_i,
+      namespace: 'cache',
+      compress: true,
+      compression_threshold: 2.kilobytes,
+      redis: { url: ENV.fetch("REDIS_CACHE_URL"), driver: :hiredis }
+    }
+  end
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default(charset: 'utf-8')

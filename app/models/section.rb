@@ -4,7 +4,7 @@ class Section < ApplicationRecord
                        uniqueness: { scope: :course },
                        numericality: { only_integer: true, greater_than: 0 }
 
-  belongs_to :course, inverse_of: :sections, foreign_key: :course_id
+  belongs_to :course, inverse_of: :sections, foreign_key: :course_id, touch: true
   has_many :lessons, -> { order(position: :asc) }, autosave: true, dependent: :destroy, inverse_of: :section
 
   accepts_nested_attributes_for :lessons, reject_if: :all_blank, allow_destroy: true

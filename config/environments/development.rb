@@ -16,13 +16,13 @@ Rails.application.configure do
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
-    if ENV['REDIS_URL']
+    if ENV["REDIS_URL"].present?
       config.cache_store = :readthis_store, {
         expires_in: 1.week.to_i,
         namespace: 'cache',
         compress: true,
         compression_threshold: 2.kilobytes,
-        redis: { url: ENV.fetch('REDIS_URL'), driver: :hiredis }
+        redis: { url: ENV.fetch("REDIS_URL"), driver: :hiredis }
       }
     else
       config.cache_store = :memory_store

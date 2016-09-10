@@ -1,11 +1,10 @@
-- cache [controller_name, action_name, current_user.id, section] do
-  %ul.step-list{ class: css_class }
-    %li.step-list-header
-      %h3= section.title
-      %p= section.objective
-    - if section.lessons.any?
-      = render partial: 'lessons/lesson_for_enrollees', collection: section.lessons, as: :lesson, cached: true
-      %li.step-list-footer
-        %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
-          = icon_tag 'chevron-up', size: :m
-          = t('lessons.progress', completed: section.lessons.completed.count, count: section.lessons.count)
+%ul.step-list{ class: css_class }
+  %li.step-list-header
+    %h3= section.title
+    %p= section.objective
+  - if section.lessons.any?
+    = render partial: 'lessons/lesson_for_enrollees', collection: section.lessons, as: :lesson
+    %li.step-list-footer
+      %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
+        = icon_tag 'chevron-up', size: :m
+        = t('lessons.progress', completed: section.lessons.completed.count, count: section.lessons.count)

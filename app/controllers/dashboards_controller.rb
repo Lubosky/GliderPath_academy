@@ -8,16 +8,15 @@ class DashboardsController < ApplicationController
 
   private
 
-    def enrolled_courses
-      Course.enrolled_courses_for(current_user)
-    end
+  def enrolled_courses
+    Course.enrolled_courses_for(current_user)
+  end
 
-    def accessible_courses
-      Course.accessible_courses_for(current_user)
-    end
+  def accessible_courses
+    Course.accessible_courses_for(current_user)
+  end
 
-    def available_courses
-      Course.available_courses_for(current_user).order('created_at DESC')
-    end
-
+  def available_courses
+    Course.available_courses_for(current_user).order('created_at DESC')
+  end
 end

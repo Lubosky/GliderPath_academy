@@ -1,5 +1,5 @@
 class Video < ApplicationRecord
-  belongs_to :videoable, polymorphic: true
+  belongs_to :videoable, polymorphic: true, touch: true
 
   validates :video_url, format: { with: /\A(https?:\/\/)?(www\.)?((vimeo\.com\/\d+\/?)|((.+)?(wistia.com|wi.st)\/(medias|embed)\/.*\/?)|(youtube\.com\/watch\?v=[-a-zA-Z0-9.%_]+)|(youtu\.be\/[-a-zA-Z0-9.%_]+))\z/i }
 

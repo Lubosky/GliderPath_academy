@@ -1,4 +1,5 @@
 - content_for :page_title, title
 
 .tile-container.flex-grid
-  = render partial: 'workshop', collection: @workshops, cached: true
+  - cache [controller_name, action_name, @workshops] do
+    = render partial: 'workshop', collection: @workshops, cached: true

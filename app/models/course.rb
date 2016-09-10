@@ -21,40 +21,44 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
 
   def progress(user)
-    @course_progress ||= 100 * (self.lessons_completed_for(user).count.to_f / self.lessons.count.to_f)
+    Rails.cache.fetch([self, user, __method__]) do
+      @course_progress ||= 100 * (lessons_completed_for(user).count.to_f / lessons.count.to_f)
+    end
   end
 
   def content_length
-    self.lessons.joins(:video).sum(:video_duration)
+    Rails.cache.fetch([self, lessons, __method__]) do
+      lessons.joins(:video).sum(:video_duration)
+    end
   end
 
   def lessons_completed_for(student)
-    self.lessons.lessons_completed_for(student)
+    lessons.lessons_completed_for(student)
   end
 
   def lessons_remaining_for(student)
-    self.lessons.lessons_remaining_for(student)
+    lessons.lessons_remaining_for(student)
   end
 
   def first_remaining_lesson_for(student)
-    self.lessons_remaining_for(student).first
+    lessons_remaining_for(student).first
   end
 
   private
 
   def slug_source
-    self.name
+    name
   end
 
   def self.enrolled_courses_for(student)
-    self.joins(:enrollments).where(enrollments: { student: student })
+    joins(:enrollments).where(enrollments: { student: student })
   end
 
   def self.accessible_courses_for(student)
-    self.joins(:purchases).where(purchases: { purchaser: student }).where.not(id: self.enrolled_courses_for(student))
+    joins(:purchases).where(purchases: { purchaser: student }).where.not(id: enrolled_courses_for(student))
   end
 
   def self.available_courses_for(student)
-    self.where.not(id: self.accessible_courses_for(student)).where.not(id: self.enrolled_courses_for(student))
+    where.not(id: accessible_courses_for(student)).where.not(id: enrolled_courses_for(student))
   end
 end

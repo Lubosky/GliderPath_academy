@@ -5,4 +5,4 @@
   %h1
     = @course.name
   %h3 Course progress
-= render partial: 'sections/section_for_enrollees', collection: @sections, as: :section, locals: { css_class: '' }, cached: true
+= render partial: 'sections/section_for_enrollees', collection: @sections, as: :section, locals: { css_class: '' }
