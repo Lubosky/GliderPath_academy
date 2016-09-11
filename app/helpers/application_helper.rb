@@ -1,12 +1,11 @@
 module ApplicationHelper
-
   def body_css(css_class = nil)
     @body_css ||= []
     if css_class.present?
       @body_css << css_class
     end
 
-    @body_css.join(" ")
+    @body_css.join(' ')
   end
 
   def e *args, &block
@@ -27,7 +26,11 @@ module ApplicationHelper
 
   def format_markdown(content)
     if content.present?
-      pipeline_context = { gfm: true, link_attr: 'target="_blank"', skip_tags: [ 'pre', 'code' ] }
+      pipeline_context = {
+        gfm: true,
+        link_attr: 'target="_blank"',
+        skip_tags: ['pre', 'code']
+      }
       pipeline = HTML::Pipeline.new [
         HTML::Pipeline::MarkdownFilter,
         HTML::Pipeline::SanitizationFilter,
@@ -40,5 +43,4 @@ module ApplicationHelper
       ''
     end
   end
-
 end

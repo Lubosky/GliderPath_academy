@@ -9,14 +9,14 @@ class DashboardsController < ApplicationController
   private
 
   def enrolled_courses
-    Course.enrolled_courses_for(current_user)
+    Course.enrolled_courses_for(current_user).includes(:instructor)
   end
 
   def accessible_courses
-    Course.accessible_courses_for(current_user)
+    Course.accessible_courses_for(current_user).includes(:instructor)
   end
 
   def available_courses
-    Course.available_courses_for(current_user).order('created_at DESC')
+    Course.available_courses_for(current_user).ordered.includes(:instructor)
   end
 end

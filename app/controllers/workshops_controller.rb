@@ -48,12 +48,12 @@ class WorkshopsController < ApplicationController
   private
 
   def workshop
-    @workshop ||= Workshop.find_by_slug(params[:id])
+    @workshop ||= Workshop.includes(:instructor, :uploads, :video).find_by_slug(params[:id])
   end
   helper_method :workshop
 
   def workshops
-    @workshops ||= Workshop.all.order('created_at DESC')
+    @workshops ||= Workshop.ordered.includes(:instructor, :video).all
   end
   helper_method :workshops
 

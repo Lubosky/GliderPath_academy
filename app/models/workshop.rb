@@ -38,4 +38,8 @@ class Workshop < ApplicationRecord
   def slug_source
     self.name
   end
+
+  def self.ordered
+    order(created_at: :desc)
+  end
 end

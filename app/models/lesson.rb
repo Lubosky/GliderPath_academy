@@ -23,30 +23,30 @@ class Lesson < ApplicationRecord
   scope :active, -> { joins(:enrolled_lessons).where('enrolled_lessons.status = ? AND student_id = ?', 'active', User.current.id) }
 
   def next_lesson
-    lessons = self.course.lessons.order('position ASC')
-    if self.position >= lessons.first.position + lessons.size - 1
+    lessons = course.lessons.order('position ASC')
+    if position >= lessons.first.position + lessons.size - 1
       return nil
     else
-      return lessons.find_by_position(self.position + 1)
+      return lessons.find_by_position(position + 1)
     end
   end
 
   def completed?(user)
-    self.enrolled_lessons.completed.where(student_id: user.id).present?
+    enrolled_lessons.completed.where(student_id: user.id).present?
   end
 
   def active?(user)
-    self.enrolled_lessons.active.where(student_id: user.id).present?
+    enrolled_lessons.active.where(student_id: user.id).present?
   end
 
   private
 
   def slug_source
-    self.title
+    title
   end
 
   def set_position
-    lesson_ids = self.course.lesson_ids.reject(&:blank?).map(&:to_i)
+    lesson_ids = course.lesson_ids.reject(&:blank?).map(&:to_i)
 
     lesson_ids.each_with_index do |lesson_id, index|
       Lesson.where(id: lesson_id).update_all(position: index + 1)
@@ -54,10 +54,10 @@ class Lesson < ApplicationRecord
   end
 
   def self.lessons_completed_for(student)
-    self.joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' })
+    joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' })
   end
 
   def self.lessons_remaining_for(student)
-    self.where.not(id: self.lessons_completed_for(student))
+    where.not(id: lessons_completed_for(student))
   end
 end

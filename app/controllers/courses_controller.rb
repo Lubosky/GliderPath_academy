@@ -1,14 +1,14 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :progress, :sort]
-  before_action :set_sections, only: [:show, :progress]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :progress]
 
   def index
-    @courses = Course.all.order('created_at DESC')
+    @courses = Course.ordered.includes(:instructor).all
     authorize @courses
   end
 
   def show
+    @sections = @course.modules
   end
 
   def new
@@ -48,11 +48,11 @@ class CoursesController < ApplicationController
   end
 
   def progress
-    authorize @course
+    @sections = @course.modules
   end
 
   def sort
-    authorize @course
+    authorize :course
     if params[:sort_sections]
       params[:sort_sections].each do |key, value|
         Section.find(value[:section_id]).update_attribute(:position, value[:position])
@@ -70,26 +70,21 @@ class CoursesController < ApplicationController
 
   private
 
-    def set_course
-      @course = Course.find_by_slug(params[:id])
-      authorize @course
-    end
+  def set_course
+    @course ||= Course.includes(:instructor, :video).find_by_slug(params[:id])
+    authorize @course
+  end
 
-    def set_sections
-      @sections = @course.sections.includes(lessons: :video)
-    end
-
-    def course_params
-      params.require(:course).permit(:name, :short_description, :description, :price,
-        video_attributes: [ :id, :video_url ],
-        sections_attributes: [ :id, :title, :objective, :_destroy,
-          lessons_attributes: [ :id, :title, :notes, :_destroy,
-            video_attributes: [ :id, :video_url ],
-            uploads_attributes: [ :id, :_destroy ],
-            uploads_files: [ ]
-          ]
+  def course_params
+    params.require(:course).permit(:name, :short_description, :description, :price,
+      video_attributes: [ :id, :video_url ],
+      sections_attributes: [ :id, :title, :objective, :_destroy,
+        lessons_attributes: [ :id, :title, :notes, :_destroy,
+          video_attributes: [ :id, :video_url ],
+          uploads_attributes: [ :id, :_destroy ],
+          uploads_files: [ ]
         ]
-      )
-    end
-
+      ]
+    )
+  end
 end

@@ -32,6 +32,10 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def modules
+    sections.includes(lessons: :video)
+  end
+
   def lessons_completed_for(student)
     lessons.lessons_completed_for(student)
   end
@@ -48,6 +52,10 @@ class Course < ActiveRecord::Base
 
   def slug_source
     name
+  end
+
+  def self.ordered
+    order(created_at: :desc)
   end
 
   def self.enrolled_courses_for(student)
