@@ -17,6 +17,10 @@ class Section < ApplicationRecord
 
   protected
 
+  def self.lesson_count
+    @section_lesson_count ||= joins(:lessons).group('sections.id').count
+  end
+
   def set_position
     if self.position.to_i.zero?
       self.course.sections.each_with_index do |section, index|

@@ -4,9 +4,9 @@
       = progress_for(course, current_user)
       %h1= course.name
       %small
-        = t('lessons.count', count: course.lessons.count)
+        = t('lessons.count', count: lesson_count_for(course))
         \/
-        = duration_in_hours(course.content_length)
+        = duration_in_hours(content_length_for(course))
   .tile-content
     .tile-meta
       %small Instructed by

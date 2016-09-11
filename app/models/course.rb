@@ -26,12 +26,6 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def content_length
-    Rails.cache.fetch([self, lessons, __method__]) do
-      lessons.joins(:video).sum(:video_duration)
-    end
-  end
-
   def modules
     sections.includes(lessons: :video)
   end
@@ -52,6 +46,16 @@ class Course < ActiveRecord::Base
 
   def slug_source
     name
+  end
+
+  def self.lesson_count
+    @course_lesson_count ||= joins(:lessons).group('courses.id').count
+  end
+
+  def self.content_length
+    Rails.cache.fetch([__method__]) do
+      @content_length ||= joins(:video).group('courses.id').sum(:video_duration)
+    end
   end
 
   def self.ordered
