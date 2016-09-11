@@ -56,6 +56,7 @@ group :doc do
 end
 
 group :development, :test do
+  gem 'bullet', '~> 5.4'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker', '~> 1.6'
