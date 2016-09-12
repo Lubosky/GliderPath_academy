@@ -24,16 +24,6 @@ module ApplicationHelper
     end
   end
 
-  def lesson_count_for(resource)
-    class_name = resource.model_name.human.constantize
-    class_name.lesson_count[resource.id] ||= 0
-  end
-
-  def content_length_for(resource)
-    class_name = resource.model_name.human.constantize
-    class_name.content_length[resource.id] ||= 0
-  end
-
   def format_markdown(content)
     if content.present?
       pipeline_context = {
