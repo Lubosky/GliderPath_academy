@@ -8,6 +8,12 @@ ul.step-list
   li:not(.step-list-footer)
     list-style-type: none
 
+    ul li
+      list-style-type: disc
+
+    ol li
+      list-style-type: decimal
+
     .topic-wrapper
       +clearfix
       +pad(20px 30px 20px 110px)
@@ -136,6 +142,15 @@ ul.step-list
         &:hover,
         &:focus
           background: lighten($default, 3%)
+
+
+    &.administrate
+
+      li .topic-wrapper
+        +pad(15px 30px  15px 110px)
+
+        h5
+          line-height: 36px
 
 .draggable-list
   .icon-draggable

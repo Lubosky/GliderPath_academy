@@ -2,7 +2,7 @@
   .draggable-list
     .icon-draggable
       = icon_tag :drag, class: 'draggable', data: { tooltip: t('tooltip.reorder', element: 'sections'), tooltip_position: 'left middle' }
-    %ul.step-list.compact{ data: { element: 'section', section_id: section.id } }
+    %ul.step-list.compact{ class: css_class, data: { element: 'section', section_id: section.id } }
       %li.step-list-header
         %h3= section.title
       = render partial: 'lessons/lesson_for_admins', collection: section.lessons, as: :lesson, cached: true

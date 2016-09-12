@@ -16,8 +16,6 @@
             = duration_for(@lesson.video.video_duration)
         .lesson-meta
           by #{ @course.instructor.name } &#8226; #{ link_to @course.name, course_path(@course) }
-      %p.lesson-objective
-        = @lesson.notes
       %ul.tabs
         %li.tab-button-small.pull-right
           - if policy(@lesson).show?

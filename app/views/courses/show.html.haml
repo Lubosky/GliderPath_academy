@@ -43,4 +43,4 @@
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
             = t('courses.admin')
           .tab-content{ id: 'sortable', data: { url: "#{sortable_course_path(@course)}" } }
-            = render partial: 'sections/section_for_admins', collection: @sections, as: :section, cached: true
+            = render partial: 'sections/section_for_admins', collection: @sections, as: :section, locals: { css_class: 'administrate' }, cached: true
