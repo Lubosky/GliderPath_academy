@@ -28,13 +28,13 @@ class LessonsController < ApplicationController
   end
 
   def redirect_after_completion
-    @next_lesson = @lesson.next_lesson
-    if @next_lesson.nil?
+    next_lesson = @lesson.next_lesson
+    if next_lesson.nil?
       flash[:success] = t('flash.courses.complete', course: @course.name)
       analytics.track_course_completed(analytics_metadata_for_course)
       redirect_back(fallback_location: course_lesson_path(@course, @lesson))
     else
-      redirect_to course_lesson_path(@course, @next_lesson)
+      redirect_to course_lesson_path(@course, next_lesson)
     end
   end
 
