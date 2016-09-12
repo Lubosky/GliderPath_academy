@@ -4,7 +4,7 @@
     .table-row.table-header
       .title= purchasable.name
     .table-row
-      %div #{duration_in_hours(purchasable.content_length).titleize} of Content
+      %div #{duration_in_hours(content_length_for(purchasable)).titleize} of Content
       = icon_tag 'check'
     .table-row
       %div Includes Lifetime Access

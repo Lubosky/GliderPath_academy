@@ -3,7 +3,7 @@
     = link_to progress_course_path(course) do
       = progress_for(course, current_user)
       %h1= course.name
-      %small= t('lessons.progress', completed: course.lessons.completed.count, count: lesson_count_for(course))
+      %small= t('lessons.progress', completed: completed_lesson_count_for(course), count: lesson_count_for(course))
   .tile-content
     .tile-meta
       %small Instructed by

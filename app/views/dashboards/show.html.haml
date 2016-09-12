@@ -1,16 +1,14 @@
 - content_for :page_title, title
 
 - if enrolled_courses.any?
-  - cache [controller_name, action_name, 'student', current_user.id, enrolled_courses, 'enrolled', current_user.enrolled_lessons.map(&:updated_at).max.utc.to_s(:usec)] do
-    %h2= t('titles.courses.enrolled')
-    .tile-container.flex-grid
-      = render partial: 'enrolled_course', collection: enrolled_courses, as: :course
+  %h2= t('titles.courses.enrolled')
+  .tile-container.flex-grid
+    = render partial: 'enrolled_course', collection: enrolled_courses, as: :course
 
 - if accessible_courses.any?
-  - cache [controller_name, action_name, 'student', current_user.id, accessible_courses, 'accessible', current_user.enrolled_lessons.map(&:updated_at).max.utc.to_s(:usec)] do
-    %h2= t('titles.courses.accessible')
-    .tile-container.flex-grid
-      = render partial: 'accessible_course', collection: accessible_courses, as: :course
+  %h2= t('titles.courses.accessible')
+  .tile-container.flex-grid
+    = render partial: 'accessible_course', collection: accessible_courses, as: :course
 
 - else
   %h2= t('titles.courses.index')

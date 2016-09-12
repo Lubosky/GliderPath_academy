@@ -7,4 +7,4 @@
     %li.step-list-footer
       %a{ href: 'javascript:void(0)', data: { toggle: 'accordion' } }
         = icon_tag 'chevron-up', size: :m
-        = t('lessons.progress', completed: section.lessons.completed.count, count: lesson_count_for(section))
+        = t('lessons.progress', completed: completed_lesson_count_for(section), count: lesson_count_for(section))
