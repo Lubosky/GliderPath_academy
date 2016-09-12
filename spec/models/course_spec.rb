@@ -9,8 +9,10 @@ describe Course, type: :model do
       is_expected.to validate_presence_of(:instructor_id)
       is_expected.to validate_presence_of(:price)
       is_expected.to validate_presence_of(:slug)
-      is_expected.to validate_numericality_of(:price).is_greater_than_or_equal_to(0)
-      is_expected.to validate_numericality_of(:price).is_less_than_or_equal_to(9999.99)
+      is_expected.to validate_numericality_of(:price)
+        .is_greater_than_or_equal_to(0)
+      is_expected.to validate_numericality_of(:price)
+        .is_less_than_or_equal_to(9999.99)
 
       is_expected.to have_many :sections
       is_expected.to have_many :lessons
@@ -50,38 +52,10 @@ describe Course, type: :model do
     end
   end
 
-  describe '#lessons_completed_for' do
-    it 'returns completed lessons for a given course and user' do
-      course = create(:course)
-      section = create(:section, course: course)
-      l1 = create(:lesson, section: section)
-      l2 = create(:lesson, section: section)
-      l3 = create(:lesson, section: section)
-      l4 = create(:lesson, section: section)
-      user = create(:user)
-      create(
-        :enrolled_lesson,
-        lesson: l1,
-        student: user,
-        status: 'completed'
-      )
-      create(
-        :enrolled_lesson,
-        lesson: l4,
-        student: user,
-        status: 'completed'
-      )
-
-      result = course.lessons_completed_for(user)
-
-      expect(result.map(&:id)).to match_array([l1.id,l4.id])
-    end
-  end
-
   describe '.enrolled_courses_for' do
     it 'shows enrolled courses for a user' do
       enrolled = create(:course)
-      course = create(:course)
+      create(:course)
       user = create(:user)
       create(
         :enrollment,
@@ -99,7 +73,7 @@ describe Course, type: :model do
     it 'shows accessible courses for a user' do
       enrolled = create(:course)
       accessible = create(:course)
-      course = create(:course)
+      create(:course)
       user = create(:user)
       create(
         :enrollment,
@@ -140,5 +114,4 @@ describe Course, type: :model do
       expect(result.map(&:id)).to match_array([course.id])
     end
   end
-
 end

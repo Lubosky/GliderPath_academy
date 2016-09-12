@@ -3,6 +3,8 @@ class Course < ActiveRecord::Base
   include Concerns::Sluggable
   include Concerns::Videoable
 
+  CACHE_KEY_BASE = ['models', model_name.name.humanize.downcase].freeze
+
   belongs_to :instructor, inverse_of: :courses_as_instructor, class_name: 'User'
 
   validates :name, presence: true
@@ -21,17 +23,12 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
 
   def progress(user)
-    Rails.cache.fetch([self, user, __method__]) do
-      @course_progress ||= 100 * (lessons_completed_for(user).count.to_f / lessons.count.to_f)
-    end
+    @course_progress ||=
+      100 * (Course.completed_lessons_count_for(user)[id].to_f / Course.lesson_count[id].to_f)
   end
 
   def modules
     sections.includes(lessons: :video)
-  end
-
-  def lessons_completed_for(student)
-    lessons.lessons_completed_for(student)
   end
 
   def lessons_remaining_for(student)
@@ -39,7 +36,8 @@ class Course < ActiveRecord::Base
   end
 
   def first_remaining_lesson_for(student)
-    lessons_remaining_for(student).first
+    lesson = Lesson.find_by_id(lessons_remaining_for(student).first)
+    lesson
   end
 
   private
@@ -48,29 +46,48 @@ class Course < ActiveRecord::Base
     name
   end
 
-  def self.lesson_count
-    @course_lesson_count ||= joins(:lessons).group('courses.id').count
-  end
-
-  def self.content_length
-    Rails.cache.fetch([__method__]) do
-      @content_length ||= joins(:video).group('courses.id').sum(:video_duration)
-    end
-  end
-
   def self.ordered
     order(created_at: :desc)
   end
 
+  def self.lesson_count
+    Rails.cache.fetch([CACHE_KEY_BASE, __method__, Lesson.all.cache_key]) do
+      joins(:lessons)
+      .group('courses.id')
+      .count
+    end
+  end
+
+  def self.content_length
+    Rails.cache.fetch([CACHE_KEY_BASE, __method__, Lesson.video_cache_key]) do
+      joins(lessons: :video)
+      .group('courses.id')
+      .sum(:video_duration)
+    end
+  end
+
+  def self.completed_lessons_count_for(student)
+    joins(lessons: :enrolled_lessons)
+    .where(enrolled_lessons: { status: 'completed', student_id: student.id })
+    .group('courses.id')
+    .count
+  end
+
   def self.enrolled_courses_for(student)
-    joins(:enrollments).where(enrollments: { student: student })
+    joins(:enrollments)
+    .where(enrollments: { student: student })
+    .order('enrollments.created_at desc')
   end
 
   def self.accessible_courses_for(student)
-    joins(:purchases).where(purchases: { purchaser: student }).where.not(id: enrolled_courses_for(student))
+    joins(:purchases)
+    .where(purchases: { purchaser: student })
+    .where.not(id: enrolled_courses_for(student))
+    .order('purchases.created_at desc')
   end
 
   def self.available_courses_for(student)
-    where.not(id: accessible_courses_for(student)).where.not(id: enrolled_courses_for(student))
+    where.not(id: accessible_courses_for(student))
+    .where.not(id: enrolled_courses_for(student))
   end
 end

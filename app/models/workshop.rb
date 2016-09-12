@@ -4,6 +4,8 @@ class Workshop < ApplicationRecord
   include Concerns::Uploadable
   include Concerns::Videoable
 
+  CACHE_KEY_BASE = ['models', model_name.name.humanize.downcase].freeze
+
   belongs_to :instructor, inverse_of: :workshops, class_name: 'User'
 
   validates :name, presence: true
@@ -18,15 +20,15 @@ class Workshop < ApplicationRecord
   accepts_attachments_for :uploads, append: true
 
   def content_length
-    self.video.video_duration
+    video.video_duration
   end
 
   def has_attachments?
-    self.uploads.any?
+    uploads.any?
   end
 
   def is_free?
-    self.price == 0
+    price == 0
   end
 
   def watchable_for(user)
@@ -36,10 +38,20 @@ class Workshop < ApplicationRecord
   private
 
   def slug_source
-    self.name
+    name
+  end
+
+  def self.content_length
+    Rails.cache.fetch([CACHE_KEY_BASE, __method__, Workshop.video_cache_key]) do
+      joins(:video).group('workshops.id').sum(:video_duration)
+    end
   end
 
   def self.ordered
     order(created_at: :desc)
+  end
+
+  def self.video_cache_key
+    Video.where(videoable_type: model_name.name.humanize).all.cache_key
   end
 end

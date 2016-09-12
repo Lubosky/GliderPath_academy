@@ -19,9 +19,6 @@ class Lesson < ApplicationRecord
   before_save :generate_slug, on: :create
   after_save :set_position, on: :create
 
-  scope :completed, -> { joins(:enrolled_lessons).where('enrolled_lessons.status = ? AND student_id = ?', 'completed', User.current.id) }
-  scope :active, -> { joins(:enrolled_lessons).where('enrolled_lessons.status = ? AND student_id = ?', 'active', User.current.id) }
-
   def next_lesson
     lessons = course.lessons.order('position ASC')
     if position >= lessons.first.position + lessons.size - 1
@@ -31,12 +28,8 @@ class Lesson < ApplicationRecord
     end
   end
 
-  def completed?(user)
-    enrolled_lessons.completed.where(student_id: user.id).present?
-  end
-
-  def active?(user)
-    enrolled_lessons.active.where(student_id: user.id).present?
+  def completed?(student)
+    Lesson.lessons_completed_for(student).include? id
   end
 
   private
@@ -54,10 +47,17 @@ class Lesson < ApplicationRecord
   end
 
   def self.lessons_completed_for(student)
-    joins(:enrolled_lessons).where(enrolled_lessons: { student_id: student.id, status: 'completed' })
+    joins(:enrolled_lessons)
+    .where(enrolled_lessons: { status: 'completed', student_id: student.id })
+    .pluck(:id)
   end
 
   def self.lessons_remaining_for(student)
-    where.not(id: lessons_completed_for(student))
+    where.not(id: Lesson.lessons_completed_for(student))
+    .pluck(:id)
+  end
+
+  def self.video_cache_key
+    Video.where(videoable_type: model_name.name.humanize).all.cache_key
   end
 end

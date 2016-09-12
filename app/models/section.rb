@@ -1,4 +1,6 @@
 class Section < ApplicationRecord
+  CACHE_KEY_BASE = ['models', model_name.name.humanize.downcase].freeze
+
   validates :title, presence: true
   validates :position, presence: true,
                        uniqueness: { scope: :course },
@@ -11,21 +13,26 @@ class Section < ApplicationRecord
 
   before_validation :set_position, on: :create
 
-  def progress(user)
-    100 * (self.lessons.completed.count.to_f / self.lessons.count.to_f)
-  end
-
   protected
 
-  def self.lesson_count
-    @section_lesson_count ||= joins(:lessons).group('sections.id').count
-  end
-
   def set_position
-    if self.position.to_i.zero?
-      self.course.sections.each_with_index do |section, index|
+    if position.to_i.zero?
+      course.sections.each_with_index do |section, index|
         section.update_attribute(:position, index + 1)
       end
     end
+  end
+
+  def self.lesson_count
+    Rails.cache.fetch([CACHE_KEY_BASE, __method__, Lesson.all.cache_key]) do
+      joins(:lessons).group('sections.id').count
+    end
+  end
+
+  def self.completed_lessons_count_for(student)
+    joins(lessons: :enrolled_lessons)
+    .where(enrolled_lessons: { status: 'completed', student_id: student.id })
+    .group('sections.id')
+    .count
   end
 end
