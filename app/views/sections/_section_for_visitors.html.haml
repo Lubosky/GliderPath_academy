@@ -2,7 +2,7 @@
   %ul.step-list.compact
     %li.step-list-header
       %h3= section.title
-      %p= section.objective
+      %p= format_markdown section.objective
     - if section.lessons.any?
       = render partial: 'lessons/lesson_for_visitors', collection: section.lessons, as: :lesson, cached: true
       %li.step-list-footer
