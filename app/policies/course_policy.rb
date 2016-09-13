@@ -5,15 +5,15 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    course.published? || user.is_admin? || user_is_instructor?
   end
 
   def create?
-    user.present? && ( user.is_admin? || user.is_instructor? )
+    user.present? && (user.is_admin? || user.is_instructor?)
   end
 
   def update?
-    return true if user.present? && ( user.is_admin? || ( user.is_instructor? && ( user == course.instructor ) ) )
+    return true if user.present? && (user.is_admin? || user_is_instructor?)
   end
 
   def destroy?
@@ -30,8 +30,11 @@ class CoursePolicy < ApplicationPolicy
 
   private
 
-    def course
-      record
-    end
+  def course
+    record
+  end
 
+  def user_is_instructor?
+    user.is_instructor? && (user == course.instructor)
+  end
 end

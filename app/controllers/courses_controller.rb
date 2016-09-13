@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :progress]
 
   def index
-    @courses = Course.ordered.includes(:instructor).all
+    @courses = Course.published.ordered.all
     authorize @courses
   end
 
@@ -76,7 +76,7 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:name, :short_description, :description, :price,
+    params.require(:course).permit(:name, :status, :published_at, :short_description, :description, :price,
       video_attributes: [ :id, :video_url ],
       sections_attributes: [ :id, :title, :objective, :_destroy,
         lessons_attributes: [ :id, :title, :notes, :_destroy,

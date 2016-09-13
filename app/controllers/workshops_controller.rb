@@ -48,12 +48,13 @@ class WorkshopsController < ApplicationController
   private
 
   def workshop
-    @workshop ||= Workshop.includes(:instructor, :uploads, :video).find_by_slug(params[:id])
+    @workshop ||=
+      Workshop.includes(:instructor, :uploads, :video).find_by_slug(params[:id])
   end
   helper_method :workshop
 
   def workshops
-    @workshops ||= Workshop.ordered.includes(:instructor, :video).all
+    @workshops ||= Workshop.published.ordered.includes(:instructor, :video).all
   end
   helper_method :workshops
 
@@ -62,7 +63,7 @@ class WorkshopsController < ApplicationController
   end
 
   def workshop_params
-    params.require(:workshop).permit(:name, :short_description, :notes, :price,
+    params.require(:workshop).permit(:name, :status, :published_at, :short_description, :notes, :price,
       video_attributes: [:id, :video_url],
       uploads_attributes: [:id, :_destroy],
       uploads_files: []

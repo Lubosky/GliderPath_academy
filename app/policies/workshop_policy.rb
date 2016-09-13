@@ -5,15 +5,15 @@ class WorkshopPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    workshop.published? || user.is_admin? || user_is_instructor?
   end
 
   def create?
-    user.present? && ( user.is_admin? || user.is_instructor? )
+    user.present? && (user.is_admin? || user.is_instructor?)
   end
 
   def update?
-    return true if user.present? && ( user.is_admin? || ( user.is_instructor? && ( user == workshop.instructor ) ) )
+    user.present? && (user.is_admin? || user_is_instructor?)
   end
 
   def destroy?
@@ -22,8 +22,11 @@ class WorkshopPolicy < ApplicationPolicy
 
   private
 
-    def workshop
-      record
-    end
+  def workshop
+    record
+  end
 
+  def user_is_instructor?
+    user.is_instructor? && (user == workshop.instructor)
+  end
 end

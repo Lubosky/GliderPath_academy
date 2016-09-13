@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   end
 
   def home
-    @courses = Course.all.order('created_at DESC')
+    @courses = Course.published.ordered.all
   end
 
   def privacy

@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+  include Concerns::Publishable
   include Concerns::Purchasable
   include Concerns::Sluggable
   include Concerns::Videoable

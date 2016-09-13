@@ -1,4 +1,5 @@
 class Workshop < ApplicationRecord
+  include Concerns::Publishable
   include Concerns::Purchasable
   include Concerns::Sluggable
   include Concerns::Uploadable

@@ -1,5 +1,8 @@
 = simple_form_for @course do |f|
   = f.input :name
+  .row
+    = f.input :status, collection: Course::STATUSES, wrapper_html: { class: 'five columns reset-mobile-column' }, include_blank: false, selected: status_for(@course)
+    = f.input :published_at, as: :datetime, wrapper_html: { class: 'seven columns reset-mobile-column' }
   = f.input :short_description, as: :text, input_html: { style: 'min-height: 65px;' }, hint: t('simple_form.hints.courses.short_description')
   = f.input :description
   = f.input :price

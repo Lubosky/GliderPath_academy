@@ -247,6 +247,10 @@ en:
       count:
         one: "%{count} minute"
         other: "%{count} minutes"
+    status:
+      draft: 'Draft'
+      published: 'Published'
+      scheduled: 'Scheduled'
 
   pundit:
     default: 'You are not authorized to perform this action.'
