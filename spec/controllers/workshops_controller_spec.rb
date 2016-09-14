@@ -18,7 +18,8 @@ RSpec.describe WorkshopsController, type: :controller do
     {
       name: '',
       short_description: '',
-      notes: ''
+      notes: '',
+      status: Workshop::PUBLISHED
     }
   }
 
@@ -26,7 +27,8 @@ RSpec.describe WorkshopsController, type: :controller do
     {
       name: 'Updated Workshop #1',
       short_description: 'Updated workshop summary #1',
-      notes: 'Updated workshop notes #1'
+      notes: 'Updated workshop notes #1',
+      status: Workshop::PUBLISHED
     }
   }
 

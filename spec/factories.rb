@@ -81,6 +81,7 @@ FactoryGirl.define do
     short_description Faker::Lorem.paragraph(2)
     description 'Course description #1'
     price 99.99
+    status Course::PUBLISHED
     association :instructor, factory: [:user, :instructor]
   end
 
@@ -163,6 +164,7 @@ FactoryGirl.define do
     short_description 'Workshop short description'
     notes 'Workshop notes'
     price 9.99
+    status Workshop::PUBLISHED
     association :instructor, factory: [:user, :instructor]
     association :video, factory: :video
   end

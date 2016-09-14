@@ -76,7 +76,7 @@ RSpec.describe CoursesController, type: :controller do
 
     context 'when updated course is invalid' do
       it 'renders the page with error' do
-        put :update, params: { id: @course, course: { name: '', description: '' } }
+        put :update, params: { id: @course, course: { name: '', description: '', status: Course::PUBLISHED } }
         @course.reload
         expect(response).to render_template(:edit)
         expect(flash[:alert]).to match(/^Sorry! We are having trouble updating this course./)
@@ -86,7 +86,7 @@ RSpec.describe CoursesController, type: :controller do
 
     context 'when updated course is valid' do
       it 'updates the course' do
-        put :update, params: { id: @course, course: { name: 'Updated Course #1', description: 'Updated course description #1' } }
+        put :update, params: { id: @course, course: { name: 'Updated Course #1', description: 'Updated course description #1', status: Course::PUBLISHED } }
         @course.reload
         expect(@course.name).to eq('Updated Course #1')
         expect(flash[:success]).to match(/^Course has been successfuly updated./)
