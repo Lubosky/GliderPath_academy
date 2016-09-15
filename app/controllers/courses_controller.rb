@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :progress]
 
   def index
-    @courses = Course.published.ordered.all
+    @courses = Course.published.ordered.includes(:instructor)
     authorize @courses
   end
 

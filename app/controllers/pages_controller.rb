@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   end
 
   def home
-    @courses = Course.published.ordered.all
+    @courses = Course.published.ordered.includes(:instructor)
   end
 
   def privacy
