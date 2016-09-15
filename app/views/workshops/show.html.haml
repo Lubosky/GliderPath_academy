@@ -25,7 +25,7 @@
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
           = t('workshops.notes')
         .tab-content
-          = workshop.notes
+          = format_markdown workshop.notes
       - if user_signed_in? && (workshop.has_attachments? && policy_scope(workshop))
         %li.tab-header
           %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } } #{ t('workshops.attachments') }
