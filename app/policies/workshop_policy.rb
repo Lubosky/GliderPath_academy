@@ -29,4 +29,10 @@ class WorkshopPolicy < ApplicationPolicy
   def user_is_instructor?
     user.is_instructor? && (user == workshop.instructor)
   end
+
+  class Scope < Struct.new(:user, :scope)
+    def resolve
+      scope.watchable_for(user) || user == scope.instructor || user.is_admin?
+    end
+  end
 end
