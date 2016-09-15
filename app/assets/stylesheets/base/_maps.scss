@@ -67,3 +67,9 @@ $card-colors: (
   11: (base: #44BBFF, font: #FFFFFF),
   12: (base: #FF9800, font: #FFFFFF)
 );
+
+$status-colors: (
+  draft:     (base: #7B8B8E, font: #FFFFFF),
+  published: (base: #61D395, font: #FFFFFF),
+  scheduled: (base: #fcf5c8, font: #f4bc15)
+);

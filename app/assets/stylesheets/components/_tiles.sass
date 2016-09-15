@@ -20,7 +20,7 @@
     background: $white
     border-top: 10px solid $border-color
     margin: 0 15px 30px
-    min-height: 280px
+    min-height: 250px
     position: relative
 
     &:hover,
@@ -136,6 +136,11 @@
         .avatar-default
           +border-radius($border-radius)
           +size(45px)
+
+      .tile-stats
+        +font-size($font-size-small)
+        color: $text-muted
+        flex: 1
 
     p
       +font-size($font-size-small)

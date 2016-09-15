@@ -79,3 +79,10 @@
   .gradient-#{$name}
     +linear-gradient(15deg, map-get($colors, from), map-get($colors, to))
     color: map-get($colors, font)
+
+
+@each $name, $colors in $status-colors
+  .label
+    &.label-#{$name}
+      background: map-get($colors, base)
+      color: map-get($colors, font)
