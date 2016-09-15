@@ -1,16 +1,23 @@
 = simple_form_for @course do |f|
-  = f.input :name
   .row
-    = f.input :status, collection: Course::STATUSES, wrapper_html: { class: 'five columns reset-mobile-column' }, include_blank: false, selected: status_for(@course)
-    = f.input :published_at, as: :datetime, wrapper_html: { class: 'seven columns reset-mobile-column' }
-  = f.input :short_description, as: :text, input_html: { style: 'min-height: 65px;' }, hint: t('simple_form.hints.courses.short_description')
-  = f.input :description
-  = f.input :price
-  = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|
-    = video.input :video_url
+    = f.input :name, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :status, collection: Course::STATUSES, wrapper_html: { class: 'five columns reset-mobile-column', data: { trigger: 'datetimepicker' } }, include_blank: false, selected: label_for(@course)
+    = f.input :published_at, as: :datetime, wrapper_html: { class: 'seven columns reset-mobile-column datetimepicker', data: { toggle: 'datetimepicker' } }
+  .row
+    = f.input :short_description, as: :text, input_html: { style: 'min-height: 65px;' }, hint: t('simple_form.hints.courses.short_description'), wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :description, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :price, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|
+      = video.input :video_url, wrapper_html: { class: 'twelve columns reset-mobile-column' }
   #modules
     = f.simple_fields_for :sections do |ff|
       = render 'sections/form', f: ff
-    #module_add
-      = link_to_add_association 'Add module', f, :sections, partial: 'sections/form'
-  = f.button :button, class: 'button-large button-purple', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.saving')}" }
+    #module_add.row
+      = link_to_add_association 'Add module', f, :sections, partial: 'sections/form', class: 'twelve columns reset-mobile-column'
+  .row
+    .twelve.columns.reset-mobile-column
+      = f.button :button, class: 'button-large button-purple pull-right margin-top-25', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.saving')}" }

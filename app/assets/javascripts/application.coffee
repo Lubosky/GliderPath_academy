@@ -38,3 +38,16 @@ $(document).on 'turbolinks:load', ->
   footer = $('*[data-layout-element=\'footer\']')
   height = $(window).height() - footer.outerHeight()
   content.attr 'style', 'min-height:' + height + 'px'
+
+  change_visibility = (status) ->
+    datetime = $('*[data-toggle=\'datetimepicker\']')
+    if status == 'Scheduled'
+      datetime.show()
+    else
+      datetime.hide()
+
+  datetimepicker = $('*[data-trigger=\'datetimepicker\'] > select')
+
+  change_visibility datetimepicker.val()
+  datetimepicker.on 'change', (e) ->
+    change_visibility datetimepicker.val()

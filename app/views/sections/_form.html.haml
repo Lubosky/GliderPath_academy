@@ -1,10 +1,13 @@
 .nested-fields
-  = f.input :title
-  = f.input :objective, input_html: { rows: 4 }
-  = link_to_remove_association 'Remove module', f
+  .row
+    = f.input :title, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :objective, input_html: { rows: 4 }, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = link_to_remove_association 'Remove module', f, class: 'twelve columns reset-mobile-column'
 
-  #lesson
+  #lessons
     = f.simple_fields_for :lessons do |fff|
       = render 'lessons/form', f: fff
-    #lesson_add
-      = link_to_add_association 'Add Lesson', f, :lessons, partial: 'lessons/form'
+    #lesson_add.row
+      = link_to_add_association 'Add Lesson', f, :lessons, partial: 'lessons/form', class: 'twelve columns reset-mobile-column'

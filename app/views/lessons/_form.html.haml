@@ -1,7 +1,12 @@
 .nested-fields
-  = f.input :title
-  = f.input :notes
-  = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|
-    = video.input :video_url
-  = f.attachment_field :uploads_files, multiple: true, direct: true, presigned: true
-  = link_to_remove_association 'Remove', f
+  .row
+    = f.input :title, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.input :notes, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.simple_fields_for :video, (f.object.build_video unless f.object.video) do |video|
+      = video.input :video_url, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+  .row
+    = f.attachment_field :uploads_files, multiple: true, direct: true, presigned: true, class: 'twelve columns reset-mobile-column'
+  .row
+    = link_to_remove_association 'Remove', f, class: 'twelve columns reset-mobile-column'

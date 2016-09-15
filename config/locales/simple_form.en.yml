@@ -9,6 +9,7 @@ en:
     labels:
       defaults:
         password: 'Password'
+        published_at: 'Publish date'
       user:
         edit:
           password: 'New password'
