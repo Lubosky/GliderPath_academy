@@ -18,6 +18,9 @@
         - if ENV['FORUM_URL']
           %li.menu-item
             = link_to t('navigation.forum'), forum_path
+        - if current_user.is_instructor?
+          %li.menu-item
+            = link_to t('users.roles.instructor'), instructor_dashboard_path
         %li.menu-item.bordered.hide-on-desktop
           = link_to t('button.account.sign_out'), destroy_user_session_path, method: :delete
         %li.menu-item.menu-profile
