@@ -1,0 +1,16 @@
+- content_for :page_title, t('titles.dashboard.student.show', user_name: current_user.name)
+
+- if @dashboard.enrolled.any?
+  %h2= t('titles.courses.enrolled')
+  .tile-container.flex-grid
+    = render partial: 'course_enrolled', collection: @dashboard.enrolled, as: :course
+
+- if @dashboard.accessible.any?
+  %h2= t('titles.courses.accessible')
+  .tile-container.flex-grid
+    = render partial: 'course_accessible', collection: @dashboard.accessible, as: :course
+
+- if @dashboard.available.any?
+  %h2= t('titles.courses.index')
+  .tile-container.flex-grid
+    = render partial: 'courses/course', collection: @dashboard.available, as: :course, cached: true

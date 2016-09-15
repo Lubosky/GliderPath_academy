@@ -73,22 +73,4 @@ class Course < ActiveRecord::Base
     .group('courses.id')
     .count
   end
-
-  def self.enrolled_courses_for(student)
-    joins(:enrollments)
-    .where(enrollments: { student: student })
-    .order('enrollments.created_at desc')
-  end
-
-  def self.accessible_courses_for(student)
-    joins(:purchases)
-    .where(purchases: { purchaser: student })
-    .where.not(id: enrolled_courses_for(student))
-    .order('purchases.created_at desc')
-  end
-
-  def self.available_courses_for(student)
-    where.not(id: accessible_courses_for(student))
-    .where.not(id: enrolled_courses_for(student))
-  end
 end

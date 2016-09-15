@@ -1,0 +1,18 @@
+.tile.extended.stacked{ class: "tile-#{course.id}" }
+  .tile-header
+    = link_to progress_course_path(course) do
+      = progress_for(course, current_user)
+      %h1= course.name
+      %small= t('lessons.progress', completed: completed_lesson_count_for(course), count: lesson_count_for(course))
+  .tile-content
+    .tile-meta
+      %small Instructed by
+      %h3= course.instructor.name
+    %figure
+      = user_avatar(course.instructor, class: 'avatar-default', alt: course.instructor.name, width: '45px', height: '45px')
+  %p.ellipsis= course.short_description
+  .tile-footer
+    - if course.progress(current_user) != 100
+      = link_to t('button.course.continue'), course_lesson_path(course, course.first_remaining_lesson_for(current_user)), class: 'button button-small'
+    - else
+      = link_to t('button.course.completed'), progress_course_path(course), class: 'button button-small'
