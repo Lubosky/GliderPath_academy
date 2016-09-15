@@ -1,0 +1,19 @@
+.tile.extended.stacked{ class: "tile-#{course.id}" }
+  .tile-header
+    = link_to course_path(course) do
+      = icon_tag 'course'
+      %h1= course.name
+      %small
+        = t('lessons.count', count: lesson_count_for(course))
+        \/
+        = duration_in_hours(content_length_for(course))
+  .tile-content
+    .tile-stats
+      = status_for(course)
+    .tile-status
+      .span.label{ class: "label-#{label_for(course).downcase}"}
+        = label_for(course)
+  %p.ellipsis= enrollment_count_for(course)
+  .tile-footer
+    = link_to t('button.edit'), edit_course_path(course), class: 'button button-green'
+    = link_to t('button.view'), course_path(course), class: 'button button-brand'

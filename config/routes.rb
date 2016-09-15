@@ -33,6 +33,11 @@ Rails.application.routes.draw do
     resource :purchase, only: [:create]
   end
 
+  # DASHBOARD
+  namespace :instructor do
+    resource :dashboard, only: [:show]
+  end
+
   # DISCOURSE
   resource :forum_sessions, only: :new
   get '/forum', to: redirect("#{Forum.url('session/sso')}")

@@ -1,0 +1,11 @@
+- content_for :page_title, t('titles.dashboard.instructor.show', user_name: current_user.name)
+
+- if @dashboard.courses.any?
+  %h2= t('titles.courses.teaching')
+  .tile-container.flex-grid
+    = render partial: 'course', collection: @dashboard.courses
+
+- if @dashboard.workshops.any?
+  %h2= t('titles.workshops.presenting')
+  .tile-container.flex-grid
+    = render partial: 'workshop', collection: @dashboard.workshops

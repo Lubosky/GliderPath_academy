@@ -1,0 +1,16 @@
+.tile.stacked
+  .tile-header
+    = link_to workshop_path(workshop) do
+      = icon_tag 'play-circle'
+      %h1= workshop.name
+      %small= duration_in_hours(content_length_for(workshop)) if workshop.video.present?
+  .tile-content
+    .tile-stats
+      = status_for(workshop)
+    .tile-status
+      .span.label{ class: "label-#{label_for(workshop).downcase}"}
+        = label_for(workshop)
+  %p.description= purchase_count_for(workshop)
+  .tile-footer
+    = link_to t('button.edit'), edit_workshop_path(workshop), class: 'button button-lime'
+    = link_to t('button.view'), workshop_path(workshop), class: 'button button-brand'
