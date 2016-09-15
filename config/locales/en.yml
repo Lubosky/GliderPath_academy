@@ -11,8 +11,12 @@ en:
       enrolled: 'Enrolled Courses'
       new: 'New Course'
       index: 'Courses'
-    dashboards:
-      show: 'Dashboard'
+      teaching: 'My Courses'
+    dashboard:
+      instructor:
+        show: "Instructor Dashboard | %{user_name}"
+      student:
+        show: "Student Dashboard | %{user_name}"
     devise:
       registrations:
         edit: "Edit Account | %{user_name}"
@@ -39,6 +43,8 @@ en:
       new: "Purchase %{product}"
     subscriptions:
       new: 'Subscribe'
+    workshops:
+      presenting: 'My Workshops'
 
   meta:
     title: 'GliderPath Academy - A Perfect Space to Share & Gain Knowledge'
@@ -180,6 +186,9 @@ en:
     password: 'Password'
     first_name: 'First Name'
     last_name: 'Last Name'
+    roles:
+      instructor: 'Instructor'
+      student: 'Student'
 
   button:
     back: 'Back'
@@ -247,10 +256,21 @@ en:
       count:
         one: "%{count} minute"
         other: "%{count} minutes"
-    status:
+    label:
       draft: 'Draft'
       published: 'Published'
       scheduled: 'Scheduled'
+    status:
+      published: "Published on %{date}"
+      scheduled: "Scheduled for publishing on %{date}"
+    enrollments:
+      count:
+        one: "%{count} student enrolled"
+        other: "%{count} students enrolled"
+    purchases:
+      count:
+        one: "%{count} student purchased"
+        other: "%{count} students purchased"
 
   pundit:
     default: 'You are not authorized to perform this action.'
