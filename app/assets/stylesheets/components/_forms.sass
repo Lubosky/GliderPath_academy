@@ -77,17 +77,17 @@ form
 
           .required
             +font-size(16px)
-            color: map-deep-get($component-colors, red, base)
+            color: $red
 
         &.has-error
           input,
           select,
           textarea
-            border-color: map-deep-get($component-colors, red, base)
+            border-color: $red
 
         .error
           +font-size($font-size-small)
-          color: map-deep-get($component-colors, red, base)
+          color: $red
 
         .hint
           +font-size($font-size-small)
@@ -96,7 +96,7 @@ form
     .error-notification
       +border-radius($border-radius)
       +pad(10px)
-      background: map-deep-get($component-colors, red, base)
+      background: $red
       color: $white
       margin-bottom: 20px
 
@@ -117,7 +117,7 @@ form
       &:hover,
       &:focus,
       &:active
-        background-color: map-deep-get($component-colors, purple, base)
+        background-color: $purple
         color: $white
 
   &.reactivate

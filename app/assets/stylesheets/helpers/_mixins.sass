@@ -16,27 +16,12 @@
   bottom: 0
   left: 0
 
-// MAP-DEEP-GET
-@function map-deep-get($map, $keys...)
-  $value: $map
-  @each $key in $keys
-    $value: map-get($value, $key)
-  @return $value
-
 // ANIMATION
 =animation($str)
-  -webkit-animation: #{$str}
-  -moz-animation: #{$str}
-  -ms-animation: #{$str}
-  -o-animation: #{$str}
   animation: #{$str}
 
 // BORDER RADIUS
 =border-radius($radius, $important: '')
-  -webkit-border-radius: $radius#{$important}
-  -moz-border-radius: $radius#{$important}
-  -ms-border-radius: $radius#{$important}
-  -o-border-radius: $radius#{$important}
   border-radius: $radius#{$important}
 
 // BOX SHADOW
@@ -95,50 +80,15 @@
   opacity: $value #{$important}
   filter: alpha(opacity=#{$value * 100}) #{$important}
 
-// RADIAL GRADIENT
-=radial-gradient($from, $to)
-  background: -moz-radial-gradient(center, circle cover, $from 0%, $to 100%)
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $from), color-stop(100%, $to))
-  background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%)
-  background: -o-radial-gradient(center, circle cover, $from 0%, $to 100%)
-  background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%)
-  background: radial-gradient(center, circle cover, $from 0%, $to 100%)
-  background-color: $from
-
 // LINEAR GRADIENT
 =linear-gradient($angle, $from, $to)
-  background-color: $to
-  background-image: -webkit-gradient(linear, $angle, from($from), to($to))
-  background-image: -webkit-linear-gradient($angle, $from, $to)
-  background-image: -moz-linear-gradient($angle, $from, $to)
-  background-image: -ms-linear-gradient($angle, $from, $to)
-  background-image: -o-linear-gradient($angle, $from, $to)
+  background-color: $from
   background-image: linear-gradient($angle, $from, $to)
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=$angle,StartColorStr='#{$from}', EndColorStr='#{$to}')
 
 // ROTATE
 =rotate($deg)
-  -webkit-transform: rotate($deg)
-  -moz-transform: rotate($deg)
-  -ms-transform: rotate($deg)
-  -o-transform: rotate($deg)
   transform: rotate($deg)
-
-// SCROLLBAR
-=scrollbar($size, $foreground-color, $background-color: mix($foreground-color, white, 50%))
-  ::-webkit-scrollbar
-    width:  $size
-    height: $size
-
-  ::-webkit-scrollbar-thumb
-    background: $foreground-color
-
-  ::-webkit-scrollbar-track
-    background: $background-color
-
-  body
-    scrollbar-face-color: $foreground-color
-    scrollbar-track-color: $background-color
 
 // SIZE
 =size($width, $height: $width)
@@ -158,26 +108,14 @@
 
 // TEXT SHADOW
 =text-shadow($args...)
-  -webkit-text-shadow: $args
-  -moz-text-shadow: $args
-  -ms-text-shadow: $args
-  -o-text-shadow: $args
   text-shadow: $args
 
 // TRANSFORM
 =transform($transforms)
-  -webkit-transform: $transforms
-  -moz-transform: $transforms
-  -ms-transform: $transforms
-  -o-transform: $transforms
   transform: $transforms
 
 // TRANSITIONS
 =transition($args...)
-  -webkit-transition: $args
-  -moz-transition: $args
-  -ms-transition: $args
-  -o-transition: $args
   transition: $args
 
 // PARALLAX

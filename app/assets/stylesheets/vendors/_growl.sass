@@ -1,41 +1,43 @@
-/*
- * jQuery Growl
- * Copyright 2015 Kevin Sylvestre
- * 1.3.1
- */
-
 $namespace: 'growl'
 
-$duration: 0.4s
+$duration: .4s
 
 #growls
-  z-index: 50000
   position: fixed
+  z-index: 50000
 
   &.default
-    top: 70px
     right: 10px
+    top: 70px
+
   &.tl
-    top: 70px
     left: 10px
-  &.tr
     top: 70px
+
+  &.tr
     right: 10px
+    top: 70px
+
   &.bl
     bottom: 10px
     left: 10px
+
   &.br
     bottom: 10px
     right: 10px
+
   &.tc
-    top: 70px
-    right: 10px
     left: 10px
+    right: 10px
+    top: 70px
+
   &.bc
     bottom: 10px
-    right: 10px
     left: 10px
-  &.tc,&.bc
+    right: 10px
+
+  &.tc,
+  &.bc
     .#{$namespace}
       margin:
         left:  auto
@@ -54,29 +56,34 @@ $duration: 0.4s
 
   &.#{$namespace}-small
     +pad(5px)
-    width: 250px
     margin: 5px
+    width: 250px
+
   &.#{$namespace}-medium
     +pad(10px)
-    width: 300px
     margin: 10px
+    width: 300px
+
   &.#{$namespace}-large
     +pad(15px)
-    width: 350px
     margin: 15px
+    width: 350px
 
   &.#{$namespace}-info
+    background: $blue
     color: $white
-    background: map-deep-get($component-colors, blue, base)
+
   &.#{$namespace}-error
+    background: $red
     color: $white
-    background: map-deep-get($component-colors, red, base)
+
   &.#{$namespace}-success
+    background: $green
     color: $white
-    background: map-deep-get($component-colors, green, base)
+
   &.#{$namespace}-warning
+    background: $orange
     color: $white
-    background: map-deep-get($component-colors, orange, base)
 
   .#{$namespace}-close
     @extend .sbold

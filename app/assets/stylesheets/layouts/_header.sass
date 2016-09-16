@@ -1,7 +1,7 @@
 header
   +box-shadow(0 1px 1px 0 rgba($dark-shade, .15))
   +clearfix
-  +linear-gradient(15deg, map-deep-get($component-colors, purple, base), map-deep-get($component-colors, brand, base))
+  +linear-gradient(15deg, $purple, $brand)
   +pad(80px 0)
   color: $white
   min-height: 270px
@@ -9,8 +9,10 @@ header
   width: 100%
 
   .home &
-    +radial-gradient(map-deep-get($component-colors, orange, base), map-deep-get($component-colors, pink, base))
     +size(100%, 550px)
+    background: $pink
+    background: image-url('header-bg.svg'), radial-gradient(circle at center, $orange 0%, $pink 100%)
+    background-size: contain
     margin-top: -$menu-height
 
     +mq($max, $mobile-screen)
