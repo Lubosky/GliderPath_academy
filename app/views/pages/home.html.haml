@@ -2,7 +2,7 @@
 - content_for :page_title, t('titles.pages.home.title')
 - content_for :page_subtitle, t('titles.pages.home.subtitle')
 
-- cache [controller_name, action_name, @courses] do
+- cache [cache_key_base, index_cache_key(:course), index_cache_key(:workshop)] do
   %section.page-content
     .row
       .twelve.columns.centered

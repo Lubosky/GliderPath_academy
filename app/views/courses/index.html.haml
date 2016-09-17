@@ -1,5 +1,5 @@
 - content_for :page_title, title
 
-- cache [controller_name, action_name, @courses] do
+- cache [cache_key_base, index_cache_key(:course)] do
   .tile-container.flex-grid
     = render partial: 'course', collection: @courses, cached: true

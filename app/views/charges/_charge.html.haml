@@ -1,4 +1,4 @@
-- cache [controller_name, action_name, current_user.id, charge] do
+- cache [cache_key_base, current_user.id, charge] do
   %tr
     %td= charge.receipt_number
     %td= charge.created_at.to_s(:default)
