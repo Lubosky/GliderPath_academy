@@ -23,7 +23,7 @@
           - elsif !( current_user.has_active_subscription? || current_user.purchased?(@course) )
             = render 'button_purchase', resource: @course
         - else
-          -#= link_to t('button.subscription.new'), new_subscription_path(plan: 1), class: 'button button-brand'
+          -#= link_to t('button.subscription.new'), new_subscription_path(plan: 1), class: 'button button-green'
           = render 'button_purchase', resource: @course
       %li.tab-header
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
