@@ -10,6 +10,7 @@ class PagesController < ApplicationController
 
   def home
     @courses = Course.published.ordered.includes(:instructor)
+    @workshops = Workshop.published.ordered.limit(5).includes(:instructor, :video)
   end
 
   def privacy

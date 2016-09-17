@@ -44,6 +44,7 @@ en:
     subscriptions:
       new: 'Subscribe'
     workshops:
+      index: 'Workshops'
       presenting: 'My Workshops'
 
   meta:

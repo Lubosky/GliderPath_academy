@@ -10,9 +10,30 @@
           .tile-container.flex-grid
             = render partial: 'courses/course', collection: @courses, cached: true
 
+  %section.page-content.gradient-turquoise-blue
+    .row
+      .ten.columns.centered
+        .testimonial-quote
+          = icon_tag :quote
+          %p As a boutique translation agency, there never seems to be enough time for training. GliderPath Academy swept in and provided our project managers with the tools they need to excel at their jobs. Productivity is up, communications are flowing, we are doing business more briskly than ever before. Can't wait to see what they come up with next!
+          %span.attribution
+            .avatar
+              = image_tag 'testimonial_avatars/monica-nainsztein-SpanishOne.jpg', alt: 'Monica Nainsztein'
+            %strong Mónica Nainsztein Rodríguez
+            The Language Maven, Founder of SpanishOne Translations
+
+  %section.page-content
+    .row
+      .twelve.columns.centered
+        %h2.content-center= t('titles.workshops.index')
+        .row
+          .tile-container.flex-grid
+            = render partial: 'workshops/workshop', collection: @workshops, cached: true
+
   %section.page-content.gradient-purple-blue
     .row
       .ten.columns.content-center.centered
         %h2 Take your career to the next level!
         %p.lead Ready to master some skills? You're in the right place.
         = link_to 'Explore Courses', courses_path, class: 'button button-white outline margin-top-15 margin-bottom-15'
+        = link_to 'Explore Workshops', workshops_path, class: 'button button-white outline margin-top-15 margin-bottom-15'
