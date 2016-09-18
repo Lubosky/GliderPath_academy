@@ -24,7 +24,7 @@ RSpec.describe WorkshopPolicy do
 
   permissions :show? do
     it 'grants access to user' do
-      workshop = build_stubbed(:workshop, published_at: Time.now)
+      workshop = build_stubbed(:workshop, published_at: Time.current)
 
       expect(subject).to permit(user, workshop)
     end

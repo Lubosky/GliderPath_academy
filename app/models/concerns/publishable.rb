@@ -15,7 +15,7 @@ module Concerns
       attr_accessor :status
 
       def self.published
-        where('published_at <= ?', Time.zone.now)
+        where('published_at <= ?', Time.current)
       end
 
       def draft?
@@ -23,11 +23,11 @@ module Concerns
       end
 
       def published?
-        published_at <= Time.zone.now unless draft?
+        published_at <= Time.current unless draft?
       end
 
       def scheduled?
-        published_at > Time.zone.now unless draft?
+        published_at > Time.current unless draft?
       end
     end
 
@@ -39,7 +39,7 @@ module Concerns
         when DRAFT
           nil
         when PUBLISHED
-          Time.zone.now
+          Time.current
         else
           published_at
         end

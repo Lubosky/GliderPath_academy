@@ -50,4 +50,4 @@
         = link_to t('footer.terms'), terms_path, class: 'footer-link'
       %li.footer-list-item.footer-list-text-item
         = link_to t('footer.privacy'), privacy_path, class: 'footer-link'
-      %li.footer-list-item.footer-list-copyright © #{ Time.now.year } #{ Settings.application.company }
+      %li.footer-list-item.footer-list-copyright © #{ Time.current.year } #{ Settings.application.company }

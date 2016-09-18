@@ -24,15 +24,15 @@ RSpec.describe CoursePolicy do
 
   permissions :show? do
     it 'grants access to student' do
-      course = build_stubbed(:course, published_at: Time.now)
+      course = build_stubbed(:course, published_at: Time.current)
 
       expect(subject).to permit(student, course)
     end
   end
 
   before do
-    @c1 = build_stubbed(:course, instructor: instructor, published_at: Time.now)
-    @c2 = build_stubbed(:course, instructor: admin, published_at: Time.now)
+    @c1 = build_stubbed(:course, instructor: instructor, published_at: Time.current)
+    @c2 = build_stubbed(:course, instructor: admin, published_at: Time.current)
   end
 
   permissions :update?, :edit?, :sort? do

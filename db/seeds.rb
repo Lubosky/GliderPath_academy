@@ -41,7 +41,7 @@ when 'development'
         email: Faker::Internet.email,
         password: password,
         password_confirmation: password,
-        confirmed_at: Time.now
+        confirmed_at: Time.current
       }
     end
   ] do |_, params|
@@ -59,7 +59,7 @@ when 'development'
       email: 'admin@example.com',
       password: password,
       password_confirmation: password,
-      confirmed_at: Time.now
+      confirmed_at: Time.current
     }
   ] do |_, params|
     u = User.create(params)

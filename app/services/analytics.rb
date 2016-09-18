@@ -75,7 +75,7 @@ class Analytics
     def track(event, metadata = {})
       backend.events.create(
         event_name: event,
-        created_at: Time.now.to_i,
+        created_at: Time.current.to_i,
         email: user.email,
         metadata: metadata,
       )
