@@ -20,6 +20,8 @@
           - elsif current_user.is_admin? || current_user.id == @course.instructor_id
             = render 'button_edit', resource: @course
             = render 'button_delete', resource: @course
+          - elsif current_user.enrolled?(@course)
+            = render 'button_continue', resource: @course, css_class: 'button button-green'
           - elsif !( current_user.has_active_subscription? || current_user.purchased?(@course) )
             = render 'button_purchase', resource: @course
         - else
@@ -34,7 +36,7 @@
         %a.tab-link{ href: 'javascript:void(0)', data: { toggle: 'tab' } }
           = t('courses.curriculum')
         .tab-content
-          - if !user_signed_in? || !(current_user.has_active_subscription? || current_user.purchased?(@course)) || !current_user.enrolled?(@course)
+          - if !user_signed_in? || (!current_user.enrolled?(@course) && !(current_user.has_active_subscription? || current_user.purchased?(@course)))
             = render partial: 'sections/section_for_visitors', collection: @sections, as: :section, cached: true
           - else
             = render partial: 'sections/section_for_enrollees', collection: @sections, as: :section, locals: { css_class: 'compact' }

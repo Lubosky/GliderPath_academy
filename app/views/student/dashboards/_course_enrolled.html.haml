@@ -12,7 +12,4 @@
       = user_avatar(course.instructor, class: 'avatar-default', alt: course.instructor.name, width: '45px', height: '45px')
   %p.ellipsis= course.short_description
   .tile-footer
-    - if course.progress(current_user) != 100
-      = link_to t('button.course.continue'), course_lesson_path(course, course.first_remaining_lesson_for(current_user)), class: 'button button-small'
-    - else
-      = link_to t('button.course.completed'), progress_course_path(course), class: 'button button-small'
+    = render 'courses/button_continue', resource: course, css_class: 'button button-small'

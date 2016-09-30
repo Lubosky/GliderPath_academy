@@ -13,9 +13,18 @@ RSpec.describe LessonPolicy do
       expect(subject).to permit(user, lesson)
     end
 
+    it 'grants access to enrolled student' do
+      user = create(:user)
+      lesson = stub_lesson
+      allow(user).to receive(:enrolled?).and_return(true)
+
+      expect(subject).to permit(user, lesson)
+    end
+
     it 'denies access if student does not have active subscription' do
       user = build_stubbed(:user)
       lesson = stub_lesson
+      allow(user).to receive(:enrolled?).and_return(false)
 
       expect(subject).not_to permit(user, lesson)
     end
@@ -23,6 +32,7 @@ RSpec.describe LessonPolicy do
     it 'denies access if student not enrolled' do
       user = build_stubbed(:user, :with_subscription)
       lesson = stub_lesson
+      allow(user).to receive(:enrolled?).and_return(false)
 
       expect(subject).not_to permit(user, lesson)
     end

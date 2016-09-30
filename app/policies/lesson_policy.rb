@@ -14,7 +14,7 @@ class LessonPolicy < ApplicationPolicy
   private
 
   def user_has_access?
-    user.has_access_to?(record.course) && user.enrolled?(record.course)
+    user.has_access_to?(record.course) || user.enrolled?(record.course)
   end
 
   def user_is_instructor?

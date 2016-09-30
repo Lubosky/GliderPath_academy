@@ -1,0 +1,4 @@
+- if resource.progress(current_user) != 100
+  = link_to t('button.course.continue'), course_lesson_path(resource, resource.first_remaining_lesson_for(current_user)), class: css_class
+- else
+  = link_to t('button.course.completed'), progress_course_path(resource), class: css_class
