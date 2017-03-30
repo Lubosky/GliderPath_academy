@@ -76,7 +76,9 @@ describe Workshop, type: :model do
       it 'returns true' do
         user = create(:user)
         workshop = build_workshop_with_price(9.99)
-        purchase = create(:purchase, purchasable: workshop, purchaser: user)
+        create(:purchase, purchasable_id: workshop.id,
+                          purchasable_type: workshop.model_name.name,
+                          purchaser: user)
 
         expect(workshop.watchable_for(user)).to be_truthy
       end
