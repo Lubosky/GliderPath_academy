@@ -197,6 +197,11 @@ GEM
     github-markdown (0.6.9)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gon (6.1.0)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     haml (5.0.0.beta.2)
       temple (>= 0.8.0)
       tilt
@@ -479,6 +484,7 @@ DEPENDENCIES
   flamegraph
   foreman
   github-markdown
+  gon
   haml (~> 5.0.0.beta.2)
   hiredis
   html-pipeline

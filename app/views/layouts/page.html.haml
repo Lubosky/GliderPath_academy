@@ -9,6 +9,7 @@
     = javascript_include_tag 'application', data_turbolinks_track: true
 
   %body{ class: "#{body_css 'static'}" }
+    = Gon::Base.render_data(namespace: 'dataLayer')
     = render 'flash_messages'
     = render 'navigation'
     %section.page-container{ data: { layout_element: 'content' } }

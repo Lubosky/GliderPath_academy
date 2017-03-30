@@ -10,6 +10,7 @@
     = javascript_include_tag "#{STRIPE_JS_HOST}/v2/", data_turbolinks_track: true, rel: 'preconnect', async: 'async', defer: 'defer'
 
   %body{ class: "#{body_css}" }
+    = Gon::Base.render_data(namespace: 'dataLayer')
     = render 'flash_messages'
     = render 'navigation'
     = render 'container'
