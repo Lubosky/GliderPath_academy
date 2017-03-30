@@ -9,7 +9,7 @@ module CheckoutHelper
 
   def comparable_price(resource)
     content_tag(:div, class: 'order-price total') do
-      concat content_tag(:span, '$', class: 'currency')
+      concat content_tag(:span, '£', class: 'currency')
       concat content_tag(:span, resource.coupon.apply(resource.price), class: 'price')
       concat ' '
       concat content_tag(:span, resource.price, class: 'price text-muted', style: 'text-decoration: line-through')
@@ -18,7 +18,7 @@ module CheckoutHelper
 
   def single_price(resource)
     content_tag(:div, class: 'order-price total') do
-      concat content_tag(:span, '$', class: 'currency')
+      concat content_tag(:span, '£', class: 'currency')
       concat content_tag(:span, resource.price, class: 'price')
     end
   end

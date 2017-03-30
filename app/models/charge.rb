@@ -33,7 +33,7 @@ class Charge < ApplicationRecord
       ['Date',            "<b>#{created_at.to_s(:default)}"],
       ['Account billed',  "<b>#{user.name}</b> (#{user.email})"],
       ['Item',            "<b>#{product}</b>"],
-      ['Amount',          "<b>USD $#{amount}"],
+      ['Amount',          "<b>GBP £#{amount}"],
       ['Charged to',      "<b>#{card_brand}</b> xxxx-#{card_last4}"],
       ['Transaction ID',  "<b>#{stripe_charge_id}</b>"]
     ]

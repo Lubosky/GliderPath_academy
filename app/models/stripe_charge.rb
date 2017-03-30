@@ -57,7 +57,7 @@ class StripeCharge
   def base_charge_attributes
     {
       amount: amount_in_cents,
-      currency: 'usd',
+      currency: 'gbp',
       customer: stripe_customer.id,
       description: @purchase.name
     }

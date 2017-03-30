@@ -219,7 +219,7 @@ en:
       reactivate: 'Reactivate'
     purchase:
       new: 'Purchase'
-      with_price: 'Purchase for $%{price}'
+      with_price: 'Purchase for £%{price}'
     credit_card:
       add: 'Update credit card'
       save: 'Save credit card'
