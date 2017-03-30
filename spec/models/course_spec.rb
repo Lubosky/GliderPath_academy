@@ -32,6 +32,22 @@ describe Course, type: :model do
     it { is_expected.to validate_uniqueness_of(:slug) }
   end
 
+  context 'scope' do
+    it 'returns array of courses based on status' do
+      draft = create(:course, published_at: nil,
+                              status: Course::DRAFT)
+      published = create(:course, published_at: 1.hour.ago,
+                                  status: Course::PUBLISHED)
+      scheduled = create(:course, published_at: Time.current + 1.week,
+                                  status: Course::SCHEDULED)
+      courses = Course.all
+
+      expect(courses.draft.map(&:id)).to match_array([draft.id])
+      expect(courses.published.map(&:id)).to match_array([published.id])
+      expect(courses.scheduled.map(&:id)).to match_array([scheduled.id])
+    end
+  end
+
   describe '#first_remaining_lesson_for' do
     it 'returns the first remaining lesson in the course for the user' do
       course = create(:course)

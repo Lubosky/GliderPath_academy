@@ -12,11 +12,12 @@ module Concerns
       validates :status, inclusion: { in: STATUSES }
       before_validation :set_status
 
-      attr_accessor :status
+      scope :draft, -> { where(published_at: nil) }
+      scope :published, -> { where('published_at <= ?', Time.current) }
+      scope :scheduled, -> { where('published_at > ?', Time.current) }
+      scope :visible, -> { where.not(published_at: nil) }
 
-      def self.published
-        where('published_at <= ?', Time.current)
-      end
+      attr_accessor :status
 
       def draft?
         published_at.nil?
