@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby `cat .ruby-version`.strip
 
 gem 'autoprefixer-rails', '~> 6.3'
 gem 'bourbon', '~> 5.0.0.beta.6'
