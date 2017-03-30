@@ -3,8 +3,9 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :progress]
 
   def index
-    @courses = Course.published.ordered.includes(:instructor)
+    @courses = Course.visible.ordered.includes(:instructor)
     authorize @courses
+    gon.push(scheduledCourses: @courses.scheduled.ids.to_s)
   end
 
   def show

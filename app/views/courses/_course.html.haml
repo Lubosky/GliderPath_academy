@@ -1,7 +1,7 @@
 - cache [cache_key_base, course] do
-  .tile.stacked{ class: "tile-#{course.id}" }
+  .tile.stacked{ class: "tile-#{course.id}", data: { type: :course, id: course.id} }
     .tile-header
-      = link_to course_path(course) do
+      = link_to course_path(course), data: { role: 'course_link' } do
         = icon_tag 'course'
         %h1= course.name
         %small

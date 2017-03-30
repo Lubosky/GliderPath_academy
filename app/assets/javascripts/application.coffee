@@ -11,6 +11,7 @@
 #= require html.sortable
 #= require initials
 #= require refile
+#= require observer
 #= require purchase
 #= require revealer
 #= require scroller
@@ -22,6 +23,9 @@
 $ ->
   FastClick.attach document.body
 
+$(document).on 'click', 'a.disabled', (e)->
+  e.preventDefault()
+
 $(document).on 'turbolinks:load', ->
   $html = $('html')
   $('#menu-toggle').data('toggle', 'mobile-menu').click ->
@@ -30,9 +34,6 @@ $(document).on 'turbolinks:load', ->
   $('nav .menu-item > a').click ->
     if $html.hasClass 'menu-expanded'
       $html.removeClass 'menu-expanded'
-
-  $('a.disabled').click (e) ->
-    e.preventDefault()
 
   content = $('*[data-layout-element=\'content\']')
   footer = $('*[data-layout-element=\'footer\']')

@@ -9,8 +9,9 @@ class PagesController < ApplicationController
   end
 
   def home
-    @courses = Course.published.ordered.includes(:instructor)
+    @courses = Course.visible.ordered.includes(:instructor)
     @workshops = Workshop.published.ordered.limit(5).includes(:instructor, :video)
+    gon.push(scheduledCourses: @courses.scheduled.ids.to_s)
   end
 
   def privacy
