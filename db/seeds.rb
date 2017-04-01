@@ -100,6 +100,9 @@ when 'development'
         notes: Faker::ChuckNorris.fact,
         price: Faker::Commerce.price,
         instructor_id: User.with_role('instructor').map { |instructor| instructor.id }.sample,
+        video_attributes: {
+          video_url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4'
+        }
       }
     end
   ] do |_, params|
