@@ -179,6 +179,7 @@ GEM
     dotenv-rails (2.2.0)
       dotenv (= 2.2.0)
       railties (>= 3.2, < 5.1)
+    down (2.4.2)
     erubi (1.6.0)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -214,6 +215,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.1)
+    image_processing (0.4.1)
     intercom (3.5.12)
       json (>= 1.8)
     intercom-rails (0.3.4)
@@ -336,6 +338,8 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rinku (2.0.2)
+    roda (2.24.0)
+      rack
     rolify (5.1.0)
     rollbar (2.14.1)
       multi_json
@@ -384,6 +388,8 @@ GEM
     shoulda-context (1.2.2)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    shrine (2.5.0)
+      down (>= 2.3.6)
     sidekiq (4.2.10)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -488,11 +494,13 @@ DEPENDENCIES
   haml (~> 5.0.0.beta.2)
   hiredis
   html-pipeline
+  image_processing
   intercom
   intercom-rails
   jbuilder (~> 2.0)
   jquery-rails
   mail_form!
+  mini_magick
   mini_racer
   neat (~> 1.8)
   newrelic_rpm
@@ -514,6 +522,7 @@ DEPENDENCIES
   refile-mini_magick
   request_store
   rinku
+  roda
   rolify
   rollbar
   rouge
@@ -524,6 +533,7 @@ DEPENDENCIES
   sdoc
   shoulda
   shoulda-matchers
+  shrine
   sidekiq
   sidekiq-unique-jobs
   simple_form
