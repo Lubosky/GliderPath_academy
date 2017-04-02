@@ -14,7 +14,6 @@ class Lesson < ApplicationRecord
 
   accepts_nested_attributes_for :uploads, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :video, reject_if: :all_blank, allow_destroy: true
-  accepts_attachments_for :uploads, append: true
 
   before_save :generate_slug, on: :create
   after_save :set_position, on: :create
