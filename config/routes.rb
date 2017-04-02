@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   # STRIPE
   mount StripeEvent::Engine, at: '/stripe/webhook'
 
+  # SHRINE
+  mount AvatarUploader::UploadEndpoint, at: '/uploads/avatars'
+  mount FileUploader::UploadEndpoint, at: '/uploads/attachments'
+  mount AvatarUploader::DownloadEndpoint, at: '/avatars'
+  mount FileUploader::DownloadEndpoint, at: '/attachments'
+
   # ACCOUNT
   resource :account, only: [:show, :edit], path: 'account' do
     patch 'update_account', to: 'accounts#update_account'
