@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401095659) do
+ActiveRecord::Schema.define(version: 20170402135927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,16 +125,12 @@ ActiveRecord::Schema.define(version: 20170401095659) do
   end
 
   create_table "uploads", id: :serial, force: :cascade do |t|
-    t.string "file_id", null: false
-    t.string "file_filename", null: false
-    t.integer "file_size", null: false
-    t.string "file_content_type", null: false
+    t.jsonb "file_data", null: false
     t.integer "uploader_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "uploadable_type", null: false
     t.integer "uploadable_id", null: false
-    t.jsonb "file_data"
     t.index ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id"
     t.index ["uploader_id"], name: "index_uploads_on_uploader_id"
   end
@@ -162,10 +158,9 @@ ActiveRecord::Schema.define(version: 20170401095659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "stripe_customer_id"
-    t.string "avatar_id"
+    t.jsonb "avatar_data"
     t.text "bio"
     t.string "headline"
-    t.jsonb "avatar_data"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
