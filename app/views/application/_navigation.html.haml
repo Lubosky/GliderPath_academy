@@ -26,7 +26,7 @@
         %li.menu-item.menu-profile
           = link_to 'javascript:void(0)', data: { toggle: 'dropdown' } do
             %figure.avatar
-              = user_avatar(current_user, class: 'avatar-circle bordered', alt: current_user.name, width: '45px', height: '45px')
+              = user_avatar(current_user, src: current_user.avatar_url(:medium), class: 'avatar-circle bordered', alt: current_user.name, width: '45px', height: '45px')
               %figcaption= current_user.name
               = icon_tag 'chevron-down', size: :m
           .dropdown.right

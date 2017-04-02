@@ -7,8 +7,9 @@
       .row
         .two.columns.reset-mobile-column
           .avatar-form
-            = user_avatar(current_user, id: 'preview_img', class: 'avatar-circle bordered', alt: current_user.name, width: '90px', height: '90px')
-          = f.attachment_field :avatar, direct: true, presigned: true, label: false, class: 'file-upload hidden', id: 'previewable'
+            = user_avatar(current_user, src: current_user.avatar_url(:medium), id: 'preview_img', class: 'avatar-circle bordered', alt: current_user.name, width: '90px', height: '90px')
+          = f.hidden_field :avatar, value: current_user.cached_avatar_data
+          = f.file_field :avatar, label: false, class: 'file-upload hidden', id: 'previewable'
           %label{ for: 'previewable' }
             %strong= t('button.account.avatar.change')
         .ten.columns.reset-mobile-column

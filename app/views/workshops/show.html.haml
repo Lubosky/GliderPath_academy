@@ -5,7 +5,7 @@
   %h1
     = workshop.name
   .library-meta
-    = user_avatar(workshop.instructor, class: 'avatar-circle', alt: workshop.instructor.name, width: '45px', height: '45px')
+    = user_avatar(workshop.instructor, src: workshop.instructor.avatar_url(:medium), class: 'avatar-circle', alt: workshop.instructor.name, width: '45px', height: '45px')
     %h5= workshop.instructor.name
 .box
   - if user_signed_in?

@@ -10,5 +10,5 @@
         %small Presented by
         %h3= workshop.instructor.name
       %figure
-        = user_avatar(workshop.instructor, class: 'avatar-default', alt: workshop.instructor.name, width: '45px', height: '45px')
+        = user_avatar(workshop.instructor, src: workshop.instructor.avatar_url(:medium), class: 'avatar-default', alt: workshop.instructor.name, width: '45px', height: '45px')
     %p.description= workshop.short_description

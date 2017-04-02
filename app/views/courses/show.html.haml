@@ -5,7 +5,7 @@
   %h1
     = @course.name
   .library-meta
-    = user_avatar(@course.instructor, class: 'avatar-circle', alt: @course.instructor.name, width: '45px', height: '45px')
+    = user_avatar(@course.instructor, src: @course.instructor.avatar_url(:medium), class: 'avatar-circle', alt: @course.instructor.name, width: '45px', height: '45px')
     %h5= @course.instructor.name
 .box
   .box-header.video-container
