@@ -29,8 +29,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @course.update(course_params)
@@ -44,8 +43,8 @@ class CoursesController < ApplicationController
 
   def destroy
     @course.destroy
-      flash[:info] = t('flash.courses.destroy.info')
-      redirect_to root_path
+    flash[:info] = t('flash.courses.destroy.info')
+    redirect_to root_path
   end
 
   def progress

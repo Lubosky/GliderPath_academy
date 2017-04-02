@@ -18,7 +18,7 @@ class UploadsController < ApplicationController
 
   def analytics_metadata_for_download
     {
-      file: attachment.file_filename,
+      file: attachment.file.original_filename,
       type: attachment.uploadable_type,
       source: attachment.uploadable_id
     }
