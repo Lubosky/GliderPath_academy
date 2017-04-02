@@ -8,7 +8,7 @@
       = video.input :video_url, wrapper_html: { class: 'twelve columns reset-mobile-column' }
   .row
     = f.simple_fields_for :uploads, f.object.uploads.build do |upload|
-      = upload.input :file, multiple: true, as: :hidden, input_html: { value: upload.object.cached_file_data }
-      = upload.input :file, multiple: true, as: :file, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+      = upload.input :file, as: :hidden, input_html: { multiple: true, value: upload.object.cached_file_data }
+      = upload.input :file, as: :file, input_html: { multiple: true }, wrapper_html: { class: 'twelve columns reset-mobile-column' }
   .row
     = link_to_remove_association 'Remove', f, class: 'twelve columns reset-mobile-column'

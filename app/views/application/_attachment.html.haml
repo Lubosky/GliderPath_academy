@@ -3,10 +3,10 @@
     = icon_tag :file, class: 'attachment-icon'
     = icon_tag :download, class: 'download-icon'
     %h4.attachment-title
-      = upload.file_filename
+      = upload.file.original_filename
     .attachment-meta
       %span.attachment-type.uppercase
         %strong #{upload.extension}
-        (#{number_to_human_size(upload.file_size)})
+        (#{number_to_human_size(upload.file.size)})
       %span.download-text
         Click to download
