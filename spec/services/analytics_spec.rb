@@ -97,10 +97,11 @@ describe Analytics do
 
   describe '#track_downloaded' do
     it 'tracks file download event' do
-      attachment = build_stubbed(:upload, :attachment)
+      file = File.open('spec/support/images/yoda.jpg')
+      attachment = build_stubbed(:upload, file: file)
 
       analytics_instance.track_downloaded(
-        file: attachment.file_filename,
+        file: attachment.file.original_filename,
         type: attachment.uploadable_type,
         source: attachment.uploadable_id
       )
@@ -108,7 +109,7 @@ describe Analytics do
       expect(analytics).to have_tracked('Downloaded file').
         for_user(user).
         with_metadata(
-          file: attachment.file_filename,
+          file: attachment.file.original_filename,
           type: attachment.uploadable_type,
           source: attachment.uploadable_id
         )

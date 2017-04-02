@@ -13,16 +13,16 @@ RSpec.describe UploadsController, type: :controller do
     before do
       user.confirm
       login user
+      file = File.open('spec/support/images/yoda.jpg')
       RequestStore.store[:current_user] = user
-      @upload = create(:upload, :refile, uploader: user, uploadable: lesson)
+      @upload = create(:upload, file: file, uploader: user, uploadable: lesson)
     end
 
     it {
-      # TODO: test file download
-      # expect(controller).to receive(:send_file).with(download_upload_path(@upload), filename: 'yoda.jpg', type: 'image/jpg', disposition: 'attachment'){controller.render nothing: true}
+      # expect(controller).to receive(:send_file).with(@upload.file.download, filename: 'yoda.jpg', type: 'image/jepg', disposition: :attachment){controller.render nothing: true}
       get :download, params: { id: @upload.id.to_s }
       expect(response.status).to eq(200)
-      expect(response.header['Content-Type']).to match('image/jpg')
+      expect(response.header['Content-Type']).to match('image/jpeg')
       expect(@upload.extension).to eq('jpg')
     }
   end

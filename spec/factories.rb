@@ -1,5 +1,3 @@
-require 'refile/file_double'
-
 FactoryGirl.define do
 
   sequence :code do |n|
@@ -144,19 +142,9 @@ FactoryGirl.define do
   end
 
   factory :upload do
-    trait :refile do
-      file Refile::FileDouble.new('yoda', Rails.root.to_s + 'spec/support/images/yoda.jpg', content_type: 'image/jpg')
-    end
-
-    trait :attachment do
-      file_id '999'
-      file_filename 'unicorn.png'
-      file_size 999
-      file_content_type 'image/png'
-      uploader_id 1
-      uploadable_type 'Lesson'
-      uploadable_id 1
-    end
+    uploader_id 1
+    uploadable_type 'Lesson'
+    uploadable_id 1
   end
 
   factory :workshop do

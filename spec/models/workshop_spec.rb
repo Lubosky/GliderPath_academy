@@ -108,8 +108,8 @@ describe Workshop, type: :model do
     stub_video
     user = create(:user)
     RequestStore.store[:current_user] = user
-    workshop = build_stubbed(:workshop, uploads_attributes:
-      [ attributes_for(:upload, :attachment) ]
-    )
+    file = File.open('spec/support/images/yoda.jpg')
+    build_stubbed(:workshop, uploads_attributes:
+      [attributes_for(:upload, file: file, uploader: user)])
   end
 end
