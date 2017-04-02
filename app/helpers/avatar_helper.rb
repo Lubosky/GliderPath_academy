@@ -4,7 +4,7 @@ module AvatarHelper
     if resource.avatar.nil?
       content_tag(:div, nil, data: { layout_element: 'avatar', name: "#{resource.name}" }, class: "avatar-circle avatar-default bordered avatar-#{first_letter(resource)}")
     else
-      image_tag attachment_url(resource, :avatar, :fill, 180, 180), options
+      content_tag(:img, nil, options)
     end
   end
 
