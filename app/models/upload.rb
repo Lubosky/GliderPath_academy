@@ -6,8 +6,6 @@ class Upload < ApplicationRecord
 
   before_save :set_uploader_id
 
-  validates_presence_of :file
-
   def extension
     file.extension
   end
