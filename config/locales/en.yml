@@ -51,6 +51,14 @@ en:
     title: 'GliderPath Academy - A Perfect Space to Share & Gain Knowledge'
     description: 'GliderPath Academy is an e-learning platform for entrepreneurs, solopreneurs and freelancers. A perfect space to share and gain knowledge and benefit from community discussion!'
 
+  errors:
+    avatar:
+      max_size: "Your upload was not a usable image. Choose a PNG, JPEG, or GIF that's under 1MB and try again."
+      mime_type_inclusion: "Your upload was not a usable image. Choose a PNG, JPEG, or GIF that's under 1MB and try again."
+    file:
+      max_size: "Your upload was not a usable file. Choose a DOC, XLS, PPT, PDF, ZIP, PNG, JPEG, or GIF that's under 10MB and try again."
+      extension_inclusion: "Your upload was not a usable file. Choose a DOC, XLS, PPT, PDF, ZIP, PNG, JPEG, or GIF that's under 10MB and try again."
+
   flash:
     account:
       not_authorized: 'You are not authorized to view this account!'
