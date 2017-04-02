@@ -29,6 +29,10 @@ class User < ApplicationRecord
   has_many :purchases, foreign_key: :purchaser_id
   has_many :courses, through: :purchases, inverse_of: :purchasers, source: :purchasable, source_type: 'Course'
 
+  before_save do
+    write_shrine_data(:avatar) if changes.key?(:avatar_id)
+  end
+
   before_save :skip_confirmation_notification, on: :create
   after_create :assign_default_role
   after_commit :confirm_user, on: :create
@@ -82,6 +86,23 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def write_shrine_data(name)
+    if read_attribute("#{name}_id").present?
+      data = {
+        storage: :store,
+        id: send("#{name}_id"),
+        metadata: {
+          size: (send("#{name}_size") if respond_to?("#{name}_size")),
+          filename: (send("#{name}_filename") if respond_to?("#{name}_filename")),
+          mime_type: (send("#{name}_content_type") if respond_to?("#{name}_content_type")),
+        }
+      }
+      write_attribute(:"#{name}_data", data.to_json)
+    else
+      write_attribute(:"#{name}_data", nil)
+    end
   end
 
   private
