@@ -2,13 +2,14 @@ module Downloadable
   extend ActiveSupport::Concern
 
   def send_to_user(attachment)
-    file = Refile.store.get(attachment.file_id).download
-    if Upload.exists?(attachment.id)
-      send_file file, filename: attachment.file_filename, type: attachment.file_content_type, disposition: :attachment
+    file = attachment.file
+    if file.exists?
+      send_file file.download, filename: file.original_filename,
+                               type: file.mime_type,
+                               disposition: :attachment
     else
       flash[:notice] = t('flash.attachments.error')
-      redirect_to :back
+      redirect_back(fallback_location: root_path)
     end
   end
-
 end
