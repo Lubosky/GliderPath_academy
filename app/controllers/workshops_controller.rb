@@ -65,8 +65,7 @@ class WorkshopsController < ApplicationController
   def workshop_params
     params.require(:workshop).permit(:name, :status, :published_at, :short_description, :notes, :price,
       video_attributes: [:id, :video_url],
-      uploads_attributes: [:id, :_destroy],
-      uploads_files: []
+      uploads_attributes: [:id, :file, :_destroy]
     )
   end
 end

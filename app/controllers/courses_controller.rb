@@ -82,8 +82,7 @@ class CoursesController < ApplicationController
       sections_attributes: [ :id, :title, :objective, :_destroy,
         lessons_attributes: [ :id, :title, :notes, :_destroy,
           video_attributes: [ :id, :video_url ],
-          uploads_attributes: [ :id, :_destroy ],
-          uploads_files: [ ]
+          uploads_attributes: [ :id, :file, :_destroy ]
         ]
       ]
     )
