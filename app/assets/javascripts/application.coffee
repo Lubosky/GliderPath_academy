@@ -10,7 +10,6 @@
 #= require dropdown
 #= require html.sortable
 #= require initials
-#= require refile
 #= require observer
 #= require purchase
 #= require revealer
