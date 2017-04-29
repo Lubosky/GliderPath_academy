@@ -15,8 +15,8 @@
     = f.input :notes, wrapper_html: { class: 'twelve columns reset-mobile-column' }
   .row
     = f.simple_fields_for :uploads, f.object.uploads.build do |upload|
-      = upload.input :file, as: :hidden, input_html: { multiple: true, value: upload.object.cached_file_data }
-      = upload.input :file, as: :file, input_html: { multiple: true }, wrapper_html: { class: 'twelve columns reset-mobile-column' }
+      = upload.input :file, as: :hidden, input_html: { value: upload.object.cached_file_data }
+      = upload.input :file, as: :file, wrapper_html: { class: 'twelve columns reset-mobile-column' }
   .row
     .twelve.columns.reset-mobile-column
       = f.button :button, class: 'button-large button-purple pull-right margin-top-25', data: { disable_with: "#{image_tag 'signal.svg', class: 'loader'} #{t('button.disabled.saving')}" }
