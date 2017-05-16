@@ -31,8 +31,8 @@ en:
         title: 'Questions & Answers'
         subtitle: 'Questions or concerns? Please take a look at our top frequently asked questions for guidance.'
       home:
-        title: 'Love the way you learn'
-        subtitle: 'The perfect place for for entrepreneurs, solopreneurs and freelancers to share and gain knowledge'
+        title: 'We provide super targeted and focused courses for project managers'
+        subtitle: "Whether you are looking to launch or grow a successful your career in Project Management, this is the place place for you to learn the skills and techniques you need to start consistently delivering exceptional project results!"
       privacy:
         title: 'Privacy Policy'
         subtitle: "Effective Date: %{date}"
@@ -49,7 +49,7 @@ en:
 
   meta:
     title: 'GliderPath Academy - A Perfect Space to Share & Gain Knowledge'
-    description: 'GliderPath Academy is an e-learning platform for entrepreneurs, solopreneurs and freelancers. A perfect space to share and gain knowledge and benefit from community discussion!'
+    description: 'GliderPath Academy is an e-learning platform for project managers. A perfect space to share and gain knowledge and benefit from community discussion!'
 
   errors:
     avatar:
